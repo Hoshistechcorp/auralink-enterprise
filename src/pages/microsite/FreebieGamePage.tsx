@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, Gamepad2, Gift, RotateCcw, Trophy, Sparkles } from "lucide-react";
+import { ArrowLeft, Gamepad2, Gift, RotateCcw, Trophy, Sparkles, Mail, Check } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
+import { z } from "zod";
 
 const prizes = [
   { label: "10% Off", color: "hsl(var(--primary))", icon: Gift },
@@ -14,16 +16,24 @@ const prizes = [
   { label: "VIP Table", color: "hsl(var(--primary))", icon: Trophy },
 ];
 
+const emailSchema = z.string().trim().email("Please enter a valid email").max(255);
+
 const FreebieGamePage = () => {
   const navigate = useNavigate();
   const [spinning, setSpinning] = useState(false);
   const [result, setResult] = useState<number | null>(null);
   const [spinsLeft, setSpinsLeft] = useState(1);
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [claimed, setClaimed] = useState(false);
 
   const spin = () => {
     if (spinning || spinsLeft <= 0) return;
     setSpinning(true);
     setResult(null);
+    setClaimed(false);
+    setEmail("");
+    setEmailError("");
     setSpinsLeft((s) => s - 1);
     setTimeout(() => {
       const winner = Math.floor(Math.random() * prizes.length);
@@ -32,7 +42,19 @@ const FreebieGamePage = () => {
     }, 2500);
   };
 
+  const handleClaim = () => {
+    const parsed = emailSchema.safeParse(email);
+    if (!parsed.success) {
+      setEmailError(parsed.error.errors[0].message);
+      return;
+    }
+    setEmailError("");
+    setClaimed(true);
+    toast({ title: "Freebie claimed! 🎉", description: `We'll send your reward details to ${parsed.data}` });
+  };
+
   const prize = result !== null ? prizes[result] : null;
+  const isWinner = prize && prize.label !== "Try Again";
 
   return (
     <div className="min-h-screen bg-background max-w-[430px] mx-auto">
@@ -68,26 +90,68 @@ const FreebieGamePage = () => {
           <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1 w-4 h-4 bg-primary rotate-45 rounded-sm" />
         </div>
 
-        {/* Result */}
-        <AnimatePresence>
-          {prize && (
-            <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="text-center p-6 rounded-2xl bg-primary/5 border border-primary/20 w-full">
-              <prize.icon className="w-10 h-10 mx-auto mb-2" style={{ color: prize.color }} />
-              <h2 className="font-display font-bold text-xl">{prize.label === "Try Again" ? "No luck this time!" : `You won: ${prize.label}!`}</h2>
-              <p className="text-sm text-muted-foreground mt-1">
-                {prize.label === "Try Again" ? "Come back tomorrow for another spin" : "Show this screen to your server to redeem"}
-              </p>
+        {/* Result + Email CTA */}
+        <AnimatePresence mode="wait">
+          {prize && !isWinner && (
+            <motion.div key="lose" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="text-center p-6 rounded-2xl bg-muted/30 border w-full">
+              <RotateCcw className="w-10 h-10 mx-auto mb-2 text-muted-foreground" />
+              <h2 className="font-display font-bold text-xl">No luck this time!</h2>
+              <p className="text-sm text-muted-foreground mt-1">Come back tomorrow for another spin</p>
+            </motion.div>
+          )}
+
+          {isWinner && !claimed && (
+            <motion.div key="win" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="w-full space-y-4">
+              <div className="text-center p-6 rounded-2xl bg-primary/5 border border-primary/20">
+                <prize.icon className="w-10 h-10 mx-auto mb-2" style={{ color: prize.color }} />
+                <h2 className="font-display font-bold text-xl">You won: {prize.label}!</h2>
+                <p className="text-sm text-muted-foreground mt-1">Enter your email to claim your freebie</p>
+              </div>
+
+              <div className="space-y-2">
+                <div className="relative">
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => { setEmail(e.target.value); setEmailError(""); }}
+                    placeholder="your@email.com"
+                    className="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-card border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    maxLength={255}
+                    onKeyDown={(e) => e.key === "Enter" && handleClaim()}
+                  />
+                </div>
+                {emailError && <p className="text-xs text-destructive px-1">{emailError}</p>}
+                <button onClick={handleClaim} className="w-full py-4 rounded-2xl bg-primary text-primary-foreground font-semibold text-lg">
+                  🎁 Claim My Freebie
+                </button>
+                <p className="text-[10px] text-muted-foreground text-center">
+                  We'll email your reward code. No spam, ever.
+                </p>
+              </div>
+            </motion.div>
+          )}
+
+          {claimed && (
+            <motion.div key="claimed" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="text-center p-6 rounded-2xl bg-aura-success/10 border border-aura-success/20 w-full">
+              <div className="w-14 h-14 rounded-full bg-aura-success/20 flex items-center justify-center mx-auto mb-3">
+                <Check className="w-7 h-7 text-aura-success" />
+              </div>
+              <h2 className="font-display font-bold text-xl">Freebie Claimed!</h2>
+              <p className="text-sm text-muted-foreground mt-1">Check your email for your <strong>{prize?.label}</strong> reward code</p>
             </motion.div>
           )}
         </AnimatePresence>
 
-        <button
-          onClick={spin}
-          disabled={spinning || spinsLeft <= 0}
-          className="w-full py-4 rounded-2xl bg-primary text-primary-foreground font-semibold text-lg disabled:opacity-50 transition-opacity"
-        >
-          {spinning ? "Spinning..." : spinsLeft > 0 ? "🎰 Spin the Wheel" : "Come back tomorrow!"}
-        </button>
+        {!result && (
+          <button
+            onClick={spin}
+            disabled={spinning || spinsLeft <= 0}
+            className="w-full py-4 rounded-2xl bg-primary text-primary-foreground font-semibold text-lg disabled:opacity-50 transition-opacity"
+          >
+            {spinning ? "Spinning..." : spinsLeft > 0 ? "🎰 Spin the Wheel" : "Come back tomorrow!"}
+          </button>
+        )}
 
         <p className="text-xs text-muted-foreground text-center">
           {spinsLeft} spin{spinsLeft !== 1 ? "s" : ""} remaining today · Resets daily at midnight
