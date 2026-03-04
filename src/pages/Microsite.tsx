@@ -38,6 +38,13 @@ const cardRoutes: Record<string, string> = {
   "Reviews": "/microsite/reviews",
   "AI Concierge": "/microsite/concierge",
   "Staff": "/microsite/staff",
+  "Details": "/microsite/details",
+  "Private Dining": "/microsite/private-dining",
+  "Popular Dishes": "/microsite/popular-dishes",
+  "Awards": "/microsite/awards",
+  "FAQs": "/microsite/faqs",
+  "Events": "/microsite/events",
+  "Social Links": "/microsite/social-links",
 };
 
 const Microsite = () => {

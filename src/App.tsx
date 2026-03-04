@@ -27,6 +27,13 @@ import GalleryPage from "./pages/microsite/GalleryPage";
 import ReviewsPage from "./pages/microsite/ReviewsPage";
 import ConciergePage from "./pages/microsite/ConciergePage";
 import StaffPage from "./pages/microsite/StaffPage";
+import DetailsPage from "./pages/microsite/DetailsPage";
+import PrivateDiningPage from "./pages/microsite/PrivateDiningPage";
+import PopularDishesPage from "./pages/microsite/PopularDishesPage";
+import AwardsPage from "./pages/microsite/AwardsPage";
+import FAQsPage from "./pages/microsite/FAQsPage";
+import EventsPage from "./pages/microsite/EventsPage";
+import SocialLinksPage from "./pages/microsite/SocialLinksPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -45,6 +52,13 @@ const App = () => (
           <Route path="/microsite/reviews" element={<ReviewsPage />} />
           <Route path="/microsite/concierge" element={<ConciergePage />} />
           <Route path="/microsite/staff" element={<StaffPage />} />
+          <Route path="/microsite/details" element={<DetailsPage />} />
+          <Route path="/microsite/private-dining" element={<PrivateDiningPage />} />
+          <Route path="/microsite/popular-dishes" element={<PopularDishesPage />} />
+          <Route path="/microsite/awards" element={<AwardsPage />} />
+          <Route path="/microsite/faqs" element={<FAQsPage />} />
+          <Route path="/microsite/events" element={<EventsPage />} />
+          <Route path="/microsite/social-links" element={<SocialLinksPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/qr" element={<QRManagement />} />
           <Route path="/dashboard/affiliates" element={<AffiliateDashboard />} />
