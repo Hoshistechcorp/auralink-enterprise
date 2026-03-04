@@ -17,6 +17,8 @@ import ReputationPage from "./pages/dashboard/ReputationPage";
 import EnterprisePage from "./pages/dashboard/EnterprisePage";
 import SettingsPage from "./pages/dashboard/SettingsPage";
 import AdminPage from "./pages/dashboard/AdminPage";
+import GamificationPage from "./pages/dashboard/GamificationPage";
+import CardStudioPage from "./pages/dashboard/CardStudioPage";
 import MenuPage from "./pages/microsite/MenuPage";
 import GalleryPage from "./pages/microsite/GalleryPage";
 import ReviewsPage from "./pages/microsite/ReviewsPage";
@@ -52,6 +54,8 @@ const App = () => (
           <Route path="/dashboard/enterprise" element={<EnterprisePage />} />
           <Route path="/dashboard/settings" element={<SettingsPage />} />
           <Route path="/dashboard/admin" element={<AdminPage />} />
+          <Route path="/dashboard/gamification" element={<GamificationPage />} />
+          <Route path="/dashboard/cards" element={<CardStudioPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
