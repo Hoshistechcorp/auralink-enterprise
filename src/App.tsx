@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Microsite from "./pages/Microsite";
 import Dashboard from "./pages/Dashboard";
+import QRManagement from "./pages/dashboard/QRManagement";
+import AffiliateDashboard from "./pages/dashboard/AffiliateDashboard";
 import MenuPage from "./pages/microsite/MenuPage";
 import GalleryPage from "./pages/microsite/GalleryPage";
 import ReviewsPage from "./pages/microsite/ReviewsPage";
@@ -30,6 +32,8 @@ const App = () => (
           <Route path="/microsite/concierge" element={<ConciergePage />} />
           <Route path="/microsite/staff" element={<StaffPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/qr" element={<QRManagement />} />
+          <Route path="/dashboard/affiliates" element={<AffiliateDashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
