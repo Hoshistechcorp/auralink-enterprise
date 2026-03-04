@@ -32,6 +32,7 @@ const navSections: NavSection[] = [
       { icon: Layers, label: "Card Studio", path: "/dashboard/cards" },
       { icon: BarChart3, label: "Analytics", path: "/dashboard/analytics" },
       { icon: Globe, label: "Tourism", path: "/dashboard/tourism" },
+      { icon: Layers, label: "Dest. Cards", path: "/dashboard/destination-cards" },
     ],
   },
   {

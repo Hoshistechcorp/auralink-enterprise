@@ -56,6 +56,8 @@ import PhotoMemoriesPage from "./pages/destination/PhotoMemoriesPage";
 import UpcomingDealsPage from "./pages/destination/UpcomingDealsPage";
 import LocalCreatorsPage from "./pages/destination/LocalCreatorsPage";
 import PlanYourTripPage from "./pages/destination/PlanYourTripPage";
+import GlobalMapPage from "./pages/destination/GlobalMapPage";
+import DestinationCardStudioPage from "./pages/dashboard/DestinationCardStudioPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -120,7 +122,9 @@ const App = () => (
             <Route path="/dashboard/locations" element={<LocationsPage />} />
             <Route path="/dashboard/team" element={<TeamPage />} />
             <Route path="/dashboard/tourism" element={<TourismDashboardPage />} />
+            <Route path="/dashboard/destination-cards" element={<DestinationCardStudioPage />} />
             <Route path="/dashboard/ecosystem/:appId" element={<EcosystemPage />} />
+            <Route path="/destination/map" element={<GlobalMapPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
