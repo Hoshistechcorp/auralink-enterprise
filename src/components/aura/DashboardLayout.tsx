@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
-  Home, Layers, BarChart3, Gamepad2, Settings, QrCode, Users2, CreditCard, Heart, Megaphone,
+  Home, Layers, BarChart3, Gamepad2, Settings, QrCode, Users2, CreditCard, Heart, Megaphone, Share2, Search,
 } from "lucide-react";
 
 const sidebarItems = [
@@ -13,6 +13,8 @@ const sidebarItems = [
   { icon: Users2, label: "Affiliates", path: "/dashboard/affiliates" },
   { icon: Megaphone, label: "Influencers", path: "/dashboard/influencers" },
   { icon: Heart, label: "Loyalty", path: "/dashboard/loyalty" },
+  { icon: Share2, label: "Referrals", path: "/dashboard/referrals" },
+  { icon: Search, label: "SEO & Maps", path: "/dashboard/seo" },
   { icon: CreditCard, label: "Subscription", path: "/dashboard/subscription" },
   { icon: Settings, label: "Settings", path: "/dashboard/settings" },
 ];
