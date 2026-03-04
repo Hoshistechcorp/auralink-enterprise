@@ -124,7 +124,7 @@ const EcosystemLauncher = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="absolute right-0 top-full mt-2 w-[360px] sm:w-[400px] rounded-2xl bg-card border shadow-xl z-50 overflow-hidden"
+            className="fixed sm:absolute right-2 sm:right-0 top-14 sm:top-full sm:mt-2 left-2 sm:left-auto w-auto sm:w-[400px] rounded-2xl bg-card border shadow-xl z-50 overflow-hidden max-h-[80vh] overflow-y-auto"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-5 pt-4 pb-2">
@@ -165,7 +165,7 @@ const EcosystemLauncher = () => {
             </div>
 
             {/* Quick Actions */}
-            <div className="border-t px-4 py-3 flex items-center gap-2">
+            <div className="border-t px-4 py-3 flex flex-wrap items-center gap-2">
               <button
                 onClick={() => { navigate("/dashboard/ecosystem/connect"); setOpen(false); }}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-primary/10 text-primary hover:bg-primary/20 transition-colors"

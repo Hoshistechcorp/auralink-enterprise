@@ -70,7 +70,7 @@ const CardStudioPage = () => {
   return (
     <DashboardLayout title="Card Studio" subtitle="Customize your microsite card layout">
       {/* Toolbar */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-muted text-xs font-medium">
             <LayoutGrid className="w-3.5 h-3.5" />
@@ -80,14 +80,14 @@ const CardStudioPage = () => {
         <div className="flex items-center gap-2">
           <button
             onClick={() => setPreviewMode(!previewMode)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
+            className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
               previewMode ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground hover:text-foreground"
             }`}
           >
-            <Eye className="w-4 h-4" /> {previewMode ? "Exit Preview" : "Preview"}
+            <Eye className="w-4 h-4" /> <span className="hidden sm:inline">{previewMode ? "Exit Preview" : "Preview"}</span>
           </button>
-          <button onClick={handleSave} className="flex items-center gap-2 px-4 py-2 rounded-xl bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity">
-            <Save className="w-4 h-4" /> Publish
+          <button onClick={handleSave} className="flex items-center gap-2 px-3 sm:px-4 py-2 rounded-xl bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity">
+            <Save className="w-4 h-4" /> <span className="hidden sm:inline">Publish</span>
           </button>
         </div>
       </div>

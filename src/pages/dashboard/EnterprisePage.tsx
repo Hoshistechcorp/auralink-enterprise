@@ -70,7 +70,7 @@ const EnterprisePage = () => {
       <div className="grid lg:grid-cols-3 gap-6 mb-8">
         {/* Location List */}
         <div className="lg:col-span-2 space-y-3">
-          <div className="flex items-center justify-between mb-2">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
             <div className="flex items-center gap-3">
               <button onClick={selectAll} className="px-3 py-1.5 rounded-lg bg-muted text-xs font-medium hover:bg-primary/10 hover:text-primary transition-colors">
                 {selected.length === locations.length ? "Deselect All" : "Select All"}

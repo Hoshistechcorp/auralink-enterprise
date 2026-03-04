@@ -77,13 +77,13 @@ const ReferralPage = () => {
           <Share2 className="w-5 h-5 text-primary" />
           <h3 className="font-display font-semibold">Your Referral Link</h3>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
           <div className="flex-1 px-4 py-2.5 rounded-xl bg-card border text-sm text-muted-foreground truncate">
             https://auralink.io/bellavista?ref=BELLAVISTA2024
           </div>
           <button
             onClick={handleCopy}
-            className="px-4 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-medium flex items-center gap-2 hover:opacity-90 transition-opacity"
+            className="px-4 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-medium flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shrink-0"
           >
             {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
             {copied ? "Copied!" : "Copy"}

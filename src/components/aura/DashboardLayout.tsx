@@ -192,9 +192,9 @@ const DashboardLayout = ({ children, title, subtitle = "Bella Vista · Restauran
         </SheetContent>
       </Sheet>
 
-      <main className="flex-1 p-6 lg:p-8 overflow-auto">
+      <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-auto">
         <div className="max-w-[1200px] mx-auto">
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 sm:mb-8">
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setMobileOpen(true)}
@@ -203,17 +203,17 @@ const DashboardLayout = ({ children, title, subtitle = "Bella Vista · Restauran
                 <Menu className="w-5 h-5" />
               </button>
               <div>
-                <h1 className="font-display text-2xl font-bold">{title}</h1>
-                <p className="text-sm text-muted-foreground">{subtitle}</p>
+                <h1 className="font-display text-xl sm:text-2xl font-bold">{title}</h1>
+                <p className="text-xs sm:text-sm text-muted-foreground">{subtitle}</p>
               </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 ml-auto sm:ml-0">
               <EcosystemLauncher />
               {/* Location Switcher */}
               <div className="relative">
                 <button
                   onClick={() => setLocDropdownOpen(!locDropdownOpen)}
-                  className="flex items-center gap-2 px-3 py-2 rounded-xl bg-muted/50 border text-sm font-medium hover:bg-muted transition-colors"
+                  className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-2 rounded-xl bg-muted/50 border text-sm font-medium hover:bg-muted transition-colors"
                 >
                   <MapPin className="w-3.5 h-3.5 text-primary" />
                   <span className="hidden sm:inline max-w-[140px] truncate">{activeLocation.label.split("—")[1]?.trim() || activeLocation.label}</span>
