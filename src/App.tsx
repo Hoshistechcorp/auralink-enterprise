@@ -15,6 +15,7 @@ import ReferralPage from "./pages/dashboard/ReferralPage";
 import SEOPage from "./pages/dashboard/SEOPage";
 import ReputationPage from "./pages/dashboard/ReputationPage";
 import EnterprisePage from "./pages/dashboard/EnterprisePage";
+import SettingsPage from "./pages/dashboard/SettingsPage";
 import MenuPage from "./pages/microsite/MenuPage";
 import GalleryPage from "./pages/microsite/GalleryPage";
 import ReviewsPage from "./pages/microsite/ReviewsPage";
@@ -48,6 +49,7 @@ const App = () => (
           <Route path="/dashboard/seo" element={<SEOPage />} />
           <Route path="/dashboard/reputation" element={<ReputationPage />} />
           <Route path="/dashboard/enterprise" element={<EnterprisePage />} />
+          <Route path="/dashboard/settings" element={<SettingsPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
