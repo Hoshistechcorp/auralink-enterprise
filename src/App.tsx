@@ -13,6 +13,8 @@ import InfluencerPage from "./pages/dashboard/InfluencerPage";
 import LoyaltyPage from "./pages/dashboard/LoyaltyPage";
 import ReferralPage from "./pages/dashboard/ReferralPage";
 import SEOPage from "./pages/dashboard/SEOPage";
+import ReputationPage from "./pages/dashboard/ReputationPage";
+import EnterprisePage from "./pages/dashboard/EnterprisePage";
 import MenuPage from "./pages/microsite/MenuPage";
 import GalleryPage from "./pages/microsite/GalleryPage";
 import ReviewsPage from "./pages/microsite/ReviewsPage";
@@ -44,6 +46,8 @@ const App = () => (
           <Route path="/dashboard/loyalty" element={<LoyaltyPage />} />
           <Route path="/dashboard/referrals" element={<ReferralPage />} />
           <Route path="/dashboard/seo" element={<SEOPage />} />
+          <Route path="/dashboard/reputation" element={<ReputationPage />} />
+          <Route path="/dashboard/enterprise" element={<EnterprisePage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
