@@ -2,13 +2,15 @@ import { useNavigate } from "react-router-dom";
 import {
   Phone, MessageCircle, Navigation, Share2, Bookmark,
   Camera, UtensilsCrossed, Star, Info, Wine, Flame,
-  Bot, Award, Users, HelpCircle, CalendarDays, Globe
+  Bot, Award, Users, HelpCircle, CalendarDays, Globe,
+  Gamepad2, Link2, Handshake
 } from "lucide-react";
 import MicrositeHeader from "@/components/aura/MicrositeHeader";
 import ActionButton from "@/components/aura/ActionButton";
 import AuraCard from "@/components/aura/AuraCard";
 import BottomBrandBar from "@/components/aura/BottomBrandBar";
 import AuraSupermenu from "@/components/aura/AuraSupermenu";
+
 const actionButtons = [
   { icon: Phone, label: "Call" },
   { icon: MessageCircle, label: "Message" },
@@ -30,6 +32,9 @@ const cards = [
   { icon: HelpCircle, title: "FAQs", subtitle: "24 answers" },
   { icon: CalendarDays, title: "Events", subtitle: "Upcoming" },
   { icon: Globe, title: "Social Links", subtitle: "Follow us" },
+  { icon: Gamepad2, title: "Freebie Game", subtitle: "Spin & win" },
+  { icon: Link2, title: "Refer a Friend", subtitle: "Earn rewards" },
+  { icon: Handshake, title: "Affiliate", subtitle: "Partner up" },
 ];
 
 const cardRoutes: Record<string, string> = {
@@ -45,6 +50,9 @@ const cardRoutes: Record<string, string> = {
   "FAQs": "/microsite/faqs",
   "Events": "/microsite/events",
   "Social Links": "/microsite/social-links",
+  "Freebie Game": "/microsite/freebie-game",
+  "Refer a Friend": "/microsite/referral",
+  "Affiliate": "/microsite/affiliate",
 };
 
 const Microsite = () => {
@@ -54,14 +62,12 @@ const Microsite = () => {
     <div className="min-h-screen bg-background max-w-[430px] mx-auto">
       <MicrositeHeader />
 
-      {/* Action Buttons */}
       <div className="flex gap-2 overflow-x-auto px-4 py-4 no-scrollbar">
         {actionButtons.map((btn) => (
           <ActionButton key={btn.label} icon={btn.icon} label={btn.label} />
         ))}
       </div>
 
-      {/* Card Grid */}
       <div className="px-4 pb-4">
         <div className="grid grid-cols-3 gap-3">
           {cards.map((card, i) => (
