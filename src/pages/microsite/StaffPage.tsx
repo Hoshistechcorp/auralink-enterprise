@@ -1,12 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Star, Heart } from "lucide-react";
 import { motion } from "framer-motion";
+import marcoImg from "@/assets/staff-marco.jpg";
+import sophiaImg from "@/assets/staff-sophia.jpg";
+import jamesImg from "@/assets/staff-james.jpg";
+import elenaImg from "@/assets/staff-elena.jpg";
 
 const staff = [
-  { name: "Marco Rossi", role: "Executive Chef", bio: "Trained in Florence, 20+ years of culinary mastery.", rating: 4.9, initials: "MR" },
-  { name: "Sophia Chen", role: "Head Sommelier", bio: "Award-winning wine expert with an encyclopedic palate.", rating: 4.8, initials: "SC" },
-  { name: "James Wright", role: "General Manager", bio: "Ensuring every guest feels like family since 2005.", rating: 4.7, initials: "JW" },
-  { name: "Elena Volkov", role: "Pastry Chef", bio: "Creates edible art that delights every sense.", rating: 4.9, initials: "EV" },
+  { name: "Marco Rossi", role: "Executive Chef", bio: "Trained in Florence, 20+ years of culinary mastery.", rating: 4.9, image: marcoImg },
+  { name: "Sophia Chen", role: "Head Sommelier", bio: "Award-winning wine expert with an encyclopedic palate.", rating: 4.8, image: sophiaImg },
+  { name: "James Wright", role: "General Manager", bio: "Ensuring every guest feels like family since 2005.", rating: 4.7, image: jamesImg },
+  { name: "Elena Volkov", role: "Pastry Chef", bio: "Creates edible art that delights every sense.", rating: 4.9, image: elenaImg },
 ];
 
 const StaffPage = () => {
@@ -30,9 +34,12 @@ const StaffPage = () => {
             transition={{ delay: i * 0.1 }}
             className="flex gap-3 p-4 rounded-2xl bg-card border"
           >
-            <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-lg font-display font-bold text-primary shrink-0">
-              {member.initials}
-            </div>
+            <img
+              src={member.image}
+              alt={member.name}
+              className="w-14 h-14 rounded-2xl object-cover shrink-0"
+              loading="lazy"
+            />
             <div className="flex-1 min-w-0">
               <div className="font-medium text-sm">{member.name}</div>
               <div className="text-xs text-secondary font-medium">{member.role}</div>
