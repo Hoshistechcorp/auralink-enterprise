@@ -1,14 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Flame, ThumbsUp } from "lucide-react";
 import { motion } from "framer-motion";
+import wagyuImg from "@/assets/dish-wagyu.jpg";
+import burrataImg from "@/assets/dish-burrata.jpg";
+import ossoBucoImg from "@/assets/dish-ossobuco.jpg";
+import aranciniImg from "@/assets/dish-arancini.jpg";
+import tiramisuImg from "@/assets/dish-tiramisu.jpg";
+import tunaImg from "@/assets/dish-tuna.jpg";
 
 const dishes = [
-  { name: "Wagyu Ribeye", orders: 1842, rating: 4.9, price: 89, tag: "Most Ordered" },
-  { name: "Burrata Caprese", orders: 1567, rating: 4.8, price: 18, tag: "Fan Favorite" },
-  { name: "Osso Buco", orders: 1234, rating: 4.9, price: 48, tag: "Award Winner" },
-  { name: "Truffle Arancini", orders: 1198, rating: 4.7, price: 16, tag: "Trending" },
-  { name: "Tiramisu", orders: 1087, rating: 4.8, price: 14, tag: "Top Dessert" },
-  { name: "Tuna Tartare", orders: 956, rating: 4.7, price: 22, tag: "Chef's Pick" },
+  { name: "Wagyu Ribeye", orders: 1842, rating: 4.9, price: 89, tag: "Most Ordered", image: wagyuImg },
+  { name: "Burrata Caprese", orders: 1567, rating: 4.8, price: 18, tag: "Fan Favorite", image: burrataImg },
+  { name: "Osso Buco", orders: 1234, rating: 4.9, price: 48, tag: "Award Winner", image: ossoBucoImg },
+  { name: "Truffle Arancini", orders: 1198, rating: 4.7, price: 16, tag: "Trending", image: aranciniImg },
+  { name: "Tiramisu", orders: 1087, rating: 4.8, price: 14, tag: "Top Dessert", image: tiramisuImg },
+  { name: "Tuna Tartare", orders: 956, rating: 4.7, price: 22, tag: "Chef's Pick", image: tunaImg },
   { name: "Branzino", orders: 891, rating: 4.6, price: 42, tag: "Healthy Choice" },
   { name: "Panna Cotta", orders: 845, rating: 4.5, price: 12, tag: "Classic" },
   { name: "Lobster Ravioli", orders: 812, rating: 4.8, price: 36, tag: "Signature" },
@@ -32,9 +38,13 @@ const PopularDishesPage = () => {
       <div className="px-4 mt-4 space-y-3">
         {dishes.map((dish, i) => (
           <motion.div key={dish.name} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }} className="flex items-center gap-3 p-3 rounded-2xl bg-card border">
-            <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-sm font-bold text-primary">
-              {i + 1}
-            </div>
+            {"image" in dish && dish.image ? (
+              <img src={dish.image} alt={dish.name} className="w-14 h-14 rounded-xl object-cover shrink-0" loading="lazy" />
+            ) : (
+              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-sm font-bold text-primary shrink-0">
+                {i + 1}
+              </div>
+            )}
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2">
                 <span className="font-medium text-sm">{dish.name}</span>
