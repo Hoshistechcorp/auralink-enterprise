@@ -303,16 +303,16 @@ const AdminPage = () => {
                 <h3 className="font-display font-semibold text-lg mb-6">Operating Hours</h3>
                 <div className="space-y-2">
                   {hours.map((d, i) => (
-                    <div key={d.day} className="flex items-center gap-3 p-3 rounded-xl bg-muted/30">
-                      <span className="w-24 text-sm font-medium">{d.day}</span>
+                    <div key={d.day} className="flex flex-wrap sm:flex-nowrap items-center gap-2 sm:gap-3 p-3 rounded-xl bg-muted/30">
+                      <span className="w-20 sm:w-24 text-sm font-medium shrink-0">{d.day}</span>
                       <Switch checked={!d.closed} onCheckedChange={(v) => updateHour(i, { closed: !v })} />
                       {d.closed ? (
                         <span className="text-sm text-muted-foreground italic">Closed</span>
                       ) : (
                         <div className="flex items-center gap-2">
-                          <input type="time" value={d.open} onChange={(e) => updateHour(i, { open: e.target.value })} className="px-2 py-1.5 rounded-lg bg-background border text-sm" />
+                          <input type="time" value={d.open} onChange={(e) => updateHour(i, { open: e.target.value })} className="px-2 py-1.5 rounded-lg bg-background border text-sm w-[110px]" />
                           <span className="text-xs text-muted-foreground">to</span>
-                          <input type="time" value={d.close} onChange={(e) => updateHour(i, { close: e.target.value })} className="px-2 py-1.5 rounded-lg bg-background border text-sm" />
+                          <input type="time" value={d.close} onChange={(e) => updateHour(i, { close: e.target.value })} className="px-2 py-1.5 rounded-lg bg-background border text-sm w-[110px]" />
                         </div>
                       )}
                     </div>
@@ -506,8 +506,8 @@ const AdminPage = () => {
                       transition={{ delay: i * 0.04 }}
                       className="p-4 rounded-xl bg-muted/30"
                     >
-                      <div className="flex gap-4">
-                        <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                      <div className="flex flex-col sm:flex-row gap-4">
+                        <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 self-start">
                           {member.name ? (
                             <span className="text-lg font-display font-bold text-primary">
                               {member.name.split(" ").map((n) => n[0]).join("")}

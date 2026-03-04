@@ -84,7 +84,7 @@ const ReputationPage = () => {
       </div>
 
       {/* Platform Ratings */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 mb-8">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-8">
         {platforms.map((p, i) => (
           <motion.div key={p.name} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }} className="p-4 rounded-2xl bg-card border">
             <div className="flex items-center gap-2 mb-3">

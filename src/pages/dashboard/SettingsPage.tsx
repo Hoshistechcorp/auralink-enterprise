@@ -429,7 +429,7 @@ const SettingsPage = () => {
                       </button>
                     ))}
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <label className="relative cursor-pointer">
                       <input
                         type="color"
@@ -459,7 +459,7 @@ const SettingsPage = () => {
                         if (/^\d+\s+\d+%\s+\d+%$/.test(v.trim())) handlePrimaryChange(v.trim());
                       }}
                       placeholder="352 43% 32%"
-                      className="flex-1 px-3 py-2 rounded-lg bg-muted/50 border text-sm font-mono focus:outline-none focus:ring-2 focus:ring-primary/20"
+                      className="flex-1 min-w-[120px] px-3 py-2 rounded-lg bg-muted/50 border text-sm font-mono focus:outline-none focus:ring-2 focus:ring-primary/20"
                     />
                   </div>
                 </div>
@@ -481,7 +481,7 @@ const SettingsPage = () => {
                       </button>
                     ))}
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <label className="relative cursor-pointer">
                       <input
                         type="color"
@@ -511,7 +511,7 @@ const SettingsPage = () => {
                         if (/^\d+\s+\d+%\s+\d+%$/.test(v.trim())) handleSecondaryChange(v.trim());
                       }}
                       placeholder="35 35% 64%"
-                      className="flex-1 px-3 py-2 rounded-lg bg-muted/50 border text-sm font-mono focus:outline-none focus:ring-2 focus:ring-primary/20"
+                      className="flex-1 min-w-[120px] px-3 py-2 rounded-lg bg-muted/50 border text-sm font-mono focus:outline-none focus:ring-2 focus:ring-primary/20"
                     />
                   </div>
                 </div>
@@ -590,9 +590,9 @@ const SettingsPage = () => {
 
               {/* Language */}
               <div className="p-6 rounded-2xl bg-card border">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                       <Globe className="w-5 h-5 text-primary" />
                     </div>
                     <div>
@@ -600,7 +600,7 @@ const SettingsPage = () => {
                       <p className="text-xs text-muted-foreground">Currently set to English (US)</p>
                     </div>
                   </div>
-                  <select className="px-3 py-2 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20">
+                  <select className="px-3 py-2 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 w-full sm:w-auto">
                     <option>English (US)</option>
                     <option>Español</option>
                     <option>Français</option>
