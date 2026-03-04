@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useAccountType, type AccountType } from "@/contexts/AccountTypeContext";
 import {
   User, Bell, Palette, Globe, Lock, Mail, Phone, MapPin,
   Camera, Save, Check, BellRing, BellOff, Monitor, Moon, Sun,
@@ -89,6 +90,7 @@ const hexToHsl = (hex: string): string => {
 const SettingsPage = () => {
   const [activeTab, setActiveTab] = useState<Tab>("profile");
   const { isDark, toggle: toggleDark } = useDarkMode();
+  const { accountType, setAccountType } = useAccountType();
   const [activeTheme, setActiveTheme] = useState("default");
   const [customPrimary, setCustomPrimary] = useState("352 43% 32%");
   const [customSecondary, setCustomSecondary] = useState("35 35% 64%");
@@ -283,6 +285,29 @@ const SettingsPage = () => {
                     rows={3}
                     className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none"
                   />
+                </div>
+
+                <div className="mt-6 p-4 rounded-xl bg-muted/30 border">
+                  <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 block">Account Type</label>
+                  <p className="text-xs text-muted-foreground mb-3">Switch between venue mode and destination/tourism mode.</p>
+                  <div className="grid grid-cols-2 gap-3">
+                    {([
+                      { id: "restaurant" as AccountType, label: "Venue / Restaurant", desc: "For restaurants, hotels, lounges" },
+                      { id: "destination" as AccountType, label: "Tourism / Destination", desc: "For cities, states, tourism boards" },
+                    ]).map((opt) => (
+                      <button
+                        key={opt.id}
+                        onClick={() => { setAccountType(opt.id); toast({ title: "Account type updated", description: `Switched to ${opt.label} mode.` }); }}
+                        className={`p-3 rounded-xl border-2 text-left transition-all ${
+                          accountType === opt.id ? "border-primary bg-primary/5" : "border-transparent bg-muted/50 hover:border-muted"
+                        }`}
+                      >
+                        <div className="text-sm font-medium">{opt.label}</div>
+                        <div className="text-[10px] text-muted-foreground">{opt.desc}</div>
+                        {accountType === opt.id && <div className="mt-1 flex items-center gap-1 text-[10px] text-primary font-medium"><Check className="w-3 h-3" /> Active</div>}
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
                 <div className="flex justify-end mt-6">
