@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import {
   User, Bell, Palette, Globe, Lock, Mail, Phone, MapPin,
   Camera, Save, Check, BellRing, BellOff, Monitor, Moon, Sun,
+  Paintbrush, Droplets, RotateCcw,
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/hooks/use-toast";
@@ -22,13 +23,32 @@ const themeOptions = [
   { id: "default", label: "Restaurant", desc: "Warm wine & gold tones", colors: ["352 43% 32%", "35 35% 64%", "30 33% 97%"] },
   { id: "hotel", label: "Hotel", desc: "Navy & brass elegance", colors: ["210 35% 17%", "38 30% 56%", "0 0% 100%"] },
   { id: "lounge", label: "Lounge", desc: "Deep purple & neon pink", colors: ["270 30% 17%", "338 100% 53%", "0 0% 7%"] },
+  { id: "ocean", label: "Ocean", desc: "Coastal teal & sand", colors: ["185 50% 28%", "42 40% 70%", "195 20% 96%"] },
+  { id: "forest", label: "Forest", desc: "Deep green & earth", colors: ["150 40% 22%", "30 35% 55%", "90 15% 96%"] },
+  { id: "sunset", label: "Sunset", desc: "Coral & warm amber", colors: ["12 70% 50%", "35 80% 55%", "30 30% 97%"] },
+];
+
+const accentColorPresets = [
+  { label: "Wine", hsl: "352 43% 32%" },
+  { label: "Navy", hsl: "210 35% 17%" },
+  { label: "Emerald", hsl: "152 60% 30%" },
+  { label: "Coral", hsl: "12 70% 50%" },
+  { label: "Teal", hsl: "185 50% 28%" },
+  { label: "Violet", hsl: "270 45% 35%" },
+  { label: "Amber", hsl: "38 80% 45%" },
+  { label: "Rose", hsl: "338 65% 45%" },
+  { label: "Slate", hsl: "215 20% 35%" },
+  { label: "Crimson", hsl: "0 70% 40%" },
 ];
 
 const SettingsPage = () => {
   const [activeTab, setActiveTab] = useState<Tab>("profile");
   const { isDark, toggle: toggleDark } = useDarkMode();
   const [activeTheme, setActiveTheme] = useState("default");
-
+  const [customPrimary, setCustomPrimary] = useState("352 43% 32%");
+  const [customSecondary, setCustomSecondary] = useState("35 35% 64%");
+  const [borderRadius, setBorderRadius] = useState("1rem");
+  const [fontStyle, setFontStyle] = useState<"serif" | "sans">("serif");
   const [profile, setProfile] = useState({
     name: "Marco Bellini",
     email: "marco@bellavista.com",
@@ -56,10 +76,56 @@ const SettingsPage = () => {
   const handleThemeChange = (themeId: string) => {
     setActiveTheme(themeId);
     const root = document.documentElement;
-    root.classList.remove("theme-hotel", "theme-lounge");
-    if (themeId === "hotel") root.classList.add("theme-hotel");
-    if (themeId === "lounge") root.classList.add("theme-lounge");
+    root.classList.remove("theme-hotel", "theme-lounge", "theme-ocean", "theme-forest", "theme-sunset");
+    if (themeId !== "default") root.classList.add(`theme-${themeId}`);
+    const theme = themeOptions.find((t) => t.id === themeId);
+    if (theme) {
+      setCustomPrimary(theme.colors[0]);
+      setCustomSecondary(theme.colors[1]);
+    }
     toast({ title: "Theme updated", description: `Switched to ${themeId} theme.` });
+  };
+
+  const applyCustomColor = (variable: string, hslValue: string) => {
+    document.documentElement.style.setProperty(`--${variable}`, hslValue);
+  };
+
+  const handlePrimaryChange = (hsl: string) => {
+    setCustomPrimary(hsl);
+    applyCustomColor("primary", hsl);
+    applyCustomColor("ring", hsl);
+    setActiveTheme("custom");
+  };
+
+  const handleSecondaryChange = (hsl: string) => {
+    setCustomSecondary(hsl);
+    applyCustomColor("secondary", hsl);
+    applyCustomColor("accent", hsl);
+    setActiveTheme("custom");
+  };
+
+  const handleRadiusChange = (val: string) => {
+    setBorderRadius(val);
+    document.documentElement.style.setProperty("--radius", val);
+  };
+
+  const handleFontChange = (style: "serif" | "sans") => {
+    setFontStyle(style);
+    const display = style === "serif" ? "'Playfair Display', serif" : "'Inter', system-ui, sans-serif";
+    document.documentElement.style.setProperty("--font-display", display);
+  };
+
+  const resetCustomization = () => {
+    document.documentElement.style.removeProperty("--primary");
+    document.documentElement.style.removeProperty("--secondary");
+    document.documentElement.style.removeProperty("--accent");
+    document.documentElement.style.removeProperty("--ring");
+    document.documentElement.style.removeProperty("--radius");
+    document.documentElement.style.removeProperty("--font-display");
+    handleThemeChange("default");
+    setBorderRadius("1rem");
+    setFontStyle("serif");
+    toast({ title: "Reset complete", description: "All customizations reverted to defaults." });
   };
 
   const notificationItems = [
@@ -234,7 +300,6 @@ const SettingsPage = () => {
               <div className="p-6 rounded-2xl bg-card border">
                 <h3 className="font-display font-semibold text-lg mb-2">Display Mode</h3>
                 <p className="text-sm text-muted-foreground mb-5">Switch between light and dark modes.</p>
-
                 <div className="grid grid-cols-2 gap-3">
                   <button
                     onClick={() => { if (isDark) toggleDark(); }}
@@ -259,23 +324,27 @@ const SettingsPage = () => {
                 </div>
               </div>
 
-              {/* Theme */}
+              {/* Theme Designs */}
               <div className="p-6 rounded-2xl bg-card border">
-                <h3 className="font-display font-semibold text-lg mb-2">Color Theme</h3>
-                <p className="text-sm text-muted-foreground mb-5">Choose the visual identity for your dashboard.</p>
-
-                <div className="grid sm:grid-cols-3 gap-3">
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="font-display font-semibold text-lg">Theme Designs</h3>
+                  <button onClick={resetCustomization} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted text-xs font-medium text-muted-foreground hover:text-foreground transition-colors">
+                    <RotateCcw className="w-3 h-3" /> Reset All
+                  </button>
+                </div>
+                <p className="text-sm text-muted-foreground mb-5">Choose a preset theme or customize colors below.</p>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {themeOptions.map((theme) => (
                     <button
                       key={theme.id}
                       onClick={() => handleThemeChange(theme.id)}
                       className={`p-4 rounded-2xl border-2 text-left transition-all ${
-                        activeTheme === theme.id ? "border-primary bg-primary/5" : "border-transparent bg-muted/50 hover:border-muted"
+                        activeTheme === theme.id ? "border-primary bg-primary/5 shadow-md" : "border-transparent bg-muted/50 hover:border-muted"
                       }`}
                     >
                       <div className="flex gap-1.5 mb-3">
                         {theme.colors.map((c, i) => (
-                          <div key={i} className="w-8 h-8 rounded-lg" style={{ backgroundColor: `hsl(${c})` }} />
+                          <div key={i} className="w-7 h-7 rounded-lg shadow-sm" style={{ backgroundColor: `hsl(${c})` }} />
                         ))}
                       </div>
                       <div className="text-sm font-medium">{theme.label}</div>
@@ -287,6 +356,124 @@ const SettingsPage = () => {
                       )}
                     </button>
                   ))}
+                </div>
+              </div>
+
+              {/* Custom Accent Colors */}
+              <div className="p-6 rounded-2xl bg-card border">
+                <div className="flex items-center gap-2 mb-2">
+                  <Paintbrush className="w-5 h-5 text-primary" />
+                  <h3 className="font-display font-semibold text-lg">Custom Accent Colors</h3>
+                </div>
+                <p className="text-sm text-muted-foreground mb-5">Fine-tune your brand colors. Changes apply instantly.</p>
+
+                <div className="mb-6">
+                  <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 block">Primary Color</label>
+                  <div className="flex flex-wrap gap-2">
+                    {accentColorPresets.map((color) => (
+                      <button
+                        key={color.label}
+                        onClick={() => handlePrimaryChange(color.hsl)}
+                        className={`relative w-10 h-10 rounded-xl shadow-sm transition-all hover:scale-110 ${
+                          customPrimary === color.hsl ? "ring-2 ring-foreground ring-offset-2 ring-offset-background scale-110" : ""
+                        }`}
+                        style={{ backgroundColor: `hsl(${color.hsl})` }}
+                        title={color.label}
+                      >
+                        {customPrimary === color.hsl && <Check className="w-4 h-4 text-white absolute inset-0 m-auto" />}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mb-6">
+                  <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 block">Secondary / Accent Color</label>
+                  <div className="flex flex-wrap gap-2">
+                    {accentColorPresets.map((color) => (
+                      <button
+                        key={color.label}
+                        onClick={() => handleSecondaryChange(color.hsl)}
+                        className={`relative w-10 h-10 rounded-xl shadow-sm transition-all hover:scale-110 ${
+                          customSecondary === color.hsl ? "ring-2 ring-foreground ring-offset-2 ring-offset-background scale-110" : ""
+                        }`}
+                        style={{ backgroundColor: `hsl(${color.hsl})` }}
+                        title={color.label}
+                      >
+                        {customSecondary === color.hsl && <Check className="w-4 h-4 text-white absolute inset-0 m-auto" />}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="p-4 rounded-xl bg-muted/30 border">
+                  <div className="text-xs font-medium text-muted-foreground mb-3">Live Preview</div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-xl" style={{ backgroundColor: `hsl(${customPrimary})` }} />
+                    <div className="w-12 h-12 rounded-xl" style={{ backgroundColor: `hsl(${customSecondary})` }} />
+                    <div className="flex-1 ml-2">
+                      <div className="h-3 rounded-full mb-2" style={{ backgroundColor: `hsl(${customPrimary})`, width: "70%" }} />
+                      <div className="h-2 rounded-full" style={{ backgroundColor: `hsl(${customSecondary})`, width: "45%" }} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Shape & Typography */}
+              <div className="p-6 rounded-2xl bg-card border">
+                <div className="flex items-center gap-2 mb-2">
+                  <Droplets className="w-5 h-5 text-primary" />
+                  <h3 className="font-display font-semibold text-lg">Shape & Typography</h3>
+                </div>
+                <p className="text-sm text-muted-foreground mb-5">Adjust corner rounding and heading font style.</p>
+                <div className="grid sm:grid-cols-2 gap-6">
+                  <div>
+                    <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 block">Corner Radius</label>
+                    <div className="flex gap-2">
+                      {[
+                        { label: "Sharp", value: "0.25rem" },
+                        { label: "Soft", value: "0.75rem" },
+                        { label: "Rounded", value: "1rem" },
+                        { label: "Pill", value: "1.5rem" },
+                      ].map((opt) => (
+                        <button
+                          key={opt.label}
+                          onClick={() => handleRadiusChange(opt.value)}
+                          className={`flex-1 p-3 border-2 text-center transition-all ${
+                            borderRadius === opt.value ? "border-primary bg-primary/5" : "border-transparent bg-muted/50 hover:border-muted"
+                          }`}
+                          style={{ borderRadius: opt.value }}
+                        >
+                          <div className="w-8 h-8 mx-auto mb-1 bg-primary/20 border border-primary/30" style={{ borderRadius: opt.value }} />
+                          <span className="text-[10px] font-medium">{opt.label}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 block">Heading Font</label>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => handleFontChange("serif")}
+                        className={`flex-1 p-3 rounded-xl border-2 text-center transition-all ${
+                          fontStyle === "serif" ? "border-primary bg-primary/5" : "border-transparent bg-muted/50 hover:border-muted"
+                        }`}
+                      >
+                        <span className="text-lg font-bold" style={{ fontFamily: "'Playfair Display', serif" }}>Aa</span>
+                        <div className="text-[10px] font-medium mt-1">Serif</div>
+                        <div className="text-[9px] text-muted-foreground">Playfair Display</div>
+                      </button>
+                      <button
+                        onClick={() => handleFontChange("sans")}
+                        className={`flex-1 p-3 rounded-xl border-2 text-center transition-all ${
+                          fontStyle === "sans" ? "border-primary bg-primary/5" : "border-transparent bg-muted/50 hover:border-muted"
+                        }`}
+                      >
+                        <span className="text-lg font-bold" style={{ fontFamily: "'Inter', sans-serif" }}>Aa</span>
+                        <div className="text-[10px] font-medium mt-1">Sans-Serif</div>
+                        <div className="text-[9px] text-muted-foreground">Inter</div>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
 
