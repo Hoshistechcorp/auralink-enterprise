@@ -2,10 +2,11 @@ import { ReactNode, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   Home, Layers, BarChart3, Gamepad2, Settings, QrCode, Users2, CreditCard,
-  Heart, Megaphone, Share2, Search, Shield, Building2, ChevronDown, LucideIcon, Menu, X,
+  Heart, Megaphone, Share2, Search, Shield, Building2, ChevronDown, LucideIcon, Menu, Sun, Moon,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
+import { useDarkMode } from "@/hooks/use-dark-mode";
 
 interface NavItem {
   icon: LucideIcon;
@@ -133,6 +134,7 @@ const DashboardLayout = ({ children, title, subtitle = "Bella Vista · Restauran
   const navigate = useNavigate();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { isDark, toggle: toggleDark } = useDarkMode();
 
   return (
     <div className="min-h-screen bg-background flex">
@@ -192,6 +194,13 @@ const DashboardLayout = ({ children, title, subtitle = "Bella Vista · Restauran
                 <p className="text-sm text-muted-foreground">{subtitle}</p>
               </div>
             </div>
+            <button
+              onClick={toggleDark}
+              className="p-2 rounded-xl hover:bg-muted transition-colors"
+              aria-label="Toggle dark mode"
+            >
+              {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
           </div>
           {children}
         </div>
