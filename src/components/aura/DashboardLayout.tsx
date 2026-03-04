@@ -8,6 +8,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { useDarkMode } from "@/hooks/use-dark-mode";
+import EcosystemLauncher from "@/components/aura/EcosystemLauncher";
 
 interface NavItem {
   icon: LucideIcon;
@@ -207,6 +208,7 @@ const DashboardLayout = ({ children, title, subtitle = "Bella Vista · Restauran
               </div>
             </div>
             <div className="flex items-center gap-2">
+              <EcosystemLauncher />
               {/* Location Switcher */}
               <div className="relative">
                 <button

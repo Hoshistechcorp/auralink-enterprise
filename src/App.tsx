@@ -21,6 +21,7 @@ import GamificationPage from "./pages/dashboard/GamificationPage";
 import CardStudioPage from "./pages/dashboard/CardStudioPage";
 import LocationsPage from "./pages/dashboard/LocationsPage";
 import TeamPage from "./pages/dashboard/TeamPage";
+import EcosystemPage from "./pages/dashboard/EcosystemPage";
 import MenuPage from "./pages/microsite/MenuPage";
 import GalleryPage from "./pages/microsite/GalleryPage";
 import ReviewsPage from "./pages/microsite/ReviewsPage";
@@ -60,6 +61,7 @@ const App = () => (
           <Route path="/dashboard/cards" element={<CardStudioPage />} />
           <Route path="/dashboard/locations" element={<LocationsPage />} />
           <Route path="/dashboard/team" element={<TeamPage />} />
+          <Route path="/dashboard/ecosystem/:appId" element={<EcosystemPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
