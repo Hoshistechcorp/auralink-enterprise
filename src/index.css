@@ -1,105 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Restaurant Theme (default) */
+    --background: 30 33% 97%;
+    --foreground: 20 10% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 20 10% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 20 10% 12%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 352 43% 32%;
+    --primary-foreground: 30 33% 97%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 35 35% 64%;
+    --secondary-foreground: 20 10% 12%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 30 20% 92%;
+    --muted-foreground: 20 8% 46%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 35 35% 64%;
+    --accent-foreground: 20 10% 12%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 30 15% 88%;
+    --input: 30 15% 88%;
+    --ring: 352 43% 32%;
 
-    --radius: 0.5rem;
+    --radius: 1rem;
 
-    --sidebar-background: 0 0% 98%;
+    --sidebar-background: 30 20% 96%;
+    --sidebar-foreground: 20 10% 20%;
+    --sidebar-primary: 352 43% 32%;
+    --sidebar-primary-foreground: 30 33% 97%;
+    --sidebar-accent: 30 20% 92%;
+    --sidebar-accent-foreground: 20 10% 20%;
+    --sidebar-border: 30 15% 88%;
+    --sidebar-ring: 352 43% 32%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* Custom tokens */
+    --aura-gold: 35 35% 64%;
+    --aura-wine: 352 43% 32%;
+    --aura-cream: 30 33% 97%;
+    --aura-warm: 30 20% 92%;
+    --aura-success: 152 60% 40%;
+    --aura-info: 210 70% 50%;
+    --aura-warning: 38 90% 55%;
 
-    --sidebar-primary: 240 5.9% 10%;
+    --card-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    --card-shadow-hover: 0 8px 24px rgba(0,0,0,0.1);
+    --card-radius: 16px;
+    --card-size: 108px;
 
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Inter', system-ui, sans-serif;
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+  /* Hotel Theme */
+  .theme-hotel {
+    --background: 0 0% 100%;
+    --foreground: 210 30% 15%;
+    --primary: 210 35% 17%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 38 30% 56%;
+    --secondary-foreground: 210 30% 15%;
+    --muted: 210 15% 95%;
+    --muted-foreground: 210 10% 46%;
+    --accent: 38 30% 56%;
+    --accent-foreground: 210 30% 15%;
+    --border: 210 15% 90%;
+    --input: 210 15% 90%;
+    --ring: 210 35% 17%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 30% 15%;
+    --aura-gold: 38 30% 56%;
+    --aura-wine: 210 35% 17%;
   }
-}
 
-@layer base {
+  /* Lounge Theme */
+  .theme-lounge {
+    --background: 0 0% 7%;
+    --foreground: 0 0% 95%;
+    --primary: 270 30% 17%;
+    --primary-foreground: 0 0% 95%;
+    --secondary: 338 100% 53%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 270 10% 15%;
+    --muted-foreground: 270 5% 60%;
+    --accent: 338 100% 53%;
+    --accent-foreground: 0 0% 100%;
+    --border: 270 10% 20%;
+    --input: 270 10% 20%;
+    --ring: 338 100% 53%;
+    --card: 270 10% 12%;
+    --card-foreground: 0 0% 95%;
+    --aura-gold: 338 100% 53%;
+    --aura-wine: 270 30% 17%;
+  }
+
   * {
     @apply border-border;
   }
 
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer components {
+  .aura-card {
+    width: var(--card-size);
+    height: var(--card-size);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    padding: 8px;
+    transition: all 0.2s ease;
+    @apply bg-card text-card-foreground flex flex-col items-center justify-center gap-1 cursor-pointer;
+  }
+  .aura-card:hover {
+    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-2px);
+  }
+  .aura-card-title {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .aura-card-desc {
+    font-size: 11px;
+    font-weight: 400;
+    @apply text-muted-foreground;
+    text-align: center;
+  }
+  .aura-action-btn {
+    @apply flex flex-col items-center gap-1 text-xs font-medium;
+    min-width: 60px;
+  }
+  .aura-action-btn .icon-wrap {
+    @apply w-10 h-10 rounded-full flex items-center justify-center bg-primary text-primary-foreground;
+  }
+  .aura-section-title {
+    font-family: var(--font-display);
+    @apply text-lg font-semibold;
+  }
+  .aura-badge {
+    @apply inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+  .aura-badge-gold {
+    background: hsl(var(--aura-gold) / 0.15);
+    color: hsl(var(--aura-gold));
+  }
+  .aura-badge-success {
+    background: hsl(var(--aura-success) / 0.15);
+    color: hsl(var(--aura-success));
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+  .font-body {
+    font-family: var(--font-body);
   }
 }
