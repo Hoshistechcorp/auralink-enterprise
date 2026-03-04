@@ -34,6 +34,9 @@ import AwardsPage from "./pages/microsite/AwardsPage";
 import FAQsPage from "./pages/microsite/FAQsPage";
 import EventsPage from "./pages/microsite/EventsPage";
 import SocialLinksPage from "./pages/microsite/SocialLinksPage";
+import FreebieGamePage from "./pages/microsite/FreebieGamePage";
+import ReferralLinkPage from "./pages/microsite/ReferralLinkPage";
+import AffiliatePage from "./pages/microsite/AffiliatePage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -59,6 +62,9 @@ const App = () => (
           <Route path="/microsite/faqs" element={<FAQsPage />} />
           <Route path="/microsite/events" element={<EventsPage />} />
           <Route path="/microsite/social-links" element={<SocialLinksPage />} />
+          <Route path="/microsite/freebie-game" element={<FreebieGamePage />} />
+          <Route path="/microsite/referral" element={<ReferralLinkPage />} />
+          <Route path="/microsite/affiliate" element={<AffiliatePage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/qr" element={<QRManagement />} />
           <Route path="/dashboard/affiliates" element={<AffiliateDashboard />} />
