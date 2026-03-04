@@ -142,6 +142,16 @@ const Microsite = () => {
             />
           ))}
         </div>
+
+        {/* Global Map CTA for destination mode */}
+        {isDestination && (
+          <button
+            onClick={() => navigate("/destination/map")}
+            className="w-full mt-4 py-3 rounded-2xl bg-primary/10 border border-primary/20 text-sm font-medium text-primary flex items-center justify-center gap-2 hover:bg-primary/15 transition-colors"
+          >
+            <Globe className="w-4 h-4" /> Explore Global Destination Map
+          </button>
+        )}
       </div>
 
       <BottomBrandBar />
