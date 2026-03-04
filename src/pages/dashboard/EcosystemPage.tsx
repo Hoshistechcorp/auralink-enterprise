@@ -6,7 +6,9 @@ import {
   CheckCircle2, XCircle, Globe, Bell, ToggleLeft, Award, Search,
   ImageIcon, CalendarDays, DollarSign, Share2, Eye, Settings,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Switch } from "@/components/ui/switch";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const appData: Record<string, { name: string; icon: any; description: string; color: string; features: { icon: any; title: string; desc: string }[] }> = {
   auralink: {
@@ -111,49 +113,66 @@ const appData: Record<string, { name: string; icon: any; description: string; co
 };
 
 // Quick action sub-pages
-const ConnectAppPage = () => (
-  <DashboardLayout title="Connect New App" subtitle="iBloov Ecosystem">
-    <div className="space-y-6">
-      <div className="bg-card rounded-2xl border p-6 space-y-4">
-        <h3 className="font-display text-lg font-semibold">API Connection</h3>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div>
-            <label className="text-sm font-medium text-muted-foreground mb-1.5 block">Aura Protocol API Key</label>
-            <input className="w-full px-3 py-2 rounded-xl border bg-background text-sm" placeholder="ap_live_xxxxxxxxxxxx" />
+const ConnectAppPage = () => {
+  const [webhookEvents, setWebhookEvents] = useState<Record<string, boolean>>(() => {
+    try { return JSON.parse(localStorage.getItem("eco-webhooks") || "{}"); } catch { return {}; }
+  });
+
+  const toggleEvent = (evt: string) => {
+    const next = { ...webhookEvents, [evt]: !webhookEvents[evt] };
+    setWebhookEvents(next);
+    localStorage.setItem("eco-webhooks", JSON.stringify(next));
+  };
+
+  const events = [
+    "Supernova user enters venue geofence",
+    "Staff member earns new certification",
+    "Affiliate booking generated",
+    "Influencer campaign conversion",
+  ];
+
+  return (
+    <DashboardLayout title="Connect New App" subtitle="iBloov Ecosystem">
+      <div className="space-y-6">
+        <div className="bg-card rounded-2xl border p-6 space-y-4">
+          <h3 className="font-display text-lg font-semibold">API Connection</h3>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label className="text-sm font-medium text-muted-foreground mb-1.5 block">Aura Protocol API Key</label>
+              <input className="w-full px-3 py-2 rounded-xl border bg-background text-sm" placeholder="ap_live_xxxxxxxxxxxx" />
+            </div>
+            <div>
+              <label className="text-sm font-medium text-muted-foreground mb-1.5 block">Webhook URL</label>
+              <input className="w-full px-3 py-2 rounded-xl border bg-background text-sm" placeholder="https://your-domain.com/webhook" />
+            </div>
           </div>
-          <div>
-            <label className="text-sm font-medium text-muted-foreground mb-1.5 block">Webhook URL</label>
-            <input className="w-full px-3 py-2 rounded-xl border bg-background text-sm" placeholder="https://your-domain.com/webhook" />
+          <div className="flex items-center gap-2 text-sm">
+            <XCircle className="w-4 h-4 text-destructive" />
+            <span className="text-muted-foreground">Not connected</span>
+          </div>
+          <button className="px-4 py-2 rounded-xl bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity">
+            Connect
+          </button>
+        </div>
+        <div className="bg-card rounded-2xl border p-6 space-y-4">
+          <h3 className="font-display text-lg font-semibold">Webhook Events</h3>
+          <p className="text-sm text-muted-foreground">Subscribe to ecosystem triggers:</p>
+          <div className="space-y-3">
+            {events.map((evt) => (
+              <label key={evt} className="flex items-center gap-3 cursor-pointer">
+                <Checkbox
+                  checked={!!webhookEvents[evt]}
+                  onCheckedChange={() => toggleEvent(evt)}
+                />
+                <span className="text-sm">{evt}</span>
+              </label>
+            ))}
           </div>
         </div>
-        <div className="flex items-center gap-2 text-sm">
-          <XCircle className="w-4 h-4 text-destructive" />
-          <span className="text-muted-foreground">Not connected</span>
-        </div>
-        <button className="px-4 py-2 rounded-xl bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity">
-          Connect
-        </button>
       </div>
-      <div className="bg-card rounded-2xl border p-6 space-y-4">
-        <h3 className="font-display text-lg font-semibold">Webhook Events</h3>
-        <p className="text-sm text-muted-foreground">Subscribe to ecosystem triggers:</p>
-        <div className="space-y-3">
-          {[
-            "Supernova user enters venue geofence",
-            "Staff member earns new certification",
-            "Affiliate booking generated",
-            "Influencer campaign conversion",
-          ].map((evt) => (
-            <label key={evt} className="flex items-center gap-3 cursor-pointer">
-              <input type="checkbox" className="w-4 h-4 rounded border-input accent-primary" />
-              <span className="text-sm">{evt}</span>
-            </label>
-          ))}
-        </div>
-      </div>
-    </div>
-  </DashboardLayout>
-);
+    </DashboardLayout>
+  );
+};
 
 const ApiKeysPage = () => (
   <DashboardLayout title="Manage API Keys" subtitle="iBloov Ecosystem">
@@ -182,31 +201,46 @@ const ApiKeysPage = () => (
   </DashboardLayout>
 );
 
-const PermissionsPage = () => (
-  <DashboardLayout title="Ecosystem Permissions" subtitle="iBloov Ecosystem">
-    <div className="bg-card rounded-2xl border p-6 space-y-5">
-      <h3 className="font-display text-lg font-semibold">Data Permissions</h3>
-      <p className="text-sm text-muted-foreground">Control what data is shared with ecosystem partners.</p>
-      <div className="space-y-4">
-        {[
-          { label: "Share data with iBloov Global", desc: "Aggregate analytics across the platform" },
-          { label: "Share data with Municipal Nebula", desc: "Anonymous venue engagement data for city insights" },
-          { label: "Share data with Partner Venues", desc: "Cross-promote with partner businesses" },
-        ].map((perm) => (
-          <div key={perm.label} className="flex items-center justify-between p-3 rounded-xl bg-muted/50 border">
-            <div>
-              <p className="text-sm font-medium">{perm.label}</p>
-              <p className="text-xs text-muted-foreground">{perm.desc}</p>
+const permissionItems = [
+  { key: "ibloov-global", label: "Share data with iBloov Global", desc: "Aggregate analytics across the platform" },
+  { key: "municipal-nebula", label: "Share data with Municipal Nebula", desc: "Anonymous venue engagement data for city insights" },
+  { key: "partner-venues", label: "Share data with Partner Venues", desc: "Cross-promote with partner businesses" },
+];
+
+const PermissionsPage = () => {
+  const [permissions, setPermissions] = useState<Record<string, boolean>>(() => {
+    try { return JSON.parse(localStorage.getItem("eco-permissions") || "{}"); } catch { return {}; }
+  });
+
+  const togglePerm = (key: string) => {
+    const next = { ...permissions, [key]: !permissions[key] };
+    setPermissions(next);
+    localStorage.setItem("eco-permissions", JSON.stringify(next));
+  };
+
+  return (
+    <DashboardLayout title="Ecosystem Permissions" subtitle="iBloov Ecosystem">
+      <div className="bg-card rounded-2xl border p-6 space-y-5">
+        <h3 className="font-display text-lg font-semibold">Data Permissions</h3>
+        <p className="text-sm text-muted-foreground">Control what data is shared with ecosystem partners.</p>
+        <div className="space-y-4">
+          {permissionItems.map((perm) => (
+            <div key={perm.key} className="flex items-center justify-between p-3 rounded-xl bg-muted/50 border">
+              <div>
+                <p className="text-sm font-medium">{perm.label}</p>
+                <p className="text-xs text-muted-foreground">{perm.desc}</p>
+              </div>
+              <Switch
+                checked={!!permissions[perm.key]}
+                onCheckedChange={() => togglePerm(perm.key)}
+              />
             </div>
-            <button className="w-10 h-6 rounded-full bg-primary/20 relative transition-colors">
-              <div className="w-4 h-4 rounded-full bg-primary absolute top-1 left-1" />
-            </button>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
-  </DashboardLayout>
-);
+    </DashboardLayout>
+  );
+};
 
 // Individual app detail page
 const AppDetailPage = ({ appId }: { appId: string }) => {
