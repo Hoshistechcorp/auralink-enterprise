@@ -19,6 +19,8 @@ import SettingsPage from "./pages/dashboard/SettingsPage";
 import AdminPage from "./pages/dashboard/AdminPage";
 import GamificationPage from "./pages/dashboard/GamificationPage";
 import CardStudioPage from "./pages/dashboard/CardStudioPage";
+import LocationsPage from "./pages/dashboard/LocationsPage";
+import TeamPage from "./pages/dashboard/TeamPage";
 import MenuPage from "./pages/microsite/MenuPage";
 import GalleryPage from "./pages/microsite/GalleryPage";
 import ReviewsPage from "./pages/microsite/ReviewsPage";
@@ -56,6 +58,8 @@ const App = () => (
           <Route path="/dashboard/admin" element={<AdminPage />} />
           <Route path="/dashboard/gamification" element={<GamificationPage />} />
           <Route path="/dashboard/cards" element={<CardStudioPage />} />
+          <Route path="/dashboard/locations" element={<LocationsPage />} />
+          <Route path="/dashboard/team" element={<TeamPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

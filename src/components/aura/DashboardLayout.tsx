@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import {
   Home, Layers, BarChart3, Gamepad2, Settings, QrCode, Users2, CreditCard,
   Heart, Megaphone, Share2, Search, Shield, Building2, ChevronDown, LucideIcon, Menu, Sun, Moon,
-  ClipboardEdit,
+  ClipboardEdit, MapPin, UserCog, Check,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
@@ -62,6 +62,8 @@ const navSections: NavSection[] = [
     title: "Business",
     defaultOpen: false,
     items: [
+      { icon: MapPin, label: "Locations", path: "/dashboard/locations" },
+      { icon: UserCog, label: "Team", path: "/dashboard/team" },
       { icon: Building2, label: "Enterprise", path: "/dashboard/enterprise" },
       { icon: CreditCard, label: "Subscription", path: "/dashboard/subscription" },
       { icon: Settings, label: "Settings", path: "/dashboard/settings" },
@@ -132,11 +134,19 @@ const SidebarNav = ({ currentPath, navigate, onNavigate }: { currentPath: string
   </nav>
 );
 
+const locations = [
+  { id: "downtown", label: "Bella Vista — Downtown" },
+  { id: "midtown", label: "Bella Vista — Midtown" },
+  { id: "brooklyn", label: "Bella Vista — Brooklyn" },
+];
+
 const DashboardLayout = ({ children, title, subtitle = "Bella Vista · Restaurant" }: DashboardLayoutProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const { isDark, toggle: toggleDark } = useDarkMode();
+  const [activeLocation, setActiveLocation] = useState(locations[0]);
+  const [locDropdownOpen, setLocDropdownOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-background flex">
@@ -196,13 +206,53 @@ const DashboardLayout = ({ children, title, subtitle = "Bella Vista · Restauran
                 <p className="text-sm text-muted-foreground">{subtitle}</p>
               </div>
             </div>
-            <button
-              onClick={toggleDark}
-              className="p-2 rounded-xl hover:bg-muted transition-colors"
-              aria-label="Toggle dark mode"
-            >
-              {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </button>
+            <div className="flex items-center gap-2">
+              {/* Location Switcher */}
+              <div className="relative">
+                <button
+                  onClick={() => setLocDropdownOpen(!locDropdownOpen)}
+                  className="flex items-center gap-2 px-3 py-2 rounded-xl bg-muted/50 border text-sm font-medium hover:bg-muted transition-colors"
+                >
+                  <MapPin className="w-3.5 h-3.5 text-primary" />
+                  <span className="hidden sm:inline max-w-[140px] truncate">{activeLocation.label.split("—")[1]?.trim() || activeLocation.label}</span>
+                  <ChevronDown className={`w-3.5 h-3.5 transition-transform ${locDropdownOpen ? "rotate-180" : ""}`} />
+                </button>
+                <AnimatePresence>
+                  {locDropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -4 }}
+                      className="absolute right-0 top-full mt-1 w-64 p-1.5 rounded-xl bg-card border shadow-lg z-50"
+                    >
+                      {locations.map((loc) => (
+                        <button
+                          key={loc.id}
+                          onClick={() => { setActiveLocation(loc); setLocDropdownOpen(false); }}
+                          className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors ${activeLocation.id === loc.id ? "bg-primary/10 text-primary font-medium" : "hover:bg-muted text-foreground"}`}
+                        >
+                          <MapPin className="w-3.5 h-3.5 shrink-0" />
+                          <span className="truncate">{loc.label}</span>
+                          {activeLocation.id === loc.id && <Check className="w-3.5 h-3.5 ml-auto shrink-0" />}
+                        </button>
+                      ))}
+                      <div className="border-t mt-1 pt-1">
+                        <button onClick={() => { navigate("/dashboard/locations"); setLocDropdownOpen(false); }} className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:bg-muted transition-colors">
+                          <Settings className="w-3.5 h-3.5" /> Manage Locations
+                        </button>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+              <button
+                onClick={toggleDark}
+                className="p-2 rounded-xl hover:bg-muted transition-colors"
+                aria-label="Toggle dark mode"
+              >
+                {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </button>
+            </div>
           </div>
           {children}
         </div>
