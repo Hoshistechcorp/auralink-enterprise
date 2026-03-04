@@ -2,9 +2,10 @@ import { ReactNode, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   Home, Layers, BarChart3, Gamepad2, Settings, QrCode, Users2, CreditCard,
-  Heart, Megaphone, Share2, Search, Shield, Building2, ChevronDown, LucideIcon,
+  Heart, Megaphone, Share2, Search, Shield, Building2, ChevronDown, LucideIcon, Menu, X,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 
 interface NavItem {
   icon: LucideIcon;
@@ -115,12 +116,27 @@ interface DashboardLayoutProps {
   subtitle?: string;
 }
 
+const SidebarNav = ({ currentPath, navigate, onNavigate }: { currentPath: string; navigate: (p: string) => void; onNavigate?: () => void }) => (
+  <nav className="flex-1 overflow-y-auto px-2 py-2 space-y-0.5">
+    {navSections.map((section) => (
+      <SidebarSection
+        key={section.title}
+        section={section}
+        currentPath={currentPath}
+        navigate={(p) => { navigate(p); onNavigate?.(); }}
+      />
+    ))}
+  </nav>
+);
+
 const DashboardLayout = ({ children, title, subtitle = "Bella Vista · Restaurant" }: DashboardLayoutProps) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-background flex">
+      {/* Desktop Sidebar */}
       <aside className="w-56 bg-card border-r hidden lg:flex flex-col">
         <div className="p-4 pb-2">
           <div className="font-display text-xl font-bold text-primary cursor-pointer" onClick={() => navigate("/")}>
@@ -128,11 +144,7 @@ const DashboardLayout = ({ children, title, subtitle = "Bella Vista · Restauran
           </div>
           <p className="text-[10px] text-muted-foreground mt-0.5">Enterprise Platform</p>
         </div>
-        <nav className="flex-1 overflow-y-auto px-2 py-2 space-y-0.5">
-          {navSections.map((section) => (
-            <SidebarSection key={section.title} section={section} currentPath={location.pathname} navigate={navigate} />
-          ))}
-        </nav>
+        <SidebarNav currentPath={location.pathname} navigate={navigate} />
         <div className="p-3 border-t">
           <button
             onClick={() => navigate("/microsite")}
@@ -143,19 +155,43 @@ const DashboardLayout = ({ children, title, subtitle = "Bella Vista · Restauran
         </div>
       </aside>
 
+      {/* Mobile Sidebar Sheet */}
+      <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+        <SheetContent side="left" className="w-64 p-0">
+          <SheetTitle className="sr-only">Navigation</SheetTitle>
+          <div className="p-4 pb-2">
+            <div className="font-display text-xl font-bold text-primary cursor-pointer" onClick={() => { navigate("/"); setMobileOpen(false); }}>
+              AuraLink
+            </div>
+            <p className="text-[10px] text-muted-foreground mt-0.5">Enterprise Platform</p>
+          </div>
+          <SidebarNav currentPath={location.pathname} navigate={navigate} onNavigate={() => setMobileOpen(false)} />
+          <div className="p-3 border-t">
+            <button
+              onClick={() => { navigate("/microsite"); setMobileOpen(false); }}
+              className="text-xs text-muted-foreground hover:text-primary transition-colors"
+            >
+              ← View Public Page
+            </button>
+          </div>
+        </SheetContent>
+      </Sheet>
+
       <main className="flex-1 p-6 lg:p-8 overflow-auto">
         <div className="max-w-[1200px] mx-auto">
           <div className="flex items-center justify-between mb-8">
-            <div>
-              <h1 className="font-display text-2xl font-bold">{title}</h1>
-              <p className="text-sm text-muted-foreground">{subtitle}</p>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => setMobileOpen(true)}
+                className="lg:hidden p-2 -ml-2 rounded-xl hover:bg-muted transition-colors"
+              >
+                <Menu className="w-5 h-5" />
+              </button>
+              <div>
+                <h1 className="font-display text-2xl font-bold">{title}</h1>
+                <p className="text-sm text-muted-foreground">{subtitle}</p>
+              </div>
             </div>
-            <button
-              onClick={() => navigate("/microsite")}
-              className="lg:hidden text-sm text-primary font-medium"
-            >
-              View Page →
-            </button>
           </div>
           {children}
         </div>
