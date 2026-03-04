@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import {
   User, Bell, Palette, Globe, Lock, Mail, Phone, MapPin,
   Camera, Save, Check, BellRing, BellOff, Monitor, Moon, Sun,
-  Paintbrush, Droplets, RotateCcw,
+  Paintbrush, Droplets, RotateCcw, Pipette,
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/hooks/use-toast";
@@ -40,6 +40,51 @@ const accentColorPresets = [
   { label: "Slate", hsl: "215 20% 35%" },
   { label: "Crimson", hsl: "0 70% 40%" },
 ];
+
+/* ── Color conversion helpers ──────────────────────── */
+const hslToHex = (hslStr: string): string => {
+  const parts = hslStr.trim().split(/\s+/);
+  if (parts.length < 3) return "#000000";
+  const h = parseFloat(parts[0]) / 360;
+  const s = parseFloat(parts[1]) / 100;
+  const l = parseFloat(parts[2]) / 100;
+  const hue2rgb = (p: number, q: number, t: number) => {
+    if (t < 0) t += 1; if (t > 1) t -= 1;
+    if (t < 1 / 6) return p + (q - p) * 6 * t;
+    if (t < 1 / 2) return q;
+    if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+    return p;
+  };
+  let r: number, g: number, b: number;
+  if (s === 0) { r = g = b = l; } else {
+    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    const p = 2 * l - q;
+    r = hue2rgb(p, q, h + 1 / 3); g = hue2rgb(p, q, h); b = hue2rgb(p, q, h - 1 / 3);
+  }
+  const toHex = (x: number) => Math.round(x * 255).toString(16).padStart(2, "0");
+  return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+};
+
+const hexToHsl = (hex: string): string => {
+  hex = hex.replace("#", "");
+  if (hex.length === 3) hex = hex.split("").map((c) => c + c).join("");
+  const r = parseInt(hex.substring(0, 2), 16) / 255;
+  const g = parseInt(hex.substring(2, 4), 16) / 255;
+  const b = parseInt(hex.substring(4, 6), 16) / 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  let h = 0, s = 0;
+  const l = (max + min) / 2;
+  if (max !== min) {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+      case g: h = ((b - r) / d + 2) / 6; break;
+      case b: h = ((r - g) / d + 4) / 6; break;
+    }
+  }
+  return `${Math.round(h * 360)} ${Math.round(s * 100)}% ${Math.round(l * 100)}%`;
+};
 
 const SettingsPage = () => {
   const [activeTab, setActiveTab] = useState<Tab>("profile");
@@ -369,7 +414,7 @@ const SettingsPage = () => {
 
                 <div className="mb-6">
                   <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 block">Primary Color</label>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mb-3">
                     {accentColorPresets.map((color) => (
                       <button
                         key={color.label}
@@ -384,11 +429,44 @@ const SettingsPage = () => {
                       </button>
                     ))}
                   </div>
+                  <div className="flex items-center gap-2">
+                    <label className="relative cursor-pointer">
+                      <input
+                        type="color"
+                        value={hslToHex(customPrimary)}
+                        onChange={(e) => handlePrimaryChange(hexToHsl(e.target.value))}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                      />
+                      <div className="w-9 h-9 rounded-lg border-2 border-muted flex items-center justify-center" style={{ backgroundColor: `hsl(${customPrimary})` }}>
+                        <Pipette className="w-3.5 h-3.5 text-white drop-shadow" />
+                      </div>
+                    </label>
+                    <input
+                      type="text"
+                      value={hslToHex(customPrimary)}
+                      onChange={(e) => {
+                        const v = e.target.value;
+                        if (/^#[0-9a-fA-F]{6}$/.test(v)) handlePrimaryChange(hexToHsl(v));
+                      }}
+                      placeholder="#5a2d3a"
+                      className="w-24 px-3 py-2 rounded-lg bg-muted/50 border text-sm font-mono focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    />
+                    <input
+                      type="text"
+                      value={customPrimary}
+                      onChange={(e) => {
+                        const v = e.target.value;
+                        if (/^\d+\s+\d+%\s+\d+%$/.test(v.trim())) handlePrimaryChange(v.trim());
+                      }}
+                      placeholder="352 43% 32%"
+                      className="flex-1 px-3 py-2 rounded-lg bg-muted/50 border text-sm font-mono focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    />
+                  </div>
                 </div>
 
                 <div className="mb-6">
                   <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 block">Secondary / Accent Color</label>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mb-3">
                     {accentColorPresets.map((color) => (
                       <button
                         key={color.label}
@@ -402,6 +480,39 @@ const SettingsPage = () => {
                         {customSecondary === color.hsl && <Check className="w-4 h-4 text-white absolute inset-0 m-auto" />}
                       </button>
                     ))}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <label className="relative cursor-pointer">
+                      <input
+                        type="color"
+                        value={hslToHex(customSecondary)}
+                        onChange={(e) => handleSecondaryChange(hexToHsl(e.target.value))}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                      />
+                      <div className="w-9 h-9 rounded-lg border-2 border-muted flex items-center justify-center" style={{ backgroundColor: `hsl(${customSecondary})` }}>
+                        <Pipette className="w-3.5 h-3.5 text-white drop-shadow" />
+                      </div>
+                    </label>
+                    <input
+                      type="text"
+                      value={hslToHex(customSecondary)}
+                      onChange={(e) => {
+                        const v = e.target.value;
+                        if (/^#[0-9a-fA-F]{6}$/.test(v)) handleSecondaryChange(hexToHsl(v));
+                      }}
+                      placeholder="#a08860"
+                      className="w-24 px-3 py-2 rounded-lg bg-muted/50 border text-sm font-mono focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    />
+                    <input
+                      type="text"
+                      value={customSecondary}
+                      onChange={(e) => {
+                        const v = e.target.value;
+                        if (/^\d+\s+\d+%\s+\d+%$/.test(v.trim())) handleSecondaryChange(v.trim());
+                      }}
+                      placeholder="35 35% 64%"
+                      className="flex-1 px-3 py-2 rounded-lg bg-muted/50 border text-sm font-mono focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    />
                   </div>
                 </div>
 
