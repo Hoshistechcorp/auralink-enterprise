@@ -3,13 +3,13 @@ import { ArrowLeft, Instagram, Facebook, Twitter, Youtube, Globe, Mail, MessageC
 import { motion } from "framer-motion";
 
 const socials = [
-  { icon: Instagram, label: "Instagram", handle: "@bellavistanyc", url: "#", color: "bg-gradient-to-br from-pink-500 to-purple-600" },
-  { icon: Facebook, label: "Facebook", handle: "BellaVistaNewYork", url: "#", color: "bg-blue-600" },
-  { icon: Twitter, label: "X (Twitter)", handle: "@bellavista_nyc", url: "#", color: "bg-foreground" },
-  { icon: Youtube, label: "YouTube", handle: "Bella Vista Kitchen", url: "#", color: "bg-red-600" },
-  { icon: MessageCircle, label: "TikTok", handle: "@bellavistanyc", url: "#", color: "bg-foreground" },
-  { icon: Globe, label: "Website", handle: "bellavistanyc.com", url: "#", color: "bg-primary" },
-  { icon: Mail, label: "Newsletter", handle: "Subscribe for updates", url: "#", color: "bg-primary" },
+  { icon: Instagram, label: "Instagram", handle: "@bellavistanyc", url: "https://instagram.com/bellavistanyc", color: "bg-gradient-to-br from-pink-500 to-purple-600" },
+  { icon: Facebook, label: "Facebook", handle: "BellaVistaNewYork", url: "https://facebook.com/BellaVistaNewYork", color: "bg-blue-600" },
+  { icon: Twitter, label: "X (Twitter)", handle: "@bellavista_nyc", url: "https://x.com/bellavista_nyc", color: "bg-foreground" },
+  { icon: Youtube, label: "YouTube", handle: "Bella Vista Kitchen", url: "https://youtube.com/@bellavistakitchen", color: "bg-red-600" },
+  { icon: MessageCircle, label: "TikTok", handle: "@bellavistanyc", url: "https://tiktok.com/@bellavistanyc", color: "bg-foreground" },
+  { icon: Globe, label: "Website", handle: "bellavistanyc.com", url: "https://bellavistanyc.com", color: "bg-primary" },
+  { icon: Mail, label: "Newsletter", handle: "Subscribe for updates", url: "mailto:newsletter@bellavistanyc.com", color: "bg-primary" },
 ];
 
 const SocialLinksPage = () => {
@@ -29,6 +29,8 @@ const SocialLinksPage = () => {
           <motion.a
             key={s.label}
             href={s.url}
+            target="_blank"
+            rel="noopener noreferrer"
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.06 }}
