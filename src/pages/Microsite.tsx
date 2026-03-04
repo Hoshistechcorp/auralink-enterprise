@@ -8,7 +8,7 @@ import MicrositeHeader from "@/components/aura/MicrositeHeader";
 import ActionButton from "@/components/aura/ActionButton";
 import AuraCard from "@/components/aura/AuraCard";
 import BottomBrandBar from "@/components/aura/BottomBrandBar";
-
+import AuraSupermenu from "@/components/aura/AuraSupermenu";
 const actionButtons = [
   { icon: Phone, label: "Call" },
   { icon: MessageCircle, label: "Message" },
@@ -74,6 +74,7 @@ const Microsite = () => {
       </div>
 
       <BottomBrandBar />
+      <AuraSupermenu />
     </div>
   );
 };
