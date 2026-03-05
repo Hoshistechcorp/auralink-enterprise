@@ -24,7 +24,7 @@ const plans = [
   {
     id: "pro",
     name: "Pro",
-    price: 29,
+    price: 99.99,
     period: "/mo",
     icon: Sparkles,
     desc: "For growing businesses",
@@ -37,10 +37,10 @@ const plans = [
   {
     id: "premium",
     name: "Premium",
-    price: 79,
+    price: 299,
     period: "/mo",
     icon: Crown,
-    desc: "Advanced tools & multi-location",
+    desc: "All tools & multi-location",
     popular: false,
     cta: "Upgrade to Premium",
     disabled: false,
@@ -68,7 +68,7 @@ const featureGroups = [
     group: "Core Platform",
     features: [
       { name: "AuraLink Page", free: true, pro: true, premium: true, enterprise: true },
-      { name: "Card Slots", free: "6", pro: "12", premium: "15", enterprise: "15" },
+      { name: "Card Slots", free: "3", pro: "9", premium: "15", enterprise: "15" },
       { name: "Staff Profiles", free: "2", pro: "10", premium: "Unlimited", enterprise: "Unlimited" },
       { name: "Photo Gallery", free: "20 photos", pro: "200 photos", premium: "Unlimited", enterprise: "Unlimited" },
       { name: "QR Codes", free: "1", pro: "5", premium: "Unlimited", enterprise: "Unlimited" },
@@ -117,8 +117,8 @@ const renderCell = (val: boolean | string) => {
 
 /* ── Highlights per plan (for modal) ──────────────── */
 const planHighlights: Record<string, string[]> = {
-  pro: ["12 Card Slots", "Analytics Dashboard", "AI Concierge", "Up to 3 Team Members", "5 QR Codes", "Basic SEO"],
-  premium: ["All 15 Card Slots", "Up to 5 Locations", "Add Location", "Gamification & Badges", "Loyalty Program", "Reputation Management"],
+  pro: ["9 Card Slots", "Analytics Dashboard", "AI Concierge", "Up to 3 Team Members", "5 QR Codes", "Basic SEO"],
+  premium: ["All 15 Card Slots", "Up to 5 Locations", "Add Location", "All Marketing Tools", "Loyalty Program", "Reputation Management"],
   enterprise: ["Unlimited Everything", "Multi-Location Analytics", "Dedicated Account Manager", "API Access", "Custom Branding", "Priority Support"],
 };
 
@@ -225,7 +225,7 @@ const SubscriptionPage = () => {
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-sm font-semibold">You're on the Free plan</p>
-          <p className="text-xs text-muted-foreground">Upgrade to unlock all 15 cards, analytics, AI tools, and multi-location support.</p>
+          <p className="text-xs text-muted-foreground">Upgrade to unlock all 15 cards, analytics, AI tools, and multi-location support. Pro starts at $99.99/mo.</p>
         </div>
         <div className="hidden sm:flex items-center gap-1.5 text-xs font-medium text-primary">
           <TrendingUp className="w-3.5 h-3.5" />
