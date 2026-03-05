@@ -4,21 +4,14 @@ import {
   Camera, UtensilsCrossed, Star, Info, Wine, Flame,
   Bot, Award, Users, HelpCircle, CalendarDays, Globe,
   Gamepad2, Link2, Handshake,
-  // Destination icons
-  Landmark, Compass, Hotel, TreePine, Map, Train,
-  HelpingHand, Store, Tag, Megaphone, Palette,
-  MapPin, Calendar,
 } from "lucide-react";
 import MicrositeHeader from "@/components/aura/MicrositeHeader";
-import DestinationHeader from "@/components/aura/DestinationHeader";
 import ActionButton from "@/components/aura/ActionButton";
 import AuraCard from "@/components/aura/AuraCard";
 import BottomBrandBar from "@/components/aura/BottomBrandBar";
 import AuraSupermenu from "@/components/aura/AuraSupermenu";
-import { useAccountType } from "@/contexts/AccountTypeContext";
 
-/* ── Restaurant config ─────────────────────────── */
-const restaurantActions = [
+const actions = [
   { icon: Phone, label: "Call" },
   { icon: MessageCircle, label: "Message" },
   { icon: Navigation, label: "Directions" },
@@ -26,7 +19,7 @@ const restaurantActions = [
   { icon: Bookmark, label: "Save" },
 ];
 
-const restaurantCards = [
+const cards = [
   { icon: Camera, title: "Photo Gallery", subtitle: "248 photos" },
   { icon: UtensilsCrossed, title: "Menu", subtitle: "Full menu" },
   { icon: Star, title: "Reviews", subtitle: "4.8 avg" },
@@ -44,7 +37,7 @@ const restaurantCards = [
   { icon: Handshake, title: "Affiliate", subtitle: "Partner up" },
 ];
 
-const restaurantRoutes: Record<string, string> = {
+const routes: Record<string, string> = {
   "Menu": "/microsite/menu",
   "Photo Gallery": "/microsite/gallery",
   "Reviews": "/microsite/reviews",
@@ -62,63 +55,12 @@ const restaurantRoutes: Record<string, string> = {
   "Affiliate": "/microsite/affiliate",
 };
 
-/* ── Destination config ────────────────────────── */
-const destinationActions = [
-  { icon: Compass, label: "Plan Trip" },
-  { icon: Map, label: "Map" },
-  { icon: CalendarDays, label: "Events" },
-  { icon: Share2, label: "Share" },
-  { icon: Bookmark, label: "Save" },
-];
-
-const destinationCards = [
-  { icon: Landmark, title: "Attractions", subtitle: "Museums & sites" },
-  { icon: Compass, title: "Things To Do", subtitle: "Tours & more" },
-  { icon: Calendar, title: "Events & Festivals", subtitle: "What's on" },
-  { icon: UtensilsCrossed, title: "Food & Dining", subtitle: "Local eats" },
-  { icon: Hotel, title: "Hotels & Stays", subtitle: "Book now" },
-  { icon: Palette, title: "Cultural Experiences", subtitle: "Arts & culture" },
-  { icon: TreePine, title: "Nature & Parks", subtitle: "Outdoors" },
-  { icon: MapPin, title: "Neighborhood Guide", subtitle: "Districts" },
-  { icon: Train, title: "Transportation", subtitle: "Getting around" },
-  { icon: HelpingHand, title: "Visitor Services", subtitle: "Help & info" },
-  { icon: Store, title: "Local Businesses", subtitle: "Shop local" },
-  { icon: Camera, title: "Photo Memories", subtitle: "PicPop" },
-  { icon: Tag, title: "Upcoming Deals", subtitle: "Promotions" },
-  { icon: Megaphone, title: "Local Creators", subtitle: "Influencers" },
-  { icon: Compass, title: "Plan Your Trip", subtitle: "Itineraries" },
-];
-
-const destinationRoutes: Record<string, string> = {
-  "Attractions": "/destination/attractions",
-  "Things To Do": "/destination/things-to-do",
-  "Events & Festivals": "/destination/events-festivals",
-  "Food & Dining": "/destination/food-dining",
-  "Hotels & Stays": "/destination/hotels",
-  "Cultural Experiences": "/destination/culture",
-  "Nature & Parks": "/destination/nature",
-  "Neighborhood Guide": "/destination/neighborhoods",
-  "Transportation": "/destination/transportation",
-  "Visitor Services": "/destination/visitor-services",
-  "Local Businesses": "/destination/local-businesses",
-  "Photo Memories": "/destination/photos",
-  "Upcoming Deals": "/destination/deals",
-  "Local Creators": "/destination/creators",
-  "Plan Your Trip": "/destination/plan-trip",
-};
-
 const Microsite = () => {
   const navigate = useNavigate();
-  const { accountType } = useAccountType();
-
-  const isDestination = accountType === "destination";
-  const actions = isDestination ? destinationActions : restaurantActions;
-  const cards = isDestination ? destinationCards : restaurantCards;
-  const routes = isDestination ? destinationRoutes : restaurantRoutes;
 
   return (
     <div className="min-h-screen bg-background max-w-[430px] mx-auto">
-      {isDestination ? <DestinationHeader /> : <MicrositeHeader />}
+      <MicrositeHeader />
 
       <div className="flex gap-2 overflow-x-auto px-4 py-4 no-scrollbar">
         {actions.map((btn) => (
@@ -142,16 +84,6 @@ const Microsite = () => {
             />
           ))}
         </div>
-
-        {/* Global Map CTA for destination mode */}
-        {isDestination && (
-          <button
-            onClick={() => navigate("/destination/map")}
-            className="w-full mt-4 py-3 rounded-2xl bg-primary/10 border border-primary/20 text-sm font-medium text-primary flex items-center justify-center gap-2 hover:bg-primary/15 transition-colors"
-          >
-            <Globe className="w-4 h-4" /> Explore Global Destination Map
-          </button>
-        )}
       </div>
 
       <BottomBrandBar />

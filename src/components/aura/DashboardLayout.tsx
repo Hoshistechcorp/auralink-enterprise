@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import {
   Home, Layers, BarChart3, Gamepad2, Settings, QrCode, Users2, CreditCard,
   Heart, Megaphone, Share2, Search, Shield, Building2, ChevronDown, LucideIcon, Menu, Sun, Moon,
-  ClipboardEdit, MapPin, UserCog, Check, Globe,
+  ClipboardEdit, MapPin, UserCog, Check,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
@@ -31,8 +31,6 @@ const navSections: NavSection[] = [
       { icon: ClipboardEdit, label: "Admin Panel", path: "/dashboard/admin" },
       { icon: Layers, label: "Card Studio", path: "/dashboard/cards" },
       { icon: BarChart3, label: "Analytics", path: "/dashboard/analytics" },
-      { icon: Globe, label: "Tourism", path: "/dashboard/tourism" },
-      { icon: Layers, label: "Dest. Cards", path: "/dashboard/destination-cards" },
     ],
   },
   {
