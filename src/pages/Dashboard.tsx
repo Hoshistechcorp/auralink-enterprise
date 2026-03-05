@@ -2,6 +2,7 @@ import { Eye, MousePointer, TrendingUp, CreditCard } from "lucide-react";
 import { motion } from "framer-motion";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line } from "recharts";
 import DashboardLayout from "@/components/aura/DashboardLayout";
+import UsageMeter from "@/components/aura/UsageMeter";
 
 const viewData = [
   { day: "Mon", views: 320 },
@@ -90,16 +91,19 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Activity Feed */}
-      <div className="p-5 rounded-2xl bg-card border">
-        <h3 className="font-display font-semibold mb-4">Recent Activity</h3>
-        <div className="space-y-3">
-          {activities.map((a, i) => (
-            <div key={i} className="flex items-center justify-between py-2 border-b last:border-0">
-              <span className="text-sm">{a.text}</span>
-              <span className="text-xs text-muted-foreground whitespace-nowrap ml-4">{a.time}</span>
-            </div>
-          ))}
+      {/* Usage Meter + Activity Feed */}
+      <div className="grid lg:grid-cols-2 gap-6">
+        <UsageMeter />
+        <div className="p-5 rounded-2xl bg-card border">
+          <h3 className="font-display font-semibold mb-4">Recent Activity</h3>
+          <div className="space-y-3">
+            {activities.map((a, i) => (
+              <div key={i} className="flex items-center justify-between py-2 border-b last:border-0">
+                <span className="text-sm">{a.text}</span>
+                <span className="text-xs text-muted-foreground whitespace-nowrap ml-4">{a.time}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </DashboardLayout>
