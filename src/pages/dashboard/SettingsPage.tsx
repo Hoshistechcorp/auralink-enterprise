@@ -128,6 +128,11 @@ const SettingsPage = () => {
   });
 
   const handleSave = () => {
+    // Save reservation settings
+    const sub = getSubscription();
+    sub.reservationUrl = reservationUrl;
+    sub.reservationProvider = reservationProvider;
+    saveSubscription(sub);
     toast({ title: "Settings saved", description: "Your changes have been applied successfully." });
   };
 
