@@ -28,7 +28,7 @@ const metrics = [
   { label: "Page Views", value: "12,847", change: "+18%", icon: Eye },
   { label: "Engagements", value: "4,231", change: "+24%", icon: MousePointer },
   { label: "Top Card", value: "Menu", change: "68% clicks", icon: TrendingUp },
-  { label: "Plan", value: "Pro", change: "Active", icon: CreditCard },
+  { label: "Plan", value: "Spark", change: "Active", icon: CreditCard },
 ];
 
 const activities = [
