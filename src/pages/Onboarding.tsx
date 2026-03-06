@@ -49,6 +49,11 @@ const Onboarding = () => {
   // Step 1
   const [industry, setIndustry] = useState("");
 
+  // Step 2
+  const [venues, setVenues] = useState<Venue[]>([{ name: "", type: "" }]);
+
+  // Step 3
+  const [members, setMembers] = useState<TeamMember[]>([{ name: "", email: "", role: "" }]);
 
 
   const addVenue = () => setVenues([...venues, { name: "", type: "" }]);
