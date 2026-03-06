@@ -388,6 +388,139 @@ const SettingsPage = () => {
             </motion.div>
           )}
 
+          {/* Business Tab */}
+          {activeTab === "business" && (
+            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
+              {/* Industry */}
+              <div className="p-6 rounded-2xl bg-card border">
+                <h3 className="font-display font-semibold text-lg mb-2">Industry</h3>
+                <p className="text-sm text-muted-foreground mb-4">What type of business do you operate?</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {industryOptions.map((ind) => (
+                    <button
+                      key={ind}
+                      onClick={() => setIndustry(ind)}
+                      className={`px-3 py-2.5 rounded-xl text-xs font-medium text-left transition-all border ${
+                        industry === ind
+                          ? "bg-primary text-primary-foreground border-primary"
+                          : "bg-muted/50 border-border hover:border-primary/30"
+                      }`}
+                    >
+                      {ind}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Venues */}
+              <div className="p-6 rounded-2xl bg-card border">
+                <h3 className="font-display font-semibold text-lg mb-2">Venues / Locations</h3>
+                <p className="text-sm text-muted-foreground mb-4">Where do you operate?</p>
+                <div className="space-y-3">
+                  {venues.map((venue, i) => (
+                    <div key={i} className="p-4 rounded-xl bg-muted/30 border space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-semibold text-muted-foreground">Venue {i + 1}</span>
+                        {venues.length > 1 && (
+                          <button onClick={() => removeVenue(i)} className="p-1 rounded-lg hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors">
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        )}
+                      </div>
+                      <input
+                        value={venue.name}
+                        onChange={(e) => updateVenue(i, "name", e.target.value)}
+                        placeholder="Venue name"
+                        className="w-full px-4 py-2.5 rounded-xl bg-background border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                      />
+                      <div className="flex flex-wrap gap-2">
+                        {venueTypeOptions.map((type) => (
+                          <button
+                            key={type}
+                            onClick={() => updateVenue(i, "type", type)}
+                            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all border ${
+                              venue.type === type
+                                ? "bg-primary text-primary-foreground border-primary"
+                                : "bg-muted/50 border-border hover:border-primary/30"
+                            }`}
+                          >
+                            {type}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <button
+                  onClick={addVenue}
+                  className="w-full flex items-center justify-center gap-2 py-2.5 mt-3 rounded-xl border-2 border-dashed border-border hover:border-primary/30 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <Plus className="w-4 h-4" /> Add Another Venue
+                </button>
+              </div>
+
+              {/* Team */}
+              <div className="p-6 rounded-2xl bg-card border">
+                <h3 className="font-display font-semibold text-lg mb-2">Team Members</h3>
+                <p className="text-sm text-muted-foreground mb-4">Manage who has access to your dashboard.</p>
+                <div className="space-y-3">
+                  {members.map((member, i) => (
+                    <div key={i} className="p-4 rounded-xl bg-muted/30 border space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-semibold text-muted-foreground">Member {i + 1}</span>
+                        {members.length > 1 && (
+                          <button onClick={() => removeMember(i)} className="p-1 rounded-lg hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors">
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        )}
+                      </div>
+                      <input
+                        value={member.name}
+                        onChange={(e) => updateMember(i, "name", e.target.value)}
+                        placeholder="Full name"
+                        className="w-full px-4 py-2.5 rounded-xl bg-background border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                      />
+                      <input
+                        value={member.email}
+                        onChange={(e) => updateMember(i, "email", e.target.value)}
+                        placeholder="email@company.com"
+                        type="email"
+                        className="w-full px-4 py-2.5 rounded-xl bg-background border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                      />
+                      <div className="flex flex-wrap gap-2">
+                        {teamRoleOptions.map((role) => (
+                          <button
+                            key={role}
+                            onClick={() => updateMember(i, "role", role)}
+                            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all border ${
+                              member.role === role
+                                ? "bg-primary text-primary-foreground border-primary"
+                                : "bg-muted/50 border-border hover:border-primary/30"
+                            }`}
+                          >
+                            {role}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <button
+                  onClick={addMember}
+                  className="w-full flex items-center justify-center gap-2 py-2.5 mt-3 rounded-xl border-2 border-dashed border-border hover:border-primary/30 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <Plus className="w-4 h-4" /> Add Another Member
+                </button>
+              </div>
+
+              <div className="flex justify-end">
+                <button onClick={handleBusinessSave} className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity">
+                  <Save className="w-4 h-4" /> Save Business Settings
+                </button>
+              </div>
+            </motion.div>
+          )}
+
           {/* Notifications Tab */}
           {activeTab === "notifications" && (
             <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
