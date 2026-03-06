@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   User, Bell, Palette, Globe, Lock, Mail, Phone, MapPin,
   Camera, Save, Check, BellRing, BellOff, Monitor, Moon, Sun,
-  Paintbrush, Droplets, RotateCcw, Pipette,
+  Paintbrush, Droplets, RotateCcw, Pipette, CalendarCheck,
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/aura/DashboardLayout";
 import { useDarkMode } from "@/hooks/use-dark-mode";
+import { getSubscription, saveSubscription } from "@/lib/subscription";
 
 const tabs = [
   { id: "profile", label: "Profile", icon: User },
