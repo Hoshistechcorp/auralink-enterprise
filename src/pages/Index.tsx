@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   QrCode, Gamepad2, Heart, Share2, BarChart3, Shield, Users2, Megaphone,
-  MapPin, CreditCard, Star, Sparkles, ArrowRight, Check,
-  Smartphone, LayoutDashboard, ChevronRight, Play, X,
+  MapPin, CreditCard, Star, Sparkles, ArrowRight,
+  Smartphone, ChevronRight, Play,
   UtensilsCrossed, Hotel, Wine, Coffee, Store, Salad,
+  Globe, MessageSquare, ImageIcon, Utensils, UserPlus, HandshakeIcon,
 } from "lucide-react";
 import { useDarkMode } from "@/hooks/use-dark-mode";
 import { Sun, Moon } from "lucide-react";
@@ -22,18 +23,21 @@ const industries = [
 ];
 
 const capabilities = [
+  { icon: Globe, title: "Microsite", desc: "Your entire brand in one beautiful link" },
   { icon: QrCode, title: "Smart QR", desc: "One scan opens your entire world" },
+  { icon: Utensils, title: "Digital Menu", desc: "Always up-to-date, always stunning" },
   { icon: Gamepad2, title: "Gamification", desc: "Spin-to-win, scratch cards, instant rewards" },
   { icon: Heart, title: "Loyalty", desc: "Points & tiers that drive repeat visits" },
-  { icon: Share2, title: "Referrals", desc: "Turn happy guests into growth engines" },
-  { icon: BarChart3, title: "Analytics", desc: "Know exactly what's working" },
+  { icon: UserPlus, title: "Referrals", desc: "Turn happy guests into growth engines" },
+  { icon: Star, title: "Reviews", desc: "Collect & showcase real guest feedback" },
   { icon: Shield, title: "Reputation", desc: "Own your reviews across every platform" },
+  { icon: BarChart3, title: "Analytics", desc: "Know exactly what's working" },
   { icon: Users2, title: "Affiliates", desc: "Let partners earn while you grow" },
   { icon: Megaphone, title: "Influencers", desc: "Find, manage, measure creator ROI" },
   { icon: MapPin, title: "Multi-Location", desc: "Every venue, one dashboard" },
   { icon: CreditCard, title: "Card Studio", desc: "Digital cards with NFC & QR" },
-  { icon: Star, title: "Awards", desc: "Showcase what makes you special" },
-  { icon: Sparkles, title: "Microsite", desc: "15 cards. One beautiful link." },
+  { icon: ImageIcon, title: "Gallery", desc: "Showcase your space beautifully" },
+  { icon: MessageSquare, title: "AI Concierge", desc: "Smart guest assistance, 24/7" },
 ];
 
 const fade = {
@@ -266,77 +270,6 @@ const Index = () => {
           <p className="text-center text-[11px] text-muted-foreground mt-3">
             Replace this with your YouTube video URL in the code when ready.
           </p>
-        </div>
-      </section>
-
-
-      {/* ─── Pricing ─── */}
-      <section id="pricing" className="py-16 sm:py-20">
-        <div className="max-w-5xl mx-auto px-5 sm:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-display font-bold">Simple pricing.</h2>
-            <p className="mt-2 text-muted-foreground text-sm">Start free. Upgrade when you're ready.</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-4 max-w-3xl mx-auto">
-            {[
-              {
-                name: "Spark", price: "Free", period: "", cards: "5 cards",
-                features: ["QR codes", "Basic analytics", "1 location"],
-              },
-              {
-                name: "Maverick", price: "$49", period: "/mo", cards: "10 cards", popular: true,
-                features: ["Everything in Spark", "Gamification & loyalty", "Referral engine", "5 locations"],
-              },
-              {
-                name: "Supernova", price: "$149", period: "/mo", cards: "All 15 cards",
-                features: ["Everything in Maverick", "Affiliates & influencers", "Reputation management", "Unlimited locations"],
-              },
-            ].map((p, i) => (
-              <motion.div
-                key={p.name}
-                custom={i}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fade}
-                className={`relative p-5 rounded-2xl border transition-all ${
-                  p.popular
-                    ? "bg-primary text-primary-foreground border-primary ring-2 ring-primary/20"
-                    : "bg-card border-border"
-                }`}
-              >
-                {p.popular && (
-                  <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-secondary text-secondary-foreground text-[10px] font-bold uppercase tracking-widest">
-                    Popular
-                  </div>
-                )}
-                <div className="text-[10px] font-semibold uppercase tracking-wider opacity-60">{p.name}</div>
-                <div className="flex items-baseline gap-0.5 mt-1.5">
-                  <span className="text-3xl font-display font-bold">{p.price}</span>
-                  {p.period && <span className="text-xs opacity-50">{p.period}</span>}
-                </div>
-                <div className="text-[10px] opacity-50 mt-0.5">{p.cards}</div>
-                <ul className="mt-4 space-y-1.5">
-                  {p.features.map((f) => (
-                    <li key={f} className="flex items-center gap-1.5 text-xs">
-                      <Check className={`w-3 h-3 shrink-0 ${p.popular ? "opacity-60" : "text-primary"}`} />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <a
-                  href="#waitlist"
-                  className={`block w-full mt-5 py-2 rounded-xl text-xs font-semibold text-center transition-all ${
-                    p.popular
-                      ? "bg-primary-foreground text-primary hover:opacity-90"
-                      : "bg-primary text-primary-foreground hover:opacity-90"
-                  }`}
-                >
-                  Join Waitlist
-                </a>
-              </motion.div>
-            ))}
-          </div>
         </div>
       </section>
 
