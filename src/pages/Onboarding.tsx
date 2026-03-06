@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Building2, MapPin, Users2, ChevronRight, ChevronLeft, Upload,
+  Building2, MapPin, Users2, ChevronRight, ChevronLeft,
   Plus, Trash2, Check, SkipForward,
 } from "lucide-react";
 import ibloovLogo from "@/assets/ibloov-logo.jpeg";
@@ -20,19 +20,17 @@ interface TeamMember {
 }
 
 const industries = [
-  "Hospitality & Tourism",
-  "Events & Entertainment",
-  "Food & Beverage",
-  "Health & Wellness",
-  "Education & Training",
-  "Real Estate",
-  "Retail & Shopping",
-  "Sports & Fitness",
-  "Arts & Culture",
-  "Other",
+  "Restaurant",
+  "Hotel & Resort",
+  "Bar & Lounge",
+  "Café & Coffee Shop",
+  "Fast Casual & QSR",
+  "Nightclub & Club",
+  "Catering & Events",
+  "Food Truck",
+  "Bakery & Patisserie",
+  "Spa & Wellness",
 ];
-
-const companySizes = ["1–10", "11–50", "51–200", "201–1,000", "1,000+"];
 
 const venueTypes = ["Restaurant", "Hotel", "Event Space", "Gym/Studio", "Office", "Retail Store", "Other"];
 
@@ -50,9 +48,6 @@ const Onboarding = () => {
 
   // Step 1
   const [industry, setIndustry] = useState("");
-  const [companySize, setCompanySize] = useState("");
-  const [logoFile, setLogoFile] = useState<File | null>(null);
-  const [logoPreview, setLogoPreview] = useState("");
 
   // Step 2
   const [venues, setVenues] = useState<Venue[]>([{ name: "", type: "" }]);
@@ -60,15 +55,6 @@ const Onboarding = () => {
   // Step 3
   const [members, setMembers] = useState<TeamMember[]>([{ name: "", email: "", role: "" }]);
 
-  const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    if (file.size > 2 * 1024 * 1024) return;
-    setLogoFile(file);
-    const reader = new FileReader();
-    reader.onload = () => setLogoPreview(reader.result as string);
-    reader.readAsDataURL(file);
-  };
 
   const addVenue = () => setVenues([...venues, { name: "", type: "" }]);
   const removeVenue = (i: number) => venues.length > 1 && setVenues(venues.filter((_, idx) => idx !== i));
@@ -116,18 +102,11 @@ const Onboarding = () => {
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
       <div className="border-b border-border/40 bg-card/50 backdrop-blur">
-        <div className="max-w-3xl mx-auto px-5 h-14 flex items-center justify-between">
+        <div className="max-w-3xl mx-auto px-5 h-14 flex items-center">
           <div className="flex items-center gap-2">
             <img src={ibloovLogo} alt="iBloov" className="h-7 w-auto rounded-lg" />
             <span className="font-semibold text-sm">AuraLink</span>
           </div>
-          <button
-            onClick={skip}
-            className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <SkipForward className="w-3.5 h-3.5" />
-            Skip
-          </button>
         </div>
       </div>
 
@@ -195,42 +174,6 @@ const Onboarding = () => {
                     </div>
                   </div>
 
-                  {/* Company Size */}
-                  <div>
-                    <label className="text-xs font-semibold text-muted-foreground mb-2 block">Company Size *</label>
-                    <div className="flex flex-wrap gap-2">
-                      {companySizes.map((size) => (
-                        <button
-                          key={size}
-                          onClick={() => setCompanySize(size)}
-                          className={`px-4 py-2 rounded-xl text-xs font-medium transition-all border ${
-                            companySize === size
-                              ? "bg-primary text-primary-foreground border-primary"
-                              : "bg-muted/50 border-border hover:border-primary/30"
-                          }`}
-                        >
-                          {size}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Logo Upload */}
-                  <div>
-                    <label className="text-xs font-semibold text-muted-foreground mb-2 block">Upload Logo</label>
-                    <p className="text-[10px] text-muted-foreground mb-2">PNG, JPG up to 2MB</p>
-                    <label className="flex items-center justify-center gap-2 p-6 rounded-xl border-2 border-dashed border-border hover:border-primary/30 cursor-pointer transition-colors bg-muted/20">
-                      {logoPreview ? (
-                        <img src={logoPreview} alt="Logo preview" className="h-16 w-auto rounded-lg object-contain" />
-                      ) : (
-                        <div className="flex flex-col items-center gap-2 text-muted-foreground">
-                          <Upload className="w-6 h-6" />
-                          <span className="text-xs font-medium">Click to upload</span>
-                        </div>
-                      )}
-                      <input type="file" accept=".png,.jpg,.jpeg" className="hidden" onChange={handleLogoUpload} />
-                    </label>
-                  </div>
                 </div>
               </motion.div>
             )}
@@ -381,13 +324,22 @@ const Onboarding = () => {
               <ChevronLeft className="w-4 h-4" />
               Back
             </button>
-            <button
-              onClick={next}
-              className="flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity"
-            >
-              {step === 3 ? "Finish Setup" : "Continue"}
-              <ChevronRight className="w-4 h-4" />
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={skip}
+                className="flex items-center gap-1.5 px-5 py-2.5 rounded-xl border border-border text-sm font-medium text-muted-foreground hover:bg-muted transition-colors"
+              >
+                <SkipForward className="w-3.5 h-3.5" />
+                Skip
+              </button>
+              <button
+                onClick={next}
+                className="flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity"
+              >
+                {step === 3 ? "Finish Setup" : "Continue"}
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
