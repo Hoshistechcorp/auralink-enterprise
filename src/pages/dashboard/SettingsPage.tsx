@@ -130,6 +130,32 @@ const SettingsPage = () => {
     bio: "Passionate restaurateur with 25+ years of experience in Italian fine dining. Committed to delivering exceptional culinary experiences.",
   });
 
+  // Business state
+  const [industry, setIndustry] = useState(() => localStorage.getItem("aura_industry") || "");
+  const [venues, setVenues] = useState<Venue[]>(() => {
+    try { return JSON.parse(localStorage.getItem("aura_venues") || "") || [{ name: "", type: "" }]; } catch { return [{ name: "", type: "" }]; }
+  });
+  const [members, setMembers] = useState<TeamMember[]>(() => {
+    try { return JSON.parse(localStorage.getItem("aura_members") || "") || [{ name: "", email: "", role: "" }]; } catch { return [{ name: "", email: "", role: "" }]; }
+  });
+
+  const addVenue = () => setVenues([...venues, { name: "", type: "" }]);
+  const removeVenue = (i: number) => venues.length > 1 && setVenues(venues.filter((_, idx) => idx !== i));
+  const updateVenue = (i: number, field: keyof Venue, val: string) => {
+    const updated = [...venues]; updated[i] = { ...updated[i], [field]: val }; setVenues(updated);
+  };
+  const addMember = () => setMembers([...members, { name: "", email: "", role: "" }]);
+  const removeMember = (i: number) => members.length > 1 && setMembers(members.filter((_, idx) => idx !== i));
+  const updateMember = (i: number, field: keyof TeamMember, val: string) => {
+    const updated = [...members]; updated[i] = { ...updated[i], [field]: val }; setMembers(updated);
+  };
+
+  const handleBusinessSave = () => {
+    localStorage.setItem("aura_industry", industry);
+    localStorage.setItem("aura_venues", JSON.stringify(venues));
+    localStorage.setItem("aura_members", JSON.stringify(members));
+    toast({ title: "Business settings saved", description: "Your business info has been updated." });
+  };
   const [notifications, setNotifications] = useState({
     newReviews: true,
     weeklyReport: true,
