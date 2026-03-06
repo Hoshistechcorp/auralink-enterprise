@@ -6,7 +6,8 @@ import {
   MapPin, CreditCard, Star, Sparkles, ArrowRight,
   Smartphone, ChevronRight, Play,
   UtensilsCrossed, Hotel, Wine, Coffee, Store, Salad,
-  Globe, MessageSquare, ImageIcon, Utensils, UserPlus, HandshakeIcon,
+  Globe, MessageSquare, ImageIcon, Utensils, UserPlus,
+  Link, Trophy, CalendarDays, ChefHat, Handshake,
 } from "lucide-react";
 import { useDarkMode } from "@/hooks/use-dark-mode";
 import { Sun, Moon } from "lucide-react";
@@ -23,16 +24,16 @@ const industries = [
 ];
 
 const capabilities = [
-  { icon: Globe, title: "Microsite", desc: "Your entire brand in one beautiful link" },
+  { icon: Link, title: "Microsite", desc: "Your entire brand in one beautiful link" },
   { icon: QrCode, title: "Smart QR", desc: "One scan opens your entire world" },
-  { icon: Utensils, title: "Digital Menu", desc: "Always up-to-date, always stunning" },
+  { icon: ChefHat, title: "Digital Menu", desc: "Always up-to-date, always stunning" },
   { icon: Gamepad2, title: "Gamification", desc: "Spin-to-win, scratch cards, instant rewards" },
   { icon: Heart, title: "Loyalty", desc: "Points & tiers that drive repeat visits" },
-  { icon: UserPlus, title: "Referrals", desc: "Turn happy guests into growth engines" },
+  { icon: Share2, title: "Referrals", desc: "Turn happy guests into growth engines" },
   { icon: Star, title: "Reviews", desc: "Collect & showcase real guest feedback" },
   { icon: Shield, title: "Reputation", desc: "Own your reviews across every platform" },
   { icon: BarChart3, title: "Analytics", desc: "Know exactly what's working" },
-  { icon: Users2, title: "Affiliates", desc: "Let partners earn while you grow" },
+  { icon: Handshake, title: "Affiliates", desc: "Let partners earn while you grow" },
   { icon: Megaphone, title: "Influencers", desc: "Find, manage, measure creator ROI" },
   { icon: MapPin, title: "Multi-Location", desc: "Every venue, one dashboard" },
   { icon: CreditCard, title: "Card Studio", desc: "Digital cards with NFC & QR" },
