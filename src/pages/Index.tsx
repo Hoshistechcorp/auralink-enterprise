@@ -1,44 +1,74 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
-  Smartphone, LayoutDashboard, Sparkles, QrCode, BarChart3, Gamepad2,
-  Heart, Shield, Share2, MapPin, CreditCard, Star, Users2, Megaphone,
-  ArrowRight, CheckCircle2, LogIn, UserPlus, ChevronRight,
+  QrCode, Gamepad2, Heart, Share2, BarChart3, Shield, Users2, Megaphone,
+  MapPin, CreditCard, Star, Sparkles, ArrowRight, Check, LogIn,
+  GraduationCap, Music2, Wallet, Camera, Trophy, Building,
+  Smartphone, LayoutDashboard, ChevronRight,
 } from "lucide-react";
 import { useDarkMode } from "@/hooks/use-dark-mode";
 import { Sun, Moon } from "lucide-react";
+import ibloovLogo from "@/assets/ibloov-logo.jpeg";
 
-const features = [
-  { icon: QrCode, title: "Smart QR Codes", desc: "Dynamic QR codes with analytics, A/B testing & branded designs" },
-  { icon: Gamepad2, title: "Gamification", desc: "Spin wheels, scratch cards & freebie games to boost engagement" },
-  { icon: Heart, title: "Loyalty Programs", desc: "Points, tiers & rewards that keep customers coming back" },
-  { icon: Share2, title: "Referral Engine", desc: "Viral referral links with automated reward distribution" },
-  { icon: BarChart3, title: "Deep Analytics", desc: "Real-time insights on traffic, engagement & conversions" },
-  { icon: Shield, title: "Reputation Guard", desc: "Monitor & manage reviews across Google, Yelp & more" },
-  { icon: Users2, title: "Affiliate Network", desc: "Built-in affiliate tracking with commission management" },
-  { icon: Megaphone, title: "Influencer Hub", desc: "Discover, manage & track influencer partnerships" },
-  { icon: MapPin, title: "Multi-Location", desc: "Manage all locations from a single unified dashboard" },
-  { icon: CreditCard, title: "Card Studio", desc: "Design digital business cards with NFC & QR integration" },
-  { icon: Star, title: "Awards & Badges", desc: "Showcase achievements, certifications & press mentions" },
-  { icon: Sparkles, title: "15-Card Microsite", desc: "Modular public pages with menu, gallery, events & more" },
+const ecosystemProducts = [
+  { icon: Sparkles, name: "AuraLink", desc: "Microsites & engagement", color: "352 43% 32%" },
+  { icon: GraduationCap, name: "iBloov Learning", desc: "Staff training", color: "210 70% 50%" },
+  { icon: Music2, name: "VibesGigs", desc: "Talent marketplace", color: "280 60% 55%" },
+  { icon: Wallet, name: "Flex-it", desc: "Smart payments", color: "152 60% 40%" },
+  { icon: CreditCard, name: "SHPR", desc: "Flexible financing", color: "38 90% 55%" },
+  { icon: Camera, name: "PicPop", desc: "Photo memories", color: "340 70% 55%" },
+  { icon: Trophy, name: "Sportmate", desc: "Sports & fans", color: "120 50% 40%" },
+  { icon: Users2, name: "TribeMint", desc: "Affiliate network", color: "25 85% 55%" },
+  { icon: Building, name: "Municipal Nebula", desc: "City intelligence", color: "220 50% 45%" },
 ];
 
-const tiers = [
-  { name: "Spark", price: "Free", cards: "5 cards", features: ["QR Codes", "Basic Analytics", "1 Location", "Community Support"] },
-  { name: "Maverick", price: "$49/mo", cards: "10 cards", features: ["Everything in Spark", "Gamification", "Loyalty", "Referrals", "5 Locations"], highlighted: true },
-  { name: "Supernova", price: "$149/mo", cards: "All 15 cards", features: ["Everything in Maverick", "Affiliates", "Influencers", "Reputation", "Unlimited Locations", "Priority Support"] },
+const capabilities = [
+  { icon: QrCode, label: "Smart QR" },
+  { icon: Gamepad2, label: "Gamification" },
+  { icon: Heart, label: "Loyalty" },
+  { icon: Share2, label: "Referrals" },
+  { icon: BarChart3, label: "Analytics" },
+  { icon: Shield, label: "Reputation" },
+  { icon: Users2, label: "Affiliates" },
+  { icon: Megaphone, label: "Influencers" },
+  { icon: MapPin, label: "Multi-Location" },
+  { icon: CreditCard, label: "Card Studio" },
+  { icon: Star, label: "Awards" },
+  { icon: Sparkles, label: "15 Cards" },
 ];
 
-const stats = [
-  { value: "10K+", label: "Active Businesses" },
-  { value: "2.4M", label: "QR Scans / Month" },
-  { value: "98%", label: "Customer Retention" },
-  { value: "4.9★", label: "Average Rating" },
+const plans = [
+  {
+    name: "Spark",
+    price: "Free",
+    period: "",
+    cards: "5 cards",
+    features: ["QR codes", "Basic analytics", "1 location", "Community support"],
+  },
+  {
+    name: "Maverick",
+    price: "$49",
+    period: "/mo",
+    cards: "10 cards",
+    features: ["Everything in Spark", "Gamification & loyalty", "Referral engine", "5 locations"],
+    popular: true,
+  },
+  {
+    name: "Supernova",
+    price: "$149",
+    period: "/mo",
+    cards: "All 15 cards",
+    features: ["Everything in Maverick", "Affiliates & influencers", "Reputation management", "Unlimited locations", "Priority support"],
+  },
 ];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.06, duration: 0.5, ease: [0.22, 1, 0.36, 1] as const } }),
+const fade = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.05, duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  }),
 };
 
 const Index = () => {
@@ -46,124 +76,170 @@ const Index = () => {
   const { isDark, toggle: toggleDark } = useDarkMode();
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-body">
-      {/* Nav */}
-      <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Sparkles className="w-6 h-6 text-primary" />
-            <span className="text-xl font-display font-bold text-primary">AuraLink</span>
+    <div className="min-h-screen bg-background text-foreground font-body antialiased">
+      {/* ─── Nav ─── */}
+      <nav className="sticky top-0 z-50 bg-background/70 backdrop-blur-2xl border-b border-border/50">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <img src={ibloovLogo} alt="iBloov" className="h-8 w-auto rounded-lg" />
+            <div className="hidden sm:flex items-center gap-1 text-xs text-muted-foreground">
+              <span className="text-foreground/30">|</span>
+              <span className="font-medium text-foreground">AuraLink</span>
+            </div>
           </div>
-          <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
-            <a href="#features" className="hover:text-foreground transition-colors">Features</a>
+
+          <div className="hidden md:flex items-center gap-8 text-[13px] font-medium text-muted-foreground">
+            <a href="#capabilities" className="hover:text-foreground transition-colors">What it does</a>
+            <a href="#ecosystem" className="hover:text-foreground transition-colors">Ecosystem</a>
             <a href="#pricing" className="hover:text-foreground transition-colors">Pricing</a>
-            <a href="#demo" className="hover:text-foreground transition-colors">Demo</a>
           </div>
+
           <div className="flex items-center gap-2">
             <button onClick={toggleDark} className="p-2 rounded-xl hover:bg-muted transition-colors" aria-label="Toggle theme">
               {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
             <button
               onClick={() => navigate("/dashboard")}
-              className="hidden sm:flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+              className="hidden sm:flex items-center gap-1.5 px-4 py-2 rounded-xl text-[13px] font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-all"
             >
-              <LogIn className="w-4 h-4" />
-              Sign In
+              <LogIn className="w-3.5 h-3.5" />
+              Sign in
             </button>
             <button
               onClick={() => navigate("/dashboard")}
-              className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
+              className="px-5 py-2 rounded-xl bg-primary text-primary-foreground text-[13px] font-semibold hover:opacity-90 transition-opacity"
             >
-              <UserPlus className="w-4 h-4" />
-              <span className="hidden sm:inline">Get Started Free</span>
-              <span className="sm:hidden">Sign Up</span>
+              Start free
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Hero */}
+      {/* ─── Hero ─── */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5" />
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-20 pb-24 sm:pt-28 sm:pb-32 relative">
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-primary/5 rounded-full blur-[120px]" />
+          <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-secondary/10 rounded-full blur-[100px]" />
+        </div>
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 pt-24 pb-20 sm:pt-32 sm:pb-28 relative">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center max-w-3xl mx-auto"
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="max-w-3xl mx-auto text-center"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-medium mb-6">
-              <Sparkles className="w-3.5 h-3.5" />
-              Enterprise Microsite Platform
-            </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold leading-tight tracking-tight">
-              Turn Every Customer Into a{" "}
-              <span className="text-primary">Loyal Ambassador</span>
-            </h1>
-            <p className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Gamified microsites with QR codes, loyalty rewards, referrals & analytics —
-              built for restaurants, hotels, nightclubs & retail brands.
+            <p className="text-primary text-sm font-semibold tracking-wide uppercase mb-5">
+              by iBloov
             </p>
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-display font-bold leading-[1.08] tracking-tight">
+              Your customers
+              <br />
+              <span className="text-primary">keep coming back.</span>
+            </h1>
+            <p className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-xl mx-auto leading-relaxed">
+              One link. Fifteen cards. Loyalty, gamification, referrals, and analytics — 
+              all wrapped in a beautiful microsite your brand deserves.
+            </p>
+
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-10">
               <button
                 onClick={() => navigate("/microsite")}
-                className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5 rounded-2xl bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl bg-primary text-primary-foreground font-semibold text-[15px] hover:opacity-90 transition-opacity shadow-lg shadow-primary/20"
               >
                 <Smartphone className="w-5 h-5" />
-                View Live Demo
+                See it live
                 <ArrowRight className="w-4 h-4" />
               </button>
               <button
                 onClick={() => navigate("/dashboard")}
-                className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5 rounded-2xl border border-border bg-card font-medium hover:bg-muted transition-colors"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl border border-border bg-card font-semibold text-[15px] hover:bg-muted transition-colors"
               >
                 <LayoutDashboard className="w-5 h-5" />
-                Open Dashboard
+                Open dashboard
               </button>
             </div>
           </motion.div>
 
-          {/* Stats */}
+          {/* Floating capability pills */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="mt-20 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="mt-16 flex flex-wrap items-center justify-center gap-2 max-w-2xl mx-auto"
           >
-            {stats.map((s) => (
-              <div key={s.label} className="text-center p-4 rounded-2xl bg-card border border-border">
-                <div className="text-2xl sm:text-3xl font-display font-bold text-primary">{s.value}</div>
-                <div className="text-xs text-muted-foreground mt-1">{s.label}</div>
-              </div>
+            {capabilities.map((c, i) => (
+              <motion.div
+                key={c.label}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5 + i * 0.04, duration: 0.4 }}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-card border border-border text-xs font-medium text-muted-foreground"
+              >
+                <c.icon className="w-3 h-3 text-primary" />
+                {c.label}
+              </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* Features */}
-      <section id="features" className="py-20 sm:py-28 bg-muted/30">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold">Everything You Need to Grow</h2>
-            <p className="mt-3 text-muted-foreground max-w-xl mx-auto">
-              A complete suite of tools to attract, engage, and retain customers at scale.
+      {/* ─── Social proof strip ─── */}
+      <section className="border-y border-border/50 bg-muted/30">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-8">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+            {[
+              { val: "10K+", label: "Businesses" },
+              { val: "2.4M", label: "Monthly scans" },
+              { val: "98%", label: "Retention" },
+              { val: "4.9★", label: "Rating" },
+            ].map((s) => (
+              <div key={s.label}>
+                <div className="text-2xl sm:text-3xl font-display font-bold text-foreground">{s.val}</div>
+                <div className="text-xs text-muted-foreground mt-0.5">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── What it does ─── */}
+      <section id="capabilities" className="py-24 sm:py-32">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8">
+          <div className="max-w-2xl mb-16">
+            <h2 className="text-3xl sm:text-4xl font-display font-bold leading-tight">
+              Everything between<br />the scan and the sale.
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              Twelve powerful modules. One dashboard. Zero friction.
             </p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {features.map((f, i) => (
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+            {[
+              { icon: QrCode, title: "Smart QR", desc: "Dynamic codes with analytics & A/B testing" },
+              { icon: Gamepad2, title: "Gamification", desc: "Spin wheels, scratch cards, freebie games" },
+              { icon: Heart, title: "Loyalty", desc: "Points, tiers & rewards that stick" },
+              { icon: Share2, title: "Referrals", desc: "Viral loops with automated rewards" },
+              { icon: BarChart3, title: "Analytics", desc: "Real-time insights on every interaction" },
+              { icon: Shield, title: "Reputation", desc: "Monitor Google, Yelp & TripAdvisor" },
+              { icon: Users2, title: "Affiliates", desc: "Commission tracking built in" },
+              { icon: Megaphone, title: "Influencers", desc: "Discover, manage & measure ROI" },
+              { icon: MapPin, title: "Multi-Location", desc: "One dashboard for every venue" },
+              { icon: CreditCard, title: "Card Studio", desc: "Digital cards with NFC & QR" },
+              { icon: Star, title: "Awards", desc: "Showcase certifications & press" },
+              { icon: Sparkles, title: "Microsite", desc: "15 modular cards, endlessly flexible" },
+            ].map((f, i) => (
               <motion.div
                 key={f.title}
                 custom={i}
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-40px" }}
-                variants={fadeUp}
-                className="group p-5 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all duration-300"
+                viewport={{ once: true, margin: "-20px" }}
+                variants={fade}
+                className="group p-4 rounded-2xl bg-card border border-border hover:border-primary/20 hover:shadow-md transition-all duration-300"
               >
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-3 group-hover:bg-primary/15 transition-colors">
-                  <f.icon className="w-5 h-5 text-primary" />
-                </div>
-                <h3 className="font-semibold text-sm">{f.title}</h3>
+                <f.icon className="w-5 h-5 text-primary mb-3" />
+                <h3 className="text-sm font-semibold">{f.title}</h3>
                 <p className="text-xs text-muted-foreground mt-1 leading-relaxed">{f.desc}</p>
               </motion.div>
             ))}
@@ -171,86 +247,132 @@ const Index = () => {
         </div>
       </section>
 
-      {/* How It Works */}
-      <section className="py-20 sm:py-28">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold">Launch in 3 Steps</h2>
-            <p className="mt-3 text-muted-foreground">From sign-up to live in under 5 minutes.</p>
+      {/* ─── Ecosystem ─── */}
+      <section id="ecosystem" className="py-24 sm:py-32 bg-muted/20 border-y border-border/50">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8">
+          <div className="flex flex-col lg:flex-row lg:items-start gap-16">
+            <div className="lg:w-2/5 lg:sticky lg:top-24">
+              <div className="flex items-center gap-3 mb-4">
+                <img src={ibloovLogo} alt="iBloov" className="h-10 w-auto rounded-xl" />
+                <div>
+                  <h2 className="text-3xl sm:text-4xl font-display font-bold">Ecosystem</h2>
+                  <p className="text-muted-foreground text-sm mt-1">Nine products. One login.</p>
+                </div>
+              </div>
+              <p className="text-muted-foreground leading-relaxed max-w-sm">
+                AuraLink is one piece of the puzzle. Connect training, payments, talent, photos, 
+                and city data — all sharing context, all under one roof.
+              </p>
+            </div>
+
+            <div className="lg:w-3/5 grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {ecosystemProducts.map((app, i) => (
+                <motion.div
+                  key={app.name}
+                  custom={i}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={fade}
+                  className="flex flex-col items-center text-center p-5 rounded-2xl bg-card border border-border hover:border-primary/20 hover:shadow-md transition-all duration-300 group"
+                >
+                  <div
+                    className="w-12 h-12 rounded-2xl flex items-center justify-center mb-3 transition-transform group-hover:scale-110"
+                    style={{ backgroundColor: `hsl(${app.color} / 0.1)` }}
+                  >
+                    <app.icon className="w-5 h-5" style={{ color: `hsl(${app.color})` }} />
+                  </div>
+                  <span className="text-sm font-semibold">{app.name}</span>
+                  <span className="text-[11px] text-muted-foreground mt-0.5">{app.desc}</span>
+                </motion.div>
+              ))}
+            </div>
           </div>
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        </div>
+      </section>
+
+      {/* ─── How it works ─── */}
+      <section className="py-24 sm:py-32">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-display font-bold">Live in five minutes.</h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-10 max-w-3xl mx-auto">
             {[
-              { step: "01", title: "Create Your Page", desc: "Pick your business type, customize your 15-card microsite, and add your branding." },
-              { step: "02", title: "Activate Engagement", desc: "Turn on loyalty, gamification, referrals & QR codes to drive repeat visits." },
-              { step: "03", title: "Grow & Analyze", desc: "Track performance, manage reputation, and scale across multiple locations." },
+              { n: "01", title: "Claim your page", desc: "Pick your niche, add your brand, choose your cards." },
+              { n: "02", title: "Turn on the engines", desc: "Activate loyalty, gamification, referrals — one click each." },
+              { n: "03", title: "Watch it compound", desc: "Analytics, reputation, and growth on autopilot." },
             ].map((s, i) => (
               <motion.div
-                key={s.step}
+                key={s.n}
                 custom={i}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                variants={fadeUp}
+                variants={fade}
                 className="text-center"
               >
-                <div className="w-14 h-14 rounded-2xl bg-primary text-primary-foreground flex items-center justify-center mx-auto text-lg font-display font-bold">
-                  {s.step}
+                <div className="w-12 h-12 rounded-2xl bg-primary text-primary-foreground flex items-center justify-center mx-auto font-display font-bold text-lg">
+                  {s.n}
                 </div>
-                <h3 className="font-display font-semibold text-lg mt-4">{s.title}</h3>
-                <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{s.desc}</p>
+                <h3 className="font-display font-semibold mt-4 text-lg">{s.title}</h3>
+                <p className="text-sm text-muted-foreground mt-2">{s.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Pricing */}
-      <section id="pricing" className="py-20 sm:py-28 bg-muted/30">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      {/* ─── Pricing ─── */}
+      <section id="pricing" className="py-24 sm:py-32 bg-muted/20 border-y border-border/50">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-display font-bold">Simple, Transparent Pricing</h2>
-            <p className="mt-3 text-muted-foreground">Start free. Upgrade as you grow. 14-day Big Bang trial on all plans.</p>
+            <h2 className="text-3xl sm:text-4xl font-display font-bold">No surprises.</h2>
+            <p className="mt-3 text-muted-foreground text-sm">Free to start. 14-day trial on every paid plan.</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {tiers.map((t, i) => (
+          <div className="grid md:grid-cols-3 gap-5 max-w-4xl mx-auto">
+            {plans.map((p, i) => (
               <motion.div
-                key={t.name}
+                key={p.name}
                 custom={i}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                variants={fadeUp}
+                variants={fade}
                 className={`relative p-6 rounded-2xl border transition-all ${
-                  t.highlighted
-                    ? "bg-primary text-primary-foreground border-primary shadow-xl scale-[1.02]"
+                  p.popular
+                    ? "bg-primary text-primary-foreground border-primary ring-2 ring-primary/20"
                     : "bg-card border-border"
                 }`}
               >
-                {t.highlighted && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-[10px] font-bold uppercase tracking-wider">
-                    Most Popular
+                {p.popular && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-secondary text-secondary-foreground text-[10px] font-bold uppercase tracking-widest">
+                    Popular
                   </div>
                 )}
-                <div className="text-sm font-medium opacity-80">{t.name}</div>
-                <div className="text-3xl font-display font-bold mt-1">{t.price}</div>
-                <div className="text-xs opacity-70 mt-1">{t.cards}</div>
-                <ul className="mt-5 space-y-2.5">
-                  {t.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2 text-sm">
-                      <CheckCircle2 className={`w-4 h-4 mt-0.5 shrink-0 ${t.highlighted ? "text-primary-foreground/80" : "text-primary"}`} />
+                <div className="text-xs font-semibold uppercase tracking-wider opacity-70">{p.name}</div>
+                <div className="flex items-baseline gap-0.5 mt-2">
+                  <span className="text-4xl font-display font-bold">{p.price}</span>
+                  {p.period && <span className="text-sm opacity-60">{p.period}</span>}
+                </div>
+                <div className="text-xs opacity-60 mt-1">{p.cards}</div>
+                <ul className="mt-5 space-y-2">
+                  {p.features.map((f) => (
+                    <li key={f} className="flex items-center gap-2 text-sm">
+                      <Check className={`w-3.5 h-3.5 shrink-0 ${p.popular ? "opacity-70" : "text-primary"}`} />
                       {f}
                     </li>
                   ))}
                 </ul>
                 <button
                   onClick={() => navigate("/dashboard")}
-                  className={`w-full mt-6 py-2.5 rounded-xl text-sm font-medium transition-colors ${
-                    t.highlighted
+                  className={`w-full mt-6 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+                    p.popular
                       ? "bg-primary-foreground text-primary hover:opacity-90"
                       : "bg-primary text-primary-foreground hover:opacity-90"
                   }`}
                 >
-                  Get Started
+                  Get started
                 </button>
               </motion.div>
             ))}
@@ -258,38 +380,37 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Demo CTA */}
-      <section id="demo" className="py-20 sm:py-28">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      {/* ─── CTA ─── */}
+      <section className="py-24 sm:py-32">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8">
           <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
+            initial={{ opacity: 0, scale: 0.97 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="relative overflow-hidden rounded-3xl bg-primary text-primary-foreground p-8 sm:p-14 text-center"
+            className="relative overflow-hidden rounded-3xl bg-primary text-primary-foreground p-10 sm:p-16 text-center"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-primary/80" />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-primary/70" />
             <div className="relative">
-              <Sparkles className="w-10 h-10 mx-auto mb-4 opacity-80" />
-              <h2 className="text-3xl sm:text-4xl font-display font-bold">See It in Action</h2>
-              <p className="mt-3 text-primary-foreground/80 max-w-lg mx-auto">
-                Explore our live demo microsite — a fully functional restaurant page with all 15 cards, 
-                gamification, loyalty rewards, and more.
+              <img src={ibloovLogo} alt="iBloov" className="h-12 w-auto mx-auto mb-6 rounded-xl brightness-0 invert opacity-80" />
+              <h2 className="text-3xl sm:text-4xl font-display font-bold">Ready when you are.</h2>
+              <p className="mt-3 text-primary-foreground/70 max-w-md mx-auto">
+                See exactly what your customers will see. No signup needed.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-8">
                 <button
                   onClick={() => navigate("/microsite")}
-                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5 rounded-2xl bg-primary-foreground text-primary font-medium hover:opacity-90 transition-opacity"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5 rounded-2xl bg-primary-foreground text-primary font-semibold hover:opacity-90 transition-opacity"
                 >
                   <Smartphone className="w-5 h-5" />
-                  View Public Page
+                  View live demo
                   <ChevronRight className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => navigate("/dashboard")}
-                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5 rounded-2xl border border-primary-foreground/30 font-medium hover:bg-primary-foreground/10 transition-colors"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5 rounded-2xl border border-primary-foreground/20 font-semibold hover:bg-primary-foreground/10 transition-colors"
                 >
                   <LayoutDashboard className="w-5 h-5" />
-                  Business Dashboard
+                  Sign in or sign up
                 </button>
               </div>
             </div>
@@ -297,22 +418,20 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-border py-10">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-primary" />
-              <span className="font-display font-bold text-primary">AuraLink</span>
-              <span className="text-xs text-muted-foreground">Enterprise Platform</span>
-            </div>
-            <div className="flex items-center gap-6 text-sm text-muted-foreground">
-              <a href="#features" className="hover:text-foreground transition-colors">Features</a>
-              <a href="#pricing" className="hover:text-foreground transition-colors">Pricing</a>
-              <button onClick={() => navigate("/microsite")} className="hover:text-foreground transition-colors">Demo</button>
-            </div>
-            <p className="text-xs text-muted-foreground">© 2026 AuraLink. All rights reserved.</p>
+      {/* ─── Footer ─── */}
+      <footer className="border-t border-border py-8">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <img src={ibloovLogo} alt="iBloov" className="h-6 w-auto rounded-md" />
+            <span className="text-xs text-muted-foreground">AuraLink by iBloov</span>
           </div>
+          <div className="flex items-center gap-6 text-xs text-muted-foreground">
+            <a href="#capabilities" className="hover:text-foreground transition-colors">Features</a>
+            <a href="#ecosystem" className="hover:text-foreground transition-colors">Ecosystem</a>
+            <a href="#pricing" className="hover:text-foreground transition-colors">Pricing</a>
+            <button onClick={() => navigate("/microsite")} className="hover:text-foreground transition-colors">Demo</button>
+          </div>
+          <p className="text-[11px] text-muted-foreground">© 2026 iBloov Inc.</p>
         </div>
       </footer>
     </div>
