@@ -19,6 +19,7 @@ import SettingsPage from "./pages/dashboard/SettingsPage";
 import AdminPage from "./pages/dashboard/AdminPage";
 import GamificationPage from "./pages/dashboard/GamificationPage";
 import CardStudioPage from "./pages/dashboard/CardStudioPage";
+import AnalyticsPage from "./pages/dashboard/AnalyticsPage";
 import LocationsPage from "./pages/dashboard/LocationsPage";
 import TeamPage from "./pages/dashboard/TeamPage";
 import EcosystemPage from "./pages/dashboard/EcosystemPage";
@@ -69,6 +70,7 @@ const App = () => (
           <Route path="/microsite/affiliate" element={<AffiliatePage />} />
           {/* Dashboard */}
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/analytics" element={<AnalyticsPage />} />
           <Route path="/dashboard/qr" element={<QRManagement />} />
           <Route path="/dashboard/affiliates" element={<AffiliateDashboard />} />
           <Route path="/dashboard/subscription" element={<SubscriptionPage />} />

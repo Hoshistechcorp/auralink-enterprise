@@ -277,7 +277,7 @@ const LocationsPage = () => {
           <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> Each location gets a unique microsite URL for sharing and QR codes</li>
           <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> Switch locations in the dashboard header to manage cards, settings, and analytics per location</li>
           <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> Team members can be assigned roles per location for granular access control</li>
-          <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> Upgrade to Premium or Enterprise for more location slots and cross-location analytics</li>
+          <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> Upgrade to Maverick or Supernova for more location slots and cross-location analytics</li>
         </ul>
       </div>
     </DashboardLayout>
