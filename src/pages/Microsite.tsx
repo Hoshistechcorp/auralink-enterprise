@@ -159,8 +159,14 @@ const Microsite = () => {
           {cards.map((card, i) => {
             const accessible = isCardAccessible(card.title, effectivePlan);
             return (
-              <div key={card.title} className="relative">
-                <div className={!accessible ? "opacity-40 blur-[1px] pointer-events-none" : ""}>
+              <motion.div
+                key={card.title}
+                className="relative group"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.04, duration: 0.35 }}
+              >
+                <div className={!accessible ? "blur-[2px] saturate-50 scale-[0.97] transition-all duration-300" : "transition-all duration-300"}>
                   <AuraCard
                     icon={card.icon}
                     title={card.title}
@@ -172,10 +178,17 @@ const Microsite = () => {
                 {!accessible && (
                   <button
                     onClick={() => setShowUpgradeModal(true)}
-                    className="absolute inset-0 flex flex-col items-center justify-center z-10"
+                    className="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-2xl bg-background/40 backdrop-blur-[6px] border border-border/30 shadow-inner transition-all duration-200 group-hover:bg-background/50 group-hover:border-primary/20"
                   >
-                    <Lock className="w-4 h-4 text-muted-foreground mb-1" />
-                    <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-wider">Upgrade</span>
+                    <motion.div
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ delay: i * 0.04 + 0.2, type: "spring", stiffness: 300 }}
+                      className="w-8 h-8 rounded-full bg-muted/80 backdrop-blur flex items-center justify-center mb-1.5 shadow-sm group-hover:bg-primary/10 group-hover:shadow-md transition-all duration-200"
+                    >
+                      <Lock className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-colors duration-200" />
+                    </motion.div>
+                    <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-wider group-hover:text-primary transition-colors duration-200">Upgrade</span>
                   </button>
                 )}
               </div>
