@@ -48,25 +48,8 @@ const Onboarding = () => {
 
   // Step 1
   const [industry, setIndustry] = useState("");
-  const [companySize, setCompanySize] = useState("");
-  const [logoFile, setLogoFile] = useState<File | null>(null);
-  const [logoPreview, setLogoPreview] = useState("");
 
-  // Step 2
-  const [venues, setVenues] = useState<Venue[]>([{ name: "", type: "" }]);
 
-  // Step 3
-  const [members, setMembers] = useState<TeamMember[]>([{ name: "", email: "", role: "" }]);
-
-  const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    if (file.size > 2 * 1024 * 1024) return;
-    setLogoFile(file);
-    const reader = new FileReader();
-    reader.onload = () => setLogoPreview(reader.result as string);
-    reader.readAsDataURL(file);
-  };
 
   const addVenue = () => setVenues([...venues, { name: "", type: "" }]);
   const removeVenue = (i: number) => venues.length > 1 && setVenues(venues.filter((_, idx) => idx !== i));
