@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Instagram, Facebook, Twitter, Youtube, Globe, Mail, MessageCircle } from "lucide-react";
+import { ArrowLeft, Instagram, Facebook, Twitter, Youtube, Globe, Mail, MessageCircle, Star, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 
 const socials = [
@@ -8,6 +8,8 @@ const socials = [
   { icon: Twitter, label: "X (Twitter)", handle: "@bellavista_nyc", url: "https://x.com/bellavista_nyc", color: "bg-foreground" },
   { icon: Youtube, label: "YouTube", handle: "Bella Vista Kitchen", url: "https://youtube.com/@bellavistakitchen", color: "bg-red-600" },
   { icon: MessageCircle, label: "TikTok", handle: "@bellavistanyc", url: "https://tiktok.com/@bellavistanyc", color: "bg-foreground" },
+  { icon: Star, label: "Yelp", handle: "Bella Vista NYC", url: "https://yelp.com/biz/bella-vista-new-york", color: "bg-red-500" },
+  { icon: MapPin, label: "Google Reviews", handle: "4.8 ★ (2,400+ reviews)", url: "https://g.page/bellavistanyc/review", color: "bg-blue-500" },
   { icon: Globe, label: "Website", handle: "bellavistanyc.com", url: "https://bellavistanyc.com", color: "bg-primary" },
   { icon: Mail, label: "Newsletter", handle: "Subscribe for updates", url: "mailto:newsletter@bellavistanyc.com", color: "bg-primary" },
 ];

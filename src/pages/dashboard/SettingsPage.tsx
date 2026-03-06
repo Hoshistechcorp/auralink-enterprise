@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   User, Bell, Palette, Globe, Lock, Mail, Phone, MapPin,
   Camera, Save, Check, BellRing, BellOff, Monitor, Moon, Sun,
-  Paintbrush, Droplets, RotateCcw, Pipette,
+  Paintbrush, Droplets, RotateCcw, Pipette, CalendarCheck,
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/aura/DashboardLayout";
 import { useDarkMode } from "@/hooks/use-dark-mode";
+import { getSubscription, saveSubscription } from "@/lib/subscription";
 
 const tabs = [
   { id: "profile", label: "Profile", icon: User },
@@ -95,6 +96,17 @@ const SettingsPage = () => {
   const [customSecondary, setCustomSecondary] = useState("35 35% 64%");
   const [borderRadius, setBorderRadius] = useState("1rem");
   const [fontStyle, setFontStyle] = useState<"serif" | "sans">("serif");
+
+  // Reservation settings
+  const [reservationProvider, setReservationProvider] = useState("opentable");
+  const [reservationUrl, setReservationUrl] = useState("");
+
+  useEffect(() => {
+    const sub = getSubscription();
+    setReservationProvider(sub.reservationProvider || "opentable");
+    setReservationUrl(sub.reservationUrl || "");
+  }, []);
+
   const [profile, setProfile] = useState({
     name: "Marco Bellini",
     email: "marco@bellavista.com",
@@ -116,6 +128,11 @@ const SettingsPage = () => {
   });
 
   const handleSave = () => {
+    // Save reservation settings
+    const sub = getSubscription();
+    sub.reservationUrl = reservationUrl;
+    sub.reservationProvider = reservationProvider;
+    saveSubscription(sub);
     toast({ title: "Settings saved", description: "Your changes have been applied successfully." });
   };
 
@@ -286,6 +303,40 @@ const SettingsPage = () => {
                   />
                 </div>
 
+
+                {/* Reservation Link */}
+                <div className="mt-6 p-5 rounded-xl bg-muted/30 border">
+                  <div className="flex items-center gap-2 mb-4">
+                    <CalendarCheck className="w-4 h-4 text-primary" />
+                    <h4 className="text-sm font-semibold">Reservation Link</h4>
+                  </div>
+                  <p className="text-xs text-muted-foreground mb-4">Set your reservation provider. This link will appear on your microsite's "Reservations" button.</p>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Provider</label>
+                      <select
+                        value={reservationProvider}
+                        onChange={(e) => setReservationProvider(e.target.value)}
+                        className="w-full px-3 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                      >
+                        <option value="opentable">OpenTable</option>
+                        <option value="resy">Resy</option>
+                        <option value="yelp">Yelp Reservations</option>
+                        <option value="tock">Tock</option>
+                        <option value="custom">Custom Link</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Reservation URL</label>
+                      <input
+                        value={reservationUrl}
+                        onChange={(e) => setReservationUrl(e.target.value)}
+                        placeholder={reservationProvider === "opentable" ? "https://opentable.com/r/..." : reservationProvider === "resy" ? "https://resy.com/cities/..." : "https://..."}
+                        className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                      />
+                    </div>
+                  </div>
+                </div>
 
                 <div className="flex justify-end mt-6">
                   <button onClick={handleSave} className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity">
