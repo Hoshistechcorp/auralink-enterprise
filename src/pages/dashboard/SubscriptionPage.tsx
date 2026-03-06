@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Check, X, Sparkles, Zap, Crown, ArrowRight,
   Shield, TrendingUp, Minus,
 } from "lucide-react";
 import DashboardLayout from "@/components/aura/DashboardLayout";
+import { getSubscription, getEffectivePlan, getTrialDaysLeft } from "@/lib/subscription";
 
 /* ── Plan tiers ───────────────────────────────────── */
 const plans = [
@@ -108,6 +109,17 @@ const SubscriptionPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState<typeof plans[0] | null>(null);
   const [annual, setAnnual] = useState(false);
+  const sub = getSubscription();
+  const effectivePlan = getEffectivePlan(sub);
+  const trialDays = getTrialDaysLeft(sub);
+  const currentPlanId = sub.plan;
+
+  // Update plan cards to reflect current plan
+  const dynamicPlans = plans.map((p) => ({
+    ...p,
+    disabled: p.id === currentPlanId,
+    cta: p.id === currentPlanId ? "Current Plan" : `Upgrade to ${p.name}`,
+  }));
 
   const handleUpgrade = (plan: typeof plans[0]) => {
     setSelectedPlan(plan);
@@ -140,7 +152,7 @@ const SubscriptionPage = () => {
 
       {/* Plan Cards */}
       <div className="grid sm:grid-cols-3 gap-5 mb-12 max-w-4xl mx-auto">
-        {plans.map((plan, i) => (
+        {dynamicPlans.map((plan, i) => (
           <motion.div
             key={plan.id}
             initial={{ opacity: 0, y: 16 }}
