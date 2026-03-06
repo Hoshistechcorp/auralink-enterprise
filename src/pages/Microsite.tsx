@@ -191,7 +191,7 @@ const Microsite = () => {
                     <span className="text-[9px] font-bold text-muted-foreground uppercase tracking-wider group-hover:text-primary transition-colors duration-200">Upgrade</span>
                   </button>
                 )}
-              </div>
+              </motion.div>
             );
           })}
         </div>
