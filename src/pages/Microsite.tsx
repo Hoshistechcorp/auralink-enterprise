@@ -20,19 +20,22 @@ const actions = [
 ];
 
 const cards = [
-  { icon: Camera, title: "Photo Gallery", subtitle: "248 photos" },
-  { icon: UtensilsCrossed, title: "Menu", subtitle: "Full menu" },
-  { icon: Star, title: "Reviews", subtitle: "4.8 avg" },
+  /* Spark (Free) — 5 cards */
   { icon: Info, title: "Details", subtitle: "Hours & info" },
-  { icon: Wine, title: "Private Dining", subtitle: "Book now" },
-  { icon: Flame, title: "Popular Dishes", subtitle: "Top 12" },
-  { icon: Bot, title: "AI Concierge", subtitle: "Ask anything" },
-  { icon: Award, title: "Awards", subtitle: "8 awards" },
-  { icon: Users, title: "Staff", subtitle: "Meet team" },
-  { icon: HelpCircle, title: "FAQs", subtitle: "24 answers" },
-  { icon: CalendarDays, title: "Events", subtitle: "Upcoming" },
+  { icon: UtensilsCrossed, title: "Menu", subtitle: "Full menu" },
   { icon: Globe, title: "Social Links", subtitle: "Follow us" },
+  { icon: Star, title: "Reviews", subtitle: "4.8 avg" },
+  { icon: HelpCircle, title: "FAQs", subtitle: "24 answers" },
+  /* Maverick ($79/mo) — +5 cards */
   { icon: Gamepad2, title: "Freebie Game", subtitle: "Spin & win" },
+  { icon: Users, title: "Staff", subtitle: "Meet team" },
+  { icon: Award, title: "Awards", subtitle: "8 awards" },
+  { icon: CalendarDays, title: "Events", subtitle: "Upcoming" },
+  { icon: Flame, title: "Popular Dishes", subtitle: "Top 12" },
+  /* Supernova ($149/mo) — +5 cards */
+  { icon: Bot, title: "AI Concierge", subtitle: "Ask anything" },
+  { icon: Wine, title: "Private Dining", subtitle: "Book now" },
+  { icon: Camera, title: "Photo Gallery", subtitle: "248 photos" },
   { icon: Link2, title: "Refer a Friend", subtitle: "Earn rewards" },
   { icon: Handshake, title: "Affiliate", subtitle: "Partner up" },
 ];
