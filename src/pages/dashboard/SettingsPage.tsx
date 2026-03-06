@@ -96,6 +96,17 @@ const SettingsPage = () => {
   const [customSecondary, setCustomSecondary] = useState("35 35% 64%");
   const [borderRadius, setBorderRadius] = useState("1rem");
   const [fontStyle, setFontStyle] = useState<"serif" | "sans">("serif");
+
+  // Reservation settings
+  const [reservationProvider, setReservationProvider] = useState("opentable");
+  const [reservationUrl, setReservationUrl] = useState("");
+
+  useEffect(() => {
+    const sub = getSubscription();
+    setReservationProvider(sub.reservationProvider || "opentable");
+    setReservationUrl(sub.reservationUrl || "");
+  }, []);
+
   const [profile, setProfile] = useState({
     name: "Marco Bellini",
     email: "marco@bellavista.com",
