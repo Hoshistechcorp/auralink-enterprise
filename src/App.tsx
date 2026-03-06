@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Microsite from "./pages/Microsite";
 import Dashboard from "./pages/Dashboard";
+import Onboarding from "./pages/Onboarding";
+import Welcome from "./pages/Welcome";
 import QRManagement from "./pages/dashboard/QRManagement";
 import AffiliateDashboard from "./pages/dashboard/AffiliateDashboard";
 import SubscriptionPage from "./pages/dashboard/SubscriptionPage";
@@ -52,6 +54,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/microsite" element={<Microsite />} />
+          <Route path="/onboarding" element={<Onboarding />} />
+          <Route path="/welcome" element={<Welcome />} />
           {/* Restaurant microsite */}
           <Route path="/microsite/menu" element={<MenuPage />} />
           <Route path="/microsite/gallery" element={<GalleryPage />} />
