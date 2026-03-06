@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Check, X, Sparkles, Zap, Crown, Building2, ArrowRight,
+  Check, X, Sparkles, Zap, Crown, ArrowRight,
   Shield, TrendingUp, Minus,
 } from "lucide-react";
 import DashboardLayout from "@/components/aura/DashboardLayout";
@@ -9,8 +9,8 @@ import DashboardLayout from "@/components/aura/DashboardLayout";
 /* ── Plan tiers ───────────────────────────────────── */
 const plans = [
   {
-    id: "free",
-    name: "Free",
+    id: "spark",
+    name: "Spark",
     price: 0,
     period: "/mo",
     icon: Zap,
@@ -22,89 +22,72 @@ const plans = [
     accent: "text-muted-foreground",
   },
   {
-    id: "pro",
-    name: "Pro",
-    price: 99.99,
+    id: "maverick",
+    name: "Maverick",
+    price: 79,
     period: "/mo",
     icon: Sparkles,
     desc: "For growing businesses",
     popular: true,
-    cta: "Upgrade to Pro",
+    cta: "Upgrade to Maverick",
     disabled: false,
     gradient: "from-primary/15 to-primary/5",
     accent: "text-primary",
   },
   {
-    id: "premium",
-    name: "Premium",
-    price: 299,
+    id: "supernova",
+    name: "Supernova",
+    price: 149,
     period: "/mo",
     icon: Crown,
-    desc: "All tools & multi-location",
+    desc: "All 15 cards & full power tools",
     popular: false,
-    cta: "Upgrade to Premium",
+    cta: "Upgrade to Supernova",
     disabled: false,
     gradient: "from-chart-4/15 to-chart-4/5",
     accent: "text-chart-4",
   },
-  {
-    id: "enterprise",
-    name: "Enterprise",
-    price: null,
-    period: "",
-    icon: Building2,
-    desc: "Custom solutions at scale",
-    popular: false,
-    cta: "Contact Sales",
-    disabled: false,
-    gradient: "from-chart-2/15 to-chart-2/5",
-    accent: "text-chart-2",
-  },
 ];
 
-/* ── Feature comparison (updated for 15 cards) ───── */
+/* ── Cards by tier ────────────────────────────────── */
+const sparkCards = ["Details", "Menu", "Social Links", "Reviews", "FAQs"];
+const maverickCards = ["Freebie Game", "Staff", "Awards", "Events", "Popular Dishes"];
+const supernovaCards = ["AI Concierge", "Private Dining", "Photo Gallery", "Refer a Friend", "Affiliate"];
+
+/* ── Feature comparison ──────────────────────────── */
 const featureGroups = [
   {
-    group: "Core Platform",
+    group: "Included Cards",
     features: [
-      { name: "AuraLink Page", free: true, pro: true, premium: true, enterprise: true },
-      { name: "Card Slots", free: "3", pro: "9", premium: "15", enterprise: "15" },
-      { name: "Staff Profiles", free: "2", pro: "10", premium: "Unlimited", enterprise: "Unlimited" },
-      { name: "Photo Gallery", free: "20 photos", pro: "200 photos", premium: "Unlimited", enterprise: "Unlimited" },
-      { name: "QR Codes", free: "1", pro: "5", premium: "Unlimited", enterprise: "Unlimited" },
+      { name: "Details", spark: true, maverick: true, supernova: true },
+      { name: "Menu", spark: true, maverick: true, supernova: true },
+      { name: "Social Links", spark: true, maverick: true, supernova: true },
+      { name: "Reviews", spark: true, maverick: true, supernova: true },
+      { name: "FAQs", spark: true, maverick: true, supernova: true },
+      { name: "Freebie Game", spark: false, maverick: true, supernova: true },
+      { name: "Staff", spark: false, maverick: true, supernova: true },
+      { name: "Awards", spark: false, maverick: true, supernova: true },
+      { name: "Events", spark: false, maverick: true, supernova: true },
+      { name: "Popular Dishes", spark: false, maverick: true, supernova: true },
+      { name: "AI Concierge", spark: false, maverick: false, supernova: true },
+      { name: "Private Dining", spark: false, maverick: false, supernova: true },
+      { name: "Photo Gallery", spark: false, maverick: false, supernova: true },
+      { name: "Refer a Friend", spark: false, maverick: false, supernova: true },
+      { name: "Affiliate", spark: false, maverick: false, supernova: true },
     ],
   },
   {
-    group: "Locations & Team",
+    group: "Platform Features",
     features: [
-      { name: "Locations", free: "1", pro: "1", premium: "Up to 5", enterprise: "Unlimited" },
-      { name: "Add Location", free: false, pro: false, premium: true, enterprise: true },
-      { name: "Per-Location Links", free: false, pro: false, premium: true, enterprise: true },
-      { name: "Team Members", free: "1 (owner)", pro: "3", premium: "10", enterprise: "Unlimited" },
-      { name: "Role-Based Access", free: false, pro: false, premium: true, enterprise: true },
-    ],
-  },
-  {
-    group: "Marketing & Growth",
-    features: [
-      { name: "Analytics Dashboard", free: false, pro: true, premium: true, enterprise: true },
-      { name: "AI Concierge", free: false, pro: true, premium: true, enterprise: true },
-      { name: "SEO Dashboard", free: false, pro: "Basic", premium: true, enterprise: true },
-      { name: "Gamification & Badges", free: false, pro: false, premium: true, enterprise: true },
-      { name: "Affiliate Marketing", free: false, pro: false, premium: true, enterprise: true },
-      { name: "Influencer Tools", free: false, pro: false, premium: true, enterprise: true },
-      { name: "Loyalty Program", free: false, pro: false, premium: true, enterprise: true },
-      { name: "Reputation Management", free: false, pro: false, premium: true, enterprise: true },
-    ],
-  },
-  {
-    group: "Enterprise Features",
-    features: [
-      { name: "Multi-Location Analytics", free: false, pro: false, premium: false, enterprise: true },
-      { name: "Custom Branding", free: false, pro: false, premium: true, enterprise: true },
-      { name: "Priority Support", free: false, pro: false, premium: true, enterprise: true },
-      { name: "Dedicated Account Manager", free: false, pro: false, premium: false, enterprise: true },
-      { name: "API Access", free: false, pro: false, premium: false, enterprise: true },
+      { name: "QR Codes", spark: "1", maverick: "5", supernova: "Unlimited" },
+      { name: "Staff Profiles", spark: "2", maverick: "10", supernova: "Unlimited" },
+      { name: "Analytics Dashboard", spark: false, maverick: true, supernova: true },
+      { name: "SEO Dashboard", spark: false, maverick: "Basic", supernova: true },
+      { name: "Gamification & Badges", spark: false, maverick: false, supernova: true },
+      { name: "Loyalty Program", spark: false, maverick: false, supernova: true },
+      { name: "Reputation Management", spark: false, maverick: false, supernova: true },
+      { name: "Custom Branding", spark: false, maverick: false, supernova: true },
+      { name: "Priority Support", spark: false, maverick: false, supernova: true },
     ],
   },
 ];
@@ -117,9 +100,8 @@ const renderCell = (val: boolean | string) => {
 
 /* ── Highlights per plan (for modal) ──────────────── */
 const planHighlights: Record<string, string[]> = {
-  pro: ["9 Card Slots", "Analytics Dashboard", "AI Concierge", "Up to 3 Team Members", "5 QR Codes", "Basic SEO"],
-  premium: ["All 15 Card Slots", "Up to 5 Locations", "Add Location", "All Marketing Tools", "Loyalty Program", "Reputation Management"],
-  enterprise: ["Unlimited Everything", "Multi-Location Analytics", "Dedicated Account Manager", "API Access", "Custom Branding", "Priority Support"],
+  maverick: ["10 Card Slots", "Analytics Dashboard", "5 QR Codes", "Up to 10 Staff Profiles", "Basic SEO", "Freebie Game & Events"],
+  supernova: ["All 15 Cards Unlocked", "AI Concierge", "Private Dining", "Photo Gallery", "Loyalty & Reputation Tools", "Priority Support"],
 };
 
 const SubscriptionPage = () => {
@@ -157,7 +139,7 @@ const SubscriptionPage = () => {
       </div>
 
       {/* Plan Cards */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+      <div className="grid sm:grid-cols-3 gap-5 mb-12 max-w-4xl mx-auto">
         {plans.map((plan, i) => (
           <motion.div
             key={plan.id}
@@ -179,21 +161,30 @@ const SubscriptionPage = () => {
             </div>
 
             <h3 className="font-display text-xl font-bold mb-1">{plan.name}</h3>
-            <p className="text-xs text-muted-foreground mb-5 leading-relaxed">{plan.desc}</p>
+            <p className="text-xs text-muted-foreground mb-3 leading-relaxed">{plan.desc}</p>
+
+            {/* Card count badge */}
+            <div className="mb-5">
+              <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-background/60 border border-border/40 text-[11px] font-semibold">
+                {plan.id === "spark" ? "5 cards" : plan.id === "maverick" ? "10 cards" : "All 15 cards"}
+              </span>
+            </div>
 
             <div className="mb-6 mt-auto">
-              {plan.price !== null ? (
+              {plan.price > 0 ? (
                 <div className="flex items-baseline gap-1">
                   <span className="text-4xl font-extrabold tracking-tight">
                     ${annual ? Math.round(plan.price * 0.8) : plan.price}
                   </span>
                   <span className="text-sm text-muted-foreground font-medium">{plan.period}</span>
-                  {annual && plan.price > 0 && (
+                  {annual && (
                     <span className="text-xs text-muted-foreground line-through ml-1">${plan.price}</span>
                   )}
                 </div>
               ) : (
-                <span className="text-2xl font-bold">Custom Pricing</span>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-4xl font-extrabold tracking-tight">Free</span>
+                </div>
               )}
             </div>
 
@@ -224,8 +215,8 @@ const SubscriptionPage = () => {
           <Shield className="w-5 h-5 text-primary" />
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-semibold">You're on the Free plan</p>
-          <p className="text-xs text-muted-foreground">Upgrade to unlock all 15 cards, analytics, AI tools, and multi-location support. Pro starts at $99.99/mo.</p>
+          <p className="text-sm font-semibold">You're on the Spark plan</p>
+          <p className="text-xs text-muted-foreground">Upgrade to Maverick ($79/mo) for 10 cards, or Supernova ($149/mo) for all 15 cards + full tools.</p>
         </div>
         <div className="hidden sm:flex items-center gap-1.5 text-xs font-medium text-primary">
           <TrendingUp className="w-3.5 h-3.5" />
@@ -237,7 +228,7 @@ const SubscriptionPage = () => {
       <div className="rounded-2xl bg-card border overflow-hidden">
         <div className="p-6 border-b bg-gradient-to-r from-muted/30 to-transparent">
           <h3 className="font-display text-lg font-bold">Feature Comparison</h3>
-          <p className="text-xs text-muted-foreground mt-1">All 15 destination & restaurant cards included in Premium+</p>
+          <p className="text-xs text-muted-foreground mt-1">All 15 cards included in Supernova</p>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
@@ -255,17 +246,16 @@ const SubscriptionPage = () => {
               {featureGroups.map((group) => (
                 <>
                   <tr key={group.group}>
-                    <td colSpan={5} className="px-6 py-3 bg-muted/20 text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                    <td colSpan={4} className="px-6 py-3 bg-muted/20 text-xs font-bold text-muted-foreground uppercase tracking-wider">
                       {group.group}
                     </td>
                   </tr>
                   {group.features.map((feat, i) => (
                     <tr key={feat.name} className={`border-b border-border/40 last:border-0 transition-colors hover:bg-muted/10 ${i % 2 === 0 ? "" : "bg-muted/5"}`}>
                       <td className="px-6 py-3 text-sm font-medium">{feat.name}</td>
-                      <td className="px-4 py-3 text-center">{renderCell(feat.free)}</td>
-                      <td className={`px-4 py-3 text-center ${plans[1].popular ? "bg-primary/[0.03]" : ""}`}>{renderCell(feat.pro)}</td>
-                      <td className="px-4 py-3 text-center">{renderCell(feat.premium)}</td>
-                      <td className="px-4 py-3 text-center">{renderCell(feat.enterprise)}</td>
+                      <td className="px-4 py-3 text-center">{renderCell(feat.spark)}</td>
+                      <td className={`px-4 py-3 text-center ${plans[1].popular ? "bg-primary/[0.03]" : ""}`}>{renderCell(feat.maverick)}</td>
+                      <td className="px-4 py-3 text-center">{renderCell(feat.supernova)}</td>
                     </tr>
                   ))}
                 </>
@@ -316,7 +306,7 @@ const SubscriptionPage = () => {
                 </div>
               </div>
 
-              {selectedPlan.price !== null && (
+              {selectedPlan.price > 0 && (
                 <div className="flex items-baseline gap-1 mb-6">
                   <span className="text-4xl font-extrabold tracking-tight">
                     ${annual ? Math.round(selectedPlan.price * 0.8) : selectedPlan.price}
@@ -338,7 +328,7 @@ const SubscriptionPage = () => {
                   Maybe Later
                 </button>
                 <button className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity shadow-md">
-                  {selectedPlan.price !== null ? "Subscribe Now" : "Contact Sales"}
+                  Subscribe Now
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>

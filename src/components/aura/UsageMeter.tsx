@@ -22,7 +22,7 @@ const UsageMeter = () => {
         <h3 className="font-display font-semibold">Plan Usage</h3>
         <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-muted text-xs font-semibold text-muted-foreground">
           <CreditCard className="w-3 h-3" />
-          Free Plan
+          Spark Plan
         </span>
       </div>
       <div className="space-y-4">
@@ -62,7 +62,7 @@ const UsageMeter = () => {
         })}
       </div>
       <p className="text-[11px] text-muted-foreground mt-4 leading-relaxed">
-        Upgrade to Pro ($99.99/mo) for 9 cards, or Premium ($299/mo) for all 15 cards + full tools.
+        Upgrade to Maverick ($79/mo) for 10 cards, or Supernova ($149/mo) for all 15 cards + full tools.
       </p>
     </div>
   );

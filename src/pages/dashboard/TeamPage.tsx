@@ -221,10 +221,9 @@ const TeamPage = () => {
           <div className="p-5 rounded-2xl bg-card border">
             <h3 className="font-display font-semibold mb-2">Plan Limits</h3>
             <ul className="space-y-2 text-xs text-muted-foreground">
-              <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> <b>Free:</b> 1 user (owner only)</li>
-              <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> <b>Pro:</b> Up to 3 team members</li>
-              <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> <b>Premium:</b> Up to 10 team members</li>
-              <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> <b>Enterprise:</b> Unlimited team members</li>
+              <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> <b>Spark:</b> 1 user (owner only)</li>
+              <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> <b>Maverick:</b> Up to 10 team members</li>
+              <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> <b>Supernova:</b> Unlimited team members</li>
             </ul>
           </div>
         </div>
