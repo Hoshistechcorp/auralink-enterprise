@@ -83,7 +83,7 @@ const Index = () => {
               Sign In
             </button>
             <button
-              onClick={() => navigate("/dashboard")}
+              onClick={() => navigate("/onboarding")}
               className="px-4 py-1.5 rounded-xl bg-primary text-primary-foreground text-[13px] font-semibold hover:opacity-90 transition-opacity"
             >
               Sign Up
