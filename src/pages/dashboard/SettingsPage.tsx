@@ -4,6 +4,7 @@ import {
   User, Bell, Palette, Globe, Lock, Mail, Phone, MapPin,
   Camera, Save, Check, BellRing, BellOff, Monitor, Moon, Sun,
   Paintbrush, Droplets, RotateCcw, Pipette, CalendarCheck,
+  Building2, Plus, Trash2, Users2,
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/hooks/use-toast";
@@ -13,12 +14,25 @@ import { getSubscription, saveSubscription } from "@/lib/subscription";
 
 const tabs = [
   { id: "profile", label: "Profile", icon: User },
+  { id: "business", label: "Business", icon: Building2 },
   { id: "notifications", label: "Notifications", icon: Bell },
   { id: "appearance", label: "Appearance", icon: Palette },
   { id: "security", label: "Security", icon: Lock },
 ] as const;
 
 type Tab = (typeof tabs)[number]["id"];
+
+const industryOptions = [
+  "Restaurant", "Hotel & Resort", "Bar & Lounge", "Café & Coffee Shop",
+  "Fast Casual & QSR", "Nightclub & Club", "Catering & Events",
+  "Food Truck", "Bakery & Patisserie", "Spa & Wellness",
+];
+
+const venueTypeOptions = ["Restaurant", "Hotel", "Event Space", "Gym/Studio", "Office", "Retail Store", "Other"];
+const teamRoleOptions = ["Admin", "Manager", "Coordinator", "Staff"];
+
+interface Venue { name: string; type: string; }
+interface TeamMember { name: string; email: string; role: string; }
 
 const themeOptions = [
   { id: "default", label: "Restaurant", desc: "Warm wine & gold tones", colors: ["352 43% 32%", "35 35% 64%", "30 33% 97%"] },
