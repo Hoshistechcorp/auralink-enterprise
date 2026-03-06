@@ -68,21 +68,21 @@ const Index = () => {
             <span className="font-semibold text-sm hidden sm:inline">AuraLink</span>
           </div>
 
-          <div className="hidden md:flex items-center gap-7 text-[13px] font-medium text-muted-foreground">
-            <a href="#features" className="hover:text-foreground transition-colors">Features</a>
-            <a href="#demo-video" className="hover:text-foreground transition-colors">Watch Demo</a>
-            <a href="#waitlist" className="hover:text-foreground transition-colors">Join Waitlist</a>
-          </div>
-
           <div className="flex items-center gap-2">
             <button onClick={toggleDark} className="p-2 rounded-xl hover:bg-muted transition-colors" aria-label="Toggle theme">
               {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
             <button
-              onClick={() => navigate("/microsite")}
+              onClick={() => navigate("/dashboard")}
+              className="px-4 py-1.5 rounded-xl border border-border text-[13px] font-semibold hover:bg-muted transition-colors"
+            >
+              Sign In
+            </button>
+            <button
+              onClick={() => navigate("/dashboard")}
               className="px-4 py-1.5 rounded-xl bg-primary text-primary-foreground text-[13px] font-semibold hover:opacity-90 transition-opacity"
             >
-              See Demo
+              Sign Up
             </button>
           </div>
         </div>
@@ -101,10 +101,6 @@ const Index = () => {
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="max-w-3xl mx-auto text-center"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-6">
-              <Sparkles className="w-3 h-3" />
-              Now accepting early access
-            </div>
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold leading-[1.1] tracking-tight">
               Growth infrastructure
@@ -207,7 +203,7 @@ const Index = () => {
         <div className="max-w-5xl mx-auto px-5 sm:px-8">
           <div className="max-w-2xl mx-auto text-center mb-12">
             <h2 className="text-2xl sm:text-3xl font-display font-bold">
-              12 modules. One link.
+              15 modules. One link.
             </h2>
             <p className="mt-3 text-muted-foreground text-sm">
               Every tool you need between the scan and the sale.
@@ -273,37 +269,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── How it works ─── */}
-      <section className="py-16 sm:py-20 bg-muted/20 border-y border-border/40">
-        <div className="max-w-4xl mx-auto px-5 sm:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-display font-bold">Live in 5 minutes.</h2>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { n: "01", title: "Claim your page", desc: "Add your brand, pick your cards, set your vibe." },
-              { n: "02", title: "Activate growth", desc: "Turn on loyalty, gamification, referrals — one tap." },
-              { n: "03", title: "Watch it compound", desc: "Guests come back, refer friends, and you see it all." },
-            ].map((s, i) => (
-              <motion.div
-                key={s.n}
-                custom={i}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fade}
-                className="text-center"
-              >
-                <div className="w-10 h-10 rounded-xl bg-primary text-primary-foreground flex items-center justify-center mx-auto font-display font-bold text-sm">
-                  {s.n}
-                </div>
-                <h3 className="font-semibold mt-3 text-[15px]">{s.title}</h3>
-                <p className="text-xs text-muted-foreground mt-1.5">{s.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ─── Pricing ─── */}
       <section id="pricing" className="py-16 sm:py-20">
