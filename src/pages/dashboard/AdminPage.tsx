@@ -5,7 +5,7 @@ import {
   UtensilsCrossed, Users, Camera, FileText, MapPin, Phone, Mail,
   Globe, Star, ChevronDown, Check, X, CalendarDays, Award, Wine,
   HelpCircle, Instagram, Facebook, Twitter, Youtube, MessageCircle,
-  Link2, Sparkles, Gift, DollarSign, CreditCard,
+  Link2, Sparkles,
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/hooks/use-toast";
