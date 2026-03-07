@@ -36,7 +36,7 @@ interface AwardItem { id: string; title: string; year: string; org: string; desc
 interface PrivateRoom { id: string; name: string; capacity: string; desc: string; }
 interface FAQItem { id: string; question: string; answer: string; }
 interface SocialLink { id: string; platform: string; handle: string; url: string; enabled: boolean; }
-interface GiftCardItem { id: string; name: string; amount: string; description: string; active: boolean; }
+
 
 /* ── Helpers ─────────────────────────────────────────── */
 const uid = () => crypto.randomUUID();
@@ -197,16 +197,6 @@ const AdminPage = () => {
   // Socials handlers
   const updateSocial = (id: string, patch: Partial<SocialLink>) => setSocials((s) => s.map((sl) => (sl.id === id ? { ...sl, ...patch } : sl)));
 
-  // Gift cards handlers
-  const [giftCards, setGiftCards] = useState<GiftCardItem[]>([
-    { id: uid(), name: "Classic Dinner", amount: "50", description: "Perfect for a starter and main course", active: true },
-    { id: uid(), name: "Fine Dining Experience", amount: "100", description: "Enjoy a full 3-course dinner for two", active: true },
-    { id: uid(), name: "Chef's Table", amount: "200", description: "An unforgettable multi-course tasting menu", active: true },
-    { id: uid(), name: "Ultimate Celebration", amount: "500", description: "Wine pairing, private dining & the full experience", active: true },
-  ]);
-  const addGiftCard = () => setGiftCards([...giftCards, { id: uid(), name: "", amount: "", description: "", active: true }]);
-  const updateGiftCard = (id: string, patch: Partial<GiftCardItem>) => setGiftCards((g) => g.map((gc) => (gc.id === id ? { ...gc, ...patch } : gc)));
-  const deleteGiftCard = (id: string) => setGiftCards((g) => g.filter((gc) => gc.id !== id));
 
   return (
     <DashboardLayout title="Admin Panel" subtitle="Manage all business content & details">
