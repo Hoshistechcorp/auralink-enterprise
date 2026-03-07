@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import {
   Home, Layers, BarChart3, Gamepad2, Settings, QrCode, Users2, CreditCard,
   Heart, Megaphone, Share2, Search, Shield, Building2, ChevronDown, LucideIcon, Menu, Sun, Moon,
-  ClipboardEdit, MapPin, UserCog, Check,
+  ClipboardEdit, MapPin, UserCog, Check, Gift,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
@@ -66,6 +66,7 @@ const navSections: NavSection[] = [
       { icon: MapPin, label: "Locations", path: "/dashboard/locations" },
       { icon: UserCog, label: "Team", path: "/dashboard/team" },
       { icon: Building2, label: "Enterprise", path: "/dashboard/enterprise" },
+      { icon: Gift, label: "Gift Cards", path: "/dashboard/gift-cards" },
       { icon: CreditCard, label: "Subscription", path: "/dashboard/subscription" },
       { icon: Settings, label: "Settings", path: "/dashboard/settings" },
     ],

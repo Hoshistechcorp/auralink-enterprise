@@ -1,4 +1,4 @@
-import { Eye, MousePointer, TrendingUp, CreditCard } from "lucide-react";
+import { Eye, MousePointer, TrendingUp, CreditCard, Gift } from "lucide-react";
 import { motion } from "framer-motion";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line } from "recharts";
 import DashboardLayout from "@/components/aura/DashboardLayout";
@@ -33,7 +33,9 @@ const metrics = [
 
 const activities = [
   { text: "New review from Sarah M. ⭐⭐⭐⭐⭐", time: "2m ago" },
+  { text: "Gift card purchased — $100 Fine Dining Experience", time: "8m ago" },
   { text: "Menu card viewed 142 times today", time: "15m ago" },
+  { text: "Gift card redeemed — $50 at checkout", time: "45m ago" },
   { text: "Photo Gallery: 3 new uploads", time: "1h ago" },
   { text: "AI Concierge answered 28 questions", time: "2h ago" },
 ];
