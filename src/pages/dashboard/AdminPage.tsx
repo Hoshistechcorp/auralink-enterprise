@@ -5,7 +5,7 @@ import {
   UtensilsCrossed, Users, Camera, FileText, MapPin, Phone, Mail,
   Globe, Star, ChevronDown, Check, X, CalendarDays, Award, Wine,
   HelpCircle, Instagram, Facebook, Twitter, Youtube, MessageCircle,
-  Link2, Sparkles,
+  Link2, Sparkles, Gift, DollarSign,
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/hooks/use-toast";
@@ -23,6 +23,7 @@ const tabs = [
   { id: "privateDining", label: "Private Dining", icon: Wine },
   { id: "faqs", label: "FAQs", icon: HelpCircle },
   { id: "socialLinks", label: "Social Links", icon: Globe },
+  { id: "giftCards", label: "Gift Cards", icon: Gift },
 ] as const;
 type Tab = (typeof tabs)[number]["id"];
 
@@ -36,6 +37,7 @@ interface AwardItem { id: string; title: string; year: string; org: string; desc
 interface PrivateRoom { id: string; name: string; capacity: string; desc: string; }
 interface FAQItem { id: string; question: string; answer: string; }
 interface SocialLink { id: string; platform: string; handle: string; url: string; enabled: boolean; }
+interface GiftCardItem { id: string; name: string; amount: string; description: string; active: boolean; }
 
 /* ── Helpers ─────────────────────────────────────────── */
 const uid = () => crypto.randomUUID();
