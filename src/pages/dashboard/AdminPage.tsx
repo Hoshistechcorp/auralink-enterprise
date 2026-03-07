@@ -28,7 +28,7 @@ type Tab = (typeof tabs)[number]["id"];
 
 /* ── Types ───────────────────────────────────────────── */
 interface MenuItem { id: string; name: string; description: string; price: string; category: string; popular: boolean; }
-interface StaffMember { id: string; name: string; role: string; bio: string; }
+interface StaffMember { id: string; name: string; role: string; bio: string; tipLink: string; }
 interface GalleryImage { id: string; url: string; caption: string; }
 interface DayHours { day: string; open: string; close: string; closed: boolean; }
 interface EventItem { id: string; title: string; date: string; time: string; location: string; desc: string; tag: string; }
@@ -63,10 +63,10 @@ const defaultMenu: MenuItem[] = [
 ];
 
 const defaultStaff: StaffMember[] = [
-  { id: uid(), name: "Marco Rossi", role: "Executive Chef", bio: "Trained in Florence, 20+ years of culinary mastery." },
-  { id: uid(), name: "Sophia Chen", role: "Head Sommelier", bio: "Award-winning wine expert with an encyclopedic palate." },
-  { id: uid(), name: "James Wright", role: "General Manager", bio: "Ensuring every guest feels like family since 2005." },
-  { id: uid(), name: "Elena Volkov", role: "Pastry Chef", bio: "Creates edible art that delights every sense." },
+  { id: uid(), name: "Marco Rossi", role: "Executive Chef", bio: "Trained in Florence, 20+ years of culinary mastery.", tipLink: "" },
+  { id: uid(), name: "Sophia Chen", role: "Head Sommelier", bio: "Award-winning wine expert with an encyclopedic palate.", tipLink: "" },
+  { id: uid(), name: "James Wright", role: "General Manager", bio: "Ensuring every guest feels like family since 2005.", tipLink: "" },
+  { id: uid(), name: "Elena Volkov", role: "Pastry Chef", bio: "Creates edible art that delights every sense.", tipLink: "" },
 ];
 
 const defaultGallery: GalleryImage[] = [
@@ -162,7 +162,7 @@ const AdminPage = () => {
   const deleteMenuItem = (id: string) => setMenuItems((items) => items.filter((m) => m.id !== id));
 
   // Staff handlers
-  const addStaff = () => setStaff([...staff, { id: uid(), name: "", role: "", bio: "" }]);
+  const addStaff = () => setStaff([...staff, { id: uid(), name: "", role: "", bio: "", tipLink: "" }]);
   const updateStaff = (id: string, patch: Partial<StaffMember>) => setStaff((s) => s.map((m) => (m.id === id ? { ...m, ...patch } : m)));
   const deleteStaff = (id: string) => setStaff((s) => s.filter((m) => m.id !== id));
 
@@ -378,6 +378,13 @@ const AdminPage = () => {
                             <input value={member.role} onChange={(e) => updateStaff(member.id, { role: e.target.value })} placeholder="Role / title" className={inputCls} maxLength={80} />
                           </div>
                           <textarea value={member.bio} onChange={(e) => updateStaff(member.id, { bio: e.target.value })} placeholder="Short bio..." rows={2} className={`${inputCls} resize-none`} maxLength={300} />
+                          <div>
+                            <label className={labelCls}>💰 Tip Link (Flex-It)</label>
+                            <div className="relative">
+                              <Link2 className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                              <input value={member.tipLink} onChange={(e) => updateStaff(member.id, { tipLink: e.target.value })} placeholder="https://flex-it.com/your-link" className={`${inputCls} pl-9`} maxLength={200} />
+                            </div>
+                          </div>
                         </div>
                         <button onClick={() => deleteStaff(member.id)} className="self-start p-2 rounded-lg text-destructive hover:bg-destructive/10 transition-colors shrink-0"><Trash2 className="w-4 h-4" /></button>
                       </div>
