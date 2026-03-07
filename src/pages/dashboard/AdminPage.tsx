@@ -195,8 +195,16 @@ const AdminPage = () => {
   const updateFAQ = (id: string, patch: Partial<FAQItem>) => setFaqs((f) => f.map((fq) => (fq.id === id ? { ...fq, ...patch } : fq)));
   const deleteFAQ = (id: string) => setFaqs((f) => f.filter((fq) => fq.id !== id));
 
-  // Socials handlers
-  const updateSocial = (id: string, patch: Partial<SocialLink>) => setSocials((s) => s.map((sl) => (sl.id === id ? { ...sl, ...patch } : sl)));
+  // Gift cards handlers
+  const [giftCards, setGiftCards] = useState<GiftCardItem[]>([
+    { id: uid(), name: "Classic Dinner", amount: "50", description: "Perfect for a starter and main course", active: true },
+    { id: uid(), name: "Fine Dining Experience", amount: "100", description: "Enjoy a full 3-course dinner for two", active: true },
+    { id: uid(), name: "Chef's Table", amount: "200", description: "An unforgettable multi-course tasting menu", active: true },
+    { id: uid(), name: "Ultimate Celebration", amount: "500", description: "Wine pairing, private dining & the full experience", active: true },
+  ]);
+  const addGiftCard = () => setGiftCards([...giftCards, { id: uid(), name: "", amount: "", description: "", active: true }]);
+  const updateGiftCard = (id: string, patch: Partial<GiftCardItem>) => setGiftCards((g) => g.map((gc) => (gc.id === id ? { ...gc, ...patch } : gc)));
+  const deleteGiftCard = (id: string) => setGiftCards((g) => g.filter((gc) => gc.id !== id));
 
   return (
     <DashboardLayout title="Admin Panel" subtitle="Manage all business content & details">
