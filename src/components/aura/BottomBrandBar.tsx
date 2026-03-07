@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { QrCode, Link as LinkIcon, X } from "lucide-react";
+import { QrCode, Link as LinkIcon, X, Share2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "sonner";
 
 const BottomBrandBar = () => {
   const [showQR, setShowQR] = useState(false);
@@ -24,7 +25,17 @@ const BottomBrandBar = () => {
               </div>
             </div>
           </div>
-          <div className="text-xs text-muted-foreground font-medium">
+          <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium">
+            <button
+              onClick={() => {
+                navigator.clipboard?.writeText(window.location.href);
+                toast.success("Link copied to clipboard!");
+              }}
+              className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center hover:bg-primary/10 transition-colors"
+              aria-label="Share"
+            >
+              <Share2 className="w-3.5 h-3.5" />
+            </button>
             Powered by <span className="font-display text-primary">AuraLink</span>
           </div>
         </div>

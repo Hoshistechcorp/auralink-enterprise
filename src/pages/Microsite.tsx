@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  Phone, MessageCircle, Navigation, Share2, CalendarCheck,
-  Camera, UtensilsCrossed, Star, Info, Wine, Flame,
+  Phone, MessageCircle, Navigation, CalendarCheck, Info,
+  Camera, UtensilsCrossed, Star, Wine, Flame, Gift,
   Bot, Award, Users, HelpCircle, CalendarDays, Globe,
   Gamepad2, Link2, Handshake, Lock, Sparkles, X,
 } from "lucide-react";
@@ -19,13 +19,13 @@ const actions = [
   { icon: Phone, label: "Call" },
   { icon: MessageCircle, label: "Message" },
   { icon: Navigation, label: "Directions" },
-  { icon: Share2, label: "Share" },
+  { icon: Info, label: "Details" },
   { icon: CalendarCheck, label: "Reservations" },
 ];
 
 const cards = [
   /* Spark (Free) — 5 cards */
-  { icon: Info, title: "Details", subtitle: "Hours & info" },
+  { icon: Gift, title: "Gift Cards", subtitle: "Give & enjoy" },
   { icon: UtensilsCrossed, title: "Menu", subtitle: "Full menu" },
   { icon: Globe, title: "Social Links", subtitle: "Follow us" },
   { icon: Star, title: "Reviews", subtitle: "4.8 avg" },
@@ -50,7 +50,7 @@ const routes: Record<string, string> = {
   "Reviews": "/microsite/reviews",
   "AI Concierge": "/microsite/concierge",
   "Staff": "/microsite/staff",
-  "Details": "/microsite/details",
+  "Gift Cards": "/microsite/gift-cards",
   "Private Dining": "/microsite/private-dining",
   "Popular Dishes": "/microsite/popular-dishes",
   "Awards": "/microsite/awards",
@@ -107,6 +107,8 @@ const Microsite = () => {
   const handleAction = (label: string) => {
     if (label === "Reservations") {
       handleReservation();
+    } else if (label === "Details") {
+      navigate("/microsite/details");
     }
   };
 

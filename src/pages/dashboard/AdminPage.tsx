@@ -5,7 +5,7 @@ import {
   UtensilsCrossed, Users, Camera, FileText, MapPin, Phone, Mail,
   Globe, Star, ChevronDown, Check, X, CalendarDays, Award, Wine,
   HelpCircle, Instagram, Facebook, Twitter, Youtube, MessageCircle,
-  Link2, Sparkles,
+  Link2, Sparkles, Gift, DollarSign, CreditCard,
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/hooks/use-toast";
@@ -23,6 +23,7 @@ const tabs = [
   { id: "privateDining", label: "Private Dining", icon: Wine },
   { id: "faqs", label: "FAQs", icon: HelpCircle },
   { id: "socialLinks", label: "Social Links", icon: Globe },
+  { id: "giftCards", label: "Gift Cards", icon: Gift },
 ] as const;
 type Tab = (typeof tabs)[number]["id"];
 
@@ -36,6 +37,7 @@ interface AwardItem { id: string; title: string; year: string; org: string; desc
 interface PrivateRoom { id: string; name: string; capacity: string; desc: string; }
 interface FAQItem { id: string; question: string; answer: string; }
 interface SocialLink { id: string; platform: string; handle: string; url: string; enabled: boolean; }
+interface GiftCardItem { id: string; name: string; amount: string; description: string; active: boolean; }
 
 /* ── Helpers ─────────────────────────────────────────── */
 const uid = () => crypto.randomUUID();
@@ -195,6 +197,17 @@ const AdminPage = () => {
 
   // Socials handlers
   const updateSocial = (id: string, patch: Partial<SocialLink>) => setSocials((s) => s.map((sl) => (sl.id === id ? { ...sl, ...patch } : sl)));
+
+  // Gift cards handlers
+  const [giftCards, setGiftCards] = useState<GiftCardItem[]>([
+    { id: uid(), name: "Classic Dinner", amount: "50", description: "Perfect for a starter and main course", active: true },
+    { id: uid(), name: "Fine Dining Experience", amount: "100", description: "Enjoy a full 3-course dinner for two", active: true },
+    { id: uid(), name: "Chef's Table", amount: "200", description: "An unforgettable multi-course tasting menu", active: true },
+    { id: uid(), name: "Ultimate Celebration", amount: "500", description: "Wine pairing, private dining & the full experience", active: true },
+  ]);
+  const addGiftCard = () => setGiftCards([...giftCards, { id: uid(), name: "", amount: "", description: "", active: true }]);
+  const updateGiftCard = (id: string, patch: Partial<GiftCardItem>) => setGiftCards((g) => g.map((gc) => (gc.id === id ? { ...gc, ...patch } : gc)));
+  const deleteGiftCard = (id: string) => setGiftCards((g) => g.filter((gc) => gc.id !== id));
 
   return (
     <DashboardLayout title="Admin Panel" subtitle="Manage all business content & details">
@@ -534,6 +547,65 @@ const AdminPage = () => {
                   ))}
                 </div>
                 <div className="flex justify-end mt-6"><button onClick={() => save("Social Links")} className={btnPrimary}><Save className="w-4 h-4" /> Save Links</button></div>
+              </div>
+            </motion.div>
+          )}
+
+          {/* ─── GIFT CARDS ────────────────────────── */}
+          {activeTab === "giftCards" && (
+            <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
+              <div className="p-6 rounded-2xl bg-card border">
+                <div className="flex items-center justify-between mb-6">
+                  <div><h3 className="font-display font-semibold text-lg">Gift Cards</h3><p className="text-xs text-muted-foreground">{giftCards.length} gift cards — customers can purchase these on your microsite</p></div>
+                  <button onClick={addGiftCard} className={btnPrimary}><Plus className="w-4 h-4" /> Add Card</button>
+                </div>
+
+                {/* Stats */}
+                <div className="grid grid-cols-3 gap-3 mb-6">
+                  <div className="p-4 rounded-xl bg-muted/30 text-center">
+                    <DollarSign className="w-5 h-5 text-primary mx-auto mb-1" />
+                    <p className="text-lg font-bold">$4,280</p>
+                    <p className="text-[10px] text-muted-foreground">Total Sales</p>
+                  </div>
+                  <div className="p-4 rounded-xl bg-muted/30 text-center">
+                    <Gift className="w-5 h-5 text-chart-4 mx-auto mb-1" />
+                    <p className="text-lg font-bold">67</p>
+                    <p className="text-[10px] text-muted-foreground">Cards Sold</p>
+                  </div>
+                  <div className="p-4 rounded-xl bg-muted/30 text-center">
+                    <CreditCard className="w-5 h-5 text-chart-2 mx-auto mb-1" />
+                    <p className="text-lg font-bold">23</p>
+                    <p className="text-[10px] text-muted-foreground">Redeemed</p>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  {giftCards.map((gc, i) => (
+                    <motion.div key={gc.id} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.03 }} className={`p-4 rounded-xl border transition-all ${gc.active ? "bg-muted/30" : "bg-muted/10 opacity-60"}`}>
+                      <div className="flex gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                          <Gift className="w-5 h-5 text-primary" />
+                        </div>
+                        <div className="flex-1 space-y-2">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-sm font-medium flex-1">{gc.name || "New Gift Card"}</span>
+                            <Switch checked={gc.active} onCheckedChange={(v) => updateGiftCard(gc.id, { active: v })} />
+                          </div>
+                          <div className="grid sm:grid-cols-3 gap-2">
+                            <input value={gc.name} onChange={(e) => updateGiftCard(gc.id, { name: e.target.value })} placeholder="Card name" className={inputCls} maxLength={80} />
+                            <div className="relative">
+                              <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                              <input value={gc.amount} onChange={(e) => updateGiftCard(gc.id, { amount: e.target.value.replace(/[^0-9.]/g, "") })} placeholder="Amount" className={`${inputCls} pl-9`} maxLength={8} />
+                            </div>
+                            <button onClick={() => deleteGiftCard(gc.id)} className="self-center p-2 rounded-lg text-destructive hover:bg-destructive/10 transition-colors"><Trash2 className="w-4 h-4" /></button>
+                          </div>
+                          <textarea value={gc.description} onChange={(e) => updateGiftCard(gc.id, { description: e.target.value })} placeholder="Description" rows={2} className={`${inputCls} resize-none`} maxLength={200} />
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+                <div className="flex justify-end mt-6"><button onClick={() => save("Gift Cards")} className={btnPrimary}><Save className="w-4 h-4" /> Save Gift Cards</button></div>
               </div>
             </motion.div>
           )}
