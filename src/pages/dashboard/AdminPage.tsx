@@ -23,7 +23,6 @@ const tabs = [
   { id: "privateDining", label: "Private Dining", icon: Wine },
   { id: "faqs", label: "FAQs", icon: HelpCircle },
   { id: "socialLinks", label: "Social Links", icon: Globe },
-  { id: "giftCards", label: "Gift Cards", icon: Gift },
 ] as const;
 type Tab = (typeof tabs)[number]["id"];
 
