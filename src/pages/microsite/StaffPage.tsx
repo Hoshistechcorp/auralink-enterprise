@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Star, Heart } from "lucide-react";
+import { ArrowLeft, Star, DollarSign } from "lucide-react";
 import { motion } from "framer-motion";
 import marcoImg from "@/assets/staff-marco.jpg";
 import sophiaImg from "@/assets/staff-sophia.jpg";
@@ -7,10 +7,10 @@ import jamesImg from "@/assets/staff-james.jpg";
 import elenaImg from "@/assets/staff-elena.jpg";
 
 const staff = [
-  { name: "Marco Rossi", role: "Executive Chef", bio: "Trained in Florence, 20+ years of culinary mastery.", rating: 4.9, image: marcoImg },
-  { name: "Sophia Chen", role: "Head Sommelier", bio: "Award-winning wine expert with an encyclopedic palate.", rating: 4.8, image: sophiaImg },
-  { name: "James Wright", role: "General Manager", bio: "Ensuring every guest feels like family since 2005.", rating: 4.7, image: jamesImg },
-  { name: "Elena Volkov", role: "Pastry Chef", bio: "Creates edible art that delights every sense.", rating: 4.9, image: elenaImg },
+  { name: "Marco Rossi", role: "Executive Chef", bio: "Trained in Florence, 20+ years of culinary mastery.", rating: 4.9, image: marcoImg, tipLink: "https://flex-it.com/marco-rossi" },
+  { name: "Sophia Chen", role: "Head Sommelier", bio: "Award-winning wine expert with an encyclopedic palate.", rating: 4.8, image: sophiaImg, tipLink: "https://flex-it.com/sophia-chen" },
+  { name: "James Wright", role: "General Manager", bio: "Ensuring every guest feels like family since 2005.", rating: 4.7, image: jamesImg, tipLink: "https://flex-it.com/james-wright" },
+  { name: "Elena Volkov", role: "Pastry Chef", bio: "Creates edible art that delights every sense.", rating: 4.9, image: elenaImg, tipLink: "https://flex-it.com/elena-volkov" },
 ];
 
 const StaffPage = () => {
@@ -49,10 +49,12 @@ const StaffPage = () => {
                   <Star className="w-3 h-3 fill-aura-warning text-aura-warning" />
                   <span className="text-xs font-medium">{member.rating}</span>
                 </div>
-                <button className="flex items-center gap-1 text-xs text-primary font-medium">
-                  <Heart className="w-3 h-3" />
-                  Tip
-                </button>
+                {member.tipLink && (
+                  <a href={member.tipLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-xs text-primary font-medium hover:underline">
+                    <DollarSign className="w-3 h-3" />
+                    Tip
+                  </a>
+                )}
               </div>
             </div>
           </motion.div>
