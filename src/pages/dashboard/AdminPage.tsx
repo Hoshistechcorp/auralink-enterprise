@@ -195,6 +195,9 @@ const AdminPage = () => {
   const updateFAQ = (id: string, patch: Partial<FAQItem>) => setFaqs((f) => f.map((fq) => (fq.id === id ? { ...fq, ...patch } : fq)));
   const deleteFAQ = (id: string) => setFaqs((f) => f.filter((fq) => fq.id !== id));
 
+  // Socials handlers
+  const updateSocial = (id: string, patch: Partial<SocialLink>) => setSocials((s) => s.map((sl) => (sl.id === id ? { ...sl, ...patch } : sl)));
+
   // Gift cards handlers
   const [giftCards, setGiftCards] = useState<GiftCardItem[]>([
     { id: uid(), name: "Classic Dinner", amount: "50", description: "Perfect for a starter and main course", active: true },
