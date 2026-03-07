@@ -75,7 +75,7 @@ export const getEffectivePlan = (state: SubscriptionState): PlanId => {
 };
 
 /* Card access by tier */
-const sparkCards = ["Details", "Menu", "Social Links", "Reviews", "FAQs"];
+const sparkCards = ["Gift Cards", "Menu", "Social Links", "Reviews", "FAQs"];
 const maverickCards = [...sparkCards, "Freebie Game", "Staff", "Awards", "Events", "Popular Dishes"];
 const supernovaCards = [...maverickCards, "AI Concierge", "Private Dining", "Photo Gallery", "Refer a Friend", "Affiliate"];
 
