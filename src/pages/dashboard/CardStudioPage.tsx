@@ -102,7 +102,7 @@ const CardStudioPage = () => {
       </div>
 
       {previewMode ? (
-        <CardStudioPreview cards={visibleCards} />
+        <CardStudioPreview cards={visibleCards} effectivePlan={effectivePlan} />
       ) : (
         <CardStudioEditor
           cards={cards}
@@ -112,6 +112,7 @@ const CardStudioPage = () => {
           updateCard={updateCard}
           visibleCards={visibleCards}
           hiddenCards={hiddenCards}
+          effectivePlan={effectivePlan}
         />
       )}
     </DashboardLayout>

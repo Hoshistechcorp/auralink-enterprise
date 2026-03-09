@@ -342,14 +342,32 @@ const AdminPage = () => {
         {/* Tab Nav */}
         <div className="lg:w-52 shrink-0">
           <div className="flex lg:flex-col gap-1 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0">
-            {tabs.map((tab) => (
-              <button key={tab.id} onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-sm font-medium whitespace-nowrap transition-colors ${
-                  activeTab === tab.id ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted"
-                }`}>
-                <tab.icon className="w-4 h-4" />{tab.label}
-              </button>
-            ))}
+            {tabs.map((tab) => {
+              const locked = isTabLocked(tab.id);
+              const cardName = tabToCardName[tab.id];
+              const requiredPlan = cardName ? tabRequiredPlan[cardName] : null;
+              return (
+                <button key={tab.id} onClick={() => {
+                  if (locked) {
+                    toast({
+                      title: `🔒 ${tab.label} is locked`,
+                      description: `Upgrade to ${requiredPlan || "a higher plan"} to unlock this feature.`,
+                      action: <button onClick={() => navigate("/dashboard/subscription")} className="px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-medium">Upgrade</button>,
+                    });
+                    return;
+                  }
+                  setActiveTab(tab.id);
+                }}
+                  className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-sm font-medium whitespace-nowrap transition-colors ${
+                    locked ? "text-muted-foreground/50 cursor-not-allowed" :
+                    activeTab === tab.id ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted"
+                  }`}>
+                  <tab.icon className="w-4 h-4" />
+                  {tab.label}
+                  {locked && <Lock className="w-3.5 h-3.5 ml-auto text-muted-foreground/40" />}
+                </button>
+              );
+            })}
           </div>
         </div>
 
