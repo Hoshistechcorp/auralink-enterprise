@@ -62,6 +62,9 @@ const CardStudioPage = () => {
   const [editing, setEditing] = useState<string | null>(null);
   const [previewMode, setPreviewMode] = useState(false);
 
+  const sub = getSubscription();
+  const effectivePlan = getEffectivePlan(sub);
+
   const visibleCards = cards.filter((c) => c.visible);
   const hiddenCards = cards.filter((c) => !c.visible);
 
