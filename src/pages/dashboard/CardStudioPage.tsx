@@ -3,7 +3,7 @@ import { motion, Reorder } from "framer-motion";
 import {
   Camera, UtensilsCrossed, Star, Info, Wine, Sparkles, Bot, Award, Users,
   GripVertical, Eye, EyeOff, Pencil, Check, X, Save, LayoutGrid, Type,
-  ChevronRight, HelpCircle, CalendarDays, Globe, Gamepad2, Link2, Handshake,
+  ChevronRight, HelpCircle, CalendarDays, Globe, Gamepad2, Link2, Handshake, Gift, Flame,
 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/aura/DashboardLayout";
