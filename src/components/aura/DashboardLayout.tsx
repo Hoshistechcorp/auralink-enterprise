@@ -258,6 +258,7 @@ const DashboardLayout = ({ children, title, subtitle = "Bella Vista · Restauran
               </button>
             </div>
           </div>
+          <TrialBanner variant="dashboard" />
           {children}
         </div>
       </main>
