@@ -26,6 +26,7 @@ const requiredPlanForCard: Record<string, string> = {
 
 const CardStudioEditor = ({ cards, setCards, editing, setEditing, updateCard, visibleCards, hiddenCards, effectivePlan }: Props) => {
   const navigate = useNavigate();
+  return (
   <div className="grid lg:grid-cols-3 gap-6">
     {/* Card list */}
     <div className="lg:col-span-2 space-y-3">
@@ -39,17 +40,37 @@ const CardStudioEditor = ({ cards, setCards, editing, setEditing, updateCard, vi
         {visibleCards.map((card, i) => {
           const Icon = iconMap[card.icon];
           const isEditing = editing === card.id;
+          const locked = !isCardAccessible(card.title, effectivePlan);
+          const neededPlan = requiredPlanForCard[card.title];
           return (
-            <Reorder.Item key={card.id} value={card}>
+            <Reorder.Item key={card.id} value={card} dragListener={!locked}>
               <motion.div
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.03 }}
-                className={`p-4 rounded-2xl border mb-2 transition-all ${
+                className={`p-4 rounded-2xl border mb-2 transition-all relative ${
+                  locked ? "bg-muted/20 border-dashed opacity-70" :
                   isEditing ? "bg-primary/5 border-primary/30" : "bg-card hover:border-primary/20"
                 }`}
               >
-                {isEditing ? (
+                {locked ? (
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center shrink-0">
+                      <Lock className="w-4 h-4 text-muted-foreground/50" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-medium text-muted-foreground">{card.title}</div>
+                      <div className="text-xs text-muted-foreground/60">{card.subtitle}</div>
+                    </div>
+                    <button
+                      onClick={() => navigate("/dashboard/subscription")}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-primary/10 text-primary text-xs font-medium hover:bg-primary/20 transition-colors"
+                    >
+                      <Crown className="w-3.5 h-3.5" />
+                      {neededPlan || "Upgrade"}
+                    </button>
+                  </div>
+                ) : isEditing ? (
                   <div className="space-y-4">
                     <div className="grid sm:grid-cols-2 gap-3">
                       <div>
