@@ -13,6 +13,7 @@ import AuraCard from "@/components/aura/AuraCard";
 import BottomBrandBar from "@/components/aura/BottomBrandBar";
 import AuraSupermenu from "@/components/aura/AuraSupermenu";
 import { getSubscription, getEffectivePlan, isCardAccessible } from "@/lib/subscription";
+import { getBusinessContact } from "@/lib/businessContact";
 import { toast } from "@/hooks/use-toast";
 
 const actions = [
@@ -77,20 +78,52 @@ const Microsite = () => {
     }
   };
 
+  const handleCall = () => {
+    const contact = getBusinessContact();
+    const digits = contact.phone.replace(/\D/g, "");
+    if (digits) {
+      window.open(`tel:${digits}`, "_self");
+    } else {
+      toast({ title: "Call", description: "Phone number not configured yet." });
+    }
+  };
+
+  const handleMessage = () => {
+    const contact = getBusinessContact();
+    const digits = contact.smsNumber.replace(/\D/g, "");
+    if (digits) {
+      window.open(`sms:${digits}`, "_self");
+    } else {
+      toast({ title: "Message", description: "SMS number not configured yet." });
+    }
+  };
+
+  const handleDirections = () => {
+    const contact = getBusinessContact();
+    if (contact.mapsUrl) {
+      window.open(contact.mapsUrl, "_blank", "noopener,noreferrer");
+    } else if (contact.address) {
+      window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contact.address)}`, "_blank", "noopener,noreferrer");
+    } else {
+      toast({ title: "Directions", description: "Address not configured yet." });
+    }
+  };
+
   const handleCardClick = (title: string) => {
     const route = routes[title];
     if (route) navigate(route);
   };
 
   const handleAction = (label: string) => {
-    if (label === "Reservations") {
-      handleReservation();
-    } else if (label === "Details") {
-      navigate("/microsite/details");
+    switch (label) {
+      case "Call": return handleCall();
+      case "Message": return handleMessage();
+      case "Directions": return handleDirections();
+      case "Reservations": return handleReservation();
+      case "Details": return navigate("/microsite/details");
     }
   };
 
-  // Only show cards the current plan has access to
   const accessibleCards = cards.filter((card) => isCardAccessible(card.title, effectivePlan));
 
   return (
