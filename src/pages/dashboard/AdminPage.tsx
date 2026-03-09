@@ -67,10 +67,10 @@ const defaultHours: DayHours[] = [
 ];
 
 const defaultMenu: MenuItem[] = [
-  { id: uid(), name: "Truffle Risotto", description: "Arborio rice, black truffle, aged parmesan", price: "34", category: "Mains", popular: true, image: "", visibility: "public" },
-  { id: uid(), name: "Burrata Caprese", description: "Fresh burrata, heirloom tomatoes, basil oil", price: "18", category: "Starters", popular: true, image: "", visibility: "public" },
-  { id: uid(), name: "Osso Buco", description: "Braised veal shank, gremolata, saffron risotto", price: "42", category: "Mains", popular: false, image: "", visibility: "public" },
-  { id: uid(), name: "Tiramisu", description: "Classic Italian, mascarpone, espresso", price: "14", category: "Desserts", popular: true, image: "", visibility: "private" },
+  { id: uid(), name: "Truffle Risotto", description: "Arborio rice, black truffle, aged parmesan", price: "34", category: "Mains", popular: true, image: "https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=200&h=200&fit=crop", visibility: "public" },
+  { id: uid(), name: "Burrata Caprese", description: "Fresh burrata, heirloom tomatoes, basil oil", price: "18", category: "Starters", popular: true, image: "https://images.unsplash.com/photo-1608897013039-887f21d8c804?w=200&h=200&fit=crop", visibility: "public" },
+  { id: uid(), name: "Osso Buco", description: "Braised veal shank, gremolata, saffron risotto", price: "42", category: "Mains", popular: false, image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=200&h=200&fit=crop", visibility: "public" },
+  { id: uid(), name: "Tiramisu", description: "Classic Italian, mascarpone, espresso", price: "14", category: "Desserts", popular: true, image: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=200&h=200&fit=crop", visibility: "private" },
 ];
 
 const defaultStaff: StaffMember[] = [
@@ -107,9 +107,9 @@ const defaultAwards: AwardItem[] = [
 ];
 
 const defaultRooms: PrivateRoom[] = [
-  { id: uid(), name: "The Cellar", capacity: "8–12 guests", desc: "Intimate wine cellar setting with curated tasting menus", image: "" },
-  { id: uid(), name: "Grand Terrace", capacity: "20–50 guests", desc: "Open-air rooftop with panoramic city views", image: "" },
-  { id: uid(), name: "Salon Privé", capacity: "12–24 guests", desc: "Elegant private room with custom AV setup", image: "" },
+  { id: uid(), name: "The Cellar", capacity: "8–12 guests", desc: "Intimate wine cellar setting with curated tasting menus", image: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=200&h=200&fit=crop" },
+  { id: uid(), name: "Grand Terrace", capacity: "20–50 guests", desc: "Open-air rooftop with panoramic city views", image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=200&h=200&fit=crop" },
+  { id: uid(), name: "Salon Privé", capacity: "12–24 guests", desc: "Elegant private room with custom AV setup", image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=200&h=200&fit=crop" },
 ];
 
 const defaultFAQs: FAQItem[] = [
@@ -259,9 +259,30 @@ const AdminPage = () => {
   // Socials handlers
   const updateSocial = (id: string, patch: Partial<SocialLink>) => setSocials((s) => s.map((sl) => (sl.id === id ? { ...sl, ...patch } : sl)));
 
+  /* Image upload modal state */
+  const [imageModalOpen, setImageModalOpen] = useState(false);
+  const [imageModalUrl, setImageModalUrl] = useState("");
+  const [imageModalCallback, setImageModalCallback] = useState<((url: string) => void) | null>(null);
+
+  const openImageModal = (cb: (url: string) => void) => {
+    setImageModalUrl("");
+    setImageModalCallback(() => cb);
+    setImageModalOpen(true);
+  };
+
+  const confirmImageModal = () => {
+    if (imageModalUrl && imageModalCallback) imageModalCallback(imageModalUrl);
+    setImageModalOpen(false);
+    setImageModalUrl("");
+    setImageModalCallback(null);
+  };
+
   /* Image placeholder component */
   const ImageUploadBox = ({ image, onChange, label = "Add Image" }: { image: string; onChange: (v: string) => void; label?: string }) => (
-    <div className="relative w-20 h-20 rounded-xl bg-muted/50 border-2 border-dashed border-muted-foreground/20 flex flex-col items-center justify-center cursor-pointer hover:border-primary/40 hover:bg-primary/5 transition-all shrink-0 overflow-hidden">
+    <div
+      onClick={(e) => { if (!image) { e.stopPropagation(); openImageModal(onChange); } }}
+      className="relative w-20 h-20 rounded-xl bg-muted/50 border-2 border-dashed border-muted-foreground/20 flex flex-col items-center justify-center cursor-pointer hover:border-primary/40 hover:bg-primary/5 transition-all shrink-0 overflow-hidden"
+    >
       {image ? (
         <>
           <img src={image} alt="" className="w-full h-full object-cover" />
@@ -273,11 +294,6 @@ const AdminPage = () => {
           <span className="text-[8px] text-muted-foreground mt-0.5">{label}</span>
         </>
       )}
-      {!image && <input type="text" className="absolute inset-0 opacity-0 cursor-pointer" title="Paste image URL" onFocus={(e) => {
-        const url = prompt("Enter image URL:");
-        if (url) onChange(url);
-        e.target.blur();
-      }} readOnly />}
     </div>
   );
 
@@ -838,6 +854,29 @@ const AdminPage = () => {
           <DialogFooter>
             <button onClick={() => setFaqModalOpen(false)} className="px-4 py-2 rounded-xl text-sm text-muted-foreground hover:bg-muted transition-colors">Cancel</button>
             <button onClick={addFAQItem} disabled={!newFaq.question} className={btnPrimary}><Plus className="w-4 h-4" /> Add FAQ</button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Image URL Modal */}
+      <Dialog open={imageModalOpen} onOpenChange={setImageModalOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Add Image</DialogTitle>
+            <DialogDescription>Paste an image URL below.</DialogDescription>
+          </DialogHeader>
+          <div className="py-2">
+            <label className={labelCls}>Image URL</label>
+            <input value={imageModalUrl} onChange={(e) => setImageModalUrl(e.target.value)} placeholder="https://example.com/image.jpg" className={inputCls} />
+            {imageModalUrl && (
+              <div className="mt-3 rounded-xl overflow-hidden border">
+                <img src={imageModalUrl} alt="Preview" className="w-full h-32 object-cover" onError={(e) => (e.currentTarget.style.display = "none")} />
+              </div>
+            )}
+          </div>
+          <DialogFooter>
+            <button onClick={() => setImageModalOpen(false)} className="px-4 py-2 rounded-xl text-sm text-muted-foreground hover:bg-muted transition-colors">Cancel</button>
+            <button onClick={confirmImageModal} disabled={!imageModalUrl} className={btnPrimary}><Check className="w-4 h-4" /> Add Image</button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

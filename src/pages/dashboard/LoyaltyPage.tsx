@@ -6,6 +6,19 @@ import {
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import DashboardLayout from "@/components/aura/DashboardLayout";
+import {
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription,
+} from "@/components/ui/dialog";
+
+const rewardIcons = [
+  { icon: Cake, label: "Cake" },
+  { icon: UtensilsCrossed, label: "Utensils" },
+  { icon: Wine, label: "Wine" },
+  { icon: Star, label: "Star" },
+  { icon: Sparkles, label: "Sparkles" },
+  { icon: Gift, label: "Gift" },
+  { icon: Trophy, label: "Trophy" },
+];
 
 const tiers = [
   {
@@ -96,10 +109,21 @@ const tierColor = (tier: string) => {
   }
 };
 
+const inputCls = "w-full px-4 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all";
+const labelCls = "text-xs font-medium text-muted-foreground mb-1.5 block";
+
 const LoyaltyPage = () => {
   const [selectedTier, setSelectedTier] = useState("gold");
+  const [rewardModalOpen, setRewardModalOpen] = useState(false);
+  const [newReward, setNewReward] = useState({ label: "", desc: "", iconIdx: 0 });
 
   const activeTier = tiers.find((t) => t.id === selectedTier)!;
+
+  const addReward = () => {
+    // In a real app this would persist; for now just toast
+    setRewardModalOpen(false);
+    setNewReward({ label: "", desc: "", iconIdx: 0 });
+  };
 
   return (
     <DashboardLayout title="Loyalty & Rewards" subtitle="Manage your loyalty program tiers">
@@ -178,18 +202,21 @@ const LoyaltyPage = () => {
                     transition={{ delay: i * 0.06 }}
                     className="flex items-center gap-3 p-3 rounded-xl bg-muted/50"
                   >
-                    <div className={`w-9 h-9 rounded-xl ${activeTier.bgColor} flex items-center justify-center`}>
+                    <div className={`w-9 h-9 rounded-xl ${activeTier.bgColor} flex items-center justify-center shrink-0`}>
                       <reward.icon className={`w-4 h-4 ${activeTier.textColor}`} />
                     </div>
-                    <div>
-                      <div className="text-sm font-medium">{reward.label}</div>
-                      <div className="text-[10px] text-muted-foreground">{reward.desc}</div>
+                    <div className="min-w-0">
+                      <div className="text-sm font-medium truncate">{reward.label}</div>
+                      <div className="text-[10px] text-muted-foreground truncate">{reward.desc}</div>
                     </div>
                   </motion.div>
                 ))}
               </div>
 
-              <button className="mt-4 flex items-center gap-2 px-4 py-2 rounded-xl bg-muted text-sm font-medium hover:bg-primary/10 hover:text-primary transition-colors">
+              <button
+                onClick={() => setRewardModalOpen(true)}
+                className="mt-4 w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"
+              >
                 <Plus className="w-4 h-4" />
                 Add Reward
               </button>
@@ -290,6 +317,49 @@ const LoyaltyPage = () => {
           </div>
         </div>
       </div>
+
+      {/* Add Reward Modal */}
+      <Dialog open={rewardModalOpen} onOpenChange={setRewardModalOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Add Reward to {activeTier.name} Tier</DialogTitle>
+            <DialogDescription>Create a new reward for {activeTier.name} members.</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-2">
+            <div>
+              <label className={labelCls}>Reward Name</label>
+              <input value={newReward.label} onChange={(e) => setNewReward({ ...newReward, label: e.target.value })} placeholder="e.g. Free Dessert" className={inputCls} maxLength={60} />
+            </div>
+            <div>
+              <label className={labelCls}>Description</label>
+              <input value={newReward.desc} onChange={(e) => setNewReward({ ...newReward, desc: e.target.value })} placeholder="e.g. On your birthday month" className={inputCls} maxLength={100} />
+            </div>
+            <div>
+              <label className={labelCls}>Icon</label>
+              <div className="flex gap-2 flex-wrap">
+                {rewardIcons.map((ri, idx) => (
+                  <button
+                    key={ri.label}
+                    type="button"
+                    onClick={() => setNewReward({ ...newReward, iconIdx: idx })}
+                    className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
+                      newReward.iconIdx === idx
+                        ? "bg-primary text-primary-foreground shadow-sm"
+                        : "bg-muted/50 border hover:bg-muted"
+                    }`}
+                  >
+                    <ri.icon className="w-4 h-4" />
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+          <DialogFooter>
+            <button onClick={() => setRewardModalOpen(false)} className="px-4 py-2 rounded-xl text-sm text-muted-foreground hover:bg-muted transition-colors">Cancel</button>
+            <button onClick={addReward} disabled={!newReward.label} className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity"><Plus className="w-4 h-4" /> Add Reward</button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </DashboardLayout>
   );
 };
