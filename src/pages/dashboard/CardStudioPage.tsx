@@ -9,6 +9,7 @@ import { toast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/aura/DashboardLayout";
 import CardStudioEditor from "@/components/aura/CardStudioEditor";
 import CardStudioPreview from "@/components/aura/CardStudioPreview";
+import { getSubscription, getEffectivePlan, isCardAccessible } from "@/lib/subscription";
 
 /* ── Icon registry ─────────────────────────────────── */
 export const iconMap = {
