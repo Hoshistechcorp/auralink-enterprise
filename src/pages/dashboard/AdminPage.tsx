@@ -259,9 +259,30 @@ const AdminPage = () => {
   // Socials handlers
   const updateSocial = (id: string, patch: Partial<SocialLink>) => setSocials((s) => s.map((sl) => (sl.id === id ? { ...sl, ...patch } : sl)));
 
+  /* Image upload modal state */
+  const [imageModalOpen, setImageModalOpen] = useState(false);
+  const [imageModalUrl, setImageModalUrl] = useState("");
+  const [imageModalCallback, setImageModalCallback] = useState<((url: string) => void) | null>(null);
+
+  const openImageModal = (cb: (url: string) => void) => {
+    setImageModalUrl("");
+    setImageModalCallback(() => cb);
+    setImageModalOpen(true);
+  };
+
+  const confirmImageModal = () => {
+    if (imageModalUrl && imageModalCallback) imageModalCallback(imageModalUrl);
+    setImageModalOpen(false);
+    setImageModalUrl("");
+    setImageModalCallback(null);
+  };
+
   /* Image placeholder component */
   const ImageUploadBox = ({ image, onChange, label = "Add Image" }: { image: string; onChange: (v: string) => void; label?: string }) => (
-    <div className="relative w-20 h-20 rounded-xl bg-muted/50 border-2 border-dashed border-muted-foreground/20 flex flex-col items-center justify-center cursor-pointer hover:border-primary/40 hover:bg-primary/5 transition-all shrink-0 overflow-hidden">
+    <div
+      onClick={(e) => { if (!image) { e.stopPropagation(); openImageModal(onChange); } }}
+      className="relative w-20 h-20 rounded-xl bg-muted/50 border-2 border-dashed border-muted-foreground/20 flex flex-col items-center justify-center cursor-pointer hover:border-primary/40 hover:bg-primary/5 transition-all shrink-0 overflow-hidden"
+    >
       {image ? (
         <>
           <img src={image} alt="" className="w-full h-full object-cover" />
@@ -273,11 +294,6 @@ const AdminPage = () => {
           <span className="text-[8px] text-muted-foreground mt-0.5">{label}</span>
         </>
       )}
-      {!image && <input type="text" className="absolute inset-0 opacity-0 cursor-pointer" title="Paste image URL" onFocus={(e) => {
-        const url = prompt("Enter image URL:");
-        if (url) onChange(url);
-        e.target.blur();
-      }} readOnly />}
     </div>
   );
 
