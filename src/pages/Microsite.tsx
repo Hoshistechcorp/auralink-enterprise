@@ -4,7 +4,7 @@ import {
   Phone, MessageCircle, Navigation, CalendarCheck, Info,
   Camera, UtensilsCrossed, Star, Wine, Flame, Gift,
   Bot, Award, Users, HelpCircle, CalendarDays, Globe,
-  Gamepad2, Link2, Handshake, Lock, Sparkles, X,
+  Gamepad2, Link2, Handshake,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import MicrositeHeader from "@/components/aura/MicrositeHeader";
