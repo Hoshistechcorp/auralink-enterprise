@@ -1,8 +1,10 @@
 import { motion, Reorder } from "framer-motion";
 import {
-  GripVertical, Eye, EyeOff, Pencil, Check, X, Type, ChevronRight,
+  GripVertical, Eye, EyeOff, Pencil, Check, X, Type, ChevronRight, Lock, Crown,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { iconMap, iconOptions, colorPresets, type MicrositeCard } from "@/pages/dashboard/CardStudioPage";
+import { isCardAccessible, type PlanId } from "@/lib/subscription";
 
 interface Props {
   cards: MicrositeCard[];
@@ -12,9 +14,18 @@ interface Props {
   updateCard: (id: string, patch: Partial<MicrositeCard>) => void;
   visibleCards: MicrositeCard[];
   hiddenCards: MicrositeCard[];
+  effectivePlan: PlanId;
 }
 
-const CardStudioEditor = ({ cards, setCards, editing, setEditing, updateCard, visibleCards, hiddenCards }: Props) => (
+const requiredPlanForCard: Record<string, string> = {
+  "Photo Gallery": "Supernova", "AI Concierge": "Supernova", "Private Dining": "Supernova",
+  "Refer a Friend": "Supernova", "Affiliate": "Supernova",
+  "Freebie Game": "Maverick", "Staff": "Maverick", "Awards": "Maverick",
+  "Events": "Maverick", "Popular Dishes": "Maverick",
+};
+
+const CardStudioEditor = ({ cards, setCards, editing, setEditing, updateCard, visibleCards, hiddenCards, effectivePlan }: Props) => {
+  const navigate = useNavigate();
   <div className="grid lg:grid-cols-3 gap-6">
     {/* Card list */}
     <div className="lg:col-span-2 space-y-3">
