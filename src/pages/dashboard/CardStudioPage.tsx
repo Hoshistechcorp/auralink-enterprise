@@ -14,7 +14,7 @@ import { getSubscription, getEffectivePlan, isCardAccessible } from "@/lib/subsc
 /* ── Icon registry ─────────────────────────────────── */
 export const iconMap = {
   Camera, UtensilsCrossed, Star, Info, Wine, Sparkles, Bot, Award, Users,
-  HelpCircle, CalendarDays, Globe, Gamepad2, Link2, Handshake,
+  HelpCircle, CalendarDays, Globe, Gamepad2, Link2, Handshake, Gift, Flame,
 } as const;
 export type IconName = keyof typeof iconMap;
 export const iconOptions = Object.keys(iconMap) as IconName[];
