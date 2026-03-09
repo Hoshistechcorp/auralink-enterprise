@@ -178,6 +178,8 @@ const SettingsPage = () => {
     sub.reservationUrl = reservationUrl;
     sub.reservationProvider = reservationProvider;
     saveSubscription(sub);
+    // Save business contact
+    saveBusinessContact(contact);
     toast({ title: "Settings saved", description: "Your changes have been applied successfully." });
   };
 
