@@ -67,10 +67,10 @@ const defaultHours: DayHours[] = [
 ];
 
 const defaultMenu: MenuItem[] = [
-  { id: uid(), name: "Truffle Risotto", description: "Arborio rice, black truffle, aged parmesan", price: "34", category: "Mains", popular: true, image: "", visibility: "public" },
-  { id: uid(), name: "Burrata Caprese", description: "Fresh burrata, heirloom tomatoes, basil oil", price: "18", category: "Starters", popular: true, image: "", visibility: "public" },
-  { id: uid(), name: "Osso Buco", description: "Braised veal shank, gremolata, saffron risotto", price: "42", category: "Mains", popular: false, image: "", visibility: "public" },
-  { id: uid(), name: "Tiramisu", description: "Classic Italian, mascarpone, espresso", price: "14", category: "Desserts", popular: true, image: "", visibility: "private" },
+  { id: uid(), name: "Truffle Risotto", description: "Arborio rice, black truffle, aged parmesan", price: "34", category: "Mains", popular: true, image: "https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=200&h=200&fit=crop", visibility: "public" },
+  { id: uid(), name: "Burrata Caprese", description: "Fresh burrata, heirloom tomatoes, basil oil", price: "18", category: "Starters", popular: true, image: "https://images.unsplash.com/photo-1608897013039-887f21d8c804?w=200&h=200&fit=crop", visibility: "public" },
+  { id: uid(), name: "Osso Buco", description: "Braised veal shank, gremolata, saffron risotto", price: "42", category: "Mains", popular: false, image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=200&h=200&fit=crop", visibility: "public" },
+  { id: uid(), name: "Tiramisu", description: "Classic Italian, mascarpone, espresso", price: "14", category: "Desserts", popular: true, image: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=200&h=200&fit=crop", visibility: "private" },
 ];
 
 const defaultStaff: StaffMember[] = [
