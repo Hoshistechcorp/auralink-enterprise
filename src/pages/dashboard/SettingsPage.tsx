@@ -4,13 +4,14 @@ import {
   User, Bell, Palette, Globe, Lock, Mail, Phone, MapPin,
   Camera, Save, Check, BellRing, BellOff, Monitor, Moon, Sun,
   Paintbrush, Droplets, RotateCcw, Pipette, CalendarCheck,
-  Building2, Plus, Trash2, Users2,
+  Building2, Plus, Trash2, Users2, MessageCircle, Navigation,
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/aura/DashboardLayout";
 import { useDarkMode } from "@/hooks/use-dark-mode";
 import { getSubscription, saveSubscription } from "@/lib/subscription";
+import { getBusinessContact, saveBusinessContact, type BusinessContact } from "@/lib/businessContact";
 
 const tabs = [
   { id: "profile", label: "Profile", icon: User },
