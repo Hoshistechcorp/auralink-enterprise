@@ -141,10 +141,10 @@ const AnalyticsPage = () => {
                   </Pie>
                 </PieChart>
               </ResponsiveContainer>
-              <div className="flex justify-center gap-4 mt-2">
+              <div className="flex flex-col items-center gap-2 mt-2">
                 {deviceData.map((d) => (
-                  <div key={d.name} className="flex items-center gap-1.5 text-xs">
-                    <div className="w-2.5 h-2.5 rounded-full" style={{ background: d.color }} />
+                  <div key={d.name} className="flex items-center gap-1.5 text-xs whitespace-nowrap">
+                    <div className="w-2.5 h-2.5 rounded-full shrink-0" style={{ background: d.color }} />
                     <span className="text-muted-foreground">{d.name}</span>
                     <span className="font-medium">{d.value}%</span>
                   </div>

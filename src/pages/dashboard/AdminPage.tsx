@@ -107,9 +107,9 @@ const defaultAwards: AwardItem[] = [
 ];
 
 const defaultRooms: PrivateRoom[] = [
-  { id: uid(), name: "The Cellar", capacity: "8–12 guests", desc: "Intimate wine cellar setting with curated tasting menus", image: "" },
-  { id: uid(), name: "Grand Terrace", capacity: "20–50 guests", desc: "Open-air rooftop with panoramic city views", image: "" },
-  { id: uid(), name: "Salon Privé", capacity: "12–24 guests", desc: "Elegant private room with custom AV setup", image: "" },
+  { id: uid(), name: "The Cellar", capacity: "8–12 guests", desc: "Intimate wine cellar setting with curated tasting menus", image: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?w=200&h=200&fit=crop" },
+  { id: uid(), name: "Grand Terrace", capacity: "20–50 guests", desc: "Open-air rooftop with panoramic city views", image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=200&h=200&fit=crop" },
+  { id: uid(), name: "Salon Privé", capacity: "12–24 guests", desc: "Elegant private room with custom AV setup", image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=200&h=200&fit=crop" },
 ];
 
 const defaultFAQs: FAQItem[] = [
