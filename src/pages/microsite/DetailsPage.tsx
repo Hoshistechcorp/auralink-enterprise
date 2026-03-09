@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Clock, Phone, Globe, MapPin, Wifi, CreditCard, Car, Accessibility } from "lucide-react";
+import { ArrowLeft, Clock, Phone, Globe, MapPin, Wifi, CreditCard, Car, Accessibility, Mail, MessageCircle, Navigation } from "lucide-react";
 import { motion } from "framer-motion";
+import { getBusinessContact } from "@/lib/businessContact";
 
 const hours = [
   { day: "Monday", time: "11:30 AM – 10:00 PM" },
@@ -22,6 +23,11 @@ const amenities = [
 const DetailsPage = () => {
   const navigate = useNavigate();
   const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
+  const contact = getBusinessContact();
+
+  const phoneDigits = contact.phone.replace(/\D/g, "");
+  const smsDigits = contact.smsNumber.replace(/\D/g, "");
+  const mapsLink = contact.mapsUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contact.address)}`;
 
   return (
     <div className="min-h-screen bg-background max-w-[430px] mx-auto">
@@ -37,18 +43,35 @@ const DetailsPage = () => {
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
           <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">Contact</h2>
           <div className="space-y-2">
-            <div className="flex items-center gap-3 p-3 rounded-xl bg-card border">
+            <a href={`tel:${phoneDigits}`} className="flex items-center gap-3 p-3 rounded-xl bg-card border hover:bg-accent/50 transition-colors">
               <Phone className="w-4 h-4 text-primary" />
-              <span className="text-sm">(212) 555-0198</span>
-            </div>
-            <div className="flex items-center gap-3 p-3 rounded-xl bg-card border">
-              <Globe className="w-4 h-4 text-primary" />
-              <span className="text-sm">www.bellavistanyc.com</span>
-            </div>
-            <div className="flex items-center gap-3 p-3 rounded-xl bg-card border">
+              <span className="text-sm flex-1">{contact.phone}</span>
+              <span className="text-xs text-primary font-medium">Call</span>
+            </a>
+            <a href={`sms:${smsDigits}`} className="flex items-center gap-3 p-3 rounded-xl bg-card border hover:bg-accent/50 transition-colors">
+              <MessageCircle className="w-4 h-4 text-primary" />
+              <span className="text-sm flex-1">{contact.smsNumber}</span>
+              <span className="text-xs text-primary font-medium">Text</span>
+            </a>
+            {contact.email && (
+              <a href={`mailto:${contact.email}`} className="flex items-center gap-3 p-3 rounded-xl bg-card border hover:bg-accent/50 transition-colors">
+                <Mail className="w-4 h-4 text-primary" />
+                <span className="text-sm flex-1">{contact.email}</span>
+                <span className="text-xs text-primary font-medium">Email</span>
+              </a>
+            )}
+            {contact.website && (
+              <a href={contact.website.startsWith("http") ? contact.website : `https://${contact.website}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-xl bg-card border hover:bg-accent/50 transition-colors">
+                <Globe className="w-4 h-4 text-primary" />
+                <span className="text-sm flex-1">{contact.website}</span>
+                <span className="text-xs text-primary font-medium">Visit</span>
+              </a>
+            )}
+            <a href={mapsLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 rounded-xl bg-card border hover:bg-accent/50 transition-colors">
               <MapPin className="w-4 h-4 text-primary" />
-              <span className="text-sm">123 Grand Ave, New York, NY 10001</span>
-            </div>
+              <span className="text-sm flex-1">{contact.address}</span>
+              <Navigation className="w-3.5 h-3.5 text-primary" />
+            </a>
           </div>
         </motion.div>
 
