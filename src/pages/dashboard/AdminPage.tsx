@@ -144,8 +144,44 @@ const defaultSocials: SocialLink[] = [
 const menuCategories = ["Starters", "Mains", "Pasta", "Desserts", "Drinks"];
 const eventTags = ["New", "Sold Out", "Few Spots Left", "Family", "Interactive", "Seasonal"];
 
+/* ── Tab → card name mapping for subscription gating ── */
+const tabToCardName: Record<Tab, string | null> = {
+  business: null, // always available
+  hours: null,    // always available
+  menu: "Menu",
+  gallery: "Photo Gallery",
+  staff: "Staff",
+  events: "Events",
+  awards: "Awards",
+  privateDining: "Private Dining",
+  faqs: "FAQs",
+  socialLinks: "Social Links",
+};
+
+const tabRequiredPlan: Record<string, string> = {
+  "Photo Gallery": "Supernova",
+  "Staff": "Maverick",
+  "Events": "Maverick",
+  "Awards": "Maverick",
+  "Private Dining": "Supernova",
+  "Freebie Game": "Maverick",
+  "Popular Dishes": "Maverick",
+  "AI Concierge": "Supernova",
+  "Refer a Friend": "Supernova",
+  "Affiliate": "Supernova",
+};
+
 const AdminPage = () => {
   const [activeTab, setActiveTab] = useState<Tab>("business");
+  const navigate = useNavigate();
+  const sub = getSubscription();
+  const effectivePlan = getEffectivePlan(sub);
+
+  const isTabLocked = (tabId: Tab): boolean => {
+    const cardName = tabToCardName[tabId];
+    if (!cardName) return false;
+    return !isCardAccessible(cardName, effectivePlan);
+  };
 
   /* Business info */
   const [business, setBusiness] = useState({
