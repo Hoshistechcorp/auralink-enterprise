@@ -5,7 +5,7 @@ import {
   UtensilsCrossed, Users, Camera, FileText, MapPin, Phone, Mail,
   Globe, Star, ChevronDown, Check, X, CalendarDays, Award, Wine,
   HelpCircle, Instagram, Facebook, Twitter, Youtube, MessageCircle,
-  Link2, Sparkles, Eye, EyeOff, Ticket, DollarSign,
+  Link2, Sparkles, Eye, EyeOff, Ticket, DollarSign, Lock, Crown,
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/hooks/use-toast";
@@ -13,6 +13,8 @@ import DashboardLayout from "@/components/aura/DashboardLayout";
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription,
 } from "@/components/ui/dialog";
+import { useNavigate } from "react-router-dom";
+import { getSubscription, getEffectivePlan, isCardAccessible, type PlanId } from "@/lib/subscription";
 
 /* ── Tabs ────────────────────────────────────────────── */
 const tabs = [
@@ -142,8 +144,44 @@ const defaultSocials: SocialLink[] = [
 const menuCategories = ["Starters", "Mains", "Pasta", "Desserts", "Drinks"];
 const eventTags = ["New", "Sold Out", "Few Spots Left", "Family", "Interactive", "Seasonal"];
 
+/* ── Tab → card name mapping for subscription gating ── */
+const tabToCardName: Record<Tab, string | null> = {
+  business: null, // always available
+  hours: null,    // always available
+  menu: "Menu",
+  gallery: "Photo Gallery",
+  staff: "Staff",
+  events: "Events",
+  awards: "Awards",
+  privateDining: "Private Dining",
+  faqs: "FAQs",
+  socialLinks: "Social Links",
+};
+
+const tabRequiredPlan: Record<string, string> = {
+  "Photo Gallery": "Supernova",
+  "Staff": "Maverick",
+  "Events": "Maverick",
+  "Awards": "Maverick",
+  "Private Dining": "Supernova",
+  "Freebie Game": "Maverick",
+  "Popular Dishes": "Maverick",
+  "AI Concierge": "Supernova",
+  "Refer a Friend": "Supernova",
+  "Affiliate": "Supernova",
+};
+
 const AdminPage = () => {
   const [activeTab, setActiveTab] = useState<Tab>("business");
+  const navigate = useNavigate();
+  const sub = getSubscription();
+  const effectivePlan = getEffectivePlan(sub);
+
+  const isTabLocked = (tabId: Tab): boolean => {
+    const cardName = tabToCardName[tabId];
+    if (!cardName) return false;
+    return !isCardAccessible(cardName, effectivePlan);
+  };
 
   /* Business info */
   const [business, setBusiness] = useState({
@@ -304,14 +342,32 @@ const AdminPage = () => {
         {/* Tab Nav */}
         <div className="lg:w-52 shrink-0">
           <div className="flex lg:flex-col gap-1 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0">
-            {tabs.map((tab) => (
-              <button key={tab.id} onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-sm font-medium whitespace-nowrap transition-colors ${
-                  activeTab === tab.id ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted"
-                }`}>
-                <tab.icon className="w-4 h-4" />{tab.label}
-              </button>
-            ))}
+            {tabs.map((tab) => {
+              const locked = isTabLocked(tab.id);
+              const cardName = tabToCardName[tab.id];
+              const requiredPlan = cardName ? tabRequiredPlan[cardName] : null;
+              return (
+                <button key={tab.id} onClick={() => {
+                  if (locked) {
+                    toast({
+                      title: `🔒 ${tab.label} is locked`,
+                      description: `Upgrade to ${requiredPlan || "a higher plan"} to unlock this feature.`,
+                      action: <button onClick={() => navigate("/dashboard/subscription")} className="px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-medium">Upgrade</button>,
+                    });
+                    return;
+                  }
+                  setActiveTab(tab.id);
+                }}
+                  className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl text-sm font-medium whitespace-nowrap transition-colors ${
+                    locked ? "text-muted-foreground/50 cursor-not-allowed" :
+                    activeTab === tab.id ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted"
+                  }`}>
+                  <tab.icon className="w-4 h-4" />
+                  {tab.label}
+                  {locked && <Lock className="w-3.5 h-3.5 ml-auto text-muted-foreground/40" />}
+                </button>
+              );
+            })}
           </div>
         </div>
 

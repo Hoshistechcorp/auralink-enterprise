@@ -9,6 +9,7 @@ import { toast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/aura/DashboardLayout";
 import CardStudioEditor from "@/components/aura/CardStudioEditor";
 import CardStudioPreview from "@/components/aura/CardStudioPreview";
+import { getSubscription, getEffectivePlan, isCardAccessible } from "@/lib/subscription";
 
 /* ── Icon registry ─────────────────────────────────── */
 export const iconMap = {
@@ -61,6 +62,9 @@ const CardStudioPage = () => {
   const [editing, setEditing] = useState<string | null>(null);
   const [previewMode, setPreviewMode] = useState(false);
 
+  const sub = getSubscription();
+  const effectivePlan = getEffectivePlan(sub);
+
   const visibleCards = cards.filter((c) => c.visible);
   const hiddenCards = cards.filter((c) => !c.visible);
 
@@ -98,7 +102,7 @@ const CardStudioPage = () => {
       </div>
 
       {previewMode ? (
-        <CardStudioPreview cards={visibleCards} />
+        <CardStudioPreview cards={visibleCards} effectivePlan={effectivePlan} />
       ) : (
         <CardStudioEditor
           cards={cards}
@@ -108,6 +112,7 @@ const CardStudioPage = () => {
           updateCard={updateCard}
           visibleCards={visibleCards}
           hiddenCards={hiddenCards}
+          effectivePlan={effectivePlan}
         />
       )}
     </DashboardLayout>

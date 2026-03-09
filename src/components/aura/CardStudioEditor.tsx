@@ -1,8 +1,10 @@
 import { motion, Reorder } from "framer-motion";
 import {
-  GripVertical, Eye, EyeOff, Pencil, Check, X, Type, ChevronRight,
+  GripVertical, Eye, EyeOff, Pencil, Check, X, Type, ChevronRight, Lock, Crown,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { iconMap, iconOptions, colorPresets, type MicrositeCard } from "@/pages/dashboard/CardStudioPage";
+import { isCardAccessible, type PlanId } from "@/lib/subscription";
 
 interface Props {
   cards: MicrositeCard[];
@@ -12,9 +14,19 @@ interface Props {
   updateCard: (id: string, patch: Partial<MicrositeCard>) => void;
   visibleCards: MicrositeCard[];
   hiddenCards: MicrositeCard[];
+  effectivePlan: PlanId;
 }
 
-const CardStudioEditor = ({ cards, setCards, editing, setEditing, updateCard, visibleCards, hiddenCards }: Props) => (
+const requiredPlanForCard: Record<string, string> = {
+  "Photo Gallery": "Supernova", "AI Concierge": "Supernova", "Private Dining": "Supernova",
+  "Refer a Friend": "Supernova", "Affiliate": "Supernova",
+  "Freebie Game": "Maverick", "Staff": "Maverick", "Awards": "Maverick",
+  "Events": "Maverick", "Popular Dishes": "Maverick",
+};
+
+const CardStudioEditor = ({ cards, setCards, editing, setEditing, updateCard, visibleCards, hiddenCards, effectivePlan }: Props) => {
+  const navigate = useNavigate();
+  return (
   <div className="grid lg:grid-cols-3 gap-6">
     {/* Card list */}
     <div className="lg:col-span-2 space-y-3">
@@ -28,17 +40,37 @@ const CardStudioEditor = ({ cards, setCards, editing, setEditing, updateCard, vi
         {visibleCards.map((card, i) => {
           const Icon = iconMap[card.icon];
           const isEditing = editing === card.id;
+          const locked = !isCardAccessible(card.title, effectivePlan);
+          const neededPlan = requiredPlanForCard[card.title];
           return (
-            <Reorder.Item key={card.id} value={card}>
+            <Reorder.Item key={card.id} value={card} dragListener={!locked}>
               <motion.div
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.03 }}
-                className={`p-4 rounded-2xl border mb-2 transition-all ${
+                className={`p-4 rounded-2xl border mb-2 transition-all relative ${
+                  locked ? "bg-muted/20 border-dashed opacity-70" :
                   isEditing ? "bg-primary/5 border-primary/30" : "bg-card hover:border-primary/20"
                 }`}
               >
-                {isEditing ? (
+                {locked ? (
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center shrink-0">
+                      <Lock className="w-4 h-4 text-muted-foreground/50" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-medium text-muted-foreground">{card.title}</div>
+                      <div className="text-xs text-muted-foreground/60">{card.subtitle}</div>
+                    </div>
+                    <button
+                      onClick={() => navigate("/dashboard/subscription")}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-primary/10 text-primary text-xs font-medium hover:bg-primary/20 transition-colors"
+                    >
+                      <Crown className="w-3.5 h-3.5" />
+                      {neededPlan || "Upgrade"}
+                    </button>
+                  </div>
+                ) : isEditing ? (
                   <div className="space-y-4">
                     <div className="grid sm:grid-cols-2 gap-3">
                       <div>
@@ -142,10 +174,11 @@ const CardStudioEditor = ({ cards, setCards, editing, setEditing, updateCard, vi
         <div className="grid grid-cols-3 gap-2">
           {visibleCards.map((card) => {
             const Icon = iconMap[card.icon];
+            const locked = !isCardAccessible(card.title, effectivePlan);
             return (
-              <motion.div key={card.id} layout className="flex flex-col items-center justify-center p-2.5 rounded-xl bg-muted/30 border aspect-square gap-1">
-                <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${card.color}15` }}>
-                  <Icon className="w-3.5 h-3.5" style={{ color: card.color }} />
+              <motion.div key={card.id} layout className={`flex flex-col items-center justify-center p-2.5 rounded-xl bg-muted/30 border aspect-square gap-1 ${locked ? "opacity-40" : ""}`}>
+                <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ backgroundColor: locked ? undefined : `${card.color}15` }}>
+                  {locked ? <Lock className="w-3.5 h-3.5 text-muted-foreground/50" /> : <Icon className="w-3.5 h-3.5" style={{ color: card.color }} />}
                 </div>
                 <span className="text-[9px] font-medium text-center leading-tight">{card.title}</span>
               </motion.div>
@@ -160,10 +193,12 @@ const CardStudioEditor = ({ cards, setCards, editing, setEditing, updateCard, vi
           <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> Hide cards to remove from the public page</li>
           <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> Display up to 15 cards on your microsite</li>
           <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> Freebie Game drives daily visits</li>
+          <li className="flex gap-2"><Crown className="w-3 h-3 text-primary mt-0.5 shrink-0" /> Upgrade your plan to unlock more cards</li>
         </ul>
       </div>
     </div>
   </div>
-);
+  );
+};
 
 export default CardStudioEditor;
