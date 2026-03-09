@@ -3,7 +3,7 @@ import { motion, Reorder } from "framer-motion";
 import {
   Camera, UtensilsCrossed, Star, Info, Wine, Sparkles, Bot, Award, Users,
   GripVertical, Eye, EyeOff, Pencil, Check, X, Save, LayoutGrid, Type,
-  ChevronRight, HelpCircle, CalendarDays, Globe, Gamepad2, Link2, Handshake,
+  ChevronRight, HelpCircle, CalendarDays, Globe, Gamepad2, Link2, Handshake, Gift, Flame,
 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/aura/DashboardLayout";
@@ -14,7 +14,7 @@ import { getSubscription, getEffectivePlan, isCardAccessible } from "@/lib/subsc
 /* ── Icon registry ─────────────────────────────────── */
 export const iconMap = {
   Camera, UtensilsCrossed, Star, Info, Wine, Sparkles, Bot, Award, Users,
-  HelpCircle, CalendarDays, Globe, Gamepad2, Link2, Handshake,
+  HelpCircle, CalendarDays, Globe, Gamepad2, Link2, Handshake, Gift, Flame,
 } as const;
 export type IconName = keyof typeof iconMap;
 export const iconOptions = Object.keys(iconMap) as IconName[];
@@ -32,21 +32,21 @@ export interface MicrositeCard {
 
 /* ── All 15 cards ──────────────────────────────────── */
 const defaultCards: MicrositeCard[] = [
-  { id: "1",  title: "Photo Gallery",  subtitle: "248 photos",   icon: "Camera",          path: "/microsite/gallery",        visible: true,  color: "hsl(var(--primary))" },
-  { id: "2",  title: "Menu",           subtitle: "Full menu",    icon: "UtensilsCrossed", path: "/microsite/menu",           visible: true,  color: "hsl(var(--primary))" },
-  { id: "3",  title: "Reviews",        subtitle: "4.8 avg",      icon: "Star",            path: "/microsite/reviews",        visible: true,  color: "hsl(var(--primary))" },
-  { id: "4",  title: "Details",        subtitle: "Hours & info", icon: "Info",            path: "/microsite/details",        visible: true,  color: "hsl(var(--primary))" },
-  { id: "5",  title: "Private Dining", subtitle: "Book now",     icon: "Wine",            path: "/microsite/private-dining", visible: true,  color: "hsl(var(--primary))" },
-  { id: "6",  title: "Popular Dishes", subtitle: "Top 12",       icon: "Sparkles",        path: "/microsite/popular-dishes", visible: true,  color: "hsl(var(--aura-warning))" },
-  { id: "7",  title: "AI Concierge",   subtitle: "Ask anything", icon: "Bot",             path: "/microsite/concierge",      visible: true,  color: "hsl(var(--aura-info))" },
-  { id: "8",  title: "Awards",         subtitle: "8 awards",     icon: "Award",           path: "/microsite/awards",         visible: true,  color: "hsl(var(--secondary))" },
-  { id: "9",  title: "Staff",          subtitle: "Meet team",    icon: "Users",           path: "/microsite/staff",          visible: true,  color: "hsl(var(--primary))" },
-  { id: "10", title: "FAQs",           subtitle: "24 answers",   icon: "HelpCircle",      path: "/microsite/faqs",           visible: true,  color: "hsl(var(--primary))" },
-  { id: "11", title: "Events",         subtitle: "Upcoming",     icon: "CalendarDays",    path: "/microsite/events",         visible: true,  color: "hsl(var(--aura-warning))" },
-  { id: "12", title: "Social Links",   subtitle: "Follow us",    icon: "Globe",           path: "/microsite/social-links",   visible: true,  color: "hsl(var(--aura-info))" },
-  { id: "13", title: "Freebie Game",   subtitle: "Spin & win",   icon: "Gamepad2",        path: "/microsite/freebie-game",   visible: true,  color: "hsl(var(--aura-success))" },
-  { id: "14", title: "Refer a Friend", subtitle: "Earn rewards", icon: "Link2",           path: "/microsite/referral",       visible: true,  color: "hsl(var(--aura-warning))" },
-  { id: "15", title: "Affiliate",      subtitle: "Partner up",   icon: "Handshake",       path: "/microsite/affiliate",      visible: true,  color: "hsl(var(--secondary))" },
+  { id: "1",  title: "Gift Cards",     subtitle: "Give & enjoy",  icon: "Gift",            path: "/microsite/gift-cards",     visible: true,  color: "hsl(var(--primary))" },
+  { id: "2",  title: "Menu",           subtitle: "Full menu",     icon: "UtensilsCrossed", path: "/microsite/menu",           visible: true,  color: "hsl(var(--primary))" },
+  { id: "3",  title: "Social Links",   subtitle: "Follow us",     icon: "Globe",           path: "/microsite/social-links",   visible: true,  color: "hsl(var(--aura-info))" },
+  { id: "4",  title: "Reviews",        subtitle: "4.8 avg",       icon: "Star",            path: "/microsite/reviews",        visible: true,  color: "hsl(var(--primary))" },
+  { id: "5",  title: "FAQs",           subtitle: "24 answers",    icon: "HelpCircle",      path: "/microsite/faqs",           visible: true,  color: "hsl(var(--primary))" },
+  { id: "6",  title: "Freebie Game",   subtitle: "Spin & win",    icon: "Gamepad2",        path: "/microsite/freebie-game",   visible: true,  color: "hsl(var(--aura-success))" },
+  { id: "7",  title: "Staff",          subtitle: "Meet team",     icon: "Users",           path: "/microsite/staff",          visible: true,  color: "hsl(var(--primary))" },
+  { id: "8",  title: "Awards",         subtitle: "8 awards",      icon: "Award",           path: "/microsite/awards",         visible: true,  color: "hsl(var(--secondary))" },
+  { id: "9",  title: "Events",         subtitle: "Upcoming",      icon: "CalendarDays",    path: "/microsite/events",         visible: true,  color: "hsl(var(--aura-warning))" },
+  { id: "10", title: "Popular Dishes", subtitle: "Top 12",        icon: "Flame",           path: "/microsite/popular-dishes", visible: true,  color: "hsl(var(--aura-warning))" },
+  { id: "11", title: "AI Concierge",   subtitle: "Ask anything",  icon: "Bot",             path: "/microsite/concierge",      visible: true,  color: "hsl(var(--aura-info))" },
+  { id: "12", title: "Private Dining", subtitle: "Book now",      icon: "Wine",            path: "/microsite/private-dining", visible: true,  color: "hsl(var(--primary))" },
+  { id: "13", title: "Photo Gallery",  subtitle: "248 photos",    icon: "Camera",          path: "/microsite/gallery",        visible: true,  color: "hsl(var(--primary))" },
+  { id: "14", title: "Refer a Friend", subtitle: "Earn rewards",  icon: "Link2",           path: "/microsite/referral",       visible: true,  color: "hsl(var(--aura-warning))" },
+  { id: "15", title: "Affiliate",      subtitle: "Partner up",    icon: "Handshake",       path: "/microsite/affiliate",      visible: true,  color: "hsl(var(--secondary))" },
 ];
 
 export const colorPresets = [
