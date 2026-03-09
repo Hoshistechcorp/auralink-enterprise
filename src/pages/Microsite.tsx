@@ -9,6 +9,7 @@ import {
 import { motion } from "framer-motion";
 import MicrositeHeader from "@/components/aura/MicrositeHeader";
 import ActionButton from "@/components/aura/ActionButton";
+import TrialBanner from "@/components/aura/TrialBanner";
 import AuraCard from "@/components/aura/AuraCard";
 import BottomBrandBar from "@/components/aura/BottomBrandBar";
 import AuraSupermenu from "@/components/aura/AuraSupermenu";
@@ -125,10 +126,13 @@ const Microsite = () => {
   };
 
   const accessibleCards = cards.filter((card) => isCardAccessible(card.title, effectivePlan));
+  const lockedCards = cards.filter((card) => !isCardAccessible(card.title, effectivePlan));
+  const isExpired = !sub.trialActive && effectivePlan !== "supernova";
 
   return (
     <div className="min-h-screen bg-background max-w-[430px] mx-auto">
       <MicrositeHeader />
+      <TrialBanner variant="microsite" />
 
       <div className="flex gap-2 overflow-x-auto px-4 py-4 no-scrollbar">
         {actions.map((btn) => (
@@ -154,7 +158,49 @@ const Microsite = () => {
               />
             </motion.div>
           ))}
+
+          {/* Locked cards shown as dimmed with lock overlay */}
+          {isExpired && lockedCards.map((card, i) => (
+            <motion.div
+              key={card.title}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 0.5, y: 0 }}
+              transition={{ delay: (accessibleCards.length + i) * 0.04, duration: 0.35 }}
+              className="relative"
+            >
+              <div className="pointer-events-none grayscale">
+                <AuraCard
+                  icon={card.icon}
+                  title={card.title}
+                  subtitle={card.subtitle}
+                  delay={accessibleCards.length + i}
+                />
+              </div>
+              <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-background/60 backdrop-blur-sm">
+                <div className="flex flex-col items-center gap-1">
+                  <Gift className="w-4 h-4 text-primary" />
+                  <span className="text-[10px] font-medium text-muted-foreground">Upgrade</span>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
+
+        {/* Upgrade prompt after expired trial */}
+        {isExpired && lockedCards.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-4 rounded-2xl bg-primary/10 border border-primary/20 p-4 text-center"
+          >
+            <p className="text-sm font-medium text-foreground mb-1">
+              Unlock {lockedCards.length} more feature{lockedCards.length !== 1 ? "s" : ""}
+            </p>
+            <p className="text-xs text-muted-foreground mb-3">
+              Upgrade to access all cards and premium features
+            </p>
+          </motion.div>
+        )}
       </div>
 
       <BottomBrandBar />
