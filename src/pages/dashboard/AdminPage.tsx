@@ -5,7 +5,7 @@ import {
   UtensilsCrossed, Users, Camera, FileText, MapPin, Phone, Mail,
   Globe, Star, ChevronDown, Check, X, CalendarDays, Award, Wine,
   HelpCircle, Instagram, Facebook, Twitter, Youtube, MessageCircle,
-  Link2, Sparkles, Eye, EyeOff, Ticket, DollarSign,
+  Link2, Sparkles, Eye, EyeOff, Ticket, DollarSign, Lock, Crown,
 } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/hooks/use-toast";
@@ -13,6 +13,8 @@ import DashboardLayout from "@/components/aura/DashboardLayout";
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription,
 } from "@/components/ui/dialog";
+import { useNavigate } from "react-router-dom";
+import { getSubscription, getEffectivePlan, isCardAccessible, type PlanId } from "@/lib/subscription";
 
 /* ── Tabs ────────────────────────────────────────────── */
 const tabs = [
