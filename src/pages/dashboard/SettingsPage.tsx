@@ -116,10 +116,14 @@ const SettingsPage = () => {
   const [reservationProvider, setReservationProvider] = useState("opentable");
   const [reservationUrl, setReservationUrl] = useState("");
 
+  // Business contact (for microsite action buttons)
+  const [contact, setContact] = useState<BusinessContact>(getBusinessContact);
+
   useEffect(() => {
     const sub = getSubscription();
     setReservationProvider(sub.reservationProvider || "opentable");
     setReservationUrl(sub.reservationUrl || "");
+    setContact(getBusinessContact());
   }, []);
 
   const [profile, setProfile] = useState({
