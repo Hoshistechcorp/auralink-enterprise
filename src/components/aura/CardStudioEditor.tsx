@@ -174,10 +174,11 @@ const CardStudioEditor = ({ cards, setCards, editing, setEditing, updateCard, vi
         <div className="grid grid-cols-3 gap-2">
           {visibleCards.map((card) => {
             const Icon = iconMap[card.icon];
+            const locked = !isCardAccessible(card.title, effectivePlan);
             return (
-              <motion.div key={card.id} layout className="flex flex-col items-center justify-center p-2.5 rounded-xl bg-muted/30 border aspect-square gap-1">
-                <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${card.color}15` }}>
-                  <Icon className="w-3.5 h-3.5" style={{ color: card.color }} />
+              <motion.div key={card.id} layout className={`flex flex-col items-center justify-center p-2.5 rounded-xl bg-muted/30 border aspect-square gap-1 ${locked ? "opacity-40" : ""}`}>
+                <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ backgroundColor: locked ? undefined : `${card.color}15` }}>
+                  {locked ? <Lock className="w-3.5 h-3.5 text-muted-foreground/50" /> : <Icon className="w-3.5 h-3.5" style={{ color: card.color }} />}
                 </div>
                 <span className="text-[9px] font-medium text-center leading-tight">{card.title}</span>
               </motion.div>
@@ -192,10 +193,12 @@ const CardStudioEditor = ({ cards, setCards, editing, setEditing, updateCard, vi
           <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> Hide cards to remove from the public page</li>
           <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> Display up to 15 cards on your microsite</li>
           <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> Freebie Game drives daily visits</li>
+          <li className="flex gap-2"><Crown className="w-3 h-3 text-primary mt-0.5 shrink-0" /> Upgrade your plan to unlock more cards</li>
         </ul>
       </div>
     </div>
   </div>
-);
+  );
+};
 
 export default CardStudioEditor;
