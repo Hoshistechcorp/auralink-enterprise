@@ -858,6 +858,29 @@ const AdminPage = () => {
         </DialogContent>
       </Dialog>
 
+      {/* Image URL Modal */}
+      <Dialog open={imageModalOpen} onOpenChange={setImageModalOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Add Image</DialogTitle>
+            <DialogDescription>Paste an image URL below.</DialogDescription>
+          </DialogHeader>
+          <div className="py-2">
+            <label className={labelCls}>Image URL</label>
+            <input value={imageModalUrl} onChange={(e) => setImageModalUrl(e.target.value)} placeholder="https://example.com/image.jpg" className={inputCls} />
+            {imageModalUrl && (
+              <div className="mt-3 rounded-xl overflow-hidden border">
+                <img src={imageModalUrl} alt="Preview" className="w-full h-32 object-cover" onError={(e) => (e.currentTarget.style.display = "none")} />
+              </div>
+            )}
+          </div>
+          <DialogFooter>
+            <button onClick={() => setImageModalOpen(false)} className="px-4 py-2 rounded-xl text-sm text-muted-foreground hover:bg-muted transition-colors">Cancel</button>
+            <button onClick={confirmImageModal} disabled={!imageModalUrl} className={btnPrimary}><Check className="w-4 h-4" /> Add Image</button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
     </DashboardLayout>
   );
 };
