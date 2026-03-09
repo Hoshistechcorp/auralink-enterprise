@@ -12,7 +12,7 @@ export interface SubscriptionState {
 }
 
 const STORAGE_KEY = "auralink_subscription";
-const TRIAL_DAYS = 14;
+const TRIAL_DAYS = 21;
 
 const defaultState: SubscriptionState = {
   plan: "spark",
