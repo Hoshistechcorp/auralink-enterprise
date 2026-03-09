@@ -26,8 +26,16 @@ const defaultState: SubscriptionState = {
 export const getSubscription = (): SubscriptionState => {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return { ...defaultState };
+    if (!raw) {
+      // Auto-start trial for all new users
+      const state = startTrialInternal({ ...defaultState });
+      return state;
+    }
     const state: SubscriptionState = { ...defaultState, ...JSON.parse(raw) };
+    // Auto-start trial if not yet activated
+    if (!state.trialActive && !state.trialStartDate) {
+      return startTrialInternal(state);
+    }
     // Auto-downgrade if trial expired
     if (state.trialActive && state.trialEndDate) {
       if (new Date() > new Date(state.trialEndDate)) {
@@ -41,6 +49,20 @@ export const getSubscription = (): SubscriptionState => {
   } catch {
     return { ...defaultState };
   }
+};
+
+const startTrialInternal = (state: SubscriptionState): SubscriptionState => {
+  const now = new Date();
+  const end = new Date(now);
+  end.setDate(end.getDate() + TRIAL_DAYS);
+  const newState: SubscriptionState = {
+    ...state,
+    trialActive: true,
+    trialStartDate: now.toISOString(),
+    trialEndDate: end.toISOString(),
+  };
+  saveSubscription(newState);
+  return newState;
 };
 
 export const saveSubscription = (state: SubscriptionState) => {
