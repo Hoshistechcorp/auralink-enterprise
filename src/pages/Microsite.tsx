@@ -9,6 +9,7 @@ import {
 import { motion } from "framer-motion";
 import MicrositeHeader from "@/components/aura/MicrositeHeader";
 import ActionButton from "@/components/aura/ActionButton";
+import TrialBanner from "@/components/aura/TrialBanner";
 import AuraCard from "@/components/aura/AuraCard";
 import BottomBrandBar from "@/components/aura/BottomBrandBar";
 import AuraSupermenu from "@/components/aura/AuraSupermenu";
