@@ -4,12 +4,13 @@ import TrialBanner from "@/components/aura/TrialBanner";
 import {
   Home, Layers, BarChart3, Gamepad2, Settings, QrCode, Users2, CreditCard,
   Heart, Megaphone, Share2, Search, Shield, Building2, ChevronDown, LucideIcon, Menu, Sun, Moon,
-  ClipboardEdit, MapPin, UserCog, Check, Gift,
+  ClipboardEdit, MapPin, UserCog, Check, Gift, LogOut,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { useDarkMode } from "@/hooks/use-dark-mode";
 import EcosystemLauncher from "@/components/aura/EcosystemLauncher";
+import { logout } from "@/lib/auth";
 
 interface NavItem {
   icon: LucideIcon;
