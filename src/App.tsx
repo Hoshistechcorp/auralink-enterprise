@@ -8,6 +8,8 @@ import Microsite from "./pages/Microsite";
 import Dashboard from "./pages/Dashboard";
 import Onboarding from "./pages/Onboarding";
 import Welcome from "./pages/Welcome";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import QRManagement from "./pages/dashboard/QRManagement";
 import AffiliateDashboard from "./pages/dashboard/AffiliateDashboard";
 import SubscriptionPage from "./pages/dashboard/SubscriptionPage";
@@ -55,6 +57,8 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/microsite" element={<Microsite />} />
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/welcome" element={<Welcome />} />
