@@ -190,12 +190,18 @@ const DashboardLayout = ({ children, title, subtitle = "Bella Vista · Restauran
             <p className="text-[10px] text-muted-foreground mt-0.5">Enterprise Platform</p>
           </div>
           <SidebarNav currentPath={location.pathname} navigate={navigate} onNavigate={() => setMobileOpen(false)} />
-          <div className="p-3 border-t">
+          <div className="p-3 border-t space-y-1">
             <button
               onClick={() => { navigate("/microsite"); setMobileOpen(false); }}
-              className="text-xs text-muted-foreground hover:text-primary transition-colors"
+              className="w-full text-left text-xs text-muted-foreground hover:text-primary transition-colors"
             >
               ← View Public Page
+            </button>
+            <button
+              onClick={() => { logout(); navigate("/login"); setMobileOpen(false); }}
+              className="w-full flex items-center gap-2 text-xs text-muted-foreground hover:text-destructive transition-colors"
+            >
+              <LogOut className="w-3.5 h-3.5" /> Log Out
             </button>
           </div>
         </SheetContent>

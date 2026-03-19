@@ -335,7 +335,7 @@ const Index = () => {
             <a href="#features" className="hover:text-foreground transition-colors">Features</a>
             <a href="#pricing" className="hover:text-foreground transition-colors">Pricing</a>
             <button onClick={() => navigate("/microsite")} className="hover:text-foreground transition-colors">Demo</button>
-            <button onClick={() => navigate("/dashboard")} className="hover:text-foreground transition-colors">Sign In</button>
+            <button onClick={() => navigate("/login")} className="hover:text-foreground transition-colors">Sign In</button>
           </div>
           <p className="text-[11px] text-muted-foreground">© 2026 iBloov Inc.</p>
         </div>
