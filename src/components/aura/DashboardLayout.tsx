@@ -4,12 +4,13 @@ import TrialBanner from "@/components/aura/TrialBanner";
 import {
   Home, Layers, BarChart3, Gamepad2, Settings, QrCode, Users2, CreditCard,
   Heart, Megaphone, Share2, Search, Shield, Building2, ChevronDown, LucideIcon, Menu, Sun, Moon,
-  ClipboardEdit, MapPin, UserCog, Check, Gift,
+  ClipboardEdit, MapPin, UserCog, Check, Gift, LogOut,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { useDarkMode } from "@/hooks/use-dark-mode";
 import EcosystemLauncher from "@/components/aura/EcosystemLauncher";
+import { logout } from "@/lib/auth";
 
 interface NavItem {
   icon: LucideIcon;
@@ -162,12 +163,18 @@ const DashboardLayout = ({ children, title, subtitle = "Bella Vista · Restauran
           <p className="text-[10px] text-muted-foreground mt-0.5">Enterprise Platform</p>
         </div>
         <SidebarNav currentPath={location.pathname} navigate={navigate} />
-        <div className="p-3 border-t">
+        <div className="p-3 border-t space-y-1">
           <button
             onClick={() => navigate("/microsite")}
-            className="text-xs text-muted-foreground hover:text-primary transition-colors"
+            className="w-full text-left text-xs text-muted-foreground hover:text-primary transition-colors"
           >
             ← View Public Page
+          </button>
+          <button
+            onClick={() => { logout(); navigate("/login"); }}
+            className="w-full flex items-center gap-2 text-xs text-muted-foreground hover:text-destructive transition-colors"
+          >
+            <LogOut className="w-3.5 h-3.5" /> Log Out
           </button>
         </div>
       </aside>
@@ -183,12 +190,18 @@ const DashboardLayout = ({ children, title, subtitle = "Bella Vista · Restauran
             <p className="text-[10px] text-muted-foreground mt-0.5">Enterprise Platform</p>
           </div>
           <SidebarNav currentPath={location.pathname} navigate={navigate} onNavigate={() => setMobileOpen(false)} />
-          <div className="p-3 border-t">
+          <div className="p-3 border-t space-y-1">
             <button
               onClick={() => { navigate("/microsite"); setMobileOpen(false); }}
-              className="text-xs text-muted-foreground hover:text-primary transition-colors"
+              className="w-full text-left text-xs text-muted-foreground hover:text-primary transition-colors"
             >
               ← View Public Page
+            </button>
+            <button
+              onClick={() => { logout(); navigate("/login"); setMobileOpen(false); }}
+              className="w-full flex items-center gap-2 text-xs text-muted-foreground hover:text-destructive transition-colors"
+            >
+              <LogOut className="w-3.5 h-3.5" /> Log Out
             </button>
           </div>
         </SheetContent>

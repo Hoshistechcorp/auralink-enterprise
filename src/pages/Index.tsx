@@ -78,13 +78,13 @@ const Index = () => {
               {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
             <button
-              onClick={() => navigate("/dashboard")}
+              onClick={() => navigate("/login")}
               className="px-4 py-1.5 rounded-xl border border-border text-[13px] font-semibold hover:bg-muted transition-colors"
             >
               Sign In
             </button>
             <button
-              onClick={() => navigate("/onboarding")}
+              onClick={() => navigate("/signup")}
               className="px-4 py-1.5 rounded-xl bg-primary text-primary-foreground text-[13px] font-semibold hover:opacity-90 transition-opacity"
             >
               Sign Up
@@ -335,7 +335,7 @@ const Index = () => {
             <a href="#features" className="hover:text-foreground transition-colors">Features</a>
             <a href="#pricing" className="hover:text-foreground transition-colors">Pricing</a>
             <button onClick={() => navigate("/microsite")} className="hover:text-foreground transition-colors">Demo</button>
-            <button onClick={() => navigate("/dashboard")} className="hover:text-foreground transition-colors">Sign In</button>
+            <button onClick={() => navigate("/login")} className="hover:text-foreground transition-colors">Sign In</button>
           </div>
           <p className="text-[11px] text-muted-foreground">© 2026 iBloov Inc.</p>
         </div>
