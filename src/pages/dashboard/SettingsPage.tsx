@@ -4,8 +4,9 @@ import {
   User, Bell, Palette, Globe, Lock, Mail, Phone, MapPin,
   Camera, Save, Check, BellRing, BellOff, Monitor, Moon, Sun,
   Paintbrush, Droplets, RotateCcw, Pipette, CalendarCheck,
-  Building2, Plus, Trash2, Users2, MessageCircle, Navigation,
+  Building2, Plus, Trash2, Users2, MessageCircle, Navigation, BookOpen,
 } from "lucide-react";
+import DocumentationTab from "@/components/aura/DocumentationTab";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/aura/DashboardLayout";
