@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line } from "recharts";
 import DashboardLayout from "@/components/aura/DashboardLayout";
 import UsageMeter from "@/components/aura/UsageMeter";
+import OnboardingProgressCard from "@/components/aura/OnboardingProgressCard";
 
 const viewData = [
   { day: "Mon", views: 320 },
@@ -93,9 +94,12 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Usage Meter + Activity Feed */}
+      {/* Onboarding Progress + Usage Meter + Activity Feed */}
       <div className="grid lg:grid-cols-2 gap-6">
-        <UsageMeter />
+        <div className="space-y-6">
+          <OnboardingProgressCard />
+          <UsageMeter />
+        </div>
         <div className="p-5 rounded-2xl bg-card border">
           <h3 className="font-display font-semibold mb-4">Recent Activity</h3>
           <div className="space-y-3">
