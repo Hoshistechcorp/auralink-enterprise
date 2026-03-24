@@ -20,6 +20,7 @@ const tabs = [
   { id: "notifications", label: "Notifications", icon: Bell },
   { id: "appearance", label: "Appearance", icon: Palette },
   { id: "security", label: "Security", icon: Lock },
+  { id: "docs", label: "Documentation", icon: BookOpen },
 ] as const;
 
 type Tab = (typeof tabs)[number]["id"];
