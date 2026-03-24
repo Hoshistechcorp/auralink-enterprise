@@ -6,9 +6,52 @@ import {
   Building2, Gift, CreditCard, Settings, ClipboardEdit,
   Globe, Star, UtensilsCrossed, Camera, MessageCircle, Award,
   CalendarDays, Sparkles, DollarSign, Phone, Navigation, Mail,
-  Lock, Palette, Bell, BookOpen,
+  Lock, Palette, Bell, BookOpen, Download, Rocket, CheckCircle2,
+  ArrowRight,
 } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
 
+// ── Getting Started Steps ──────────────────────────
+const gettingStartedSteps = [
+  {
+    step: 1,
+    title: "Create Your Account",
+    description: "Sign up with your email and password. You'll automatically receive a 21-day free trial of the Supernova tier — every feature unlocked from day one.",
+    tip: "No credit card required to start your trial.",
+  },
+  {
+    step: 2,
+    title: "Complete Onboarding",
+    description: "Select your hospitality industry (Restaurant, Hotel, Bar, etc.), add your venue locations, and invite team members with role-based access.",
+    tip: "You can skip steps and come back to them later in Settings → Business.",
+  },
+  {
+    step: 3,
+    title: "Set Up Your Business Info",
+    description: "Head to Settings → Profile to configure your phone number, SMS, address, and reservation provider. These power the Call, Message, Directions, and Reserve buttons on your microsite.",
+    tip: "Your microsite action buttons won't work until this is configured.",
+  },
+  {
+    step: 4,
+    title: "Build Your Content in Admin Panel",
+    description: "Use the Admin Panel to add your menu items, upload gallery photos, create staff profiles, set operating hours, and fill in FAQs. This content populates your public microsite.",
+    tip: "Start with Menu and Hours — they're what customers look for first.",
+  },
+  {
+    step: 5,
+    title: "Customize Your Microsite in Card Studio",
+    description: "Open Card Studio to choose which cards appear on your public microsite (up to 15). Drag to reorder, toggle visibility, and preview your layout in real time.",
+    tip: "The top 3 cards get the most engagement — choose wisely!",
+  },
+  {
+    step: 6,
+    title: "Go Live & Share",
+    description: "Your microsite is live! Generate a QR code from the QR Management page, share your link on social media, and start driving traffic. Monitor performance in Analytics.",
+    tip: "Print QR codes on table tents, receipts, and business cards for maximum reach.",
+  },
+];
+
+// ── Feature Sections ──────────────────────────────
 interface DocSection {
   id: string;
   icon: React.ElementType;
@@ -293,6 +336,87 @@ const sections: DocSection[] = [
   },
 ];
 
+// ── PDF Export ────────────────────────────────────
+const generateDocsPdf = () => {
+  // Build a printable HTML document and trigger print-to-PDF
+  const printContent = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AuraLink Platform Documentation</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: #1a1a1a; padding: 48px; line-height: 1.6; }
+    h1 { font-size: 28px; margin-bottom: 4px; color: #6b2139; }
+    .subtitle { font-size: 13px; color: #888; margin-bottom: 32px; }
+    h2 { font-size: 20px; margin-top: 28px; margin-bottom: 12px; color: #6b2139; border-bottom: 2px solid #f0e0e6; padding-bottom: 6px; }
+    h3 { font-size: 15px; margin-top: 16px; margin-bottom: 6px; color: #333; }
+    p { font-size: 13px; color: #555; margin-bottom: 8px; }
+    .step-box { background: #faf5f7; border: 1px solid #f0e0e6; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; page-break-inside: avoid; }
+    .step-num { display: inline-block; width: 24px; height: 24px; background: #6b2139; color: white; border-radius: 50%; text-align: center; line-height: 24px; font-size: 12px; font-weight: 700; margin-right: 8px; }
+    .step-title { font-weight: 600; font-size: 14px; }
+    .tip { font-size: 11px; color: #6b2139; margin-top: 4px; font-style: italic; }
+    .section { page-break-inside: avoid; margin-bottom: 20px; }
+    .section-title { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+    .section-desc { font-size: 12px; color: #666; margin-bottom: 8px; }
+    ul { padding-left: 20px; margin-bottom: 8px; }
+    li { font-size: 12px; color: #444; margin-bottom: 3px; }
+    .stats { display: flex; gap: 16px; margin-bottom: 24px; }
+    .stat-box { flex: 1; background: #faf5f7; border-radius: 8px; padding: 12px; text-align: center; }
+    .stat-num { font-size: 28px; font-weight: 700; color: #6b2139; }
+    .stat-label { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+    .footer { margin-top: 40px; text-align: center; font-size: 11px; color: #aaa; border-top: 1px solid #eee; padding-top: 16px; }
+    @media print { body { padding: 24px; } }
+  </style>
+</head>
+<body>
+  <h1>AuraLink Platform Documentation</h1>
+  <p class="subtitle">Complete Feature Reference · v1.0 · March 2026</p>
+
+  <div class="stats">
+    <div class="stat-box"><div class="stat-num">${sections.length}</div><div class="stat-label">Modules</div></div>
+    <div class="stat-box"><div class="stat-num">15</div><div class="stat-label">Microsite Cards</div></div>
+    <div class="stat-box"><div class="stat-num">3</div><div class="stat-label">Plan Tiers</div></div>
+  </div>
+
+  <h2>🚀 Getting Started</h2>
+  ${gettingStartedSteps.map(s => `
+    <div class="step-box">
+      <span class="step-num">${s.step}</span>
+      <span class="step-title">${s.title}</span>
+      <p style="margin-top:6px">${s.description}</p>
+      <p class="tip">💡 ${s.tip}</p>
+    </div>
+  `).join("")}
+
+  <h2>📖 Feature Reference</h2>
+  ${sections.map(s => `
+    <div class="section">
+      <div class="section-title">${s.title}</div>
+      <div class="section-desc">${s.description}</div>
+      <ul>${s.features.map(f => `<li>${f}</li>`).join("")}</ul>
+    </div>
+  `).join("")}
+
+  <div class="footer">AuraLink Enterprise Platform · Generated ${new Date().toLocaleDateString()}</div>
+</body>
+</html>`;
+
+  const printWindow = window.open("", "_blank");
+  if (printWindow) {
+    printWindow.document.write(printContent);
+    printWindow.document.close();
+    // Give it a moment to render, then trigger print
+    setTimeout(() => {
+      printWindow.print();
+    }, 400);
+  } else {
+    toast({ title: "Pop-up blocked", description: "Please allow pop-ups to export the PDF.", variant: "destructive" });
+  }
+};
+
+// ── Section Accordion ──────────────────────────────
 const SectionAccordion = ({ section }: { section: DocSection }) => {
   const [open, setOpen] = useState(false);
   const Icon = section.icon;
@@ -339,8 +463,10 @@ const SectionAccordion = ({ section }: { section: DocSection }) => {
   );
 };
 
+// ── Main Component ─────────────────────────────────
 const DocumentationTab = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [showGuide, setShowGuide] = useState(true);
 
   const filtered = searchQuery
     ? sections.filter(
@@ -353,10 +479,72 @@ const DocumentationTab = () => {
 
   return (
     <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
+      {/* Getting Started Guide */}
       <div className="p-6 rounded-2xl bg-card border">
-        <div className="flex items-center gap-3 mb-1">
-          <BookOpen className="w-5 h-5 text-primary" />
-          <h3 className="font-display font-semibold text-lg">Platform Documentation</h3>
+        <button
+          onClick={() => setShowGuide(!showGuide)}
+          className="w-full flex items-center justify-between"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center">
+              <Rocket className="w-5 h-5 text-primary-foreground" />
+            </div>
+            <div className="text-left">
+              <h3 className="font-display font-semibold text-lg">Getting Started</h3>
+              <p className="text-xs text-muted-foreground">6 steps to launch your microsite</p>
+            </div>
+          </div>
+          <ChevronDown className={`w-5 h-5 text-muted-foreground transition-transform ${showGuide ? "rotate-180" : ""}`} />
+        </button>
+
+        <AnimatePresence>
+          {showGuide && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="overflow-hidden"
+            >
+              <div className="mt-5 space-y-3">
+                {gettingStartedSteps.map((step) => (
+                  <div
+                    key={step.step}
+                    className="flex gap-3 p-3.5 rounded-xl bg-muted/30 border border-transparent hover:border-primary/20 transition-colors"
+                  >
+                    <div className="w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+                      {step.step}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h4 className="text-sm font-semibold mb-0.5">{step.title}</h4>
+                      <p className="text-xs text-muted-foreground leading-relaxed">{step.description}</p>
+                      <div className="flex items-center gap-1.5 mt-2 text-[11px] text-primary font-medium">
+                        <Sparkles className="w-3 h-3" />
+                        {step.tip}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {/* Feature Reference */}
+      <div className="p-6 rounded-2xl bg-card border">
+        <div className="flex items-center justify-between mb-1">
+          <div className="flex items-center gap-3">
+            <BookOpen className="w-5 h-5 text-primary" />
+            <h3 className="font-display font-semibold text-lg">Feature Reference</h3>
+          </div>
+          <button
+            onClick={generateDocsPdf}
+            className="flex items-center gap-2 px-3 py-2 rounded-xl bg-primary text-primary-foreground text-xs font-medium hover:bg-primary/90 transition-colors"
+          >
+            <Download className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Export PDF</span>
+          </button>
         </div>
         <p className="text-sm text-muted-foreground mb-5">
           A complete reference of every feature and function in AuraLink. Click any section to expand.
