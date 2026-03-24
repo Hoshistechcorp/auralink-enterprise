@@ -4,8 +4,9 @@ import {
   User, Bell, Palette, Globe, Lock, Mail, Phone, MapPin,
   Camera, Save, Check, BellRing, BellOff, Monitor, Moon, Sun,
   Paintbrush, Droplets, RotateCcw, Pipette, CalendarCheck,
-  Building2, Plus, Trash2, Users2, MessageCircle, Navigation,
+  Building2, Plus, Trash2, Users2, MessageCircle, Navigation, BookOpen,
 } from "lucide-react";
+import DocumentationTab from "@/components/aura/DocumentationTab";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/aura/DashboardLayout";
@@ -19,6 +20,7 @@ const tabs = [
   { id: "notifications", label: "Notifications", icon: Bell },
   { id: "appearance", label: "Appearance", icon: Palette },
   { id: "security", label: "Security", icon: Lock },
+  { id: "docs", label: "Documentation", icon: BookOpen },
 ] as const;
 
 type Tab = (typeof tabs)[number]["id"];
@@ -996,6 +998,8 @@ const SettingsPage = () => {
               </div>
             </motion.div>
           )}
+
+          {activeTab === "docs" && <DocumentationTab />}
         </div>
       </div>
     </DashboardLayout>
