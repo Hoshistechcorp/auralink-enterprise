@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line } from "recharts";
 import DashboardLayout from "@/components/aura/DashboardLayout";
 import UsageMeter from "@/components/aura/UsageMeter";
+import OnboardingProgressCard from "@/components/aura/OnboardingProgressCard";
 
 const viewData = [
   { day: "Mon", views: 320 },
