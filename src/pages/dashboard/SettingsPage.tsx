@@ -998,6 +998,8 @@ const SettingsPage = () => {
               </div>
             </motion.div>
           )}
+
+          {activeTab === "docs" && <DocumentationTab />}
         </div>
       </div>
     </DashboardLayout>
