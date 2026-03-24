@@ -94,9 +94,12 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Usage Meter + Activity Feed */}
+      {/* Onboarding Progress + Usage Meter + Activity Feed */}
       <div className="grid lg:grid-cols-2 gap-6">
-        <UsageMeter />
+        <div className="space-y-6">
+          <OnboardingProgressCard />
+          <UsageMeter />
+        </div>
         <div className="p-5 rounded-2xl bg-card border">
           <h3 className="font-display font-semibold mb-4">Recent Activity</h3>
           <div className="space-y-3">
