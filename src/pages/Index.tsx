@@ -13,6 +13,7 @@ import { useDarkMode } from "@/hooks/use-dark-mode";
 import { Sun, Moon } from "lucide-react";
 import ibloovLogo from "@/assets/ibloov-logo.jpeg";
 import { toast } from "sonner";
+import LandingSegmentNav from "@/components/aura/LandingSegmentNav";
 
 const industries = [
   { icon: UtensilsCrossed, label: "Restaurants" },
@@ -92,6 +93,9 @@ const Index = () => {
           </div>
         </div>
       </nav>
+
+      {/* ─── Segment Nav ─── */}
+      <LandingSegmentNav />
 
       {/* ─── Hero ─── */}
       <section className="relative overflow-hidden">
