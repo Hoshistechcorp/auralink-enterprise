@@ -21,9 +21,9 @@ import TourismHero from "@/components/tourism/TourismHero";
 import TourismImageGrid from "@/components/tourism/TourismImageGrid";
 import TourismUseCases from "@/components/tourism/TourismUseCases";
 import TourismCapabilities from "@/components/tourism/TourismCapabilities";
-import TourismStats from "@/components/tourism/TourismStats";
 import TourismCTA from "@/components/tourism/TourismCTA";
 import TourismFooter from "@/components/tourism/TourismFooter";
+import TourismLandmarkMosaic from "@/components/tourism/TourismLandmarkMosaic";
 
 const TourismLanding = () => {
   const navigate = useNavigate();
@@ -95,8 +95,8 @@ const TourismLanding = () => {
       {/* Capabilities */}
       <TourismCapabilities />
 
-      {/* Stats */}
-      <TourismStats />
+      {/* Landmark Mosaic */}
+      <TourismLandmarkMosaic />
 
       {/* CTA */}
       <TourismCTA />
