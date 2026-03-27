@@ -95,8 +95,8 @@ const TourismLanding = () => {
       {/* Capabilities */}
       <TourismCapabilities />
 
-      {/* Stats */}
-      <TourismStats />
+      {/* Landmark Mosaic */}
+      <TourismLandmarkMosaic />
 
       {/* CTA */}
       <TourismCTA />
