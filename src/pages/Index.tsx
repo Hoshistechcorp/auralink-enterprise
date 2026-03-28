@@ -4,9 +4,16 @@ import { useDarkMode } from "@/hooks/use-dark-mode";
 import ibloovLogo from "@/assets/ibloov-logo.jpeg";
 import LandingSegmentNav from "@/components/aura/LandingSegmentNav";
 import EnterpriseHero from "@/components/enterprise/EnterpriseHero";
+import EnterpriseTrustBar from "@/components/enterprise/EnterpriseTrustBar";
+import EnterpriseRevenueStrip from "@/components/enterprise/EnterpriseRevenueStrip";
 import EnterpriseWhyCards from "@/components/enterprise/EnterpriseWhyCards";
+import EnterpriseBeforeAfter from "@/components/enterprise/EnterpriseBeforeAfter";
+import EnterpriseMicrositePreview from "@/components/enterprise/EnterpriseMicrositePreview";
+import EnterpriseFeatureRows from "@/components/enterprise/EnterpriseFeatureRows";
 import EnterpriseEcosystem from "@/components/enterprise/EnterpriseEcosystem";
 import EnterpriseGiftCards from "@/components/enterprise/EnterpriseGiftCards";
+import EnterpriseChainBenefits from "@/components/enterprise/EnterpriseChainBenefits";
+import EnterpriseCSuiteCTAs from "@/components/enterprise/EnterpriseCSuiteCTAs";
 import EnterpriseVideoDemo from "@/components/enterprise/EnterpriseVideoDemo";
 import EnterpriseVenueTypes from "@/components/enterprise/EnterpriseVenueTypes";
 import EnterpriseCTA from "@/components/enterprise/EnterpriseCTA";
@@ -55,9 +62,16 @@ const Index = () => {
 
       {/* Sections */}
       <EnterpriseHero />
+      <EnterpriseTrustBar />
+      <EnterpriseRevenueStrip />
       <EnterpriseWhyCards />
+      <EnterpriseBeforeAfter />
+      <EnterpriseMicrositePreview />
+      <EnterpriseFeatureRows />
       <EnterpriseEcosystem />
       <EnterpriseGiftCards />
+      <EnterpriseChainBenefits />
+      <EnterpriseCSuiteCTAs />
       <EnterpriseVideoDemo />
       <EnterpriseVenueTypes />
       <EnterpriseCTA />
