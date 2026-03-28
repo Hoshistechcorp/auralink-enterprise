@@ -1,81 +1,95 @@
 
 
-# Tourism Board Landing Page Overhaul
+# Tourism Board Landing Page — Full Remix
 
-## What We're Building
+The screenshots show a warm, light-themed design from the Claude HTML reference. The current page is dark-themed. This remix adds the 6 missing sections from the reference while keeping the existing dark sections that work well (15-card showcase, category grid, landmark mosaic).
 
-A complete rebuild of the `/tourism` landing page to properly sell AuraLink as a **plug-and-play digital tourism hub** to tourism directors and city marketing departments. The copy shifts to "Bloomberg Terminal pitch meets travel magazine" — authoritative, data-driven, premium.
+## New Page Flow
 
-## Core Changes
+1. **Nav** (warm light theme — `#FAFAF8` background, coral CTA, "AuraLink Tourism" serif branding)
+2. **Segment Nav** (keep existing)
+3. **Hero** — Warm theme: "Turn Your City Into a *Digital Destination*" with coral/cream palette, proof points
+4. **Stats Strip** — NEW — Dark band with 4 gold stats ($1.9T, 73%, 15, 48hr)
+5. **Problem Section** — NEW — Light `#FAFAF8` bg, 3 pain cards (Fragmented Marketing, Zero Visibility, Expensive & Slow)
+6. **Solution + Phone Mockup** — NEW — Warm `#F5F0E8` bg, centered phone frame showing "Visit Atlanta" with all 15 card icons
+7. **How It Works** — NEW — Light bg, 3-step flow (Claim, Activate, Share & Measure) with coral/teal/gold circles
+8. **15-Card Showcase** — Keep existing (dark theme, already built)
+9. **Category Deep-Dive** — Keep existing (dark theme)
+10. **Dashboard Preview** — NEW — Light bg left column (feature bullets) + dark mockup panel right column with metrics & bar chart
+11. **Buyer Tiers** — NEW — Warm `#F5F0E8` bg, 4 cards (City, State, National, Economic Dev) with budget ranges
+12. **Image Grid** — Keep existing
+13. **Parallax City Band** — Keep existing
+14. **Capabilities** — Keep existing (3 pillars, dark)
+15. **Landmark Mosaic** — Keep existing
+16. **CTA** — Update to warm theme: "Your destination deserves more than a *brochure.*" with cream bg + coral buttons
+17. **Footer** — Update to dark with "AuraLink Tourism by iBloov Global Inc."
 
-### 1. Hero Section Rewrite (`TourismHero.tsx`)
-- New headline: **"ONE LINK. ENTIRE DESTINATION."**
-- Subhead reframing the value prop: "Replace fragmented websites, PDF brochures, and apps nobody downloads with one mobile-first destination hub — 15 modular cards covering everything a visitor needs."
-- Three stat pills floating below CTA: "Drive More Visitors", "Keep Them Longer", "Measure Everything"
-- Keep the cinematic parallax image + scroll indicator
+## Files to Create (6 new components)
 
-### 2. New Section: The 15-Card Showcase (`TourismCardShowcase.tsx`)
-- The centerpiece of the page — a visually stunning interactive grid showing all 15 tourism cards with their icons, names, descriptions, and iBloov integration labels
-- Cards: Attractions, Things To Do, Events & Festivals, Food & Dining, Hotels & Stays, Cultural Experiences, Nature & Parks, Neighborhood Guide, Transportation, Visitor Services, Local Businesses, Photo Memories, Upcoming Deals, Local Creators, Plan Your Trip
-- Each card has a colored icon, title, one-line description, and a small integration badge (e.g., "Place API", "Event Ticketing")
-- Hover reveals a brief expanded description
-- Section headline: "15 Cards. One Destination. Zero Friction."
+### `src/components/tourism/TourismStatsStrip.tsx`
+- Dark `bg-[#0D1117]` horizontal band
+- 4-column grid: "$1.9T" (Global tourism market), "73%" (Mobile planning), "15" (Cards), "48hr" (Signup to live)
+- Gold `#D4A853` accent for numbers, muted white text for labels
 
-### 3. New Section: Category Deep-Dive (`TourismCategoryGrid.tsx`)
-- Inspired by Discover Atlanta's navigation — shows the major content categories visitors can explore:
-  - **Fun Things To Do**: Attractions, Arts & Culture, Outdoors, History & Heritage, Shopping, Nightlife, Sports, Weekend Picks, Free & Cheap
-  - **Events**: Festivals, Seasonal & Holidays, Family & Kids, Free Events, Submit Your Event
-  - **Food & Drink**: Famous Restaurants, Culinary Experiences, Farmers Markets, Michelin Restaurants, Rooftop Bars, Lunch Spots
-  - **Where To Stay**: All Hotels, Resorts, Luxury, Downtown, Airport Hotels
-  - **Plan Your Visit**: Getting Around, Tours, Neighborhoods, Itineraries, Deals, Visitor Guide, Local Guides, LGBTQ
-- Displayed as a multi-column grid with category headers and sub-items — showing the depth of content possible
-- Each category column has a bold color accent matching the brand palette
+### `src/components/tourism/TourismProblem.tsx`
+- Light `bg-[#FAFAF8]` section
+- Header: "THE PROBLEM" label + serif heading "Your destination's digital presence is scattered..."
+- 3 stacked cards on white bg with emoji icons: Fragmented Marketing, Zero Visibility, Expensive & Slow
 
-### 4. Updated Use Cases Section (`TourismUseCases.tsx`)
-- Rewrite copy to be sharper and more government/budget-focused
-- Add a "The Problem" vs "The Solution" framing:
-  - Problem: "Your destination runs on 47 disconnected tools — a website nobody updates, social pages with no analytics, PDF guides that die on download"
-  - Solution: "One AuraLink hub. 15 smart cards. Real-time analytics. Works on every phone, no app download required."
+### `src/components/tourism/TourismPhoneMockup.tsx`
+- Warm `bg-[#F5F0E8]` section
+- Header: "THE SOLUTION" + "One destination hub. Everything a visitor needs."
+- Centered phone-shaped CSS card: teal header with "Visit Atlanta" + rating/visitor count, white body with 3x5 grid of 15 card icons, action buttons (Plan Trip, Map, Events, Share)
 
-### 5. Updated Capabilities Section (`TourismCapabilities.tsx`)
-- Reorganize around the three core sell points: **Drive Visitors**, **Extend Stays**, **Measure Impact**
-- Three columns with 4 features each instead of a flat 12-grid
+### `src/components/tourism/TourismHowItWorks.tsx`
+- Light `bg-[#FAFAF8]` section
+- "HOW IT WORKS" label + "Live in three steps." serif heading
+- 3 vertical steps with colored circles (coral #1, teal #2, gold #3)
+- Each: numbered circle, bold title, one-line description
 
-### 6. Parallax City Band Update
-- Change copy to: "From a $500K city bureau to a $500M national authority — same platform, infinite scale."
+### `src/components/tourism/TourismDashboard.tsx`
+- Light bg, split layout (2 columns on desktop)
+- Left: "TOURISM DASHBOARD" label, serif heading "Know exactly what drives your visitors.", description, 4 feature rows (Visitor Analytics, Top Performers, Seasonal Trends, Demographics) on warm cards
+- Right: Dark mockup panel with 4 metric tiles (Page Views 847K, Unique Visitors 312K, Avg Time 4:32, Top Attraction Georgia Aquarium) + CSS bar chart
 
-### 7. Keep Existing
-- Landmark Mosaic (animated grid) — keep as-is
-- CTA section — keep as-is  
-- Footer — keep as-is
-- Image Grid — keep but update category labels to match new card names
-
-## Page Flow (Top to Bottom)
-1. Nav + Segment Nav
-2. Hero — "ONE LINK. ENTIRE DESTINATION."
-3. 15-Card Showcase — the product demo
-4. Category Deep-Dive — showing content depth
-5. Image Grid (existing) — visual discovery
-6. Use Cases — who it's for, reframed
-7. Parallax City Band
-8. Capabilities — three pillars
-9. Landmark Mosaic (existing)
-10. CTA + Footer (existing)
-
-## Files to Create
-- `src/components/tourism/TourismCardShowcase.tsx` — 15-card interactive grid
-- `src/components/tourism/TourismCategoryGrid.tsx` — Discover Atlanta-style content depth display
+### `src/components/tourism/TourismBuyerTiers.tsx`
+- Warm `bg-[#F5F0E8]` section
+- "BUILT FOR" label + "From cities to countries." serif heading
+- 2x2 grid of white cards: City ($500K-$5M), State ($5M-$50M), National ($50M-$500M), Economic Development (Grant-funded)
+- Each with emoji icon, title, description, coral budget text
 
 ## Files to Edit
-- `src/pages/TourismLanding.tsx` — new section ordering + imports
-- `src/components/tourism/TourismHero.tsx` — new headline and value prop copy
-- `src/components/tourism/TourismUseCases.tsx` — sharper problem/solution framing
-- `src/components/tourism/TourismCapabilities.tsx` — reorganize into 3 pillars
+
+### `src/pages/TourismLanding.tsx`
+- Update nav to warm light theme (white bg, dark text, coral CTA "Get Your Destination Live")
+- Import and insert all 6 new components in correct order
+- Remove `TourismUseCases` (replaced by Problem + BuyerTiers)
+- Keep dark sections (CardShowcase, CategoryGrid, Capabilities, LandmarkMosaic) as contrast bands
+- Update wrapper div from `bg-[#0a0a0a] text-white` to allow mixed light/dark sections
+
+### `src/components/tourism/TourismHero.tsx`
+- Switch from dark cinematic hero to warm light hero matching reference
+- Cream `bg-[#FAFAF8]` background, no background image
+- Badge: "BUILT FOR DESTINATIONS"
+- Headline: "Turn Your City Into a *Digital Destination*" (italic coral accent)
+- Coral primary CTA + outlined secondary CTA
+- Three proof points: "Live in under 48 hours", "No developers needed", "Works on every device"
+
+### `src/components/tourism/TourismCTA.tsx`
+- Switch from orange gradient card to warm light theme
+- Cream/warm gradient background
+- Serif heading: "Your destination deserves more than a *brochure.*"
+- Coral primary button + outlined "Book a Demo" secondary
+
+### `src/components/tourism/TourismFooter.tsx`
+- Update to: "AuraLink Tourism by iBloov Global Inc."
+- Subline: "The digital infrastructure for modern tourism. Atlanta, GA."
 
 ## Technical Notes
-- All new components use `framer-motion` for scroll-triggered animations
-- 15-card grid uses CSS grid with responsive breakpoints (2 cols mobile, 3 tablet, 5 desktop)
-- Category grid uses a multi-column flexbox layout with sticky headers on mobile
-- No new assets needed — uses Lucide icons for the 15 cards
-- Maintains dark theme (`bg-[#0a0a0a]`) and existing brand colors (`#FF6B35`, `#FFD700`, `#00CED1`)
+- Warm sections use: `bg-[#FAFAF8]` (paper), `bg-[#F5F0E8]` (warm), `text-[#0D1117]` (ink)
+- Coral accent: `#E8604C`, Teal: `#1B9AAA`, Gold: `#D4A853`
+- Dark sections (card showcase, category grid, capabilities) remain as contrast bands
+- All new components use `framer-motion` for scroll animations
+- Phone mockup is pure CSS (rounded rectangle + shadow)
+- Dashboard mockup uses CSS bars, no charting library
 
