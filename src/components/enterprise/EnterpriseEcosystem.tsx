@@ -83,10 +83,11 @@ const EnterpriseEcosystem = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.06, duration: 0.5 }}
-            className="relative rounded-2xl overflow-hidden border border-white/[0.06] hover:border-opacity-20 transition-all group min-h-[320px] flex flex-col justify-end"
+            className="relative rounded-2xl overflow-hidden border border-white/[0.06] transition-all duration-500 group min-h-[320px] flex flex-col justify-end cursor-pointer"
             style={{ borderTopColor: p.color, borderTopWidth: 2 }}
+            whileHover={{ borderColor: `${p.color}66`, boxShadow: `0 0 20px ${p.color}22, 0 0 40px ${p.color}11` }}
           >
-            <img src={p.image} alt={p.name} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <img src={p.image} alt={p.name} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110" loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0D1117] via-[#0D1117]/85 to-[#0D1117]/30" />
 
             {/* YouTube play button */}
