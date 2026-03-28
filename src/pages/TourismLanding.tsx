@@ -35,7 +35,7 @@ const TourismLanding = () => {
           <div className="flex items-center gap-2">
             <img src={ibloovLogo} alt="iBloov" className="h-8 w-auto rounded-lg" />
             <div className="w-2.5 h-2.5 rounded-full bg-[#E8604C]" />
-            <span className="font-display text-[22px] text-[#0D1117]">{"\n"}AuraLink Tourism</span>
+            <span className="font-display text-[22px] text-[#0D1117]">{"\n"}AuraLink </span>
           </div>
           <div className="flex items-center gap-3">
             <a href="#how-it-works" className="hidden sm:inline text-sm font-medium text-[#4A5568] hover:text-[#0D1117] transition-colors">
