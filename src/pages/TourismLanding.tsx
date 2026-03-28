@@ -1,11 +1,5 @@
-import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
-import {
-  Globe, MapPin, BarChart3, ArrowRight, ChevronRight, Users2, Megaphone,
-  TrendingUp, Compass, Camera, CalendarDays, Landmark, Building2, PieChart,
-  Play, Sparkles, ArrowDown,
-} from "lucide-react";
+import { motion } from "framer-motion";
 import { useDarkMode } from "@/hooks/use-dark-mode";
 import { Sun, Moon } from "lucide-react";
 import ibloovLogo from "@/assets/ibloov-logo.jpeg";
@@ -15,9 +9,10 @@ import tourismNightlife from "@/assets/tourism-nightlife.jpg";
 import tourismNature from "@/assets/tourism-nature.jpg";
 import tourismCoastal from "@/assets/tourism-coastal.jpg";
 import tourismCity from "@/assets/tourism-city.jpg";
-import { toast } from "sonner";
 import LandingSegmentNav from "@/components/aura/LandingSegmentNav";
 import TourismHero from "@/components/tourism/TourismHero";
+import TourismCardShowcase from "@/components/tourism/TourismCardShowcase";
+import TourismCategoryGrid from "@/components/tourism/TourismCategoryGrid";
 import TourismImageGrid from "@/components/tourism/TourismImageGrid";
 import TourismUseCases from "@/components/tourism/TourismUseCases";
 import TourismCapabilities from "@/components/tourism/TourismCapabilities";
@@ -31,7 +26,7 @@ const TourismLanding = () => {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white font-body antialiased overflow-x-hidden">
-      {/* Nav — transparent over hero */}
+      {/* Nav */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black/60 to-transparent">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -58,18 +53,24 @@ const TourismLanding = () => {
         <LandingSegmentNav />
       </div>
 
-      {/* Hero */}
+      {/* 1. Hero */}
       <TourismHero heroImage={tourismHero} />
 
-      {/* Destination Gallery */}
+      {/* 2. 15-Card Showcase */}
+      <TourismCardShowcase />
+
+      {/* 3. Category Deep-Dive */}
+      <TourismCategoryGrid />
+
+      {/* 4. Destination Gallery */}
       <TourismImageGrid
         images={{ landmark: tourismLandmark, nightlife: tourismNightlife, nature: tourismNature, coastal: tourismCoastal }}
       />
 
-      {/* Use Cases */}
+      {/* 5. Use Cases (Problem/Solution + Who It's For) */}
       <TourismUseCases />
 
-      {/* Parallax City Band */}
+      {/* 6. Parallax City Band */}
       <section className="relative h-[50vh] sm:h-[60vh] overflow-hidden">
         <div className="absolute inset-0">
           <img src={tourismCity} alt="City skyline" className="w-full h-full object-cover" loading="lazy" width={1920} height={800} />
@@ -83,25 +84,26 @@ const TourismLanding = () => {
             transition={{ duration: 0.8 }}
             className="text-center px-5"
           >
-            <p className="text-[#FF6B35] font-bold text-sm tracking-[0.3em] uppercase mb-3">From Cities to Coastlines</p>
+            <p className="text-[#FF6B35] font-bold text-sm tracking-[0.3em] uppercase mb-3">Infinite Scale</p>
             <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-bold leading-[1.1]">
-              Every destination has<br />
-              <span className="bg-gradient-to-r from-[#FF6B35] via-[#FFD700] to-[#00CED1] bg-clip-text text-transparent">a story to tell.</span>
+              From a $500K city bureau to<br />
+              <span className="bg-gradient-to-r from-[#FF6B35] via-[#FFD700] to-[#00CED1] bg-clip-text text-transparent">a $500M national authority.</span>
             </h2>
+            <p className="mt-4 text-white/50 text-lg">Same platform. Infinite scale.</p>
           </motion.div>
         </div>
       </section>
 
-      {/* Capabilities */}
+      {/* 7. Capabilities — Three Pillars */}
       <TourismCapabilities />
 
-      {/* Landmark Mosaic */}
+      {/* 8. Landmark Mosaic */}
       <TourismLandmarkMosaic />
 
-      {/* CTA */}
+      {/* 9. CTA */}
       <TourismCTA />
 
-      {/* Footer */}
+      {/* 10. Footer */}
       <TourismFooter />
     </div>
   );

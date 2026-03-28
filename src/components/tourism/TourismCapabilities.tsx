@@ -4,19 +4,37 @@ import {
   TrendingUp, Compass, Camera, CalendarDays, Landmark, Building2, PieChart,
 } from "lucide-react";
 
-const tourismCapabilities = [
-  { icon: Globe, title: "Destination Portal", desc: "A single link showcasing every venue, attraction, and experience in your destination", color: "#FF6B35" },
-  { icon: MapPin, title: "Interactive Maps", desc: "Let visitors discover restaurants, hotels, and attractions with smart mapping", color: "#00CED1" },
-  { icon: BarChart3, title: "Visitor Analytics", desc: "Track visitor behavior, popular spots, and tourism trends in real-time", color: "#FFD700" },
-  { icon: Users2, title: "Venue Network", desc: "Onboard and manage all hospitality venues in your destination from one dashboard", color: "#9B59B6" },
-  { icon: TrendingUp, title: "Economic Impact", desc: "Measure tourism revenue, spending patterns, and growth metrics", color: "#2ECC71" },
-  { icon: Megaphone, title: "Campaign Manager", desc: "Run destination marketing campaigns with trackable QR codes and links", color: "#E74C3C" },
-  { icon: CalendarDays, title: "Event Calendar", desc: "Centralized events across all venues — festivals, markets, concerts", color: "#FF6B35" },
-  { icon: Camera, title: "Visual Storytelling", desc: "Curate galleries and visitor stories that showcase your destination", color: "#00CED1" },
-  { icon: PieChart, title: "Reporting Suite", desc: "Generate board-ready reports on tourism KPIs and performance", color: "#FFD700" },
-  { icon: Compass, title: "Itinerary Builder", desc: "Help visitors plan multi-day trips with curated venue recommendations", color: "#9B59B6" },
-  { icon: Landmark, title: "Heritage & Culture", desc: "Spotlight cultural landmarks, local cuisine, and authentic experiences", color: "#2ECC71" },
-  { icon: Building2, title: "Stakeholder Portal", desc: "Give government bodies and sponsors visibility into tourism metrics", color: "#E74C3C" },
+const pillars = [
+  {
+    title: "Drive Visitors",
+    color: "#FF6B35",
+    features: [
+      { icon: Globe, title: "Destination Portal", desc: "One link showcasing every venue and experience" },
+      { icon: Megaphone, title: "Campaign Manager", desc: "Trackable QR-powered destination campaigns" },
+      { icon: Camera, title: "Visual Storytelling", desc: "Curated galleries that sell the destination" },
+      { icon: CalendarDays, title: "Event Calendar", desc: "Centralized festivals, markets, and concerts" },
+    ],
+  },
+  {
+    title: "Extend Stays",
+    color: "#FFD700",
+    features: [
+      { icon: MapPin, title: "Interactive Maps", desc: "Smart discovery of restaurants and attractions" },
+      { icon: Compass, title: "Itinerary Builder", desc: "Multi-day trip planning with recommendations" },
+      { icon: Landmark, title: "Heritage & Culture", desc: "Cultural landmarks and authentic experiences" },
+      { icon: Users2, title: "Venue Network", desc: "Onboard all hospitality venues from one hub" },
+    ],
+  },
+  {
+    title: "Measure Impact",
+    color: "#00CED1",
+    features: [
+      { icon: BarChart3, title: "Visitor Analytics", desc: "Real-time behavior, trends, and popular spots" },
+      { icon: TrendingUp, title: "Economic Impact", desc: "Revenue, spending patterns, and growth metrics" },
+      { icon: PieChart, title: "Reporting Suite", desc: "Board-ready KPI reports and dashboards" },
+      { icon: Building2, title: "Stakeholder Portal", desc: "Government and sponsor visibility into data" },
+    ],
+  },
 ];
 
 const TourismCapabilities = () => {
@@ -30,33 +48,53 @@ const TourismCapabilities = () => {
           transition={{ duration: 0.7 }}
           className="text-center mb-16"
         >
-          <p className="text-[#00CED1] font-bold text-xs tracking-[0.3em] uppercase mb-3">Platform Features</p>
+          <p className="text-[#00CED1] font-bold text-xs tracking-[0.3em] uppercase mb-3">Three Pillars</p>
           <h2 className="text-3xl sm:text-5xl font-display font-bold">
-            Destination-grade <span className="text-[#FF6B35]">tools</span>
+            The <span className="text-[#FF6B35]">government sell</span> in three words
           </h2>
           <p className="mt-4 text-white/50 max-w-lg mx-auto">
-            Everything a tourism board needs to digitize, measure, and market their destination.
+            Drive more visitors. Keep them longer. Measure everything.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-          {tourismCapabilities.map((f, i) => (
+        <div className="grid sm:grid-cols-3 gap-6 sm:gap-8">
+          {pillars.map((pillar, pi) => (
             <motion.div
-              key={f.title}
-              initial={{ opacity: 0, y: 20 }}
+              key={pillar.title}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-20px" }}
-              transition={{ duration: 0.4, delay: i * 0.04 }}
-              className="group relative p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-white/[0.15] transition-all duration-300 cursor-pointer overflow-hidden"
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: pi * 0.1 }}
+              className="space-y-4"
             >
-              {/* Colored top-line accent */}
-              <div className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: f.color }} />
-              
-              <div className="w-9 h-9 rounded-lg flex items-center justify-center mb-3" style={{ background: `${f.color}15` }}>
-                <f.icon className="w-4 h-4" style={{ color: f.color }} />
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-1.5 h-8 rounded-full" style={{ background: pillar.color }} />
+                <h3 className="text-xl font-display font-bold text-white">{pillar.title}</h3>
               </div>
-              <h3 className="text-sm font-bold text-white mb-1">{f.title}</h3>
-              <p className="text-[12px] text-white/40 leading-relaxed">{f.desc}</p>
+
+              {pillar.features.map((f, fi) => (
+                <motion.div
+                  key={f.title}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: pi * 0.1 + fi * 0.05 }}
+                  className="group p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] hover:border-white/[0.12] transition-all duration-300"
+                >
+                  <div className="flex items-start gap-3">
+                    <div
+                      className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
+                      style={{ background: `${pillar.color}15` }}
+                    >
+                      <f.icon className="w-4 h-4" style={{ color: pillar.color }} />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-white mb-0.5">{f.title}</h4>
+                      <p className="text-[11px] text-white/40 leading-relaxed">{f.desc}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </motion.div>
           ))}
         </div>
