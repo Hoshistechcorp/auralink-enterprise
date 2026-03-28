@@ -5,11 +5,8 @@ import ibloovLogo from "@/assets/ibloov-logo.jpeg";
 import LandingSegmentNav from "@/components/aura/LandingSegmentNav";
 import EnterpriseHero from "@/components/enterprise/EnterpriseHero";
 import EnterpriseTrustBar from "@/components/enterprise/EnterpriseTrustBar";
-import EnterpriseRevenueStrip from "@/components/enterprise/EnterpriseRevenueStrip";
 import EnterpriseWhyCards from "@/components/enterprise/EnterpriseWhyCards";
-import EnterpriseBeforeAfter from "@/components/enterprise/EnterpriseBeforeAfter";
 import EnterpriseMicrositePreview from "@/components/enterprise/EnterpriseMicrositePreview";
-import EnterpriseFeatureRows from "@/components/enterprise/EnterpriseFeatureRows";
 import EnterpriseEcosystem from "@/components/enterprise/EnterpriseEcosystem";
 import EnterpriseGiftCards from "@/components/enterprise/EnterpriseGiftCards";
 import EnterpriseChainBenefits from "@/components/enterprise/EnterpriseChainBenefits";
@@ -63,11 +60,19 @@ const Index = () => {
       {/* Sections */}
       <EnterpriseHero />
       <EnterpriseTrustBar />
-      <EnterpriseRevenueStrip />
       <EnterpriseWhyCards />
-      <EnterpriseBeforeAfter />
       <EnterpriseMicrositePreview />
-      <EnterpriseFeatureRows />
+
+      {/* Full-width hospitality image break */}
+      <section className="relative w-full h-[50vh] sm:h-[60vh] overflow-hidden">
+        <img
+          src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=80"
+          alt="Fine dining experience"
+          className="w-full h-full object-cover"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0D1117] via-[#0D1117]/30 to-[#0D1117]/60" />
+      </section>
       <EnterpriseEcosystem />
       <EnterpriseGiftCards />
       <EnterpriseChainBenefits />
