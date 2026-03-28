@@ -27,7 +27,6 @@ const EnterpriseMicrositePreview = () => {
     <section className="py-16 sm:py-24 border-t border-white/[0.04] overflow-hidden">
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Text */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -39,8 +38,8 @@ const EnterpriseMicrositePreview = () => {
             <h2 className="mt-3 font-display text-3xl sm:text-4xl font-bold text-white leading-tight">
               See what your <span className="italic text-[#E8604C]">guests</span> see.
             </h2>
-            <p className="mt-4 text-white/40 text-sm leading-relaxed max-w-md">
-              Every AuraLink microsite comes with 15 smart modules — from gift cards and AI concierge to loyalty rewards and live events. All accessible from one scannable link.
+            <p className="mt-4 text-white/40 text-sm max-w-md">
+              15 smart modules, one scannable link. Zero app downloads.
             </p>
             <button
               onClick={() => navigate("/microsite")}
@@ -51,7 +50,6 @@ const EnterpriseMicrositePreview = () => {
             </button>
           </motion.div>
 
-          {/* Phone mockup */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -60,22 +58,14 @@ const EnterpriseMicrositePreview = () => {
             className="flex justify-center"
           >
             <div className="relative">
-              {/* Glow */}
               <div className="absolute -inset-4 bg-gradient-to-br from-[#E8604C]/20 to-[#D4A853]/10 rounded-[3rem] blur-2xl" />
-              
-              {/* Phone frame */}
               <div className="relative w-[280px] rounded-[2.5rem] border-[3px] border-white/10 bg-[#0D1117] p-4 pt-8 shadow-2xl">
-                {/* Notch */}
                 <div className="absolute top-3 left-1/2 -translate-x-1/2 w-20 h-5 bg-black rounded-full" />
-                
-                {/* Header */}
                 <div className="text-center mb-4 mt-2">
                   <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#E8604C] to-[#D4A853] mx-auto mb-2" />
                   <p className="text-white text-xs font-bold">The Grand Restaurant</p>
                   <p className="text-white/30 text-[9px]">Fine Dining · New York</p>
                 </div>
-
-                {/* Card grid */}
                 <div className="grid grid-cols-3 gap-2">
                   {cards.map((card) => {
                     const Icon = card.icon;
@@ -92,8 +82,6 @@ const EnterpriseMicrositePreview = () => {
                     );
                   })}
                 </div>
-
-                {/* Bottom bar */}
                 <div className="mt-3 h-1 w-24 bg-white/10 rounded-full mx-auto" />
               </div>
             </div>

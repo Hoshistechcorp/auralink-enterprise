@@ -5,27 +5,27 @@ const features = [
   {
     label: "VibeGigs",
     title: "Live entertainment, booked in minutes.",
-    desc: "Browse local artists, DJs, and performers. Book directly through your AuraLink. Fill your venue with energy — without the back-and-forth.",
+    desc: "Discover and book local artists, DJs, and performers directly.",
     stat: "62%",
-    statLabel: "faster entertainment staffing",
+    statLabel: "faster staffing",
     image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80",
     color: "#A855F7",
   },
   {
     label: "Flex-it",
     title: "Tipping & payments, modernized.",
-    desc: "QR-based tipping for staff, split bills, and digital receipts. Guests love the convenience. Staff love the transparency. You love the data.",
+    desc: "QR tipping, split bills, and digital receipts guests love.",
     stat: "$127K",
-    statLabel: "avg annual gift card revenue per venue",
+    statLabel: "avg gift card revenue/venue",
     image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80",
     color: "#D4A853",
   },
   {
     label: "AI Concierge",
     title: "Your 24/7 multilingual guest assistant.",
-    desc: "Trained on your menu, policies, and brand voice. Handles reservations, answers questions, recommends dishes — in 40+ languages, around the clock.",
+    desc: "Handles reservations, recommends dishes — in 40+ languages.",
     stat: "80%",
-    statLabel: "of guest inquiries handled automatically",
+    statLabel: "inquiries auto-handled",
     image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
     color: "#1B9AAA",
   },
@@ -60,31 +60,25 @@ const EnterpriseFeatureRows = () => (
               transition={{ duration: 0.6 }}
               className={`grid lg:grid-cols-2 gap-8 items-center ${reversed ? "lg:direction-rtl" : ""}`}
             >
-              {/* Image */}
               <div className={`relative rounded-2xl overflow-hidden aspect-[4/3] ${reversed ? "lg:order-2" : ""}`}>
                 <img src={f.image} alt={f.label} className="w-full h-full object-cover" loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0D1117] via-[#0D1117]/40 to-transparent" />
-                <div className="absolute bottom-4 left-4 flex items-center gap-2">
+                <div className="absolute bottom-4 left-4">
                   <span className="px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase text-white" style={{ backgroundColor: f.color }}>
                     {f.label}
                   </span>
                 </div>
               </div>
 
-              {/* Text */}
               <div className={`${reversed ? "lg:order-1 lg:text-right" : ""}`}>
-                <div className="mb-4">
-                  <span className="font-display text-5xl font-bold bg-gradient-to-r from-[#D4A853] to-[#E8604C] bg-clip-text text-transparent">
-                    {f.stat}
-                  </span>
-                  <span className="block text-xs text-white/30 mt-1">{f.statLabel}</span>
-                </div>
-                <h3 className="font-display text-2xl sm:text-3xl font-bold text-white leading-tight">
+                <span className="font-display text-5xl font-bold bg-gradient-to-r from-[#D4A853] to-[#E8604C] bg-clip-text text-transparent">
+                  {f.stat}
+                </span>
+                <span className="block text-xs text-white/30 mt-1">{f.statLabel}</span>
+                <h3 className="mt-4 font-display text-2xl sm:text-3xl font-bold text-white leading-tight">
                   {f.title}
                 </h3>
-                <p className="mt-3 text-white/40 text-sm leading-relaxed max-w-md">
-                  {f.desc}
-                </p>
+                <p className="mt-2 text-white/40 text-sm max-w-md">{f.desc}</p>
                 <button className="mt-5 flex items-center gap-2 text-sm font-semibold transition-colors hover:text-white" style={{ color: f.color }}>
                   Learn more <ArrowRight className="w-4 h-4" />
                 </button>

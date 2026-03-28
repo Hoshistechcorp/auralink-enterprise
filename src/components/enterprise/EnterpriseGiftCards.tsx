@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 const tabs = ["Create & Customize", "Sell & Deliver", "Track & Analyze", "Redeem & Manage"];
 
 const giftCards = [
-  { amount: "$50", emoji: "☕", label: "Coffee Lover", bg: "from-[#E8604C]/20 to-[#E8604C]/5", code: "AURA-50-CAFE" },
-  { amount: "$100", emoji: "🍽️", label: "Dinner Date", bg: "from-[#1B9AAA]/20 to-[#1B9AAA]/5", code: "AURA-100-DINE" },
-  { amount: "$200", emoji: "🥂", label: "VIP Experience", bg: "from-[#D4A853]/20 to-[#D4A853]/5", code: "AURA-200-VIP" },
-  { amount: "$500", emoji: "🎉", label: "Ultimate Package", bg: "from-[#A855F7]/20 to-[#A855F7]/5", code: "AURA-500-ULTI" },
+  { amount: "$50", label: "Coffee Lover", image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&q=70", code: "AURA-50-CAFE" },
+  { amount: "$100", label: "Dinner Date", image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&q=70", code: "AURA-100-DINE" },
+  { amount: "$200", label: "VIP Experience", image: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=400&q=70", code: "AURA-200-VIP" },
+  { amount: "$500", label: "Ultimate Package", image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&q=70", code: "AURA-500-ULTI" },
 ];
 
 const EnterpriseGiftCards = () => {
@@ -17,7 +17,6 @@ const EnterpriseGiftCards = () => {
     <section className="py-16 sm:py-24 border-t border-white/[0.04]">
       <div className="max-w-5xl mx-auto px-5 sm:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -26,10 +25,10 @@ const EnterpriseGiftCards = () => {
           >
             <span className="text-xs font-semibold tracking-widest uppercase text-[#D4A853]">Gift Card Commerce</span>
             <h2 className="mt-3 font-display text-3xl sm:text-4xl font-bold text-white leading-tight">
-              Sell digital gift cards <span className="italic text-[#D4A853]">directly from your page.</span>
+              Sell digital gift cards <span className="italic text-[#D4A853]">directly.</span>
             </h2>
-            <p className="mt-4 text-white/50 text-sm leading-relaxed">
-              No third-party platform. No revenue share. Create branded gift cards, sell them instantly, and track every dollar.
+            <p className="mt-3 text-white/50 text-sm">
+              No third-party fees. Create, sell, and track every dollar.
             </p>
 
             <div className="flex flex-wrap gap-2 mt-6">
@@ -49,7 +48,6 @@ const EnterpriseGiftCards = () => {
             </div>
           </motion.div>
 
-          {/* Right — Gift card grid */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -64,12 +62,15 @@ const EnterpriseGiftCards = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, duration: 0.4 }}
-                className={`relative p-5 rounded-2xl bg-gradient-to-br ${gc.bg} border border-white/[0.06] overflow-hidden`}
+                className="relative rounded-2xl overflow-hidden border border-white/[0.06] min-h-[180px] flex flex-col justify-end"
               >
-                <span className="text-4xl block mb-3">{gc.emoji}</span>
-                <p className="font-display text-2xl font-bold text-white">{gc.amount}</p>
-                <p className="text-white/40 text-xs font-medium mt-0.5">{gc.label}</p>
-                <p className="text-white/20 text-[10px] font-mono mt-3">{gc.code}</p>
+                <img src={gc.image} alt={gc.label} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0D1117] via-[#0D1117]/60 to-transparent" />
+                <div className="relative p-4">
+                  <p className="font-display text-2xl font-bold text-white">{gc.amount}</p>
+                  <p className="text-white/40 text-xs font-medium">{gc.label}</p>
+                  <p className="text-white/20 text-[10px] font-mono mt-2">{gc.code}</p>
+                </div>
               </motion.div>
             ))}
           </motion.div>
