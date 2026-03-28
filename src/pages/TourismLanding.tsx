@@ -1,20 +1,23 @@
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
 import { useDarkMode } from "@/hooks/use-dark-mode";
-import { Sun, Moon } from "lucide-react";
 import ibloovLogo from "@/assets/ibloov-logo.jpeg";
-import tourismHero from "@/assets/tourism-hero.jpg";
 import tourismLandmark from "@/assets/tourism-landmark.jpg";
 import tourismNightlife from "@/assets/tourism-nightlife.jpg";
 import tourismNature from "@/assets/tourism-nature.jpg";
 import tourismCoastal from "@/assets/tourism-coastal.jpg";
 import tourismCity from "@/assets/tourism-city.jpg";
+import { motion } from "framer-motion";
 import LandingSegmentNav from "@/components/aura/LandingSegmentNav";
 import TourismHero from "@/components/tourism/TourismHero";
+import TourismStatsStrip from "@/components/tourism/TourismStatsStrip";
+import TourismProblem from "@/components/tourism/TourismProblem";
+import TourismPhoneMockup from "@/components/tourism/TourismPhoneMockup";
+import TourismHowItWorks from "@/components/tourism/TourismHowItWorks";
 import TourismCardShowcase from "@/components/tourism/TourismCardShowcase";
 import TourismCategoryGrid from "@/components/tourism/TourismCategoryGrid";
+import TourismDashboard from "@/components/tourism/TourismDashboard";
+import TourismBuyerTiers from "@/components/tourism/TourismBuyerTiers";
 import TourismImageGrid from "@/components/tourism/TourismImageGrid";
-import TourismUseCases from "@/components/tourism/TourismUseCases";
 import TourismCapabilities from "@/components/tourism/TourismCapabilities";
 import TourismCTA from "@/components/tourism/TourismCTA";
 import TourismFooter from "@/components/tourism/TourismFooter";
@@ -25,52 +28,78 @@ const TourismLanding = () => {
   const { isDark, toggle: toggleDark } = useDarkMode();
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white font-body antialiased overflow-x-hidden">
-      {/* Nav */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-black/60 to-transparent">
+    <div className="min-h-screen font-body antialiased overflow-x-hidden">
+      {/* Nav — warm light */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#FAFAF8]/92 backdrop-blur-xl border-b border-black/[0.04]">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <img src={ibloovLogo} alt="iBloov" className="h-8 w-auto rounded-lg" />
-            <span className="text-white/30">|</span>
-            <span className="font-semibold text-sm text-white tracking-wide">AuraLink</span>
+            <div className="w-2.5 h-2.5 rounded-full bg-[#E8604C]" />
+            <span className="font-display text-[22px] text-[#0D1117]">AuraLink Tourism</span>
           </div>
           <div className="flex items-center gap-3">
-            <button onClick={toggleDark} className="p-2 rounded-xl hover:bg-white/10 transition-colors" aria-label="Toggle theme">
-              {isDark ? <Sun className="w-4 h-4 text-white" /> : <Moon className="w-4 h-4 text-white" />}
-            </button>
-            <button onClick={() => navigate("/login")} className="px-5 py-2 rounded-full border border-white/20 text-[13px] font-semibold hover:bg-white/10 transition-all text-white">
+            <a href="#how-it-works" className="hidden sm:inline text-sm font-medium text-[#4A5568] hover:text-[#0D1117] transition-colors">
+              How It Works
+            </a>
+            <a href="#cards" className="hidden sm:inline text-sm font-medium text-[#4A5568] hover:text-[#0D1117] transition-colors ml-5">
+              Features
+            </a>
+            <button
+              onClick={() => navigate("/login")}
+              className="hidden sm:inline text-sm font-medium text-[#4A5568] hover:text-[#0D1117] transition-colors ml-5"
+            >
               Sign In
             </button>
-            <button onClick={() => navigate("/signup")} className="px-5 py-2 rounded-full bg-[#FF6B35] text-white text-[13px] font-bold hover:bg-[#FF8555] transition-all shadow-lg shadow-[#FF6B35]/30">
-              Contact Sales
+            <button
+              onClick={() => navigate("/signup")}
+              className="ml-4 px-6 py-2.5 rounded-lg bg-[#E8604C] text-white text-sm font-semibold hover:-translate-y-0.5 hover:shadow-[0_4px_16px_rgba(232,96,76,0.3)] transition-all"
+            >
+              Get Your Destination Live →
             </button>
           </div>
         </div>
       </nav>
 
       {/* Segment Nav */}
-      <div className="fixed top-16 left-0 right-0 z-40 bg-black/40 backdrop-blur-xl border-b border-white/5">
+      <div className="fixed top-16 left-0 right-0 z-40 bg-[#FAFAF8]/80 backdrop-blur-xl border-b border-black/[0.04]">
         <LandingSegmentNav />
       </div>
 
       {/* 1. Hero */}
-      <TourismHero heroImage={tourismHero} />
+      <TourismHero />
 
-      {/* 2. 15-Card Showcase */}
+      {/* 2. Stats Strip */}
+      <TourismStatsStrip />
+
+      {/* 3. Problem */}
+      <TourismProblem />
+
+      {/* 4. Solution + Phone Mockup */}
+      <TourismPhoneMockup />
+
+      {/* 5. How It Works */}
+      <div id="how-it-works">
+        <TourismHowItWorks />
+      </div>
+
+      {/* 6. 15-Card Showcase (dark) */}
       <TourismCardShowcase />
 
-      {/* 3. Category Deep-Dive */}
+      {/* 7. Category Deep-Dive (dark) */}
       <TourismCategoryGrid />
 
-      {/* 4. Destination Gallery */}
+      {/* 8. Dashboard Preview */}
+      <TourismDashboard />
+
+      {/* 9. Buyer Tiers */}
+      <TourismBuyerTiers />
+
+      {/* 10. Destination Gallery */}
       <TourismImageGrid
         images={{ landmark: tourismLandmark, nightlife: tourismNightlife, nature: tourismNature, coastal: tourismCoastal }}
       />
 
-      {/* 5. Use Cases (Problem/Solution + Who It's For) */}
-      <TourismUseCases />
-
-      {/* 6. Parallax City Band */}
+      {/* 11. Parallax City Band */}
       <section className="relative h-[50vh] sm:h-[60vh] overflow-hidden">
         <div className="absolute inset-0">
           <img src={tourismCity} alt="City skyline" className="w-full h-full object-cover" loading="lazy" width={1920} height={800} />
@@ -85,7 +114,7 @@ const TourismLanding = () => {
             className="text-center px-5"
           >
             <p className="text-[#FF6B35] font-bold text-sm tracking-[0.3em] uppercase mb-3">Infinite Scale</p>
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-bold leading-[1.1]">
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-bold text-white leading-[1.1]">
               From a $500K city bureau to<br />
               <span className="bg-gradient-to-r from-[#FF6B35] via-[#FFD700] to-[#00CED1] bg-clip-text text-transparent">a $500M national authority.</span>
             </h2>
@@ -94,16 +123,16 @@ const TourismLanding = () => {
         </div>
       </section>
 
-      {/* 7. Capabilities — Three Pillars */}
+      {/* 12. Capabilities (dark) */}
       <TourismCapabilities />
 
-      {/* 8. Landmark Mosaic */}
+      {/* 13. Landmark Mosaic */}
       <TourismLandmarkMosaic />
 
-      {/* 9. CTA */}
+      {/* 14. CTA */}
       <TourismCTA />
 
-      {/* 10. Footer */}
+      {/* 15. Footer */}
       <TourismFooter />
     </div>
   );
