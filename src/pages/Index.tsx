@@ -9,8 +9,7 @@ import EnterpriseWhyCards from "@/components/enterprise/EnterpriseWhyCards";
 import EnterpriseMicrositePreview from "@/components/enterprise/EnterpriseMicrositePreview";
 import EnterpriseEcosystem from "@/components/enterprise/EnterpriseEcosystem";
 import EnterpriseGiftCards from "@/components/enterprise/EnterpriseGiftCards";
-import EnterpriseChainBenefits from "@/components/enterprise/EnterpriseChainBenefits";
-import EnterpriseCSuiteCTAs from "@/components/enterprise/EnterpriseCSuiteCTAs";
+import EnterpriseGrowthShowcase from "@/components/enterprise/EnterpriseGrowthShowcase";
 import EnterpriseVideoDemo from "@/components/enterprise/EnterpriseVideoDemo";
 import EnterpriseVenueTypes from "@/components/enterprise/EnterpriseVenueTypes";
 import EnterpriseCTA from "@/components/enterprise/EnterpriseCTA";
@@ -75,8 +74,7 @@ const Index = () => {
       </section>
       <EnterpriseEcosystem />
       <EnterpriseGiftCards />
-      <EnterpriseChainBenefits />
-      <EnterpriseCSuiteCTAs />
+      <EnterpriseGrowthShowcase />
       <EnterpriseVideoDemo />
       <EnterpriseVenueTypes />
       <EnterpriseCTA />
