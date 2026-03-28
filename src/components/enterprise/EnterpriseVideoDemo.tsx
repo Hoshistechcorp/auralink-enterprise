@@ -17,7 +17,7 @@ const EnterpriseVideoDemo = () => {
         >
           <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#E8604C]">See It In Action</span>
           <h2 className="mt-3 font-display text-3xl sm:text-4xl font-bold text-white">
-            Watch a Michelin-starred restaurant <span className="italic text-white/40">go live in under 3 minutes.</span>
+            Go live in <span className="italic text-white/40">under 3 minutes.</span>
           </h2>
         </motion.div>
 
@@ -46,7 +46,6 @@ const EnterpriseVideoDemo = () => {
               />
               <div className="absolute inset-0 bg-[#0D1117]/70" />
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                {/* Glow ring */}
                 <div className="relative">
                   <div className="absolute -inset-4 bg-[#E8604C]/20 rounded-full blur-xl animate-pulse" />
                   <div className="relative w-20 h-20 rounded-full bg-[#E8604C] text-white flex items-center justify-center shadow-2xl shadow-[#E8604C]/30 group-hover:scale-110 transition-transform">

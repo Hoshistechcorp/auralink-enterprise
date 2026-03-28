@@ -2,12 +2,12 @@ import { motion } from "framer-motion";
 import { TrendingDown, Gift, Users, Repeat, Bot, BarChart3 } from "lucide-react";
 
 const benefits = [
-  { icon: TrendingDown, stat: "40%", label: "Admin Reduction", desc: "Across all locations with centralized management", color: "#E8604C" },
-  { icon: Gift, stat: "$127K", label: "Gift Card Revenue", desc: "Average annual revenue per venue from digital cards", color: "#D4A853" },
-  { icon: Users, stat: "62%", label: "Faster Staffing", desc: "Entertainment & event staffing via VibeGigs", color: "#A855F7" },
-  { icon: Repeat, stat: "3.2x", label: "Repeat Visits", desc: "Gamified loyalty tiers drive return customers", color: "#1B9AAA" },
-  { icon: Bot, stat: "80%", label: "AI Automation", desc: "Guest inquiries handled without human intervention", color: "#E8604C" },
-  { icon: BarChart3, stat: "Real-Time", label: "Cross-Location Analytics", desc: "Compare performance across every venue instantly", color: "#D4A853" },
+  { icon: TrendingDown, stat: "40%", label: "Admin Reduction", desc: "Centralized management", color: "#E8604C" },
+  { icon: Gift, stat: "$127K", label: "Gift Card Revenue", desc: "Per venue annually", color: "#D4A853" },
+  { icon: Users, stat: "62%", label: "Faster Staffing", desc: "Via VibeGigs", color: "#A855F7" },
+  { icon: Repeat, stat: "3.2x", label: "Repeat Visits", desc: "Gamified loyalty", color: "#1B9AAA" },
+  { icon: Bot, stat: "80%", label: "AI Automation", desc: "No human needed", color: "#E8604C" },
+  { icon: BarChart3, stat: "Real-Time", label: "Cross-Location Analytics", desc: "Every venue, instantly", color: "#D4A853" },
 ];
 
 const EnterpriseChainBenefits = () => (
@@ -45,7 +45,7 @@ const EnterpriseChainBenefits = () => (
                 {b.stat}
               </span>
               <span className="block text-white font-semibold text-sm mt-1">{b.label}</span>
-              <p className="mt-2 text-white/30 text-xs leading-relaxed">{b.desc}</p>
+              <p className="mt-1 text-white/30 text-xs">{b.desc}</p>
             </motion.div>
           );
         })}

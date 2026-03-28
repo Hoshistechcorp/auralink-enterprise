@@ -2,17 +2,25 @@ import { motion } from "framer-motion";
 import { X, Check } from "lucide-react";
 
 const comparisons = [
-  { before: "5 separate tools, 5 logins, 5 invoices", after: "One unified platform — one link" },
-  { before: "Zero guest data or behavioral insights", after: "Real-time analytics dashboard per location" },
-  { before: "Generic link-in-bio with no brand identity", after: "Branded microsite with 15+ smart modules" },
-  { before: "No loyalty program or repeat-visit strategy", after: "Gamified rewards, tiers & referral engine" },
-  { before: "Manual gift cards with no tracking", after: "Digital gift card commerce with analytics" },
-  { before: "No AI — guests wait for human replies", after: "24/7 multilingual AI concierge" },
+  { before: "5 tools, 5 logins, 5 invoices", after: "One platform — one link" },
+  { before: "Zero guest data insights", after: "Real-time analytics per location" },
+  { before: "No loyalty or repeat strategy", after: "Gamified rewards & referral engine" },
+  { before: "Guests wait for human replies", after: "24/7 multilingual AI concierge" },
 ];
 
 const EnterpriseBeforeAfter = () => (
-  <section className="py-16 sm:py-24 border-t border-white/[0.04]">
-    <div className="max-w-5xl mx-auto px-5 sm:px-8">
+  <section className="py-16 sm:py-24 border-t border-white/[0.04] relative overflow-hidden">
+    <div className="absolute inset-0">
+      <img
+        src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1200&q=60"
+        alt=""
+        className="w-full h-full object-cover"
+        loading="lazy"
+      />
+      <div className="absolute inset-0 bg-[#0D1117]/95" />
+    </div>
+
+    <div className="max-w-5xl mx-auto px-5 sm:px-8 relative">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -28,7 +36,6 @@ const EnterpriseBeforeAfter = () => (
       </motion.div>
 
       <div className="grid md:grid-cols-2 gap-4">
-        {/* Before column */}
         <div className="space-y-3">
           <div className="text-xs font-bold tracking-[0.2em] uppercase text-red-400/60 mb-4 text-center">
             Without AuraLink
@@ -40,15 +47,14 @@ const EnterpriseBeforeAfter = () => (
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className="flex items-start gap-3 p-4 rounded-xl bg-red-500/[0.04] border border-red-500/[0.08]"
+              className="flex items-center gap-3 p-4 rounded-xl bg-red-500/[0.04] border border-red-500/[0.08]"
             >
-              <X className="w-4 h-4 text-red-400/60 mt-0.5 shrink-0" />
+              <X className="w-4 h-4 text-red-400/60 shrink-0" />
               <span className="text-sm text-white/50">{c.before}</span>
             </motion.div>
           ))}
         </div>
 
-        {/* After column */}
         <div className="space-y-3">
           <div className="text-xs font-bold tracking-[0.2em] uppercase text-emerald-400/60 mb-4 text-center">
             With AuraLink
@@ -60,9 +66,9 @@ const EnterpriseBeforeAfter = () => (
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className="flex items-start gap-3 p-4 rounded-xl bg-emerald-500/[0.04] border border-emerald-500/[0.08]"
+              className="flex items-center gap-3 p-4 rounded-xl bg-emerald-500/[0.04] border border-emerald-500/[0.08]"
             >
-              <Check className="w-4 h-4 text-emerald-400/60 mt-0.5 shrink-0" />
+              <Check className="w-4 h-4 text-emerald-400/60 shrink-0" />
               <span className="text-sm text-white/70 font-medium">{c.after}</span>
             </motion.div>
           ))}

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, ChevronRight, Shield, Clock, Globe, FileCheck } from "lucide-react";
+import { ArrowRight, Eye, Shield, Clock, Globe, FileCheck } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const trustSignals = [
@@ -14,7 +14,6 @@ const EnterpriseCTA = () => {
 
   return (
     <section className="py-20 sm:py-32 border-t border-white/[0.04] relative overflow-hidden">
-      {/* Warm glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-t from-[#E8604C]/[0.08] via-[#D4A853]/[0.04] to-transparent rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-3xl mx-auto px-5 sm:px-8 text-center relative">
@@ -30,10 +29,6 @@ const EnterpriseCTA = () => {
             <br />
             Give them one.
           </h2>
-          <p className="mt-5 text-white/40 text-sm max-w-md mx-auto leading-relaxed">
-            Replace your link-in-bio, review tool, loyalty app, QR generator, and analytics dashboard
-            — with a single AuraLink.
-          </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-8">
             <button
@@ -43,16 +38,15 @@ const EnterpriseCTA = () => {
               Get Started Free
               <ArrowRight className="w-4 h-4" />
             </button>
-            <a
-              href="mailto:hello@ibloov.com?subject=AuraLink Enterprise Demo"
+            <button
+              onClick={() => navigate("/microsite")}
               className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 rounded-2xl border border-white/10 text-white/70 font-semibold text-[15px] hover:bg-white/[0.04] transition-colors"
             >
-              Book a Demo
-              <ChevronRight className="w-4 h-4" />
-            </a>
+              <Eye className="w-4 h-4" />
+              See the Public View
+            </button>
           </div>
 
-          {/* Trust signals */}
           <div className="flex flex-wrap items-center justify-center gap-6 mt-10">
             {trustSignals.map((t) => {
               const Icon = t.icon;

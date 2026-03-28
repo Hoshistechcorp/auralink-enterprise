@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Eye } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const stats = [
@@ -13,7 +13,6 @@ const EnterpriseHero = () => {
 
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-      {/* Background image */}
       <div className="absolute inset-0">
         <img
           src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1600&q=80"
@@ -24,7 +23,6 @@ const EnterpriseHero = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-[#0D1117] via-transparent to-[#0D1117]/40" />
       </div>
 
-      {/* Film grain */}
       <div className="absolute inset-0 opacity-[0.04] pointer-events-none" style={{
         backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`,
       }} />
@@ -49,11 +47,9 @@ const EnterpriseHero = () => {
           </h1>
 
           <p className="mt-6 text-white/40 text-base sm:text-lg max-w-lg leading-relaxed">
-            One link gives your venue a branded microsite with loyalty, gamification,
-            gift cards, AI concierge, and real-time analytics — live in 24 hours.
+            One link. Loyalty, gift cards, AI concierge, analytics — live in 24 hours.
           </p>
 
-          {/* Stats */}
           <div className="flex items-center gap-8 mt-8">
             {stats.map((s) => (
               <div key={s.label}>
@@ -65,7 +61,6 @@ const EnterpriseHero = () => {
             ))}
           </div>
 
-          {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-start gap-3 mt-8">
             <button
               onClick={() => navigate("/signup")}
@@ -74,12 +69,13 @@ const EnterpriseHero = () => {
               Launch Your AuraLink
               <ArrowRight className="w-4 h-4" />
             </button>
-            <a
-              href="mailto:hello@ibloov.com?subject=AuraLink Enterprise Demo"
+            <button
+              onClick={() => navigate("/microsite")}
               className="flex items-center gap-2 px-8 py-4 rounded-2xl border border-white/10 text-white/70 font-semibold text-[15px] hover:bg-white/[0.04] transition-colors"
             >
-              Book a Strategy Call
-            </a>
+              <Eye className="w-4 h-4" />
+              See the Public View
+            </button>
           </div>
         </motion.div>
       </div>

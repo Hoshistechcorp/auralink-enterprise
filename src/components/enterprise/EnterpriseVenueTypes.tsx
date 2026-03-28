@@ -2,34 +2,34 @@ import { motion } from "framer-motion";
 
 const venues = [
   {
-    emoji: "🍽️",
     name: "Restaurants & Cafés",
-    desc: "Turn first-time diners into regulars. Loyalty points, spin-to-win games, digital menus, and referral rewards — all from one QR scan at the table.",
+    desc: "Loyalty, gamification, digital menus — one QR scan.",
     color: "#E8604C",
+    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&q=70",
   },
   {
-    emoji: "🏨",
     name: "Hotels & Resorts",
-    desc: "A digital concierge that drives direct bookings. Guests discover amenities, leave reviews, book spa treatments, and share with friends — no app needed.",
+    desc: "Digital concierge driving direct bookings.",
     color: "#D4A853",
+    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&q=70",
   },
   {
-    emoji: "🍸",
     name: "Bars & Lounges",
-    desc: "Fill seats on slow nights with targeted gamification. Happy hour promos, event calendars, and real-time analytics across every location.",
+    desc: "Fill seats with targeted gamification & promos.",
     color: "#1B9AAA",
+    image: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=400&q=70",
   },
   {
-    emoji: "🎵",
     name: "Clubs & Nightlife",
-    desc: "VIP lists, bottle service menus, event tickets, and influencer partnerships — all managed from one dashboard with live revenue tracking.",
+    desc: "VIP lists, tickets, and live revenue tracking.",
     color: "#EC4899",
+    image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&q=70",
   },
   {
-    emoji: "🎪",
     name: "Event Venues",
-    desc: "Showcase your space, manage bookings, sell packages, and collect reviews. One link for corporate clients, wedding planners, and walk-ins.",
+    desc: "Showcase, book, sell, and collect reviews.",
     color: "#06B6D4",
+    image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&q=70",
   },
 ];
 
@@ -49,26 +49,22 @@ const EnterpriseVenueTypes = () => (
         </h2>
       </motion.div>
 
-      <div className="space-y-3">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {venues.map((v, i) => (
           <motion.div
             key={v.name}
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.06, duration: 0.5 }}
-            className="flex items-start gap-5 p-5 sm:p-6 rounded-2xl bg-white/[0.03] border border-white/[0.06]"
-            style={{ borderLeftColor: v.color, borderLeftWidth: 3 }}
+            className="relative rounded-2xl overflow-hidden border border-white/[0.06] min-h-[200px] flex flex-col justify-end group"
+            style={{ borderTopColor: v.color, borderTopWidth: 2 }}
           >
-            <div
-              className="w-14 h-14 rounded-xl flex-shrink-0 flex items-center justify-center text-3xl"
-              style={{ backgroundColor: `${v.color}10` }}
-            >
-              {v.emoji}
-            </div>
-            <div>
+            <img src={v.image} alt={v.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0D1117] via-[#0D1117]/70 to-transparent" />
+            <div className="relative p-5">
               <h3 className="text-white font-semibold text-lg">{v.name}</h3>
-              <p className="mt-1.5 text-white/50 text-sm leading-relaxed">{v.desc}</p>
+              <p className="mt-1 text-white/50 text-sm">{v.desc}</p>
             </div>
           </motion.div>
         ))}
