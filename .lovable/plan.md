@@ -1,138 +1,86 @@
 
 
-# Enterprise Landing Page — Premium C-Suite Conversion Redesign
+# Enterprise Landing Page — Visual Polish & Content Trim
 
-The current page is functional but reads like a product feature list. This redesign transforms it into a luxury hospitality conversion machine that makes CMOs, CTOs, and GMs feel like this was built for their brand.
+The page has good structure but needs: real photography, less text, a "View Public Page" CTA replacing "Book a Strategy Call," and visual richness across sections.
 
-## What Changes
+## Changes Overview
 
-### 1. Cinematic Hero with Real Photography (`EnterpriseHero.tsx` — rewrite)
-- Full-bleed background using Unsplash fine dining image with dark gradient overlay
-- Headline: **"Your Guests Deserve More Than a Website"** — speaks to the outcome, not the product
-- Three animated stat counters: **312% more engagement**, **8 revenue streams**, **Live in 24 hours**
-- Two CTAs: coral "Launch Your AuraLink →" and outlined "Book a Strategy Call"
-- Subtle film-grain texture overlay for editorial luxury feel
+### 1. `EnterpriseHero.tsx` — Replace "Book a Strategy Call" with "View Public Page →"
+- Change the outlined CTA to navigate to `/microsite` with text "See the Public View"
+- Trim the description paragraph to one short punchy line
 
-### 2. Trust Bar — NEW component (`EnterpriseTrustBar.tsx`)
-- Horizontal strip: "TRUSTED BY LEADING HOSPITALITY BRANDS"
-- Aspirational brand names in a scrolling marquee: Nobu, Soho House, Zuma, Tao Group, W Hotels, Mandarin Oriental
-- Muted gold text on dark bg, auto-scrolling animation
+### 2. `EnterpriseWhyCards.tsx` — Add background images, trim text
+- Add real Unsplash background images to each card (subtle overlay):
+  - One Link: restaurant table with QR code `photo-1559339352-11d035aa65de`
+  - AI Concierge: hotel lobby `photo-1566073771259-6a8506099945`
+  - Gamified Growth: busy bar scene `photo-1514933651103-005eec06c04b`
+  - Analytics: dashboard/laptop `photo-1460925895917-afdab827c52f`
+- Shorten `desc` text to one line each
+- Remove the metric pill badge (redundant with the stat)
 
-### 3. Revenue & Market Stats Strip — NEW component (`EnterpriseRevenueStrip.tsx`)
-- Three large stat blocks side by side with cross-hatch texture background
-- **$1.9T** global hospitality market · **73%** guests prefer mobile-first · **$4.2B** lost annually to tool fragmentation
-- Gold accent numbers, white labels — CMOs speak this language
+### 3. `EnterpriseBeforeAfter.tsx` — Trim to 4 rows, add background image
+- Reduce from 6 comparisons to 4 (the strongest ones)
+- Add a subtle background image of a restaurant interior with heavy dark overlay
+- Shorten the before/after text to be punchier (3-5 words each)
 
-### 4. Before vs. After — NEW component (`EnterpriseBeforeAfter.tsx`)
-- Two-column comparison with red "Before" and green "After"
-- Six pain points vs. six AuraLink solutions side by side:
-  - "5 separate tools" → "One unified platform"
-  - "No guest data" → "Real-time analytics dashboard"
-  - "Generic links" → "Branded microsite with 15 modules"
-  - "Zero loyalty program" → "Gamified rewards & tiers"
-  - "Manual gift cards" → "Digital gift card commerce"
-  - "No AI support" → "24/7 multilingual AI concierge"
-- This is the "holy shit, that's us" moment for any GM
+### 4. `EnterpriseMicrositePreview.tsx` — Trim text
+- Shorten the description paragraph to one line
+- Keep phone mockup and "Try the Live Demo" button as-is
 
-### 5. Public Microsite Preview — NEW component (`EnterpriseMicrositePreview.tsx`)
-- Full-width section: "See What Your Guests See"
-- Interactive phone mockup showing the actual AuraLink microsite card grid (15 cards)
-- Pulls the real card data from the Microsite page (Gift Cards, Menu, Reviews, AI Concierge, etc.)
-- Rendered in a phone frame with dark bg, glowing border
-- "Try the Live Demo →" button linking to `/microsite`
+### 5. `EnterpriseFeatureRows.tsx` — Already has real images, trim text
+- Shorten each `desc` to 1 line
+- Keep the stat + image layout
 
-### 6. Why AuraLink Cards (`EnterpriseWhyCards.tsx` — enhanced)
-- Keep 4 cards but add **hard ROI metrics** to each:
-  - One Link: "Replace 5 tools, save $2,400/mo"
-  - AI Concierge: "Handle 80% of guest inquiries automatically"
-  - Gamified Growth: "3.2x repeat visit rate"
-  - Analytics: "Know your ROI per dollar in real-time"
-- Add hover glow effect matching border color
+### 6. `EnterpriseEcosystem.tsx` — Add background images per card, trim text
+- Add subtle Unsplash images as card backgrounds with dark overlays:
+  - VibeGigs: concert `photo-1514525253161-7a46d19cd819`
+  - Flex-it: gym `photo-1534438327276-14e5300c3a48`
+  - Gift Cards: gift wrapping `photo-1513885535751-8b9238bd345a`
+  - TribeMint: crowd `photo-1529156069898-49953e39b3ac`
+  - PicPop: photo booth `photo-1527529482837-4698179dc6ce`
+  - AI Concierge: hotel concierge `photo-1566073771259-6a8506099945`
+- Shorten `desc` to one line each
 
-### 7. Immersive Feature Rows — NEW component (`EnterpriseFeatureRows.tsx`)
-- Three full-width alternating rows with real Unsplash images:
-  - **VibeGigs** — Live entertainment booking with artist marketplace image, stats: "62% faster staffing"
-  - **Flex-it** — Tipping & payments with restaurant service image, stats: "$127K avg annual gift card revenue"
-  - **AI Concierge** — Guest assistant with hotel concierge image, stats: "Speaks 40+ languages, 24/7"
-- Each row: image on one side, text + CTA on other, alternating layout
+### 7. `EnterpriseGiftCards.tsx` — Add real gift card background images
+- Replace emoji with real food/drink images as card backgrounds with gradient overlays
+  - Coffee: `photo-1509042239860-f550ce710b93`
+  - Dinner: `photo-1414235077428-338989a2e8c0`
+  - VIP: `photo-1559339352-11d035aa65de`
+  - Ultimate: `photo-1517248135467-4c7edcad34c4`
+- Trim left-side description text
 
-### 8. Chain Benefits Grid — NEW component (`EnterpriseChainBenefits.tsx`)
-- "BUILT FOR CHAINS & MULTI-LOCATION BRANDS"
-- Six cards specifically for enterprise operators with ROI numbers:
-  - 40% admin reduction across locations
-  - $127K avg gift card revenue per venue
-  - 62% faster staffing with VibeGigs
-  - 3.2x repeat visits with gamification
-  - 80% inquiry automation with AI
-  - Real-time cross-location analytics
-- Gold/coral gradient borders
+### 8. `EnterpriseChainBenefits.tsx` — Trim text, keep stats prominent
+- Shorten `desc` to single phrases (3-4 words)
+- Remove section sub-description
 
-### 9. C-Suite CTA Cards — NEW component (`EnterpriseCSuiteCTAs.tsx`)
-- Three role-specific cards side by side:
-  - **GM / COO**: "Streamline operations across every location" → "Get Your Venue Live"
-  - **CMO**: "Turn every guest interaction into measurable revenue" → "Book a Strategy Call"
-  - **CTO**: "One API, zero maintenance, enterprise-grade security" → "View Technical Docs"
-- Each card has a different accent color (coral, gold, teal)
+### 9. `EnterpriseCSuiteCTAs.tsx` — Add real portrait/office images, trim text
+- Add background images per card:
+  - GM: hotel manager `photo-1556157382-97eda2d62296`
+  - CMO: marketing meeting `photo-1552664730-d307ca884978`
+  - CTO: tech office `photo-1519389950473-47ba0277781c`
+- Shorten descriptions to one line
+- Change CMO "Book a Strategy Call" → "See the Public View" → `/microsite`
 
-### 10. Gift Cards (`EnterpriseGiftCards.tsx` — keep as-is)
+### 10. `EnterpriseVenueTypes.tsx` — Add real venue images
+- Add background images per venue card:
+  - Restaurants: `photo-1517248135467-4c7edcad34c4`
+  - Hotels: `photo-1566073771259-6a8506099945`
+  - Bars: `photo-1514933651103-005eec06c04b`
+  - Clubs: `photo-1514525253161-7a46d19cd819`
+  - Events: `photo-1540575467063-178a50c2df87`
+- Shorten descriptions to one line each
 
-### 11. Video Demo (`EnterpriseVideoDemo.tsx` — enhanced)
-- Add real restaurant background image behind play button
-- Add animated glow ring around play button
-- Add caption: "Watch a Michelin-starred restaurant go live in under 3 minutes"
+### 11. `EnterpriseCTA.tsx` — Add "View Public Page" button
+- Replace "Book a Demo" outlined button with "See the Public View →" linking to `/microsite`
+- Trim description text
 
-### 12. Venue Types (`EnterpriseVenueTypes.tsx` — keep as-is)
+### 12. `EnterpriseVideoDemo.tsx` — Trim text
+- Shorten heading to one line
 
-### 13. Final CTA (`EnterpriseCTA.tsx` — rewrite)
-- Headline: "Your guests don't want six apps. Give them one."
-- Four trust signals underneath: "SOC 2 Compliant" · "99.9% Uptime" · "GDPR Ready" · "Enterprise SLA"
-- Warm gradient glow background
-
-### 14. Footer (`EnterpriseFooter.tsx` — keep as-is)
-
-### 15. Segment Nav (`LandingSegmentNav.tsx` — restyle)
-- Dark theme variant: `bg-white/[0.04]` background, `border-white/[0.08]` border, white text
-
-## Files to Create (6 new)
-- `src/components/enterprise/EnterpriseTrustBar.tsx`
-- `src/components/enterprise/EnterpriseRevenueStrip.tsx`
-- `src/components/enterprise/EnterpriseBeforeAfter.tsx`
-- `src/components/enterprise/EnterpriseMicrositePreview.tsx`
-- `src/components/enterprise/EnterpriseFeatureRows.tsx`
-- `src/components/enterprise/EnterpriseChainBenefits.tsx`
-- `src/components/enterprise/EnterpriseCSuiteCTAs.tsx`
-
-## Files to Edit (5 existing)
-- `src/pages/Index.tsx` — add new sections in order
-- `src/components/enterprise/EnterpriseHero.tsx` — cinematic rewrite
-- `src/components/enterprise/EnterpriseWhyCards.tsx` — add ROI metrics
-- `src/components/enterprise/EnterpriseVideoDemo.tsx` — add background image + glow
-- `src/components/enterprise/EnterpriseCTA.tsx` — rewrite with trust signals
-- `src/components/aura/LandingSegmentNav.tsx` — dark variant styling
-
-## New Section Order in Index.tsx
-1. Nav (keep)
-2. LandingSegmentNav (dark-styled)
-3. EnterpriseHero (cinematic)
-4. EnterpriseTrustBar (new)
-5. EnterpriseRevenueStrip (new)
-6. EnterpriseWhyCards (enhanced)
-7. EnterpriseBeforeAfter (new)
-8. EnterpriseMicrositePreview (new — the public view)
-9. EnterpriseFeatureRows (new)
-10. EnterpriseEcosystem (keep)
-11. EnterpriseGiftCards (keep)
-12. EnterpriseChainBenefits (new)
-13. EnterpriseCSuiteCTAs (new)
-14. EnterpriseVideoDemo (enhanced)
-15. EnterpriseVenueTypes (keep)
-16. EnterpriseCTA (rewritten)
-17. EnterpriseFooter (keep)
-
-## Design Notes
-- Real Unsplash images via URL for hero, feature rows, and video bg
-- Gold gradient system: `#D4A853` → `#E8604C` for premium feel
-- Film grain CSS texture overlay on hero
-- All new sections use `framer-motion` scroll animations
-- Phone mockup for microsite preview uses CSS device frame
+## Design Principles Applied
+- Every section gets a real high-quality Unsplash image (hospitality/food/venue photography)
+- Text trimmed to ~50% of current — punchy, scannable, no paragraphs
+- "Book a Strategy Call" replaced with "See the Public View" (→ `/microsite`) across Hero, CSuite, and CTA sections
+- Keep the dark theme, colors, and animation system exactly as-is
 
