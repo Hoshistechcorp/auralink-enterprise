@@ -21,7 +21,6 @@ const TourismHero = () => {
           className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#F5F0E8] mb-8"
         >
           <span className="text-[13px] font-semibold text-[#E8604C] tracking-[1px] uppercase">
-            🌍 Built for Destinations
           </span>
         </motion.div>
 
