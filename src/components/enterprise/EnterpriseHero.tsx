@@ -35,7 +35,7 @@ const EnterpriseHero = () => {
           className="max-w-2xl"
         >
           <span className="inline-block px-4 py-1.5 rounded-full bg-[#E8604C]/10 border border-[#E8604C]/20 text-[#E8604C] text-xs font-semibold tracking-widest uppercase mb-6">
-            The Hospitality Operating System
+            ​
           </span>
 
           <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl font-bold leading-[1.05] tracking-tight text-white">
