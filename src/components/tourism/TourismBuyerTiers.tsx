@@ -5,25 +5,25 @@ const tiers = [
     icon: "🏙️",
     title: "City Tourism Boards",
     desc: "Unified digital hub for city attractions, dining, events, and visitor services.",
-    budget: "$500K–$5M annual budgets",
+    budget: "",
   },
   {
     icon: "🏔️",
     title: "State & Provincial",
     desc: "Regional hubs that connect multiple cities into a cohesive tourism strategy.",
-    budget: "$5M–$50M annual budgets",
+    budget: "\n",
   },
   {
     icon: "🌍",
     title: "National Tourism",
     desc: "Country-level destination pages that attract international visitors at scale.",
-    budget: "$50M–$500M annual budgets",
+    budget: "",
   },
   {
     icon: "🏛️",
     title: "Economic Development",
     desc: "Showcase business opportunities, investment zones, and convention facilities.",
-    budget: "Grant-funded deployments",
+    budget: "\n",
   },
 ];
 
