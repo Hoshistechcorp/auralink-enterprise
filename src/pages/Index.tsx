@@ -1,8 +1,4 @@
-import { useNavigate } from "react-router-dom";
-import { Sun, Moon } from "lucide-react";
-import { useDarkMode } from "@/hooks/use-dark-mode";
-import ibloovLogo from "@/assets/ibloov-logo.jpeg";
-import LandingSegmentNav from "@/components/aura/LandingSegmentNav";
+import LandingNavbar from "@/components/aura/LandingNavbar";
 import EnterpriseHero from "@/components/enterprise/EnterpriseHero";
 import EnterpriseTrustBar from "@/components/enterprise/EnterpriseTrustBar";
 import EnterpriseWhyCards from "@/components/enterprise/EnterpriseWhyCards";
@@ -16,47 +12,10 @@ import EnterpriseCTA from "@/components/enterprise/EnterpriseCTA";
 import EnterpriseFooter from "@/components/enterprise/EnterpriseFooter";
 
 const Index = () => {
-  const navigate = useNavigate();
-  const { isDark, toggle: toggleDark } = useDarkMode();
-
   return (
     <div className="min-h-screen bg-[#0D1117] text-white font-body antialiased">
-      {/* Nav */}
-      <nav className="sticky top-0 z-50 bg-[#0D1117]/80 backdrop-blur-2xl border-b border-white/[0.04]">
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <img src={ibloovLogo} alt="iBloov" className="h-7 w-auto rounded-lg" />
-            <span className="text-white/20 hidden sm:inline">|</span>
-            <span className="font-semibold text-sm text-white hidden sm:inline">AuraLink</span>
-            <span className="px-2 py-0.5 rounded-md bg-[#E8604C]/10 text-[#E8604C] text-[10px] font-bold tracking-wider uppercase hidden sm:inline">
-              Enterprise
-            </span>
-          </div>
+      <LandingNavbar />
 
-          <div className="flex items-center gap-2">
-            <button onClick={toggleDark} className="p-2 rounded-xl hover:bg-white/[0.04] transition-colors" aria-label="Toggle theme">
-              {isDark ? <Sun className="w-4 h-4 text-white/50" /> : <Moon className="w-4 h-4 text-white/50" />}
-            </button>
-            <button
-              onClick={() => navigate("/login")}
-              className="px-4 py-1.5 rounded-xl border border-white/10 text-[13px] font-semibold text-white/70 hover:bg-white/[0.04] transition-colors"
-            >
-              Sign In
-            </button>
-            <button
-              onClick={() => navigate("/signup")}
-              className="px-4 py-1.5 rounded-xl bg-[#E8604C] text-white text-[13px] font-semibold hover:bg-[#d4533f] transition-colors"
-            >
-              Get Started Free
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* Segment Nav */}
-      <LandingSegmentNav />
-
-      {/* Sections */}
       <EnterpriseHero />
       <EnterpriseTrustBar />
       <EnterpriseWhyCards />
