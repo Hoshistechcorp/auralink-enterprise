@@ -51,7 +51,7 @@ const plans = [
 ];
 
 /* ── Cards by tier ────────────────────────────────── */
-const sparkCards = ["Details", "Menu", "Social Links", "Reviews", "FAQs"];
+const sparkCards = ["Details", "Menu", "Social Links", "Reviews", "FAQs", "Gift Cards"];
 const maverickCards = ["Freebie Game", "Staff", "Awards", "Events", "Popular Dishes"];
 const supernovaCards = ["AI Concierge", "Private Dining", "Photo Gallery", "Refer a Friend", "Affiliate"];
 
@@ -65,6 +65,7 @@ const featureGroups = [
       { name: "Social Links", spark: true, maverick: true, supernova: true },
       { name: "Reviews", spark: true, maverick: true, supernova: true },
       { name: "FAQs", spark: true, maverick: true, supernova: true },
+      { name: "Gift Cards", spark: true, maverick: true, supernova: true },
       { name: "Freebie Game", spark: false, maverick: true, supernova: true },
       { name: "Staff", spark: false, maverick: true, supernova: true },
       { name: "Awards", spark: false, maverick: true, supernova: true },
