@@ -41,7 +41,7 @@ const plans = [
     price: 149,
     period: "/mo",
     icon: Crown,
-    desc: "All 16 cards & full power tools",
+    desc: "All 15 cards & full power tools",
     popular: false,
     cta: "Upgrade to Supernova",
     disabled: false,
@@ -51,7 +51,7 @@ const plans = [
 ];
 
 /* ── Cards by tier ────────────────────────────────── */
-const sparkCards = ["Details", "Menu", "Social Links", "Reviews", "FAQs", "Gift Cards"];
+const sparkCards = ["Details", "Menu", "Social Links", "Reviews", "FAQs"];
 const maverickCards = ["Freebie Game", "Staff", "Awards", "Events", "Popular Dishes"];
 const supernovaCards = ["AI Concierge", "Private Dining", "Photo Gallery", "Refer a Friend", "Affiliate"];
 
@@ -65,7 +65,6 @@ const featureGroups = [
       { name: "Social Links", spark: true, maverick: true, supernova: true },
       { name: "Reviews", spark: true, maverick: true, supernova: true },
       { name: "FAQs", spark: true, maverick: true, supernova: true },
-      { name: "Gift Cards", spark: true, maverick: true, supernova: true },
       { name: "Freebie Game", spark: false, maverick: true, supernova: true },
       { name: "Staff", spark: false, maverick: true, supernova: true },
       { name: "Awards", spark: false, maverick: true, supernova: true },
@@ -179,7 +178,7 @@ const SubscriptionPage = () => {
             {/* Card count badge */}
             <div className="mb-5">
               <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-background/60 border border-border/40 text-[11px] font-semibold">
-                {plan.id === "spark" ? "6 cards" : plan.id === "maverick" ? "11 cards" : "All 16 cards"}
+                {plan.id === "spark" ? "5 cards" : plan.id === "maverick" ? "10 cards" : "All 15 cards"}
               </span>
             </div>
 
@@ -241,7 +240,7 @@ const SubscriptionPage = () => {
       <div className="rounded-2xl bg-card border overflow-hidden">
         <div className="p-6 border-b bg-gradient-to-r from-muted/30 to-transparent">
           <h3 className="font-display text-lg font-bold">Feature Comparison</h3>
-          <p className="text-xs text-muted-foreground mt-1">All 16 cards included in Supernova</p>
+          <p className="text-xs text-muted-foreground mt-1">All 15 cards included in Supernova</p>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">

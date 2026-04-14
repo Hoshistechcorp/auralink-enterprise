@@ -1,10 +1,13 @@
+import { useNavigate } from "react-router-dom";
+import { useDarkMode } from "@/hooks/use-dark-mode";
+import ibloovLogo from "@/assets/ibloov-logo.jpeg";
 import tourismLandmark from "@/assets/tourism-landmark.jpg";
 import tourismNightlife from "@/assets/tourism-nightlife.jpg";
 import tourismNature from "@/assets/tourism-nature.jpg";
 import tourismCoastal from "@/assets/tourism-coastal.jpg";
 import tourismCity from "@/assets/tourism-city.jpg";
 import { motion } from "framer-motion";
-import LandingNavbar from "@/components/aura/LandingNavbar";
+import LandingSegmentNav from "@/components/aura/LandingSegmentNav";
 import TourismHero from "@/components/tourism/TourismHero";
 import TourismStatsStrip from "@/components/tourism/TourismStatsStrip";
 import TourismProblem from "@/components/tourism/TourismProblem";
@@ -21,9 +24,46 @@ import TourismFooter from "@/components/tourism/TourismFooter";
 import TourismLandmarkMosaic from "@/components/tourism/TourismLandmarkMosaic";
 
 const TourismLanding = () => {
+  const navigate = useNavigate();
+  const { isDark, toggle: toggleDark } = useDarkMode();
+
   return (
-    <div className="min-h-screen bg-[#0D1117] text-white font-body antialiased overflow-x-hidden">
-      <LandingNavbar />
+    <div className="min-h-screen font-body antialiased overflow-x-hidden">
+      {/* Nav — warm light */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#FAFAF8]/92 backdrop-blur-xl border-b border-black/[0.04]">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <img src={ibloovLogo} alt="iBloov" className="h-8 w-auto rounded-lg" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[#E8604C]" />
+            <span className="font-display text-[22px] text-[#0D1117]">{"\n"}AuraLink </span>
+          </div>
+          <div className="flex items-center gap-3">
+            <a href="#how-it-works" className="hidden sm:inline text-sm font-medium text-[#4A5568] hover:text-[#0D1117] transition-colors">
+              How It Works
+            </a>
+            <a href="#cards" className="hidden sm:inline text-sm font-medium text-[#4A5568] hover:text-[#0D1117] transition-colors ml-5">
+              Features
+            </a>
+            <button
+              onClick={() => navigate("/login")}
+              className="hidden sm:inline text-sm font-medium text-[#4A5568] hover:text-[#0D1117] transition-colors ml-5"
+            >
+              Sign In
+            </button>
+            <button
+              onClick={() => navigate("/signup")}
+              className="ml-4 px-6 py-2.5 rounded-lg bg-[#E8604C] text-white text-sm font-semibold hover:-translate-y-0.5 hover:shadow-[0_4px_16px_rgba(232,96,76,0.3)] transition-all"
+            >
+              Get Your Destination Live →
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Segment Nav */}
+      <div className="fixed top-16 left-0 right-0 z-40 bg-[#FAFAF8]/80 backdrop-blur-xl border-b border-black/[0.04]">
+        <LandingSegmentNav />
+      </div>
 
       {/* 1. Hero */}
       <TourismHero />
@@ -63,7 +103,7 @@ const TourismLanding = () => {
       <section className="relative h-[50vh] sm:h-[60vh] overflow-hidden">
         <div className="absolute inset-0">
           <img src={tourismCity} alt="City skyline" className="w-full h-full object-cover" loading="lazy" width={1920} height={800} />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0D1117] via-black/40 to-[#0D1117]/80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-black/40 to-[#0a0a0a]/80" />
         </div>
         <div className="relative h-full flex items-center justify-center">
           <motion.div
