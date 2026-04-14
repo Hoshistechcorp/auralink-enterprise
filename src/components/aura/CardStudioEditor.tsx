@@ -20,7 +20,7 @@ interface Props {
 const requiredPlanForCard: Record<string, string> = {
   "Photo Gallery": "Supernova", "AI Concierge": "Supernova", "Private Dining": "Supernova",
   "Refer a Friend": "Supernova", "Affiliate": "Supernova",
-  "Freebie Game": "Maverick", "Staff": "Maverick", "Awards": "Maverick",
+  "Gift Cards": "Maverick", "Freebie Game": "Maverick", "Staff": "Maverick", "Awards": "Maverick",
   "Events": "Maverick", "Popular Dishes": "Maverick",
 };
 

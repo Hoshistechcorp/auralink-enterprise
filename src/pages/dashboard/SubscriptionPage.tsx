@@ -51,8 +51,8 @@ const plans = [
 ];
 
 /* ── Cards by tier ────────────────────────────────── */
-const sparkCards = ["Gift Cards", "Details", "Menu", "Social Links", "Reviews", "FAQs"];
-const maverickCards = ["Freebie Game", "Staff", "Awards", "Events", "Popular Dishes"];
+const sparkCards = ["Details", "Menu", "Social Links", "Reviews", "FAQs"];
+const maverickCards = ["Gift Cards", "Freebie Game", "Staff", "Awards", "Events", "Popular Dishes"];
 const supernovaCards = ["AI Concierge", "Private Dining", "Photo Gallery", "Refer a Friend", "Affiliate"];
 
 /* ── Feature comparison ──────────────────────────── */
@@ -60,7 +60,7 @@ const featureGroups = [
   {
     group: "Included Cards",
     features: [
-      { name: "Gift Cards", spark: true, maverick: true, supernova: true },
+      { name: "Gift Cards", spark: false, maverick: true, supernova: true },
       { name: "Details", spark: true, maverick: true, supernova: true },
       { name: "Menu", spark: true, maverick: true, supernova: true },
       { name: "Social Links", spark: true, maverick: true, supernova: true },
