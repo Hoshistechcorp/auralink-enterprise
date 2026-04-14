@@ -51,7 +51,7 @@ const plans = [
 ];
 
 /* ── Cards by tier ────────────────────────────────── */
-const sparkCards = ["Details", "Menu", "Social Links", "Reviews", "FAQs"];
+const sparkCards = ["Gift Cards", "Details", "Menu", "Social Links", "Reviews", "FAQs"];
 const maverickCards = ["Freebie Game", "Staff", "Awards", "Events", "Popular Dishes"];
 const supernovaCards = ["AI Concierge", "Private Dining", "Photo Gallery", "Refer a Friend", "Affiliate"];
 
@@ -60,6 +60,7 @@ const featureGroups = [
   {
     group: "Included Cards",
     features: [
+      { name: "Gift Cards", spark: true, maverick: true, supernova: true },
       { name: "Details", spark: true, maverick: true, supernova: true },
       { name: "Menu", spark: true, maverick: true, supernova: true },
       { name: "Social Links", spark: true, maverick: true, supernova: true },
@@ -178,7 +179,7 @@ const SubscriptionPage = () => {
             {/* Card count badge */}
             <div className="mb-5">
               <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-background/60 border border-border/40 text-[11px] font-semibold">
-                {plan.id === "spark" ? "5 cards" : plan.id === "maverick" ? "10 cards" : "All 15 cards"}
+                {plan.id === "spark" ? "6 cards" : plan.id === "maverick" ? "11 cards" : "All 16 cards"}
               </span>
             </div>
 
