@@ -62,7 +62,7 @@ const UsageMeter = () => {
         })}
       </div>
       <p className="text-[11px] text-muted-foreground mt-4 leading-relaxed">
-        Upgrade to Maverick ($79/mo) for 10 cards, or Supernova ($149/mo) for all 15 cards + full tools.
+        Upgrade to Maverick ($79/mo) for 11 cards, or Supernova ($149/mo) for all 16 cards + full tools.
       </p>
     </div>
   );

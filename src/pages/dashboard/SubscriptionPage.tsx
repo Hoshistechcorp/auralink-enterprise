@@ -41,7 +41,7 @@ const plans = [
     price: 149,
     period: "/mo",
     icon: Crown,
-    desc: "All 15 cards & full power tools",
+    desc: "All 16 cards & full power tools",
     popular: false,
     cta: "Upgrade to Supernova",
     disabled: false,
@@ -51,7 +51,7 @@ const plans = [
 ];
 
 /* ── Cards by tier ────────────────────────────────── */
-const sparkCards = ["Details", "Menu", "Social Links", "Reviews", "FAQs"];
+const sparkCards = ["Gift Cards", "Details", "Menu", "Social Links", "Reviews", "FAQs"];
 const maverickCards = ["Freebie Game", "Staff", "Awards", "Events", "Popular Dishes"];
 const supernovaCards = ["AI Concierge", "Private Dining", "Photo Gallery", "Refer a Friend", "Affiliate"];
 
@@ -60,6 +60,7 @@ const featureGroups = [
   {
     group: "Included Cards",
     features: [
+      { name: "Gift Cards", spark: true, maverick: true, supernova: true },
       { name: "Details", spark: true, maverick: true, supernova: true },
       { name: "Menu", spark: true, maverick: true, supernova: true },
       { name: "Social Links", spark: true, maverick: true, supernova: true },
@@ -101,8 +102,8 @@ const renderCell = (val: boolean | string) => {
 
 /* ── Highlights per plan (for modal) ──────────────── */
 const planHighlights: Record<string, string[]> = {
-  maverick: ["10 Card Slots", "Analytics Dashboard", "5 QR Codes", "Up to 10 Staff Profiles", "Basic SEO", "Freebie Game & Events"],
-  supernova: ["All 15 Cards Unlocked", "AI Concierge", "Private Dining", "Photo Gallery", "Loyalty & Reputation Tools", "Priority Support"],
+  maverick: ["11 Card Slots", "Analytics Dashboard", "5 QR Codes", "Up to 10 Staff Profiles", "Basic SEO", "Freebie Game & Events"],
+  supernova: ["All 16 Cards Unlocked", "AI Concierge", "Private Dining", "Photo Gallery", "Loyalty & Reputation Tools", "Priority Support"],
 };
 
 const SubscriptionPage = () => {
@@ -178,7 +179,7 @@ const SubscriptionPage = () => {
             {/* Card count badge */}
             <div className="mb-5">
               <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-background/60 border border-border/40 text-[11px] font-semibold">
-                {plan.id === "spark" ? "5 cards" : plan.id === "maverick" ? "10 cards" : "All 15 cards"}
+                {plan.id === "spark" ? "6 cards" : plan.id === "maverick" ? "11 cards" : "All 16 cards"}
               </span>
             </div>
 
@@ -228,7 +229,7 @@ const SubscriptionPage = () => {
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-sm font-semibold">You're on the Spark plan</p>
-          <p className="text-xs text-muted-foreground">Upgrade to Maverick ($79/mo) for 10 cards, or Supernova ($149/mo) for all 15 cards + full tools.</p>
+          <p className="text-xs text-muted-foreground">Upgrade to Maverick ($79/mo) for 11 cards, or Supernova ($149/mo) for all 16 cards + full tools.</p>
         </div>
         <div className="hidden sm:flex items-center gap-1.5 text-xs font-medium text-primary">
           <TrendingUp className="w-3.5 h-3.5" />
@@ -240,7 +241,7 @@ const SubscriptionPage = () => {
       <div className="rounded-2xl bg-card border overflow-hidden">
         <div className="p-6 border-b bg-gradient-to-r from-muted/30 to-transparent">
           <h3 className="font-display text-lg font-bold">Feature Comparison</h3>
-          <p className="text-xs text-muted-foreground mt-1">All 15 cards included in Supernova</p>
+          <p className="text-xs text-muted-foreground mt-1">All 16 cards included in Supernova</p>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
