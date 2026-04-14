@@ -179,7 +179,7 @@ const SubscriptionPage = () => {
             {/* Card count badge */}
             <div className="mb-5">
               <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-background/60 border border-border/40 text-[11px] font-semibold">
-                {plan.id === "spark" ? "5 cards" : plan.id === "maverick" ? "10 cards" : "All 15 cards"}
+                {plan.id === "spark" ? "6 cards" : plan.id === "maverick" ? "11 cards" : "All 16 cards"}
               </span>
             </div>
 
