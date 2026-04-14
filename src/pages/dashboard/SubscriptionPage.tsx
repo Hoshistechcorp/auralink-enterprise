@@ -41,7 +41,7 @@ const plans = [
     price: 149,
     period: "/mo",
     icon: Crown,
-    desc: "All 15 cards & full power tools",
+    desc: "All 16 cards & full power tools",
     popular: false,
     cta: "Upgrade to Supernova",
     disabled: false,
@@ -241,7 +241,7 @@ const SubscriptionPage = () => {
       <div className="rounded-2xl bg-card border overflow-hidden">
         <div className="p-6 border-b bg-gradient-to-r from-muted/30 to-transparent">
           <h3 className="font-display text-lg font-bold">Feature Comparison</h3>
-          <p className="text-xs text-muted-foreground mt-1">All 15 cards included in Supernova</p>
+          <p className="text-xs text-muted-foreground mt-1">All 16 cards included in Supernova</p>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
