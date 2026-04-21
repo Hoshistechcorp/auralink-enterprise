@@ -18,9 +18,21 @@ const previewActions = [
 
 const MicrositeActionEditor = () => {
   const [contact, setContact] = useState<BusinessContact>(getBusinessContact);
+  const [reservationProvider, setReservationProvider] = useState("opentable");
+  const [reservationUrl, setReservationUrl] = useState("");
+
+  useEffect(() => {
+    const sub = getSubscription();
+    setReservationProvider(sub.reservationProvider || "opentable");
+    setReservationUrl(sub.reservationUrl || "");
+  }, []);
 
   const handleSave = () => {
     saveBusinessContact(contact);
+    const sub = getSubscription();
+    sub.reservationProvider = reservationProvider;
+    sub.reservationUrl = reservationUrl;
+    saveSubscription(sub);
     toast({ title: "Action buttons saved", description: "Your microsite action buttons have been updated." });
   };
 
