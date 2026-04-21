@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Phone, MessageCircle, MapPin, Navigation, Globe, Mail, Info, CalendarCheck, Save } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { getBusinessContact, saveBusinessContact, type BusinessContact } from "@/lib/businessContact";
+import { getSubscription, saveSubscription } from "@/lib/subscription";
 
 const inputCls =
   "w-full pl-10 pr-4 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all";
