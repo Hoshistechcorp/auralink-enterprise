@@ -106,6 +106,7 @@ const CardStudioPage = () => {
         <CardStudioPreview cards={visibleCards} effectivePlan={effectivePlan} />
       ) : (
         <>
+          <MicrositeActionEditor />
           <CardStudioEditor
             cards={cards}
             setCards={setCards}
@@ -116,7 +117,6 @@ const CardStudioPage = () => {
             hiddenCards={hiddenCards}
             effectivePlan={effectivePlan}
           />
-          <MicrositeActionEditor />
         </>
       )}
     </DashboardLayout>
