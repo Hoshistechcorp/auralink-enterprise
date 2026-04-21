@@ -353,40 +353,6 @@ const SettingsPage = () => {
                 </div>
 
 
-                {/* Reservation Link */}
-                <div className="mt-6 p-5 rounded-xl bg-muted/30 border">
-                  <div className="flex items-center gap-2 mb-4">
-                    <CalendarCheck className="w-4 h-4 text-primary" />
-                    <h4 className="text-sm font-semibold">Reservation Link</h4>
-                  </div>
-                  <p className="text-xs text-muted-foreground mb-4">Set your reservation provider. This link will appear on your microsite's "Reservations" button.</p>
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Provider</label>
-                      <select
-                        value={reservationProvider}
-                        onChange={(e) => setReservationProvider(e.target.value)}
-                        className="w-full px-3 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
-                      >
-                        <option value="opentable">OpenTable</option>
-                        <option value="resy">Resy</option>
-                        <option value="yelp">Yelp Reservations</option>
-                        <option value="tock">Tock</option>
-                        <option value="custom">Custom Link</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Reservation URL</label>
-                      <input
-                        value={reservationUrl}
-                        onChange={(e) => setReservationUrl(e.target.value)}
-                        placeholder={reservationProvider === "opentable" ? "https://opentable.com/r/..." : reservationProvider === "resy" ? "https://resy.com/cities/..." : "https://..."}
-                        className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
-                      />
-                    </div>
-                  </div>
-                </div>
-
                 <div className="flex justify-end mt-6">
                   <button onClick={handleSave} className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-opacity">
                     <Save className="w-4 h-4" />
