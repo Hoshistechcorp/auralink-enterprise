@@ -120,7 +120,7 @@ const MicrositeActionEditor = () => {
                   (a.label === "Message" && contact.smsNumber) ||
                   (a.label === "Directions" && (contact.address || contact.mapsUrl)) ||
                   a.label === "Details" ||
-                  a.label === "Reservations";
+                  (a.label === "Reservations" && reservationUrl);
                 return (
                   <div
                     key={a.label}
@@ -138,6 +138,45 @@ const MicrositeActionEditor = () => {
               {contact.phone && <div className="flex items-center gap-1.5"><Phone className="w-3 h-3" /> {contact.phone}</div>}
               {contact.email && <div className="flex items-center gap-1.5"><Mail className="w-3 h-3" /> {contact.email}</div>}
               {contact.website && <div className="flex items-center gap-1.5"><Globe className="w-3 h-3" /> {contact.website}</div>}
+              {reservationUrl && <div className="flex items-center gap-1.5"><CalendarCheck className="w-3 h-3" /> {reservationProvider}</div>}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Reservation Link */}
+      <div className="px-5 pb-5">
+        <div className="p-5 rounded-xl bg-muted/30 border">
+          <div className="flex items-center gap-2 mb-2">
+            <CalendarCheck className="w-4 h-4 text-primary" />
+            <h4 className="text-sm font-semibold">Reservation Link</h4>
+          </div>
+          <p className="text-xs text-muted-foreground mb-4">
+            Set your reservation provider. This link powers the "Reservations" button on your microsite.
+          </p>
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Provider</label>
+              <select
+                value={reservationProvider}
+                onChange={(e) => setReservationProvider(e.target.value)}
+                className="w-full px-3 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+              >
+                <option value="opentable">OpenTable</option>
+                <option value="resy">Resy</option>
+                <option value="yelp">Yelp Reservations</option>
+                <option value="tock">Tock</option>
+                <option value="custom">Custom Link</option>
+              </select>
+            </div>
+            <div>
+              <label className="text-xs font-medium text-muted-foreground mb-1.5 block">Reservation URL</label>
+              <input
+                value={reservationUrl}
+                onChange={(e) => setReservationUrl(e.target.value)}
+                placeholder={reservationProvider === "opentable" ? "https://opentable.com/r/..." : reservationProvider === "resy" ? "https://resy.com/cities/..." : "https://..."}
+                className="w-full px-4 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+              />
             </div>
           </div>
         </div>
