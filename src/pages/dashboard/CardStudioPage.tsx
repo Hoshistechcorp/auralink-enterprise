@@ -105,16 +105,19 @@ const CardStudioPage = () => {
       {previewMode ? (
         <CardStudioPreview cards={visibleCards} effectivePlan={effectivePlan} />
       ) : (
-        <CardStudioEditor
-          cards={cards}
-          setCards={setCards}
-          editing={editing}
-          setEditing={setEditing}
-          updateCard={updateCard}
-          visibleCards={visibleCards}
-          hiddenCards={hiddenCards}
-          effectivePlan={effectivePlan}
-        />
+        <>
+          <CardStudioEditor
+            cards={cards}
+            setCards={setCards}
+            editing={editing}
+            setEditing={setEditing}
+            updateCard={updateCard}
+            visibleCards={visibleCards}
+            hiddenCards={hiddenCards}
+            effectivePlan={effectivePlan}
+          />
+          <MicrositeActionEditor />
+        </>
       )}
     </DashboardLayout>
   );
