@@ -42,6 +42,7 @@ const navSections: NavSection[] = [
       { icon: Gamepad2, label: "Gamification", path: "/dashboard/gamification" },
       { icon: Heart, label: "Loyalty", path: "/dashboard/loyalty" },
       { icon: Share2, label: "Referrals", path: "/dashboard/referrals" },
+      { icon: Gift, label: "Gift Cards", path: "/dashboard/gift-cards" },
     ],
   },
   {
@@ -68,7 +69,6 @@ const navSections: NavSection[] = [
       { icon: MapPin, label: "Locations", path: "/dashboard/locations" },
       { icon: UserCog, label: "Team", path: "/dashboard/team" },
       { icon: Building2, label: "Enterprise", path: "/dashboard/enterprise" },
-      { icon: Gift, label: "Gift Cards", path: "/dashboard/gift-cards" },
       { icon: CreditCard, label: "Subscription", path: "/dashboard/subscription" },
       { icon: Settings, label: "Settings", path: "/dashboard/settings" },
     ],
