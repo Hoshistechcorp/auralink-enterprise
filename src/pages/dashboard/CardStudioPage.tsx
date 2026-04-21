@@ -9,6 +9,7 @@ import { toast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/aura/DashboardLayout";
 import CardStudioEditor from "@/components/aura/CardStudioEditor";
 import CardStudioPreview from "@/components/aura/CardStudioPreview";
+import MicrositeActionEditor from "@/components/aura/MicrositeActionEditor";
 import { getSubscription, getEffectivePlan, isCardAccessible } from "@/lib/subscription";
 
 /* ── Icon registry ─────────────────────────────────── */
@@ -104,16 +105,19 @@ const CardStudioPage = () => {
       {previewMode ? (
         <CardStudioPreview cards={visibleCards} effectivePlan={effectivePlan} />
       ) : (
-        <CardStudioEditor
-          cards={cards}
-          setCards={setCards}
-          editing={editing}
-          setEditing={setEditing}
-          updateCard={updateCard}
-          visibleCards={visibleCards}
-          hiddenCards={hiddenCards}
-          effectivePlan={effectivePlan}
-        />
+        <>
+          <CardStudioEditor
+            cards={cards}
+            setCards={setCards}
+            editing={editing}
+            setEditing={setEditing}
+            updateCard={updateCard}
+            visibleCards={visibleCards}
+            hiddenCards={hiddenCards}
+            effectivePlan={effectivePlan}
+          />
+          <MicrositeActionEditor />
+        </>
       )}
     </DashboardLayout>
   );

@@ -222,7 +222,15 @@ const GiftCardsDashboard = () => {
 
   return (
     <DashboardLayout title="Gift Cards" subtitle="Full lifecycle — create, sell, track & redeem">
-      {/* Metrics */}
+      {/* Quick Action */}
+      <div className="flex justify-end mb-4">
+        <button
+          onClick={() => { setTab("purchase"); resetPurchase(); }}
+          className={btnPrimary}
+        >
+          <Plus className="w-4 h-4" /> Create Gift Card
+        </button>
+      </div>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         {metrics.map((m, i) => (
           <motion.div key={m.label} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} className="p-4 rounded-2xl bg-card border">
