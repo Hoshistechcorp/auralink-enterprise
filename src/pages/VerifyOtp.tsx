@@ -93,6 +93,10 @@ const VerifyOtp = () => {
             </div>
           )}
 
+          <div className="rounded-xl border border-border bg-muted/50 p-3 text-center text-xs text-muted-foreground">
+            Demo preview code: <span className="font-semibold text-foreground">{session.otp}</span>
+          </div>
+
           <div className="flex justify-center">
             <InputOTP maxLength={6} value={otp} onChange={setOtp}>
               <InputOTPGroup>
