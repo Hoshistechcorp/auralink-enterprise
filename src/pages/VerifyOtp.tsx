@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, MailCheck, RefreshCw, ShieldCheck } from "lucide-react";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { getOtpSession, resendOtp, verifyOtp } from "@/lib/auth";
 import { toast } from "sonner";
@@ -85,7 +84,7 @@ const VerifyOtp = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background lg:grid lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
+    <div className="min-h-screen bg-background lg:grid lg:grid-cols-[minmax(0,40fr)_minmax(0,60fr)]">
       <div className="relative hidden overflow-hidden border-r border-border bg-primary lg:flex lg:min-h-screen lg:flex-col lg:justify-between">
         <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-secondary/70" />
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle at 20% 20%, hsl(var(--primary-foreground)) 0, transparent 30%), radial-gradient(circle at 80% 70%, hsl(var(--primary-foreground)) 0, transparent 28%)" }} />
@@ -96,18 +95,11 @@ const VerifyOtp = () => {
           transition={{ duration: 0.45 }}
           className="relative z-10 flex h-full flex-col justify-between p-12 text-primary-foreground"
         >
-          <div className="flex items-center gap-3">
+          <div>
             <img src={ibloovLogo} alt="iBloov" className="h-11 w-auto rounded-xl border border-primary-foreground/20" />
-            <div>
-              <p className="text-sm text-primary-foreground/70">AuraLink access</p>
-              <h2 className="text-2xl font-display font-bold">Secure verification</h2>
-            </div>
           </div>
 
           <div className="max-w-lg space-y-6">
-            <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-primary-foreground/20 bg-primary-foreground/10 backdrop-blur-sm">
-              <ShieldCheck className="h-7 w-7" />
-            </div>
             <div className="space-y-3">
               <h1 className="text-4xl font-display font-bold leading-tight">
                 {mode === "signup" ? "Complete your registration" : "Confirm your password reset"}
@@ -144,14 +136,14 @@ const VerifyOtp = () => {
           transition={{ duration: 0.35 }}
           className="w-full max-w-xl"
         >
-          <div className="mb-8 flex items-center justify-between gap-4 lg:hidden">
-            <div className="flex items-center gap-3">
-              <img src={ibloovLogo} alt="iBloov" className="h-10 w-auto rounded-lg" />
-              <div>
-                <p className="text-sm text-muted-foreground">AuraLink access</p>
-                <p className="font-display text-lg font-bold">Secure verification</p>
-              </div>
-            </div>
+          <div className="mb-6 flex items-center justify-between gap-4 lg:hidden">
+            <img src={ibloovLogo} alt="iBloov" className="h-10 w-auto rounded-lg" />
+          </div>
+
+          <div className="mb-6 text-sm text-muted-foreground">
+            <Link to={mode === "reset" ? "/forgot-password" : "/signup"} className="font-semibold text-primary hover:underline">
+              Back
+            </Link>
           </div>
 
           <div className="rounded-[var(--radius)] border border-border bg-card p-6 shadow-sm sm:p-8">
@@ -212,22 +204,14 @@ const VerifyOtp = () => {
                       type="button"
                       onClick={handleResend}
                       disabled={resending}
-                      className="inline-flex items-center gap-2 font-semibold text-primary hover:underline disabled:opacity-50"
+                      className="font-semibold text-primary hover:underline disabled:opacity-50"
                     >
-                      <RefreshCw className={`h-4 w-4 ${resending ? "animate-spin" : ""}`} />
                       {resending ? "Sending..." : "Resend code"}
                     </button>
                   )}
                 </p>
                 <p className="text-xs text-muted-foreground">Check your inbox and spam folder before requesting another code.</p>
               </div>
-            </div>
-
-            <div className="mt-8 border-t border-border pt-6 text-sm text-muted-foreground">
-              <Link to={mode === "reset" ? "/forgot-password" : "/signup"} className="inline-flex items-center gap-2 font-semibold text-primary hover:underline">
-                <ArrowLeft className="h-4 w-4" />
-                Back
-              </Link>
             </div>
           </div>
         </motion.div>
