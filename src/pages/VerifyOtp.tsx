@@ -155,10 +155,7 @@ const VerifyOtp = () => {
           </div>
 
           <div className="rounded-[var(--radius)] border border-border bg-card p-6 shadow-sm sm:p-8">
-            <div className="mb-8 flex items-start gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                <MailCheck className="h-5 w-5" />
-              </div>
+            <div className="mb-8">
               <div className="space-y-2">
                 <p className="text-sm font-medium text-muted-foreground">
                   {mode === "signup" ? "Registration verification" : "Password reset verification"}
