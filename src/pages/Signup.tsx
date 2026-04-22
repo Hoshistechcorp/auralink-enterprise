@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, UserPlus, ArrowRight, Check } from "lucide-react";
-import { signUp } from "@/lib/auth";
+import { requestSignUpOtp } from "@/lib/auth";
 import { toast } from "sonner";
 import ibloovLogo from "@/assets/ibloov-logo.jpeg";
 
@@ -33,9 +33,9 @@ const Signup = () => {
 
     setLoading(true);
     try {
-      signUp(name, email, password);
-      toast.success("Account created! Let's set up your business.");
-      navigate("/onboarding");
+      requestSignUpOtp(name, email, password);
+      toast.success("Verification code sent to your email");
+      navigate(`/verify-otp?mode=signup&email=${encodeURIComponent(email)}`);
     } catch (err: any) {
       setError(err.message);
     } finally {
