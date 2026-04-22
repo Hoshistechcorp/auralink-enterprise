@@ -12,6 +12,9 @@ import Onboarding from "./pages/Onboarding";
 import Welcome from "./pages/Welcome";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import ForgotPassword from "./pages/ForgotPassword";
+import VerifyOtp from "./pages/VerifyOtp";
+import ResetPassword from "./pages/ResetPassword";
 import QRManagement from "./pages/dashboard/QRManagement";
 import AffiliateDashboard from "./pages/dashboard/AffiliateDashboard";
 import SubscriptionPage from "./pages/dashboard/SubscriptionPage";
@@ -63,6 +66,9 @@ const App = () => (
           <Route path="/tourism" element={<TourismLanding />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/verify-otp" element={<VerifyOtp />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/microsite" element={<Microsite />} />
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/welcome" element={<Welcome />} />
