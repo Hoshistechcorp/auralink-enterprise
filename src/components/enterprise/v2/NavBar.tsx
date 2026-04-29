@@ -1,15 +1,19 @@
 import { useNavigate } from "react-router-dom";
 
 const links = [
-  { label: "Features", href: "#features" },
-  { label: "Pricing", href: "#faq" },
-  { label: "Use Cases", href: "#testimonials" },
+  { label: "Features", href: "#features", type: "scroll" as const },
+  { label: "Pricing", href: "/dashboard/subscription", type: "route" as const },
+  { label: "Use Cases", href: "#testimonials", type: "scroll" as const },
 ];
 
 const NavBar = () => {
   const navigate = useNavigate();
-  const scrollTo = (href: string) => {
-    const el = document.querySelector(href);
+  const handleClick = (link: typeof links[number]) => {
+    if (link.type === "route") {
+      navigate(link.href);
+      return;
+    }
+    const el = document.querySelector(link.href);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
@@ -27,7 +31,7 @@ const NavBar = () => {
           {links.map((l) => (
             <button
               key={l.label}
-              onClick={() => scrollTo(l.href)}
+              onClick={() => handleClick(l)}
               className="px-4 py-2 text-[13px] font-medium text-white/60 hover:text-white transition-colors"
             >
               {l.label}

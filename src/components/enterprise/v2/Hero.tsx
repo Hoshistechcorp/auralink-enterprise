@@ -147,7 +147,7 @@ const Hero = () => {
               See It In Action (1-Min Video)
             </a>
             <button
-              onClick={() => navigate("/u/demo")}
+              onClick={() => navigate("/microsite")}
               className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-2xl border border-white/15 bg-white/[0.02] text-white/80 font-semibold text-[15px] hover:bg-white/[0.06] transition-colors"
             >
               <Eye className="w-4 h-4" />
