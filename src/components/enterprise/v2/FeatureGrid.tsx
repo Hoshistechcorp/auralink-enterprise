@@ -4,8 +4,8 @@ import { Gift, Sparkles, CalendarCheck, Megaphone } from "lucide-react";
 const features = [
   {
     icon: Gift,
-    title: "Zero-Fee Gift Cards",
-    desc: "Launch custom digital gift cards in seconds. 100% of revenue goes straight to your bank account.",
+    title: "Branded Digital Gift Cards",
+    desc: "Launch custom digital gift cards in seconds — fully branded to your venue.",
     glow: "from-[#3B82F6] to-[#60A5FA]",
   },
   {
