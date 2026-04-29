@@ -146,6 +146,13 @@ const Hero = () => {
               <PlayCircle className="w-4 h-4" />
               See It In Action (1-Min Video)
             </a>
+            <button
+              onClick={() => navigate("/u/demo")}
+              className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-2xl border border-white/15 bg-white/[0.02] text-white/80 font-semibold text-[15px] hover:bg-white/[0.06] transition-colors"
+            >
+              <Eye className="w-4 h-4" />
+              View Public Demo
+            </button>
           </div>
 
           <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-2 text-[12px] text-white/40">
