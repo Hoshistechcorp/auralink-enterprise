@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, PlayCircle, ShieldCheck, Zap, Rocket, Sparkles, TrendingUp, MessageSquare } from "lucide-react";
+import { ArrowRight, PlayCircle, ShieldCheck, Zap, Rocket, Sparkles, TrendingUp, MessageSquare, Eye } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const DashboardMockup = () => (
