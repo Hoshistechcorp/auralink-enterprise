@@ -130,9 +130,21 @@ const Microsite = () => {
   const isExpired = !sub.trialActive && effectivePlan !== "supernova";
 
   return (
-    <div className="min-h-screen bg-background max-w-[430px] mx-auto">
-      <MicrositeHeader />
-      <TrialBanner variant="microsite" />
+    <div className="relative min-h-screen">
+      {/* Warm hospitality backdrop — restaurant, hotel, lounge */}
+      <div className="fixed inset-0 -z-10">
+        <img
+          src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80"
+          alt="Warm classy restaurant, hotel and lounge ambience"
+          className="w-full h-full object-cover"
+          loading="eager"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/55 to-background/80 backdrop-blur-[2px]" />
+      </div>
+
+      <div className="relative bg-background max-w-[430px] mx-auto shadow-2xl min-h-screen">
+        <MicrositeHeader />
+        <TrialBanner variant="microsite" />
 
       <div className="flex gap-2 overflow-x-auto px-4 py-4 no-scrollbar">
         {actions.map((btn) => (
