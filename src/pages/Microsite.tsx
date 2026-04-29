@@ -217,6 +217,7 @@ const Microsite = () => {
 
       <BottomBrandBar />
       <AuraSupermenu />
+      </div>
     </div>
   );
 };
