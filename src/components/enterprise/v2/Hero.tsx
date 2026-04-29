@@ -90,8 +90,19 @@ const Hero = () => {
   const navigate = useNavigate();
   return (
     <section className="relative overflow-hidden">
+      {/* Warm hospitality backdrop image */}
+      <div className="absolute inset-0">
+        <img
+          src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&q=80"
+          alt="Warm classy restaurant, hotel and lounge ambience"
+          className="w-full h-full object-cover opacity-[0.18]"
+          loading="eager"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#08080B]/85 via-[#08080B]/92 to-[#08080B]" />
+      </div>
+
       {/* Background grid + glows */}
-      <div className="absolute inset-0 bg-grid-neon opacity-60 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
+      <div className="absolute inset-0 bg-grid-neon opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
       <div className="absolute -top-32 -left-32 h-[480px] w-[480px] rounded-full bg-[#3B82F6]/20 blur-[140px]" />
       <div className="absolute -top-32 right-0 h-[520px] w-[520px] rounded-full bg-[#8B5CF6]/20 blur-[160px]" />
 
