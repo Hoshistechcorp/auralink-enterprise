@@ -9,7 +9,6 @@ const oldWay = [
 ];
 
 const newWay = [
-  "0% commission digital gift cards — funds direct to your bank",
   "Direct bookings & reservations on your own link",
   "24/7 AI concierge replies in 40+ languages",
   "100% guest data ownership with live analytics",
