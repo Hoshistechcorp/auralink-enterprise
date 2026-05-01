@@ -2,29 +2,26 @@ import { motion } from "framer-motion";
 
 const steps = [
   {
-    num: 1,
-    color: "#E8604C",
-    title: "Claim Your Destination",
-    desc: "Tell us your city, state, or country. We create your custom URL: ibloov.com/@visitatlanta",
+    num: "01",
+    title: "Claim your destination",
+    desc: "We create your custom destination URL and a branded mobile-first hub. Example: auralink.app/visitatlanta.",
   },
   {
-    num: 2,
-    color: "#1B9AAA",
-    title: "Activate Your Cards",
-    desc: "Choose which of the 15 cards to turn on. Add your attractions, events, hotels, and local businesses.",
+    num: "02",
+    title: "Activate your cards",
+    desc: "Choose attractions, events, hotels, food, culture, transit, deals, and visitor services from 15 modular cards.",
   },
   {
-    num: 3,
-    color: "#D4A853",
-    title: "Share & Measure",
-    desc: "One link for everything. Track visitor engagement, top attractions, seasonal trends, and ROI in real time.",
+    num: "03",
+    title: "Deploy & measure",
+    desc: "Place QR codes across airports, landmarks, hotels, and campaigns. Track engagement and tourism impact in real time.",
   },
 ];
 
 const TourismHowItWorks = () => {
   return (
-    <section className="bg-[#FAFAF8] py-20 sm:py-28">
-      <div className="max-w-[1000px] mx-auto px-5 sm:px-8">
+    <section id="how-it-works" className="relative bg-tourism-midnight py-20 sm:py-28 border-t border-tourism-divider">
+      <div className="relative max-w-6xl mx-auto px-5 sm:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -32,17 +29,16 @@ const TourismHowItWorks = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <p className="text-xs font-bold text-[#1B9AAA] tracking-[2px] uppercase mb-4">
+          <p className="text-[11px] font-bold text-tourism-teal tracking-[0.3em] uppercase mb-4">
             How It Works
           </p>
-          <h2 className="font-display text-[clamp(30px,3.5vw,44px)] font-bold text-[#0D1117]">
-            Live in three steps.
+          <h2 className="font-fraunces text-[clamp(30px,3.6vw,46px)] font-bold text-tourism-ivory leading-[1.15]">
+            Live in <span className="italic text-tourism-brass">three steps</span>.
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-12 relative">
-          {/* Connecting line */}
-          <div className="hidden sm:block absolute top-9 left-[15%] right-[15%] h-0.5 bg-gradient-to-r from-[#E8604C] via-[#1B9AAA] to-[#D4A853] opacity-30" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+          <div className="hidden md:block absolute top-10 left-[16%] right-[16%] h-px bg-gradient-to-r from-[#C9A35B]/0 via-[#3FA7A0]/40 to-[#C9A35B]/0" />
 
           {steps.map((step, i) => (
             <motion.div
@@ -51,16 +47,13 @@ const TourismHowItWorks = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.15 }}
-              className="text-center relative z-10"
+              className="relative z-10 text-center md:text-left"
             >
-              <div
-                className="w-[72px] h-[72px] rounded-full mx-auto mb-5 flex items-center justify-center font-display text-[28px] font-bold text-white"
-                style={{ background: step.color }}
-              >
-                {step.num}
+              <div className="w-20 h-20 rounded-full mx-auto md:mx-0 mb-5 flex items-center justify-center bg-[#0F1626] border border-[#C9A35B]/30 glow-tourism-brass">
+                <span className="font-fraunces text-[22px] font-bold text-tourism-brass">{step.num}</span>
               </div>
-              <h4 className="text-lg font-bold text-[#0D1117] mb-2">{step.title}</h4>
-              <p className="text-sm text-[#4A5568] leading-relaxed">{step.desc}</p>
+              <h4 className="font-fraunces text-[22px] font-bold text-tourism-ivory mb-2">{step.title}</h4>
+              <p className="text-sm text-tourism-slate leading-relaxed max-w-[300px] mx-auto md:mx-0">{step.desc}</p>
             </motion.div>
           ))}
         </div>
