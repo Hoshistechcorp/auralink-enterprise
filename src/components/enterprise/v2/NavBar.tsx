@@ -1,62 +1,57 @@
 import { useNavigate } from "react-router-dom";
 
 const links = [
-  { label: "Features", href: "#features", type: "scroll" as const },
-  { label: "Pricing", href: "/dashboard/subscription", type: "route" as const },
-  { label: "Use Cases", href: "#testimonials", type: "scroll" as const },
+  { label: "Features", href: "#features" },
+  { label: "Use Cases", href: "#use-cases" },
+  { label: "Ecosystem", href: "#ecosystem" },
+  { label: "Security", href: "#security" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 const NavBar = () => {
   const navigate = useNavigate();
-  const handleClick = (link: typeof links[number]) => {
-    if (link.type === "route") {
-      navigate(link.href);
-      return;
-    }
-    const el = document.querySelector(link.href);
+  const scrollTo = (sel: string) => {
+    const el = document.querySelector(sel);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   return (
-    <nav className="sticky top-0 z-50 backdrop-blur-xl bg-[#08080B]/70 border-b border-white/[0.06]">
+    <nav className="sticky top-0 z-50 backdrop-blur-xl bg-[#0B0907]/80 border-b border-[#2A2320]">
       <div className="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
-        <button onClick={() => navigate("/enterprise")} className="flex items-center gap-2">
-          <span className="h-8 w-8 rounded-lg bg-aura-gradient glow-blue" />
-          <span className="font-jakarta font-bold text-white text-[15px] tracking-tight">
-            AuraLink <span className="text-white/40 font-medium">Enterprise</span>
+        <button onClick={() => navigate("/enterprise")} className="flex items-center gap-2.5">
+          <span className="h-7 w-7 rounded-md bg-brass-gradient" />
+          <span className="font-fraunces font-bold text-ivory text-[18px] tracking-tight leading-none">
+            AuraLink{" "}
+            <span className="font-jakarta italic font-medium text-stone-warm text-[12px] tracking-normal">
+              by iBloov
+            </span>
           </span>
         </button>
 
-        <div className="hidden md:flex items-center gap-1">
+        <div className="hidden lg:flex items-center gap-1">
           {links.map((l) => (
             <button
               key={l.label}
-              onClick={() => handleClick(l)}
-              className="px-4 py-2 text-[13px] font-medium text-white/60 hover:text-white transition-colors"
+              onClick={() => scrollTo(l.href)}
+              className="px-3.5 py-2 text-[13px] font-medium text-stone-warm hover:text-ivory transition-colors"
             >
               {l.label}
             </button>
           ))}
-          <button
-            onClick={() => navigate("/login")}
-            className="px-4 py-2 text-[13px] font-medium text-white/60 hover:text-white transition-colors"
-          >
-            Log In
-          </button>
         </div>
 
         <div className="flex items-center gap-2">
           <button
             onClick={() => navigate("/login")}
-            className="md:hidden px-3 py-1.5 text-[13px] font-medium text-white/70"
+            className="hidden sm:inline-flex px-3.5 py-2 text-[13px] font-medium text-stone-warm hover:text-ivory transition-colors"
           >
-            Log In
+            Sign In
           </button>
           <button
             onClick={() => navigate("/signup")}
-            className="px-4 py-2 rounded-xl bg-aura-gradient text-white text-[13px] font-semibold glow-blue hover:opacity-95 transition-opacity"
+            className="px-4 py-2.5 rounded-full bg-brass-gradient text-[#1B1310] text-[13px] font-semibold glow-brass hover:opacity-95 transition-opacity"
           >
-            Get Started
+            Book Enterprise Demo
           </button>
         </div>
       </div>
