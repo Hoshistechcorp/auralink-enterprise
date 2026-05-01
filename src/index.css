@@ -349,4 +349,42 @@
   .text-stone-warm {
     color: #A89B8C;
   }
+
+  /* Tourism — premium public-sector palette */
+  .bg-tourism-midnight { background-color: #0A0F1C; }
+  .bg-tourism-graphite { background-color: #0F1626; }
+  .bg-tourism-panel { background-color: #141B2E; }
+  .text-tourism-ivory { color: #F4F1EA; }
+  .text-tourism-slate { color: #9BA5B7; }
+  .border-tourism-divider { border-color: #1F2638; }
+  .text-tourism-brass {
+    background-image: linear-gradient(135deg, #E8C886 0%, #C9A35B 60%, #B8893E 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bg-tourism-brass {
+    background-image: linear-gradient(135deg, #C9A35B 0%, #E8C886 55%, #B8893E 100%);
+  }
+  .text-tourism-teal { color: #3FA7A0; }
+  .bg-tourism-teal { background-color: #3FA7A0; }
+  .text-tourism-sage { color: #8FA888; }
+  .glow-tourism-brass {
+    box-shadow: 0 0 32px rgba(201,163,91,0.30), 0 0 80px rgba(63,167,160,0.10);
+  }
+  .glow-tourism-teal {
+    box-shadow: 0 0 28px rgba(63,167,160,0.30);
+  }
+  .bg-grid-transit {
+    background-image:
+      linear-gradient(to right, rgba(155,165,183,0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(155,165,183,0.06) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
+  .bg-grid-transit-fine {
+    background-image:
+      linear-gradient(to right, rgba(63,167,160,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(63,167,160,0.05) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
 }
