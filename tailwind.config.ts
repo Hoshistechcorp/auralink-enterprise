@@ -17,6 +17,7 @@ export default {
         display: ["'Playfair Display'", "serif"],
         body: ["'Inter'", "system-ui", "sans-serif"],
         jakarta: ["'Plus Jakarta Sans'", "system-ui", "sans-serif"],
+        fraunces: ["'Fraunces'", "'Playfair Display'", "Georgia", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",
