@@ -18,8 +18,8 @@ const TourismFooter = () => {
           The digital infrastructure layer for modern destinations.
         </p>
         <div className="flex items-center justify-center gap-6 text-xs text-tourism-slate flex-wrap">
-          <button onClick={() => navigate("/")} className="hover:text-tourism-ivory transition-colors">For Users</button>
           <button onClick={() => navigate("/enterprise")} className="hover:text-tourism-ivory transition-colors">For Hospitality</button>
+          <button onClick={() => navigate("/tourism")} className="hover:text-tourism-ivory transition-colors">For Destinations</button>
           <button onClick={() => navigate("/login")} className="hover:text-tourism-ivory transition-colors">Sign In</button>
           <button onClick={() => navigate("/signup")} className="hover:text-tourism-ivory transition-colors">Book a Demo</button>
         </div>
