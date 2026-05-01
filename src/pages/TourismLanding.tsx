@@ -68,8 +68,8 @@ const TourismLanding = () => {
         </div>
       </nav>
 
-      {/* Segment nav */}
-      <div className="fixed top-16 left-0 right-0 z-40 bg-[#0A0F1C]/85 backdrop-blur-xl border-b border-tourism-divider">
+      {/* Floating segment switcher */}
+      <div className="fixed top-20 left-1/2 -translate-x-1/2 z-40">
         <LandingSegmentNav />
       </div>
 

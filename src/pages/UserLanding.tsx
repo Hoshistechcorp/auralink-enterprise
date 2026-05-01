@@ -9,7 +9,7 @@ import { useDarkMode } from "@/hooks/use-dark-mode";
 import { Sun, Moon } from "lucide-react";
 import ibloovLogo from "@/assets/ibloov-logo.jpeg";
 import { toast } from "sonner";
-import LandingSegmentNav from "@/components/aura/LandingSegmentNav";
+
 
 const userBenefits = [
   { icon: Heart, title: "Loyalty Rewards", desc: "Earn points every visit and unlock exclusive perks at your favorite spots" },
@@ -72,8 +72,6 @@ const UserLanding = () => {
         </div>
       </nav>
 
-      {/* Segment Nav */}
-      <LandingSegmentNav />
 
       {/* Hero */}
       <section className="relative overflow-hidden">

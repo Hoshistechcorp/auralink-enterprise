@@ -17,7 +17,8 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-[#0B0907] text-ivory font-jakarta antialiased selection:bg-[#C9A35B]/40 selection:text-ivory">
       <NavBar />
-      <div className="border-b border-[#2A2320] bg-[#0E0B09]">
+      {/* Floating segment switcher */}
+      <div className="fixed top-20 left-1/2 -translate-x-1/2 z-40">
         <LandingSegmentNav />
       </div>
       <Hero />
