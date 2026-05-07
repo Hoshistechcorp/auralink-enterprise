@@ -1,83 +1,60 @@
-# Plan: AuraLink PRD (End-to-End Product Requirements Document)
+# Plan: AuraLink QA Test Workbook (.xlsx)
 
 ## Objective
-Produce a comprehensive, board-ready Product Requirements Document for **AuraLink by iBloov**, covering both product segments currently in the codebase:
-1. **AuraLink for Hospitality** (Enterprise — restaurants, hotels, lounges)
-2. **AuraLink for Tourism Boards** (Destinations — cities, states, ministries)
-
-The PRD will be delivered as a downloadable **.docx** file (with an optional **.pdf** export) saved to `/mnt/documents/`, so you can share it with stakeholders, engineering, and investors.
+Deliver a clean, easy-to-use Excel workbook that lets you (PM) walk through every feature in AuraLink, mark pass/fail, and hand engineers a structured bug report.
 
 ## Format
-- Primary: `AuraLink_PRD_v1.docx` (editable Word document, professional typography)
-- Optional secondary: `AuraLink_PRD_v1.pdf` (read-only export for sharing)
+- File: `AuraLink_QA_TestPlan_v1.xlsx` in `/mnt/documents/`
+- Built with openpyxl, frozen header rows, dropdowns (data validation), conditional formatting (green Pass / red Fail / yellow Blocked), auto-filters, sensible column widths, color-coded section headers.
 
-If you'd prefer a different format (Google Docs, Notion-style markdown, Confluence-ready), say the word and I'll switch.
+## Workbook Structure (6 tabs)
 
-## PRD Structure (sections to be authored)
+### 1. README
+How to use the sheet, status legend, severity legend, workflow (test → mark status → log bugs in Bug Report tab → share file with engineers).
 
-1. **Document Control** — version, owner, status, revision history
-2. **Executive Summary** — vision, mission, the AuraLink thesis, why now
-3. **Product Overview**
-   - Brand architecture (AuraLink as product, iBloov as parent)
-   - The two product surfaces: Hospitality & Tourism Board
-   - The 15-card modular microsite system
-4. **Goals & Success Metrics** — North Star metric, OKRs, KPIs per segment
-5. **Market & Personas**
-   - Hospitality buyers: GM, F&B Director, Marketing Lead, Owner
-   - Tourism buyers: CTO/CIO of tourism board, DMO Director, Mayor's office, Convention Bureau
-   - End-user personas: diner, hotel guest, traveler, visitor
-6. **Problem Statements & JTBD** — pains AuraLink solves vs. status quo (websites nobody visits, app fatigue, fragmented tools)
-7. **Solution & Core Value Props** — QR-first, modular, multi-tenant, AI-native
-8. **Functional Requirements** (the meat — feature-by-feature)
-   - Microsite system & 15 cards (Menu, Reviews, Gift Cards, AI Concierge, etc.)
-   - Card Studio (admin editor)
-   - Onboarding flow (3-step wizard, 21-day Supernova trial)
-   - Subscription tiers (Spark, Maverick, Supernova) + trial logic + gating
-   - Enterprise multi-location management
-   - Tourism-specific card modules
-   - Gamification (Spin & Win), Loyalty, Referral, Affiliate
-   - Gift Cards (purchase, POS, redemption)
-   - Staff Tipping, Reservations, Reviews aggregation, Events
-   - AI Concierge
-   - QR Management
-   - Analytics & Insights (traffic, CTR, channels)
-   - Local SEO & reputation
-   - iBloov Ecosystem Launcher (6 core products)
-   - Auth, roles (admin/moderator/user via separate `user_roles` table)
-9. **Non-Functional Requirements** — performance, accessibility (WCAG AA), i18n, security, privacy/GDPR, uptime SLA
-10. **Information Architecture & Routing** — sitemap (`/`, `/enterprise`, `/tourism`, `/dashboard/*`, `/microsite/*`, auth flows)
-11. **UX & Design System** — design tokens, themes, typography, photography, modal-first creation pattern, gated-card visual treatment
-12. **Technical Architecture**
-    - Frontend: React 18 + Vite + Tailwind + shadcn
-    - Backend: Lovable Cloud (Supabase) — RLS, `user_roles`, `has_role()` security definer
-    - Data model overview
-    - Integrations (POS, OpenTable/Resy, maps, payments)
-13. **Analytics & Instrumentation** — events, dashboards, attribution
-14. **Go-to-Market** — pricing, packaging, sales motion (B2B + B2G), pilot program for tourism boards
-15. **Roadmap** — Now / Next / Later, phased by segment
-16. **Risks, Assumptions, Dependencies**
-17. **Open Questions**
-18. **Appendix** — glossary, competitive landscape, route map, card matrix by tier
+### 2. Test Summary (auto-calculated)
+Dashboard with formulas:
+- Total tests, # Pass, # Fail, # Blocked, # Not Tested, % complete, % pass rate
+- Breakdown by module (Landing, Auth, Onboarding, Microsite, Dashboard, Subscription, Ecosystem)
 
-## Sourcing
-Content will be grounded in the actual codebase and project memory:
-- Memory index (subscription, onboarding, hospitality modules, tourism modules, ecosystem launcher, admin tools, gift cards, marketing/gamification, analytics)
-- Routes from `src/App.tsx`
-- Subscription logic from `src/lib/subscription.ts`
-- Component inventory across `src/components/enterprise/v2/*` and `src/components/tourism/*`
-- Microsite cards from `src/pages/Microsite.tsx`
+### 3. Test Cases (the main sheet)
+Columns:
+`ID | Module | Sub-Area | Feature | Test Scenario | Steps | Expected Result | Route/URL | Status | Severity | Actual Result | Bug ID | Tester | Date | Notes`
 
-## Implementation Steps (after approval)
-1. Read the relevant memory files and key source files to extract authoritative details (subscription tiers, card lists, tourism modules, ecosystem launcher, etc.)
-2. Generate the PRD content in a Node script using `docx` (per the docx skill: US Letter, Arial, proper headings, TOC, tables for feature matrices and tier comparison)
-3. Pack to `/mnt/documents/AuraLink_PRD_v1.docx`
-4. Convert to PDF via LibreOffice for the secondary deliverable
-5. QA: render every page to images, inspect for layout/overflow/typos, fix and re-render
-6. Deliver via `<lov-artifact>` tags for both files
+Status dropdown: Not Tested / Pass / Fail / Blocked / N/A
+Severity dropdown: Critical / High / Medium / Low
+Conditional formatting on Status + Severity columns.
 
-## Deliverables
-- `AuraLink_PRD_v1.docx` (primary, editable)
-- `AuraLink_PRD_v1.pdf` (read-only share copy)
-- Brief summary in chat of what's inside and what to review first
+Coverage (~120–150 test cases) grouped by module, sourced from the codebase:
 
-Approve this plan and I'll generate the PRD.
+- **Landing Pages**: Enterprise (`/`, `/enterprise`) — hero, segment nav, feature grid, ecosystem map, testimonials, FAQ, footer, CTAs, SEO meta. Tourism (`/tourism`) — hero, stats, capabilities, card showcase, buyer tiers, CTA.
+- **Auth**: Signup, Login, Forgot password, OTP verify, Reset password, session persistence, redirect after auth.
+- **Onboarding**: 3-step wizard, progress tracking, 21-day Supernova trial activation, skip/resume.
+- **Microsite (`/microsite`)**: Header, trial banner, 5 action buttons (Call/Message/Directions/Details/Reservations) with fallbacks, all 15 cards render, locked-card grayscale + lock overlay when trial expired, upgrade prompt, Aura Supermenu FAB, bottom brand bar.
+- **Microsite sub-pages**: Menu, Gallery, Reviews, Concierge, Staff, Details, Private Dining, Popular Dishes, Awards, FAQs, Events, Social Links, Freebie Game, Referral, Affiliate, Gift Cards (one row per page: loads, content renders, back nav).
+- **Dashboard**: Sidebar nav, location switcher, log out, each subpage loads — Analytics, QR, Affiliates, Subscription, Influencers, Loyalty, Referrals, SEO, Reputation, Enterprise, Settings, Admin, Gamification, Card Studio, Locations, Gift Cards, Team, Ecosystem launcher.
+- **Subscription / Gating**: Trial banner countdown, plan tiers (Spark/Maverick/Supernova), card accessibility per tier, upgrade prompt, expired-trial behavior.
+- **Ecosystem Launcher**: All 6 iBloov apps open `/dashboard/ecosystem/:appId`.
+- **Cross-cutting**: Responsive mobile (≤430px), 404 route, console errors, broken links, image loading, dark/light theme, accessibility (focus, alt text), SEO meta on `/`.
+
+### 4. Bug Report
+`Bug ID | Linked Test ID | Title | Module | Severity | Steps to Reproduce | Expected | Actual | Screenshot/Link | Status (Open/In Progress/Fixed/Won't Fix) | Assignee | Date Reported | Date Fixed | Notes`
+Dropdowns + conditional formatting on Status & Severity.
+
+### 5. Feature Inventory (reference)
+Read-only catalog of every route, feature, and component grouped by module — so engineers know exactly what scope was tested.
+
+### 6. Sign-Off
+Release name, version, tested by, reviewed by, dates, go/no-go decision, outstanding criticals.
+
+## Implementation Steps
+1. Read `src/App.tsx`, `src/lib/subscription.ts`, microsite cards list, dashboard pages, and tourism components to extract authoritative feature/route list.
+2. Build openpyxl script in `/tmp/`, generate workbook to `/mnt/documents/AuraLink_QA_TestPlan_v1.xlsx`.
+3. Recalculate formulas via the xlsx skill script.
+4. QA: open with pandas, verify all sheets, row counts, no formula errors.
+5. Deliver via `<lov-artifact>` tag with a short summary of how to use it.
+
+## Deliverable
+- `AuraLink_QA_TestPlan_v1.xlsx` — single self-contained file ready to share with engineering.
+
+Approve and I'll generate it.
