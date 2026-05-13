@@ -49,6 +49,21 @@ const products = [
 
 const rankColors = ["text-aura-warning", "text-muted-foreground", "text-secondary"];
 
+const influencers = [
+  { name: "Sarah Johnson", handle: "@sarahj", avatar: "SJ", tier: "Gold", earnings: 4280, conversions: 342, status: "Active", campaigns: ["Summer Dining Special", "Holiday Gift Card Push"] },
+  { name: "Mike Chen", handle: "@mikechen", avatar: "MC", tier: "Gold", earnings: 3150, conversions: 271, status: "Active", campaigns: ["Summer Dining Special"] },
+  { name: "Emma Davis", handle: "@emmad", avatar: "ED", tier: "Silver", earnings: 2470, conversions: 198, status: "Active", campaigns: ["Holiday Gift Card Push"] },
+  { name: "Alex Rivera", handle: "@alexr", avatar: "AR", tier: "Silver", earnings: 1920, conversions: 156, status: "Paused", campaigns: ["New Year Events"] },
+  { name: "Lisa Park", handle: "@lisap", avatar: "LP", tier: "Bronze", earnings: 1680, conversions: 134, status: "Active", campaigns: ["Summer Dining Special", "New Year Events"] },
+  { name: "Jordan Blake", handle: "@jblake", avatar: "JB", tier: "Bronze", earnings: 980, conversions: 87, status: "Active", campaigns: ["Holiday Gift Card Push"] },
+];
+
+const tierStyles: Record<string, string> = {
+  Gold: "bg-aura-warning/10 text-aura-warning border-aura-warning/30",
+  Silver: "bg-muted text-muted-foreground border-border",
+  Bronze: "bg-secondary/10 text-secondary border-secondary/30",
+};
+
 interface Campaign {
   id: string;
   name: string;
@@ -241,6 +256,66 @@ const AffiliateDashboard = () => {
                   </div>
                 </motion.div>
               ))}
+            </div>
+          </div>
+
+          {/* Influencers Table */}
+          <div className="rounded-2xl bg-card border overflow-hidden">
+            <div className="flex items-center justify-between p-5 border-b">
+              <div className="flex items-center gap-2">
+                <Users2 className="w-4 h-4 text-primary" />
+                <div>
+                  <h3 className="font-display font-semibold">Influencers</h3>
+                  <p className="text-[11px] text-muted-foreground">{influencers.length} influencers — earnings & active campaigns</p>
+                </div>
+              </div>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead className="bg-muted/40 text-[11px] uppercase tracking-wide text-muted-foreground">
+                  <tr>
+                    <th className="text-left font-medium px-5 py-3">Influencer</th>
+                    <th className="text-left font-medium px-5 py-3">Tier</th>
+                    <th className="text-left font-medium px-5 py-3">Campaigns</th>
+                    <th className="text-right font-medium px-5 py-3">Conversions</th>
+                    <th className="text-right font-medium px-5 py-3">Earnings</th>
+                    <th className="text-left font-medium px-5 py-3">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {influencers.map((inf) => (
+                    <tr key={inf.handle} className="border-t hover:bg-muted/30 transition-colors">
+                      <td className="px-5 py-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-[10px] font-semibold text-primary">{inf.avatar}</div>
+                          <div>
+                            <div className="text-sm font-medium">{inf.name}</div>
+                            <div className="text-[10px] text-muted-foreground">{inf.handle}</div>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-5 py-3">
+                        <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${tierStyles[inf.tier]}`}>{inf.tier}</span>
+                      </td>
+                      <td className="px-5 py-3">
+                        <div className="flex flex-wrap gap-1 max-w-[280px]">
+                          {inf.campaigns.map((c) => (
+                            <span key={c} className="text-[10px] px-2 py-0.5 rounded-full bg-primary/10 text-primary border border-primary/20">{c}</span>
+                          ))}
+                        </div>
+                      </td>
+                      <td className="px-5 py-3 text-right font-medium">{inf.conversions.toLocaleString()}</td>
+                      <td className="px-5 py-3 text-right font-semibold text-aura-success">${inf.earnings.toLocaleString()}</td>
+                      <td className="px-5 py-3">
+                        <span className={`inline-flex items-center gap-1.5 text-[11px] font-medium ${inf.status === "Active" ? "text-aura-success" : "text-muted-foreground"}`}>
+                          <span className={`w-1.5 h-1.5 rounded-full ${inf.status === "Active" ? "bg-aura-success" : "bg-muted-foreground"}`} />
+                          {inf.status}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
