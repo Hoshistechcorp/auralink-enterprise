@@ -49,6 +49,21 @@ const products = [
 
 const rankColors = ["text-aura-warning", "text-muted-foreground", "text-secondary"];
 
+const influencers = [
+  { name: "Sarah Johnson", handle: "@sarahj", avatar: "SJ", tier: "Gold", earnings: 4280, conversions: 342, status: "Active", campaigns: ["Summer Dining Special", "Holiday Gift Card Push"] },
+  { name: "Mike Chen", handle: "@mikechen", avatar: "MC", tier: "Gold", earnings: 3150, conversions: 271, status: "Active", campaigns: ["Summer Dining Special"] },
+  { name: "Emma Davis", handle: "@emmad", avatar: "ED", tier: "Silver", earnings: 2470, conversions: 198, status: "Active", campaigns: ["Holiday Gift Card Push"] },
+  { name: "Alex Rivera", handle: "@alexr", avatar: "AR", tier: "Silver", earnings: 1920, conversions: 156, status: "Paused", campaigns: ["New Year Events"] },
+  { name: "Lisa Park", handle: "@lisap", avatar: "LP", tier: "Bronze", earnings: 1680, conversions: 134, status: "Active", campaigns: ["Summer Dining Special", "New Year Events"] },
+  { name: "Jordan Blake", handle: "@jblake", avatar: "JB", tier: "Bronze", earnings: 980, conversions: 87, status: "Active", campaigns: ["Holiday Gift Card Push"] },
+];
+
+const tierStyles: Record<string, string> = {
+  Gold: "bg-aura-warning/10 text-aura-warning border-aura-warning/30",
+  Silver: "bg-muted text-muted-foreground border-border",
+  Bronze: "bg-secondary/10 text-secondary border-secondary/30",
+};
+
 interface Campaign {
   id: string;
   name: string;
