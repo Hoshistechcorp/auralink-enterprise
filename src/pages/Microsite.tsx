@@ -7,6 +7,7 @@ import {
   Gamepad2, Link2, Handshake,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import SEO from "@/components/SEO";
 import MicrositeHeader from "@/components/aura/MicrositeHeader";
 import ActionButton from "@/components/aura/ActionButton";
 import TrialBanner from "@/components/aura/TrialBanner";
@@ -129,20 +130,48 @@ const Microsite = () => {
   const lockedCards = cards.filter((card) => !isCardAccessible(card.title, effectivePlan));
   const isExpired = !sub.trialActive && effectivePlan !== "supernova";
 
+  const contact = getBusinessContact();
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    name: "Bella Vista",
+    description: "Award-winning Italian fine dining, established 1998. Reservations, menu, gift cards, AI concierge, and more — powered by AuraLink.",
+    servesCuisine: "Italian",
+    priceRange: "$$$",
+    image: "https://aura-link-enterpries.lovable.app/og-microsite.jpg",
+    address: { "@type": "PostalAddress", streetAddress: "123 Grand Ave", addressLocality: "New York", addressRegion: "NY", postalCode: "10001", addressCountry: "US" },
+    telephone: contact.phone,
+    url: typeof window !== "undefined" ? window.location.href : "https://aura-link-enterpries.lovable.app/microsite",
+    aggregateRating: { "@type": "AggregateRating", ratingValue: "4.8", reviewCount: "2847" },
+    menu: typeof window !== "undefined" ? `${window.location.origin}/microsite/menu` : undefined,
+    acceptsReservations: true,
+  };
+
   return (
     <div className="relative min-h-screen">
+      <SEO
+        title="Bella Vista — Menu, Reservations & Gift Cards | AuraLink"
+        description="Bella Vista — award-winning Italian fine dining in NYC. View the menu, book a table, send gift cards, and chat with our AI concierge. Powered by AuraLink."
+        keywords="Bella Vista, Italian restaurant NYC, fine dining, reservations, gift cards, AI concierge, AuraLink microsite"
+        jsonLd={jsonLd}
+      />
+      {/* Skip link for keyboard & assistive tech */}
+      <a href="#microsite-grid" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-primary focus:text-primary-foreground focus:px-3 focus:py-2 focus:text-sm">
+        Skip to content
+      </a>
       {/* Warm hospitality backdrop — restaurant, hotel, lounge */}
       <div className="fixed inset-0 -z-10">
         <img
           src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80"
-          alt="Warm classy restaurant, hotel and lounge ambience"
+          alt=""
+          aria-hidden="true"
           className="w-full h-full object-cover"
           loading="eager"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/55 to-background/80 backdrop-blur-[2px]" />
       </div>
 
-      <div className="relative bg-background max-w-[430px] mx-auto shadow-2xl min-h-screen">
+      <main className="relative bg-background max-w-[430px] mx-auto shadow-2xl min-h-screen" aria-label="Bella Vista microsite">
         <MicrositeHeader />
         <TrialBanner variant="microsite" />
 
@@ -152,11 +181,13 @@ const Microsite = () => {
         ))}
       </div>
 
-      <div className="px-4 pb-4">
-        <div className="grid grid-cols-3 gap-3">
+      <section id="microsite-grid" aria-label="Explore Bella Vista" className="px-4 pb-4">
+        <h2 className="sr-only">Explore Bella Vista</h2>
+        <div className="grid grid-cols-3 gap-3" role="list">
           {accessibleCards.map((card, i) => (
             <motion.div
               key={card.title}
+              role="listitem"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.04, duration: 0.35 }}
@@ -213,11 +244,11 @@ const Microsite = () => {
             </p>
           </motion.div>
         )}
-      </div>
+      </section>
 
       <BottomBrandBar />
       <AuraSupermenu />
-      </div>
+      </main>
     </div>
   );
 };
