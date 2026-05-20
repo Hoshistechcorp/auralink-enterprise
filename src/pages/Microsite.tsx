@@ -244,11 +244,11 @@ const Microsite = () => {
             </p>
           </motion.div>
         )}
-      </div>
+      </section>
 
       <BottomBrandBar />
       <AuraSupermenu />
-      </div>
+      </main>
     </div>
   );
 };
