@@ -10,7 +10,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { useDarkMode } from "@/hooks/use-dark-mode";
 import EcosystemLauncher from "@/components/aura/EcosystemLauncher";
-import { logout } from "@/lib/auth";
+import { logout, getUser } from "@/lib/auth";
+import { BRANCHES } from "@/lib/branchManagers";
 
 interface NavItem {
   icon: LucideIcon;
@@ -125,9 +126,9 @@ interface DashboardLayoutProps {
   subtitle?: string;
 }
 
-const SidebarNav = ({ currentPath, navigate, onNavigate }: { currentPath: string; navigate: (p: string) => void; onNavigate?: () => void }) => (
+const SidebarNav = ({ sections, currentPath, navigate, onNavigate }: { sections: NavSection[]; currentPath: string; navigate: (p: string) => void; onNavigate?: () => void }) => (
   <nav className="flex-1 overflow-y-auto px-2 py-2 space-y-0.5">
-    {navSections.map((section) => (
+    {sections.map((section) => (
       <SidebarSection
         key={section.title}
         section={section}
@@ -138,19 +139,39 @@ const SidebarNav = ({ currentPath, navigate, onNavigate }: { currentPath: string
   </nav>
 );
 
-const locations = [
-  { id: "downtown", label: "Bella Vista — Downtown" },
-  { id: "midtown", label: "Bella Vista — Midtown" },
-  { id: "brooklyn", label: "Bella Vista — Brooklyn" },
-];
+const locations = BRANCHES.map((b) => ({ id: b.id, label: b.label }));
+
+// Paths visible only to super admins
+const ADMIN_ONLY_PATHS = new Set<string>([
+  "/dashboard/admin",
+  "/dashboard/team",
+  "/dashboard/enterprise",
+  "/dashboard/subscription",
+  "/dashboard/locations",
+]);
 
 const DashboardLayout = ({ children, title, subtitle = "Bella Vista · Restaurant" }: DashboardLayoutProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const { isDark, toggle: toggleDark } = useDarkMode();
-  const [activeLocation, setActiveLocation] = useState(locations[0]);
+  const currentUser = getUser();
+  const isManager = currentUser?.role === "branch_manager";
+
+  const scopedLocations = isManager
+    ? locations.filter((l) => l.id === currentUser?.branchId)
+    : locations;
+
+  const initialLocation = scopedLocations[0] || locations[0];
+  const [activeLocation, setActiveLocation] = useState(initialLocation);
   const [locDropdownOpen, setLocDropdownOpen] = useState(false);
+
+  // Filter sidebar sections for branch managers
+  const visibleSections = isManager
+    ? navSections
+        .map((s) => ({ ...s, items: s.items.filter((i) => !ADMIN_ONLY_PATHS.has(i.path)) }))
+        .filter((s) => s.items.length > 0)
+    : navSections;
 
   return (
     <div className="min-h-screen bg-background flex">
@@ -162,7 +183,7 @@ const DashboardLayout = ({ children, title, subtitle = "Bella Vista · Restauran
           </div>
           <p className="text-[10px] text-muted-foreground mt-0.5">Enterprise Platform</p>
         </div>
-        <SidebarNav currentPath={location.pathname} navigate={navigate} />
+        <SidebarNav sections={visibleSections} currentPath={location.pathname} navigate={navigate} />
         <div className="p-3 border-t space-y-1">
           <button
             onClick={() => navigate("/microsite")}
@@ -189,7 +210,7 @@ const DashboardLayout = ({ children, title, subtitle = "Bella Vista · Restauran
             </div>
             <p className="text-[10px] text-muted-foreground mt-0.5">Enterprise Platform</p>
           </div>
-          <SidebarNav currentPath={location.pathname} navigate={navigate} onNavigate={() => setMobileOpen(false)} />
+          <SidebarNav sections={visibleSections} currentPath={location.pathname} navigate={navigate} onNavigate={() => setMobileOpen(false)} />
           <div className="p-3 border-t space-y-1">
             <button
               onClick={() => { navigate("/microsite"); setMobileOpen(false); }}
@@ -218,31 +239,46 @@ const DashboardLayout = ({ children, title, subtitle = "Bella Vista · Restauran
                 <Menu className="w-5 h-5" />
               </button>
               <div>
-                <h1 className="font-display text-xl sm:text-2xl font-bold">{title}</h1>
-                <p className="text-xs sm:text-sm text-muted-foreground">{subtitle}</p>
+                <div className="flex items-center gap-2">
+                  <h1 className="font-display text-xl sm:text-2xl font-bold">{title}</h1>
+                  {isManager && (
+                    <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-primary/10 text-primary">
+                      Branch Manager
+                    </span>
+                  )}
+                </div>
+                <p className="text-xs sm:text-sm text-muted-foreground">
+                  {isManager ? `${currentUser?.branchLabel} · Restricted view` : subtitle}
+                </p>
               </div>
             </div>
             <div className="flex items-center gap-2 ml-auto sm:ml-0">
               <EcosystemLauncher />
-              {/* Location Switcher */}
+              {/* Location Switcher (locked for branch managers) */}
               <div className="relative">
                 <button
-                  onClick={() => setLocDropdownOpen(!locDropdownOpen)}
-                  className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-2 rounded-xl bg-muted/50 border text-sm font-medium hover:bg-muted transition-colors"
+                  onClick={() => !isManager && setLocDropdownOpen(!locDropdownOpen)}
+                  disabled={isManager}
+                  title={isManager ? "Locked to your assigned branch" : "Switch location"}
+                  className={`flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-2 rounded-xl bg-muted/50 border text-sm font-medium transition-colors ${isManager ? "opacity-80 cursor-not-allowed" : "hover:bg-muted"}`}
                 >
                   <MapPin className="w-3.5 h-3.5 text-primary" />
                   <span className="hidden sm:inline max-w-[140px] truncate">{activeLocation.label.split("—")[1]?.trim() || activeLocation.label}</span>
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform ${locDropdownOpen ? "rotate-180" : ""}`} />
+                  {isManager ? (
+                    <Shield className="w-3.5 h-3.5 text-primary" />
+                  ) : (
+                    <ChevronDown className={`w-3.5 h-3.5 transition-transform ${locDropdownOpen ? "rotate-180" : ""}`} />
+                  )}
                 </button>
                 <AnimatePresence>
-                  {locDropdownOpen && (
+                  {locDropdownOpen && !isManager && (
                     <motion.div
                       initial={{ opacity: 0, y: -4 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -4 }}
                       className="absolute right-0 top-full mt-1 w-64 p-1.5 rounded-xl bg-card border shadow-lg z-50"
                     >
-                      {locations.map((loc) => (
+                      {scopedLocations.map((loc) => (
                         <button
                           key={loc.id}
                           onClick={() => { setActiveLocation(loc); setLocDropdownOpen(false); }}
