@@ -210,7 +210,7 @@ const DashboardLayout = ({ children, title, subtitle = "Bella Vista · Restauran
             </div>
             <p className="text-[10px] text-muted-foreground mt-0.5">Enterprise Platform</p>
           </div>
-          <SidebarNav currentPath={location.pathname} navigate={navigate} onNavigate={() => setMobileOpen(false)} />
+          <SidebarNav sections={visibleSections} currentPath={location.pathname} navigate={navigate} onNavigate={() => setMobileOpen(false)} />
           <div className="p-3 border-t space-y-1">
             <button
               onClick={() => { navigate("/microsite"); setMobileOpen(false); }}
