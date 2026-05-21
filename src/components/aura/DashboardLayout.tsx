@@ -126,9 +126,9 @@ interface DashboardLayoutProps {
   subtitle?: string;
 }
 
-const SidebarNav = ({ currentPath, navigate, onNavigate }: { currentPath: string; navigate: (p: string) => void; onNavigate?: () => void }) => (
+const SidebarNav = ({ sections, currentPath, navigate, onNavigate }: { sections: NavSection[]; currentPath: string; navigate: (p: string) => void; onNavigate?: () => void }) => (
   <nav className="flex-1 overflow-y-auto px-2 py-2 space-y-0.5">
-    {navSections.map((section) => (
+    {sections.map((section) => (
       <SidebarSection
         key={section.title}
         section={section}
