@@ -239,8 +239,17 @@ const DashboardLayout = ({ children, title, subtitle = "Bella Vista · Restauran
                 <Menu className="w-5 h-5" />
               </button>
               <div>
-                <h1 className="font-display text-xl sm:text-2xl font-bold">{title}</h1>
-                <p className="text-xs sm:text-sm text-muted-foreground">{subtitle}</p>
+                <div className="flex items-center gap-2">
+                  <h1 className="font-display text-xl sm:text-2xl font-bold">{title}</h1>
+                  {isManager && (
+                    <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-primary/10 text-primary">
+                      Branch Manager
+                    </span>
+                  )}
+                </div>
+                <p className="text-xs sm:text-sm text-muted-foreground">
+                  {isManager ? `${currentUser?.branchLabel} · Restricted view` : subtitle}
+                </p>
               </div>
             </div>
             <div className="flex items-center gap-2 ml-auto sm:ml-0">
