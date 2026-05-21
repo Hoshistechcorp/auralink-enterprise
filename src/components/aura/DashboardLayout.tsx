@@ -10,7 +10,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { useDarkMode } from "@/hooks/use-dark-mode";
 import EcosystemLauncher from "@/components/aura/EcosystemLauncher";
-import { logout } from "@/lib/auth";
+import { logout, getUser } from "@/lib/auth";
+import { BRANCHES } from "@/lib/branchManagers";
 
 interface NavItem {
   icon: LucideIcon;
