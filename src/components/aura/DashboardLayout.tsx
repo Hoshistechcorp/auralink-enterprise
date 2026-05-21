@@ -254,25 +254,31 @@ const DashboardLayout = ({ children, title, subtitle = "Bella Vista · Restauran
             </div>
             <div className="flex items-center gap-2 ml-auto sm:ml-0">
               <EcosystemLauncher />
-              {/* Location Switcher */}
+              {/* Location Switcher (locked for branch managers) */}
               <div className="relative">
                 <button
-                  onClick={() => setLocDropdownOpen(!locDropdownOpen)}
-                  className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-2 rounded-xl bg-muted/50 border text-sm font-medium hover:bg-muted transition-colors"
+                  onClick={() => !isManager && setLocDropdownOpen(!locDropdownOpen)}
+                  disabled={isManager}
+                  title={isManager ? "Locked to your assigned branch" : "Switch location"}
+                  className={`flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-2 rounded-xl bg-muted/50 border text-sm font-medium transition-colors ${isManager ? "opacity-80 cursor-not-allowed" : "hover:bg-muted"}`}
                 >
                   <MapPin className="w-3.5 h-3.5 text-primary" />
                   <span className="hidden sm:inline max-w-[140px] truncate">{activeLocation.label.split("—")[1]?.trim() || activeLocation.label}</span>
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform ${locDropdownOpen ? "rotate-180" : ""}`} />
+                  {isManager ? (
+                    <Shield className="w-3.5 h-3.5 text-primary" />
+                  ) : (
+                    <ChevronDown className={`w-3.5 h-3.5 transition-transform ${locDropdownOpen ? "rotate-180" : ""}`} />
+                  )}
                 </button>
                 <AnimatePresence>
-                  {locDropdownOpen && (
+                  {locDropdownOpen && !isManager && (
                     <motion.div
                       initial={{ opacity: 0, y: -4 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -4 }}
                       className="absolute right-0 top-full mt-1 w-64 p-1.5 rounded-xl bg-card border shadow-lg z-50"
                     >
-                      {locations.map((loc) => (
+                      {scopedLocations.map((loc) => (
                         <button
                           key={loc.id}
                           onClick={() => { setActiveLocation(loc); setLocDropdownOpen(false); }}
