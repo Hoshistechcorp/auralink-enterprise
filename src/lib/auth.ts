@@ -1,9 +1,16 @@
 // localStorage-based auth mockup
+import { findManagerByCredentials, updateManager } from "./branchManagers";
+
+export type UserRole = "admin" | "branch_manager";
+
 export interface AuthUser {
   id: string;
   name: string;
   email: string;
   createdAt: string;
+  role?: UserRole;
+  branchId?: string;
+  branchLabel?: string;
 }
 
 const AUTH_KEY = "aura_auth_user";
