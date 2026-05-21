@@ -139,19 +139,39 @@ const SidebarNav = ({ currentPath, navigate, onNavigate }: { currentPath: string
   </nav>
 );
 
-const locations = [
-  { id: "downtown", label: "Bella Vista — Downtown" },
-  { id: "midtown", label: "Bella Vista — Midtown" },
-  { id: "brooklyn", label: "Bella Vista — Brooklyn" },
-];
+const locations = BRANCHES.map((b) => ({ id: b.id, label: b.label }));
+
+// Paths visible only to super admins
+const ADMIN_ONLY_PATHS = new Set<string>([
+  "/dashboard/admin",
+  "/dashboard/team",
+  "/dashboard/enterprise",
+  "/dashboard/subscription",
+  "/dashboard/locations",
+]);
 
 const DashboardLayout = ({ children, title, subtitle = "Bella Vista · Restaurant" }: DashboardLayoutProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const { isDark, toggle: toggleDark } = useDarkMode();
-  const [activeLocation, setActiveLocation] = useState(locations[0]);
+  const currentUser = getUser();
+  const isManager = currentUser?.role === "branch_manager";
+
+  const scopedLocations = isManager
+    ? locations.filter((l) => l.id === currentUser?.branchId)
+    : locations;
+
+  const initialLocation = scopedLocations[0] || locations[0];
+  const [activeLocation, setActiveLocation] = useState(initialLocation);
   const [locDropdownOpen, setLocDropdownOpen] = useState(false);
+
+  // Filter sidebar sections for branch managers
+  const visibleSections = isManager
+    ? navSections
+        .map((s) => ({ ...s, items: s.items.filter((i) => !ADMIN_ONLY_PATHS.has(i.path)) }))
+        .filter((s) => s.items.length > 0)
+    : navSections;
 
   return (
     <div className="min-h-screen bg-background flex">
