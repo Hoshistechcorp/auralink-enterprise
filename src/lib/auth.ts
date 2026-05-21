@@ -167,10 +167,29 @@ export const resetPassword = (email: string, password: string) => {
 };
 
 export const login = (email: string, password: string): AuthUser => {
+  // 1) Branch manager credentials take precedence
+  const manager = findManagerByCredentials(email, password);
+  if (manager) {
+    const user: AuthUser = {
+      id: manager.id,
+      name: manager.name,
+      email: manager.email,
+      createdAt: manager.createdAt,
+      role: "branch_manager",
+      branchId: manager.branchId,
+      branchLabel: manager.branchLabel,
+    };
+    updateManager(manager.id, { status: "active", lastActive: "Just now" });
+    localStorage.setItem(AUTH_KEY, JSON.stringify(user));
+    return user;
+  }
+
+  // 2) Regular (admin) account
   const users = getUsers();
   const found = users.find((u) => u.email === email && u.password === password);
   if (!found) throw new Error("Invalid email or password");
-  const { password: _, ...user } = found;
+  const { password: _, ...rest } = found;
+  const user: AuthUser = { ...rest, role: "admin" };
   localStorage.setItem(AUTH_KEY, JSON.stringify(user));
   return user;
 };
