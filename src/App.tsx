@@ -15,6 +15,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import VerifyOtp from "./pages/VerifyOtp";
 import ResetPassword from "./pages/ResetPassword";
 import QRManagement from "./pages/dashboard/QRManagement";
+import LinksPage from "./pages/dashboard/LinksPage";
 import AffiliateDashboard from "./pages/dashboard/AffiliateDashboard";
 import SubscriptionPage from "./pages/dashboard/SubscriptionPage";
 import InfluencerPage from "./pages/dashboard/InfluencerPage";
@@ -92,6 +93,7 @@ const App = () => (
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/analytics" element={<AnalyticsPage />} />
           <Route path="/dashboard/qr" element={<QRManagement />} />
+          <Route path="/dashboard/links" element={<LinksPage />} />
           <Route path="/dashboard/affiliates" element={<AffiliateDashboard />} />
           <Route path="/dashboard/subscription" element={<SubscriptionPage />} />
           <Route path="/dashboard/influencers" element={<InfluencerPage />} />
