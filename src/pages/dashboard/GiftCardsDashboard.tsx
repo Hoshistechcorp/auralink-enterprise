@@ -4,7 +4,7 @@ import {
   Gift, DollarSign, CreditCard, Plus, Save, Trash2, TrendingUp,
   ArrowUp, ArrowDown, ShoppingBag, Repeat, Eye, Search, Send,
   CheckCircle2, XCircle, Clock, User, Mail, MessageSquare, Ticket,
-  ShieldCheck, ArrowRight,
+  ShieldCheck, ArrowRight, Tag,
 } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from "recharts";
 import { Switch } from "@/components/ui/switch";
@@ -144,8 +144,8 @@ const GiftCardsDashboard = () => {
 
   // Purchase flow
   const [selectedCardId, setSelectedCardId] = useState("");
-  const [purchaseForm, setPurchaseForm] = useState({ buyerName: "", buyerEmail: "", recipientName: "", recipientEmail: "", message: "", customAmount: "" });
-  const [purchaseComplete, setPurchaseComplete] = useState<{ code: string; amount: number } | null>(null);
+  const [purchaseForm, setPurchaseForm] = useState({ buyerName: "", buyerEmail: "", recipientName: "", recipientEmail: "", message: "", customAmount: "", discount: "", discountType: "percent" as "percent" | "amount" });
+  const [purchaseComplete, setPurchaseComplete] = useState<{ code: string; amount: number; finalAmount: number; discount: number } | null>(null);
 
   // Redeem flow
   const [redeemCode, setRedeemCode] = useState("");
@@ -170,24 +170,32 @@ const GiftCardsDashboard = () => {
 
   const handlePurchase = () => {
     const card = giftCards.find((c) => c.id === selectedCardId);
-    const amount = card ? parseFloat(card.amount) : parseFloat(purchaseForm.customAmount);
-    if (!amount || !purchaseForm.buyerName || !purchaseForm.recipientName) return;
+    const baseAmount = card ? parseFloat(card.amount) : parseFloat(purchaseForm.customAmount);
+    if (!baseAmount || !purchaseForm.buyerName || !purchaseForm.recipientName) return;
+    const discountVal = parseFloat(purchaseForm.discount) || 0;
+    const discountAmt = purchaseForm.discountType === "percent"
+      ? Math.min(baseAmount, baseAmount * (discountVal / 100))
+      : Math.min(baseAmount, discountVal);
+    const finalAmount = Math.max(0, baseAmount - discountAmt);
     const code = generateCode();
+    const discountNote = discountAmt > 0
+      ? ` (${purchaseForm.discountType === "percent" ? `${discountVal}% off` : `$${discountAmt.toFixed(2)} off`})`
+      : "";
     const newIssued: IssuedCard = {
-      id: uid(), code, cardName: card?.name || "Custom Amount", amount, balance: amount,
+      id: uid(), code, cardName: card?.name || "Custom Amount", amount: baseAmount, balance: baseAmount,
       buyerName: purchaseForm.buyerName, buyerEmail: purchaseForm.buyerEmail,
       recipientName: purchaseForm.recipientName, recipientEmail: purchaseForm.recipientEmail,
       message: purchaseForm.message, status: "active", purchasedAt: new Date().toISOString().split("T")[0],
-      transactions: [{ id: uid(), type: "purchase", amount, date: new Date().toISOString().split("T")[0], note: "Gift card purchased" }],
+      transactions: [{ id: uid(), type: "purchase", amount: baseAmount, date: new Date().toISOString().split("T")[0], note: `Gift card purchased${discountNote} — charged $${finalAmount.toFixed(2)}` }],
     };
     setIssuedCards([newIssued, ...issuedCards]);
-    setPurchaseComplete({ code, amount });
-    toast({ title: "Gift card sold!", description: `Code: ${code} — $${amount} card issued to ${purchaseForm.recipientName}` });
+    setPurchaseComplete({ code, amount: baseAmount, finalAmount, discount: discountAmt });
+    toast({ title: "Gift card sold!", description: `Code: ${code} — $${baseAmount} card${discountAmt > 0 ? ` (charged $${finalAmount.toFixed(2)} after $${discountAmt.toFixed(2)} discount)` : ""} issued to ${purchaseForm.recipientName}` });
   };
 
   const resetPurchase = () => {
     setSelectedCardId("");
-    setPurchaseForm({ buyerName: "", buyerEmail: "", recipientName: "", recipientEmail: "", message: "", customAmount: "" });
+    setPurchaseForm({ buyerName: "", buyerEmail: "", recipientName: "", recipientEmail: "", message: "", customAmount: "", discount: "", discountType: "percent" });
     setPurchaseComplete(null);
   };
 
