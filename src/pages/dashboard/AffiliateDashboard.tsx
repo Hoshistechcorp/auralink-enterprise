@@ -245,7 +245,7 @@ const AffiliateDashboard = () => {
                     <span className="aura-badge aura-badge-gold text-[10px]">{product.commission} commission</span>
                   </div>
                   <div className="flex items-center gap-1.5 p-2 rounded-lg bg-muted text-[11px]">
-                    <span className="flex-1 truncate text-muted-foreground">auralink.io/bv/ref/{product.id}</span>
+                    <span className="flex-1 truncate text-muted-foreground">4i.fyi/bv/ref/{product.id}</span>
                     <button onClick={(e) => { e.stopPropagation(); handleCopy(product.id); }}
                       className="shrink-0 w-6 h-6 rounded-md bg-card border flex items-center justify-center hover:bg-primary/10 transition-colors">
                       {copiedLink === product.id ? <Check className="w-3 h-3 text-aura-success" /> : <Copy className="w-3 h-3" />}

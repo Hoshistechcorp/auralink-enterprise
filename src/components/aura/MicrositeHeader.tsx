@@ -1,6 +1,7 @@
 import { MapPin, Star, BadgeCheck, Shield } from "lucide-react";
 import coverImage from "@/assets/restaurant-cover.jpg";
 import logoImage from "@/assets/restaurant-logo.png";
+import CertificationBadges from "@/components/aura/CertificationBadges";
 
 const MicrositeHeader = () => {
   return (
@@ -19,11 +20,12 @@ const MicrositeHeader = () => {
             alt="Bella Vista logo"
             className="w-20 h-20 rounded-2xl border-4 border-background shadow-lg object-cover"
           />
-          <div className="pb-1 flex-1">
-            <div className="flex items-center gap-1.5">
+          <div className="pb-1 flex-1 min-w-0">
+            <div className="flex items-center gap-1.5 flex-wrap">
               <h1 className="text-xl font-display font-bold">Bella Vista</h1>
               <BadgeCheck className="w-5 h-5 text-aura-info" />
               <Shield className="w-4 h-4 text-aura-success" />
+              <CertificationBadges size="sm" max={4} />
             </div>
             <div className="flex items-center gap-1 mt-0.5">
               <Star className="w-3.5 h-3.5 fill-aura-warning text-aura-warning" />

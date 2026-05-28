@@ -20,15 +20,15 @@ interface ManagedLink {
   createdAt: string;
 }
 
-const SHORT_DOMAIN = "aura.lk";
+const SHORT_DOMAIN = "4i.fyi";
 const STORAGE_KEY = "auralink:managed-links";
 
 const SEED: ManagedLink[] = [
-  { id: "l1", label: "Main Microsite", slug: "bv", destination: "https://auralink.io/restaurant/bella-vista-downtown/microsite", status: "active", clicks: 4821, createdAt: "2025-09-10" },
-  { id: "l2", label: "Dinner Menu", slug: "bv-menu", destination: "https://auralink.io/restaurant/bella-vista-downtown/menu", status: "active", clicks: 2103, createdAt: "2025-09-12" },
+  { id: "l1", label: "Main Microsite", slug: "bv", destination: "https://4i.fyi/restaurant/bella-vista-downtown/microsite", status: "active", clicks: 4821, createdAt: "2025-09-10" },
+  { id: "l2", label: "Dinner Menu", slug: "bv-menu", destination: "https://4i.fyi/restaurant/bella-vista-downtown/menu", status: "active", clicks: 2103, createdAt: "2025-09-12" },
   { id: "l3", label: "Reserve a Table", slug: "bv-book", destination: "https://reservations.bellavista.com/downtown?source=qr&utm_campaign=table", status: "active", clicks: 1287, createdAt: "2025-09-14" },
-  { id: "l4", label: "Summer Promo (ended)", slug: "summer25", destination: "https://auralink.io/promo/summer-2025", status: "discontinued", clicks: 542, createdAt: "2025-06-01" },
-  { id: "l5", label: "Brooklyn Soft Launch", slug: "bk-launch", destination: "https://auralink.io/restaurant/bella-vista-brooklyn?preview=1", status: "suspended", clicks: 96, createdAt: "2025-10-02" },
+  { id: "l4", label: "Summer Promo (ended)", slug: "summer25", destination: "https://4i.fyi/promo/summer-2025", status: "discontinued", clicks: 542, createdAt: "2025-06-01" },
+  { id: "l5", label: "Brooklyn Soft Launch", slug: "bk-launch", destination: "https://4i.fyi/restaurant/bella-vista-brooklyn?preview=1", status: "suspended", clicks: 96, createdAt: "2025-10-02" },
 ];
 
 const loadLinks = (): ManagedLink[] => {

@@ -4,7 +4,7 @@ import {
   Gift, DollarSign, CreditCard, Plus, Save, Trash2, TrendingUp,
   ArrowUp, ArrowDown, ShoppingBag, Repeat, Eye, Search, Send,
   CheckCircle2, XCircle, Clock, User, Mail, MessageSquare, Ticket,
-  ShieldCheck, ArrowRight,
+  ShieldCheck, ArrowRight, Tag,
 } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from "recharts";
 import { Switch } from "@/components/ui/switch";
@@ -144,8 +144,8 @@ const GiftCardsDashboard = () => {
 
   // Purchase flow
   const [selectedCardId, setSelectedCardId] = useState("");
-  const [purchaseForm, setPurchaseForm] = useState({ buyerName: "", buyerEmail: "", recipientName: "", recipientEmail: "", message: "", customAmount: "" });
-  const [purchaseComplete, setPurchaseComplete] = useState<{ code: string; amount: number } | null>(null);
+  const [purchaseForm, setPurchaseForm] = useState({ buyerName: "", buyerEmail: "", recipientName: "", recipientEmail: "", message: "", customAmount: "", discount: "", discountType: "percent" as "percent" | "amount" });
+  const [purchaseComplete, setPurchaseComplete] = useState<{ code: string; amount: number; finalAmount: number; discount: number } | null>(null);
 
   // Redeem flow
   const [redeemCode, setRedeemCode] = useState("");
@@ -170,24 +170,32 @@ const GiftCardsDashboard = () => {
 
   const handlePurchase = () => {
     const card = giftCards.find((c) => c.id === selectedCardId);
-    const amount = card ? parseFloat(card.amount) : parseFloat(purchaseForm.customAmount);
-    if (!amount || !purchaseForm.buyerName || !purchaseForm.recipientName) return;
+    const baseAmount = card ? parseFloat(card.amount) : parseFloat(purchaseForm.customAmount);
+    if (!baseAmount || !purchaseForm.buyerName || !purchaseForm.recipientName) return;
+    const discountVal = parseFloat(purchaseForm.discount) || 0;
+    const discountAmt = purchaseForm.discountType === "percent"
+      ? Math.min(baseAmount, baseAmount * (discountVal / 100))
+      : Math.min(baseAmount, discountVal);
+    const finalAmount = Math.max(0, baseAmount - discountAmt);
     const code = generateCode();
+    const discountNote = discountAmt > 0
+      ? ` (${purchaseForm.discountType === "percent" ? `${discountVal}% off` : `$${discountAmt.toFixed(2)} off`})`
+      : "";
     const newIssued: IssuedCard = {
-      id: uid(), code, cardName: card?.name || "Custom Amount", amount, balance: amount,
+      id: uid(), code, cardName: card?.name || "Custom Amount", amount: baseAmount, balance: baseAmount,
       buyerName: purchaseForm.buyerName, buyerEmail: purchaseForm.buyerEmail,
       recipientName: purchaseForm.recipientName, recipientEmail: purchaseForm.recipientEmail,
       message: purchaseForm.message, status: "active", purchasedAt: new Date().toISOString().split("T")[0],
-      transactions: [{ id: uid(), type: "purchase", amount, date: new Date().toISOString().split("T")[0], note: "Gift card purchased" }],
+      transactions: [{ id: uid(), type: "purchase", amount: baseAmount, date: new Date().toISOString().split("T")[0], note: `Gift card purchased${discountNote} — charged $${finalAmount.toFixed(2)}` }],
     };
     setIssuedCards([newIssued, ...issuedCards]);
-    setPurchaseComplete({ code, amount });
-    toast({ title: "Gift card sold!", description: `Code: ${code} — $${amount} card issued to ${purchaseForm.recipientName}` });
+    setPurchaseComplete({ code, amount: baseAmount, finalAmount, discount: discountAmt });
+    toast({ title: "Gift card sold!", description: `Code: ${code} — $${baseAmount} card${discountAmt > 0 ? ` (charged $${finalAmount.toFixed(2)} after $${discountAmt.toFixed(2)} discount)` : ""} issued to ${purchaseForm.recipientName}` });
   };
 
   const resetPurchase = () => {
     setSelectedCardId("");
-    setPurchaseForm({ buyerName: "", buyerEmail: "", recipientName: "", recipientEmail: "", message: "", customAmount: "" });
+    setPurchaseForm({ buyerName: "", buyerEmail: "", recipientName: "", recipientEmail: "", message: "", customAmount: "", discount: "", discountType: "percent" });
     setPurchaseComplete(null);
   };
 
@@ -452,7 +460,15 @@ const GiftCardsDashboard = () => {
                   <p className="text-xs text-muted-foreground mb-1">Gift Card Code</p>
                   <p className="text-2xl font-mono font-bold text-primary tracking-wider">{purchaseComplete.code}</p>
                 </div>
-                <p className="text-sm text-muted-foreground">A ${purchaseComplete.amount} gift card has been created and added to your issued cards.</p>
+                {purchaseComplete.discount > 0 ? (
+                  <div className="text-sm text-muted-foreground space-y-1">
+                    <p>Card value: <span className="font-semibold text-foreground">${purchaseComplete.amount.toFixed(2)}</span></p>
+                    <p className="text-chart-2">Discount applied: −${purchaseComplete.discount.toFixed(2)}</p>
+                    <p>Buyer charged: <span className="font-semibold text-foreground">${purchaseComplete.finalAmount.toFixed(2)}</span></p>
+                  </div>
+                ) : (
+                  <p className="text-sm text-muted-foreground">A ${purchaseComplete.amount} gift card has been created and added to your issued cards.</p>
+                )}
                 <button onClick={resetPurchase} className={`${btnPrimary} mx-auto`}><Plus className="w-4 h-4" /> Sell Another</button>
               </motion.div>
             ) : (
@@ -506,6 +522,60 @@ const GiftCardsDashboard = () => {
                     <label className="text-xs font-medium text-muted-foreground mb-1 flex items-center gap-1"><MessageSquare className="w-3 h-3" /> Personal Message (optional)</label>
                     <textarea value={purchaseForm.message} onChange={(e) => setPurchaseForm({ ...purchaseForm, message: e.target.value })} placeholder="Add a note..." rows={2} className={`${inputCls} resize-none`} maxLength={200} />
                   </div>
+
+                  {/* Discount */}
+                  {(() => {
+                    const card = giftCards.find((c) => c.id === selectedCardId);
+                    const baseAmount = card ? parseFloat(card.amount) : parseFloat(purchaseForm.customAmount || "0");
+                    const discountVal = parseFloat(purchaseForm.discount) || 0;
+                    const discountAmt = baseAmount > 0
+                      ? (purchaseForm.discountType === "percent"
+                          ? Math.min(baseAmount, baseAmount * (discountVal / 100))
+                          : Math.min(baseAmount, discountVal))
+                      : 0;
+                    const finalAmount = Math.max(0, baseAmount - discountAmt);
+                    return (
+                      <div className="rounded-xl border bg-muted/20 p-4 space-y-3">
+                        <label className="text-xs font-medium text-muted-foreground flex items-center gap-1"><Tag className="w-3 h-3" /> Discount (optional)</label>
+                        <div className="grid sm:grid-cols-[1fr_auto] gap-2">
+                          <div className="relative">
+                            <input
+                              value={purchaseForm.discount}
+                              onChange={(e) => setPurchaseForm({ ...purchaseForm, discount: e.target.value.replace(/[^0-9.]/g, "") })}
+                              placeholder={purchaseForm.discountType === "percent" ? "e.g. 10" : "e.g. 5.00"}
+                              className={`${inputCls} pr-10`}
+                              maxLength={6}
+                            />
+                            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted-foreground font-medium">
+                              {purchaseForm.discountType === "percent" ? "%" : "$"}
+                            </span>
+                          </div>
+                          <div className="flex rounded-xl bg-muted p-1 gap-1">
+                            <button type="button" onClick={() => setPurchaseForm({ ...purchaseForm, discountType: "percent" })}
+                              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${purchaseForm.discountType === "percent" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground"}`}>
+                              %
+                            </button>
+                            <button type="button" onClick={() => setPurchaseForm({ ...purchaseForm, discountType: "amount" })}
+                              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${purchaseForm.discountType === "amount" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground"}`}>
+                              $
+                            </button>
+                          </div>
+                        </div>
+                        {baseAmount > 0 && (
+                          <div className="flex flex-wrap items-center justify-between text-xs gap-2 pt-1">
+                            <span className="text-muted-foreground">
+                              Card value <span className="font-semibold text-foreground">${baseAmount.toFixed(2)}</span>
+                              {discountAmt > 0 && <> · Discount <span className="text-chart-2 font-semibold">−${discountAmt.toFixed(2)}</span></>}
+                            </span>
+                            <span className="font-semibold">
+                              Buyer pays: <span className="text-primary">${finalAmount.toFixed(2)}</span>
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })()}
+
                   <button onClick={handlePurchase} disabled={(!selectedCardId && !purchaseForm.customAmount) || !purchaseForm.buyerName || !purchaseForm.recipientName}
                     className={`${btnPrimary} w-full justify-center disabled:opacity-40 disabled:cursor-not-allowed`}>
                     <Send className="w-4 h-4" /> Issue Gift Card

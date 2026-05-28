@@ -85,7 +85,7 @@ const QRManagement = () => {
             {/* URL Copy */}
             <div className="flex items-center gap-2 p-2 rounded-xl bg-muted text-xs mb-4">
               <span className="flex-1 truncate text-left text-muted-foreground">
-                auralink.io/bv/{selected}
+                4i.fyi/bv/{selected}
               </span>
               <button
                 onClick={handleCopy}

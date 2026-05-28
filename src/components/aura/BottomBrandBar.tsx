@@ -21,7 +21,7 @@ const BottomBrandBar = () => {
             <div>
               <div className="flex items-center gap-1 text-xs text-muted-foreground">
                 <LinkIcon className="w-3 h-3" />
-                <span>auralink.io/bellavista</span>
+                <span>4i.fyi/bellavista</span>
               </div>
             </div>
           </div>
@@ -122,7 +122,7 @@ const BottomBrandBar = () => {
                   <p className="text-sm font-medium">Bella Vista</p>
                   <div className="flex items-center justify-center gap-1 text-xs text-muted-foreground">
                     <LinkIcon className="w-3 h-3" />
-                    <span>auralink.io/bellavista</span>
+                    <span>4i.fyi/bellavista</span>
                   </div>
                 </div>
 

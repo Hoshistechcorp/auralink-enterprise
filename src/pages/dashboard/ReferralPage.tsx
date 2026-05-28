@@ -79,7 +79,7 @@ const ReferralPage = () => {
         </div>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
           <div className="flex-1 px-4 py-2.5 rounded-xl bg-card border text-sm text-muted-foreground truncate">
-            https://auralink.io/bellavista?ref=BELLAVISTA2024
+            https://4i.fyi/bellavista?ref=BELLAVISTA2024
           </div>
           <button
             onClick={handleCopy}
