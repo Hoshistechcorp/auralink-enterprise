@@ -7,6 +7,7 @@ import {
   Building2, Plus, Trash2, Users2, MessageCircle, Navigation, BookOpen,
 } from "lucide-react";
 import DocumentationTab from "@/components/aura/DocumentationTab";
+import CertificationsManager from "@/components/aura/CertificationsManager";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/aura/DashboardLayout";
@@ -386,6 +387,9 @@ const SettingsPage = () => {
                   ))}
                 </div>
               </div>
+
+              {/* Certifications & Ratings */}
+              <CertificationsManager />
 
               {/* Venues */}
               <div className="p-6 rounded-2xl bg-card border">
