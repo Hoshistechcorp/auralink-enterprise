@@ -460,7 +460,15 @@ const GiftCardsDashboard = () => {
                   <p className="text-xs text-muted-foreground mb-1">Gift Card Code</p>
                   <p className="text-2xl font-mono font-bold text-primary tracking-wider">{purchaseComplete.code}</p>
                 </div>
-                <p className="text-sm text-muted-foreground">A ${purchaseComplete.amount} gift card has been created and added to your issued cards.</p>
+                {purchaseComplete.discount > 0 ? (
+                  <div className="text-sm text-muted-foreground space-y-1">
+                    <p>Card value: <span className="font-semibold text-foreground">${purchaseComplete.amount.toFixed(2)}</span></p>
+                    <p className="text-chart-2">Discount applied: −${purchaseComplete.discount.toFixed(2)}</p>
+                    <p>Buyer charged: <span className="font-semibold text-foreground">${purchaseComplete.finalAmount.toFixed(2)}</span></p>
+                  </div>
+                ) : (
+                  <p className="text-sm text-muted-foreground">A ${purchaseComplete.amount} gift card has been created and added to your issued cards.</p>
+                )}
                 <button onClick={resetPurchase} className={`${btnPrimary} mx-auto`}><Plus className="w-4 h-4" /> Sell Another</button>
               </motion.div>
             ) : (
