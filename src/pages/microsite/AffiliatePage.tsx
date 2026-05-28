@@ -10,7 +10,7 @@ const AffiliatePage = () => {
   const [promoCode, setPromoCode] = useState("");
   const [promoApplied, setPromoApplied] = useState(false);
   const affiliateCode = "AFF-" + Math.random().toString(36).substring(2, 8).toUpperCase();
-  const affiliateLink = `https://auralink.io/bellavista?aff=${affiliateCode}`;
+  const affiliateLink = `https://4i.fyi/bellavista?aff=${affiliateCode}`;
 
   const copyLink = () => {
     navigator.clipboard.writeText(affiliateLink);

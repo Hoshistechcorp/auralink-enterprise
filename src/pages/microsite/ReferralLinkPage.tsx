@@ -7,7 +7,7 @@ const ReferralLinkPage = () => {
   const navigate = useNavigate();
   const [copied, setCopied] = useState(false);
   const referralCode = "BELLA-" + Math.random().toString(36).substring(2, 8).toUpperCase();
-  const referralLink = `https://auralink.io/bellavista?ref=${referralCode}`;
+  const referralLink = `https://4i.fyi/bellavista?ref=${referralCode}`;
 
   const copyLink = () => {
     navigator.clipboard.writeText(referralLink);
