@@ -522,6 +522,60 @@ const GiftCardsDashboard = () => {
                     <label className="text-xs font-medium text-muted-foreground mb-1 flex items-center gap-1"><MessageSquare className="w-3 h-3" /> Personal Message (optional)</label>
                     <textarea value={purchaseForm.message} onChange={(e) => setPurchaseForm({ ...purchaseForm, message: e.target.value })} placeholder="Add a note..." rows={2} className={`${inputCls} resize-none`} maxLength={200} />
                   </div>
+
+                  {/* Discount */}
+                  {(() => {
+                    const card = giftCards.find((c) => c.id === selectedCardId);
+                    const baseAmount = card ? parseFloat(card.amount) : parseFloat(purchaseForm.customAmount || "0");
+                    const discountVal = parseFloat(purchaseForm.discount) || 0;
+                    const discountAmt = baseAmount > 0
+                      ? (purchaseForm.discountType === "percent"
+                          ? Math.min(baseAmount, baseAmount * (discountVal / 100))
+                          : Math.min(baseAmount, discountVal))
+                      : 0;
+                    const finalAmount = Math.max(0, baseAmount - discountAmt);
+                    return (
+                      <div className="rounded-xl border bg-muted/20 p-4 space-y-3">
+                        <label className="text-xs font-medium text-muted-foreground flex items-center gap-1"><Tag className="w-3 h-3" /> Discount (optional)</label>
+                        <div className="grid sm:grid-cols-[1fr_auto] gap-2">
+                          <div className="relative">
+                            <input
+                              value={purchaseForm.discount}
+                              onChange={(e) => setPurchaseForm({ ...purchaseForm, discount: e.target.value.replace(/[^0-9.]/g, "") })}
+                              placeholder={purchaseForm.discountType === "percent" ? "e.g. 10" : "e.g. 5.00"}
+                              className={`${inputCls} pr-10`}
+                              maxLength={6}
+                            />
+                            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-muted-foreground font-medium">
+                              {purchaseForm.discountType === "percent" ? "%" : "$"}
+                            </span>
+                          </div>
+                          <div className="flex rounded-xl bg-muted p-1 gap-1">
+                            <button type="button" onClick={() => setPurchaseForm({ ...purchaseForm, discountType: "percent" })}
+                              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${purchaseForm.discountType === "percent" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground"}`}>
+                              %
+                            </button>
+                            <button type="button" onClick={() => setPurchaseForm({ ...purchaseForm, discountType: "amount" })}
+                              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${purchaseForm.discountType === "amount" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground"}`}>
+                              $
+                            </button>
+                          </div>
+                        </div>
+                        {baseAmount > 0 && (
+                          <div className="flex flex-wrap items-center justify-between text-xs gap-2 pt-1">
+                            <span className="text-muted-foreground">
+                              Card value <span className="font-semibold text-foreground">${baseAmount.toFixed(2)}</span>
+                              {discountAmt > 0 && <> · Discount <span className="text-chart-2 font-semibold">−${discountAmt.toFixed(2)}</span></>}
+                            </span>
+                            <span className="font-semibold">
+                              Buyer pays: <span className="text-primary">${finalAmount.toFixed(2)}</span>
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })()}
+
                   <button onClick={handlePurchase} disabled={(!selectedCardId && !purchaseForm.customAmount) || !purchaseForm.buyerName || !purchaseForm.recipientName}
                     className={`${btnPrimary} w-full justify-center disabled:opacity-40 disabled:cursor-not-allowed`}>
                     <Send className="w-4 h-4" /> Issue Gift Card
