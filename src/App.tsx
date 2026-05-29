@@ -33,6 +33,7 @@ import LocationsPage from "./pages/dashboard/LocationsPage";
 import TeamPage from "./pages/dashboard/TeamPage";
 import EcosystemPage from "./pages/dashboard/EcosystemPage";
 import GiftCardsDashboard from "./pages/dashboard/GiftCardsDashboard";
+import WalletPage from "./pages/dashboard/WalletPage";
 // Restaurant microsite pages
 import MenuPage from "./pages/microsite/MenuPage";
 import GalleryPage from "./pages/microsite/GalleryPage";
