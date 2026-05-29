@@ -36,7 +36,7 @@ const defaultCards: MicrositeCard[] = [
   { id: "1",  title: "Gift Cards",     subtitle: "Give & enjoy",  icon: "Gift",            path: "/microsite/gift-cards",     visible: true,  color: "hsl(var(--primary))" },
   { id: "2",  title: "Menu",           subtitle: "Full menu",     icon: "UtensilsCrossed", path: "/microsite/menu",           visible: true,  color: "hsl(var(--primary))" },
   { id: "3",  title: "Social Links",   subtitle: "Follow us",     icon: "Globe",           path: "/microsite/social-links",   visible: true,  color: "hsl(var(--aura-info))" },
-  { id: "4",  title: "Reviews",        subtitle: "4.8 avg",       icon: "Star",            path: "/microsite/reviews",        visible: true,  color: "hsl(var(--primary))" },
+  { id: "4",  title: "Love Letter",     subtitle: "Send us love",  icon: "Star",            path: "https://loveletterreview.lovable.app",        visible: true,  color: "hsl(var(--primary))" },
   { id: "5",  title: "FAQs",           subtitle: "24 answers",    icon: "HelpCircle",      path: "/microsite/faqs",           visible: true,  color: "hsl(var(--primary))" },
   { id: "6",  title: "Freebie Game",   subtitle: "Spin & win",    icon: "Gamepad2",        path: "/microsite/freebie-game",   visible: true,  color: "hsl(var(--aura-success))" },
   { id: "7",  title: "Staff",          subtitle: "Meet team",     icon: "Users",           path: "/microsite/staff",          visible: true,  color: "hsl(var(--primary))" },
