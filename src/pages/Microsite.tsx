@@ -113,7 +113,12 @@ const Microsite = () => {
 
   const handleCardClick = (title: string) => {
     const route = routes[title];
-    if (route) navigate(route);
+    if (!route) return;
+    if (/^https?:\/\//i.test(route)) {
+      window.open(route, "_blank", "noopener,noreferrer");
+    } else {
+      navigate(route);
+    }
   };
 
   const handleAction = (label: string) => {
