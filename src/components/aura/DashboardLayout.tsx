@@ -34,6 +34,7 @@ const navSections: NavSection[] = [
       { icon: ClipboardEdit, label: "Admin Panel", path: "/dashboard/admin" },
       { icon: Layers, label: "Card Studio", path: "/dashboard/cards" },
       { icon: BarChart3, label: "Analytics", path: "/dashboard/analytics" },
+      { icon: Wallet, label: "Wallet", path: "/dashboard/wallet" },
     ],
   },
   {
