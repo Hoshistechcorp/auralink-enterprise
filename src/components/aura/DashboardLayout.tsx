@@ -4,7 +4,7 @@ import TrialBanner from "@/components/aura/TrialBanner";
 import {
   Home, Layers, BarChart3, Gamepad2, Settings, QrCode, Users2, CreditCard,
   Heart, Megaphone, Share2, Search, Shield, Building2, ChevronDown, LucideIcon, Menu, Sun, Moon,
-  ClipboardEdit, MapPin, UserCog, Check, Gift, LogOut, Link2,
+  ClipboardEdit, MapPin, UserCog, Check, Gift, LogOut, Link2, Wallet,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
@@ -34,6 +34,7 @@ const navSections: NavSection[] = [
       { icon: ClipboardEdit, label: "Admin Panel", path: "/dashboard/admin" },
       { icon: Layers, label: "Card Studio", path: "/dashboard/cards" },
       { icon: BarChart3, label: "Analytics", path: "/dashboard/analytics" },
+      { icon: Wallet, label: "Wallet", path: "/dashboard/wallet" },
     ],
   },
   {

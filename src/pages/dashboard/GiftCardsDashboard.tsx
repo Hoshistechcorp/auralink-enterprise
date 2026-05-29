@@ -12,6 +12,7 @@ import { Progress } from "@/components/ui/progress";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { toast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/aura/DashboardLayout";
+import { addTransaction as addWalletTx } from "@/lib/wallet";
 
 const uid = () => crypto.randomUUID();
 const inputCls = "w-full px-4 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all";
@@ -190,6 +191,13 @@ const GiftCardsDashboard = () => {
     };
     setIssuedCards([newIssued, ...issuedCards]);
     setPurchaseComplete({ code, amount: baseAmount, finalAmount, discount: discountAmt });
+    addWalletTx({
+      type: "gift_card",
+      description: `Gift card — ${card?.name || "Custom"} ($${baseAmount.toFixed(2)})${discountAmt > 0 ? ` · ${purchaseForm.discountType === "percent" ? `${discountVal}% off` : `$${discountAmt.toFixed(2)} off`}` : ""} — ${purchaseForm.recipientName}`,
+      amount: finalAmount,
+      status: "completed",
+      reference: code,
+    });
     toast({ title: "Gift card sold!", description: `Code: ${code} — $${baseAmount} card${discountAmt > 0 ? ` (charged $${finalAmount.toFixed(2)} after $${discountAmt.toFixed(2)} discount)` : ""} issued to ${purchaseForm.recipientName}` });
   };
 
