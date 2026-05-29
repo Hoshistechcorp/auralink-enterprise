@@ -7,48 +7,28 @@ import {
 import DashboardLayout from "@/components/aura/DashboardLayout";
 import { getSubscription, getEffectivePlan, getTrialDaysLeft } from "@/lib/subscription";
 
-/* ── Plan tiers ───────────────────────────────────── */
-const plans = [
-  {
-    id: "spark",
-    name: "Spark",
-    price: 0,
-    period: "/mo",
-    icon: Zap,
-    desc: "Get started with the essentials",
-    popular: false,
-    cta: "Current Plan",
-    disabled: true,
-    gradient: "from-muted/60 to-muted/30",
-    accent: "text-muted-foreground",
-  },
-  {
-    id: "maverick",
-    name: "Maverick",
-    price: 79,
-    period: "/mo",
-    icon: Sparkles,
-    desc: "For growing businesses",
-    popular: true,
-    cta: "Upgrade to Maverick",
-    disabled: false,
-    gradient: "from-primary/15 to-primary/5",
-    accent: "text-primary",
-  },
-  {
-    id: "supernova",
-    name: "Supernova",
-    price: 149,
-    period: "/mo",
-    icon: Crown,
-    desc: "All 16 cards & full power tools",
-    popular: false,
-    cta: "Upgrade to Supernova",
-    disabled: false,
-    gradient: "from-chart-4/15 to-chart-4/5",
-    accent: "text-chart-4",
-  },
-];
+/* ── Plan tiers (data from shared lib) ─────────────── */
+import { PLANS as SHARED_PLANS } from "@/lib/plans";
+
+const planMeta: Record<string, { icon: typeof Zap; gradient: string; accent: string; popular: boolean }> = {
+  spark:     { icon: Zap,      gradient: "from-muted/60 to-muted/30",       accent: "text-muted-foreground", popular: false },
+  maverick:  { icon: Sparkles, gradient: "from-primary/15 to-primary/5",    accent: "text-primary",          popular: true  },
+  supernova: { icon: Crown,    gradient: "from-chart-4/15 to-chart-4/5",    accent: "text-chart-4",          popular: false },
+};
+
+const plans = SHARED_PLANS.map((p) => ({
+  id: p.id,
+  name: p.name,
+  price: p.price,
+  period: "/mo",
+  icon: planMeta[p.id].icon,
+  desc: p.tagline,
+  popular: planMeta[p.id].popular,
+  cta: p.price === 0 ? "Current Plan" : `Upgrade to ${p.name}`,
+  disabled: p.price === 0,
+  gradient: planMeta[p.id].gradient,
+  accent: planMeta[p.id].accent,
+}));
 
 /* ── Cards by tier ────────────────────────────────── */
 const sparkCards = ["Details", "Menu", "Social Links", "Reviews", "FAQs"];

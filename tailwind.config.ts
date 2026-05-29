@@ -18,6 +18,8 @@ export default {
         body: ["'Inter'", "system-ui", "sans-serif"],
         jakarta: ["'Plus Jakarta Sans'", "system-ui", "sans-serif"],
         fraunces: ["'Fraunces'", "'Playfair Display'", "Georgia", "serif"],
+        grotesk: ["'Space Grotesk'", "system-ui", "sans-serif"],
+        dm: ["'DM Sans'", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
