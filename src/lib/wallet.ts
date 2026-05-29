@@ -1,6 +1,4 @@
-// Frontend-only wallet store (localStorage). Tracks revenue from gift cards
-// and other items, plus withdrawals.
-
+// Frontend-only wallet store (localStorage).
 export type TxType = "gift_card" | "tip" | "reservation" | "merchandise" | "event" | "other" | "withdrawal" | "fee";
 export type TxStatus = "completed" | "pending" | "failed";
 
@@ -10,7 +8,7 @@ export interface WalletTransaction {
   description: string;
   amount: number; // positive = credit, negative = debit
   status: TxStatus;
-  createdAt: string; // ISO
+  createdAt: string;
   reference?: string;
 }
 
@@ -18,19 +16,12 @@ export interface WithdrawalMethod {
   id: string;
   label: string;
   type: "bank" | "paypal" | "stripe";
-  details: string; // e.g. "Chase •••• 4821"
+  details: string;
 }
 
 const TX_KEY = "auralink:wallet:txs";
 const METHOD_KEY = "auralink:wallet:methods";
-const EVENT = "auralink:wallet-updated";
-
-const seed = (): WalletTransaction[] => [
-  { id: "tx_1", type: "gift_card", description: "Gift card — $100 (Sarah M.)", amount: 100, status: "completed", createdAt: daysAgo(1) },
-  { id: "tx_2", type: "gift_card", description: "Gift card — $250 (Corporate)", amount: 250, status: "completed", createdAt: daysAgo(2) },
-  { id: "tx_3", type: "tip", description: "Staff tip pool contribution", amount: 48.5, status: "completed", createdAt: daysAgo(2) },
-  { id: "tx_4", type: "reservation", description: "Private dining deposit — Table 12", amount: 500, status: "completed", createdAt: daysAgo: undefined as never, ...({} as any) } as any,
-];
+export const WALLET_EVENT = "auralink:wallet-updated";
 
 function daysAgo(n: number) {
   const d = new Date();
@@ -66,7 +57,7 @@ export function getTransactions(): WalletTransaction[] {
 
 export function saveTransactions(txs: WalletTransaction[]) {
   localStorage.setItem(TX_KEY, JSON.stringify(txs));
-  window.dispatchEvent(new Event(EVENT));
+  window.dispatchEvent(new Event(WALLET_EVENT));
 }
 
 export function addTransaction(tx: Omit<WalletTransaction, "id" | "createdAt"> & { createdAt?: string }) {
@@ -82,17 +73,19 @@ export function addTransaction(tx: Omit<WalletTransaction, "id" | "createdAt"> &
 
 export function getBalance(txs?: WalletTransaction[]) {
   const list = txs || getTransactions();
-  return list.filter((t) => t.status === "completed").reduce((sum, t) => sum + t.amount, 0);
+  return list.filter((t) => t.status === "completed").reduce((s, t) => s + t.amount, 0);
 }
 
 export function getPending(txs?: WalletTransaction[]) {
   const list = txs || getTransactions();
-  return list.filter((t) => t.status === "pending").reduce((sum, t) => sum + Math.max(t.amount, 0), 0);
+  return list.filter((t) => t.status === "pending").reduce((s, t) => s + Math.max(t.amount, 0), 0);
 }
 
 export function getLifetimeRevenue(txs?: WalletTransaction[]) {
   const list = txs || getTransactions();
-  return list.filter((t) => t.status === "completed" && t.amount > 0 && t.type !== "withdrawal").reduce((s, t) => s + t.amount, 0);
+  return list
+    .filter((t) => t.status === "completed" && t.amount > 0 && t.type !== "withdrawal")
+    .reduce((s, t) => s + t.amount, 0);
 }
 
 export function getMethods(): WithdrawalMethod[] {
@@ -113,10 +106,8 @@ export function getMethods(): WithdrawalMethod[] {
 
 export function saveMethods(methods: WithdrawalMethod[]) {
   localStorage.setItem(METHOD_KEY, JSON.stringify(methods));
-  window.dispatchEvent(new Event(EVENT));
+  window.dispatchEvent(new Event(WALLET_EVENT));
 }
-
-export const WALLET_EVENT = EVENT;
 
 export const TYPE_LABELS: Record<TxType, string> = {
   gift_card: "Gift card",
