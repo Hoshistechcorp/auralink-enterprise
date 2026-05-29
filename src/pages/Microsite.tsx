@@ -6,6 +6,7 @@ import {
   Bot, Award, Users, HelpCircle, CalendarDays, Globe,
   Gamepad2, Link2, Handshake,
 } from "lucide-react";
+import HeartLetter from "@/components/icons/HeartLetter";
 import { motion } from "framer-motion";
 import SEO from "@/components/SEO";
 import MicrositeHeader from "@/components/aura/MicrositeHeader";
