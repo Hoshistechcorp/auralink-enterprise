@@ -47,7 +47,7 @@ const cards = [
 const routes: Record<string, string> = {
   "Menu": "/microsite/menu",
   "Photo Gallery": "/microsite/gallery",
-  "Reviews": "/microsite/reviews",
+  "Love Letter": "https://loveletterreview.lovable.app",
   "AI Concierge": "/microsite/concierge",
   "Staff": "/microsite/staff",
   "Gift Cards": "/microsite/gift-cards",
