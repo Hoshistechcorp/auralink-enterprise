@@ -30,7 +30,7 @@ const cards = [
   { icon: Gift, title: "Gift Cards", subtitle: "Give & enjoy" },
   { icon: UtensilsCrossed, title: "Menu", subtitle: "Full menu" },
   { icon: Globe, title: "Social Links", subtitle: "Follow us" },
-  { icon: Star, title: "Reviews", subtitle: "4.8 avg" },
+  { icon: Star, title: "Love Letter", subtitle: "Send us love" },
   { icon: HelpCircle, title: "FAQs", subtitle: "24 answers" },
   { icon: Gamepad2, title: "Freebie Game", subtitle: "Spin & win" },
   { icon: Users, title: "Staff", subtitle: "Meet team" },
@@ -47,7 +47,7 @@ const cards = [
 const routes: Record<string, string> = {
   "Menu": "/microsite/menu",
   "Photo Gallery": "/microsite/gallery",
-  "Reviews": "/microsite/reviews",
+  "Love Letter": "https://loveletterreview.lovable.app",
   "AI Concierge": "/microsite/concierge",
   "Staff": "/microsite/staff",
   "Gift Cards": "/microsite/gift-cards",
@@ -113,7 +113,12 @@ const Microsite = () => {
 
   const handleCardClick = (title: string) => {
     const route = routes[title];
-    if (route) navigate(route);
+    if (!route) return;
+    if (/^https?:\/\//i.test(route)) {
+      window.open(route, "_blank", "noopener,noreferrer");
+    } else {
+      navigate(route);
+    }
   };
 
   const handleAction = (label: string) => {
