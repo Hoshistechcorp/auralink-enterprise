@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
-import { LucideIcon } from "lucide-react";
+import type { ComponentType, SVGProps } from "react";
 
 interface AuraCardProps {
-  icon: LucideIcon;
+  icon: ComponentType<SVGProps<SVGSVGElement> & { size?: number | string }>;
   title: string;
   subtitle?: string;
   onClick?: () => void;
