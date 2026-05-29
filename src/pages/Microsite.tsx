@@ -31,7 +31,7 @@ const cards = [
   { icon: Gift, title: "Gift Cards", subtitle: "Give & enjoy" },
   { icon: UtensilsCrossed, title: "Menu", subtitle: "Full menu" },
   { icon: Globe, title: "Social Links", subtitle: "Follow us" },
-  { icon: Star, title: "Love Letter", subtitle: "Send us love" },
+  { icon: HeartLetter, title: "Love Letter", subtitle: "Send us love" },
   { icon: HelpCircle, title: "FAQs", subtitle: "24 answers" },
   { icon: Gamepad2, title: "Freebie Game", subtitle: "Spin & win" },
   { icon: Users, title: "Staff", subtitle: "Meet team" },
