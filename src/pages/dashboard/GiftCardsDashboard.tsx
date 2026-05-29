@@ -191,6 +191,13 @@ const GiftCardsDashboard = () => {
     };
     setIssuedCards([newIssued, ...issuedCards]);
     setPurchaseComplete({ code, amount: baseAmount, finalAmount, discount: discountAmt });
+    addWalletTx({
+      type: "gift_card",
+      description: `Gift card — ${card?.name || "Custom"} ($${baseAmount.toFixed(2)})${discountAmt > 0 ? ` · ${purchaseForm.discountType === "percent" ? `${discountVal}% off` : `$${discountAmt.toFixed(2)} off`}` : ""} — ${purchaseForm.recipientName}`,
+      amount: finalAmount,
+      status: "completed",
+      reference: code,
+    });
     toast({ title: "Gift card sold!", description: `Code: ${code} — $${baseAmount} card${discountAmt > 0 ? ` (charged $${finalAmount.toFixed(2)} after $${discountAmt.toFixed(2)} discount)` : ""} issued to ${purchaseForm.recipientName}` });
   };
 
