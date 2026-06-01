@@ -268,7 +268,7 @@ const GiftCardsPage = () => {
       const ref = `GC-${code.slice(-4)}`;
       addTransaction({
         type: "gift_card",
-        description: `Gift card — $${purchaseAmount} (${data.from || "Guest"})`,
+        description: `Gift card — $${purchaseAmount} (${senderName || "Guest"})`,
         amount: purchaseAmount,
         status: "completed",
         reference: ref,
