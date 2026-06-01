@@ -31,16 +31,17 @@ const plans = SHARED_PLANS.map((p) => ({
 }));
 
 /* ── Cards by tier ────────────────────────────────── */
-const sparkCards = ["Details", "Menu", "Social Links", "Reviews", "FAQs"];
-const maverickCards = ["Gift Cards", "Freebie Game", "Staff", "Awards", "Events", "Popular Dishes"];
+const sparkCards = ["Details", "Menu", "Social Links", "Reviews", "FAQs", "Gift Cards"];
+const maverickCards = ["Freebie Game", "Staff", "Awards", "Events", "Popular Dishes"];
 const supernovaCards = ["AI Concierge", "Private Dining", "Photo Gallery", "Refer a Friend", "Affiliate"];
+
 
 /* ── Feature comparison ──────────────────────────── */
 const featureGroups = [
   {
     group: "Included Cards",
     features: [
-      { name: "Gift Cards", spark: false, maverick: true, supernova: true },
+      { name: "Gift Cards", spark: "3% fee", maverick: true, supernova: true },
       { name: "Details", spark: true, maverick: true, supernova: true },
       { name: "Menu", spark: true, maverick: true, supernova: true },
       { name: "Social Links", spark: true, maverick: true, supernova: true },
@@ -159,7 +160,8 @@ const SubscriptionPage = () => {
             {/* Card count badge */}
             <div className="mb-5">
               <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-background/60 border border-border/40 text-[11px] font-semibold">
-                {plan.id === "spark" ? "6 cards" : plan.id === "maverick" ? "11 cards" : "All 16 cards"}
+                {plan.id === "spark" ? "7 cards" : plan.id === "maverick" ? "12 cards" : "All 16 cards"}
+
               </span>
             </div>
 
@@ -209,7 +211,8 @@ const SubscriptionPage = () => {
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-sm font-semibold">You're on the Spark plan</p>
-          <p className="text-xs text-muted-foreground">Upgrade to Maverick ($79/mo) for 11 cards, or Supernova ($149/mo) for all 16 cards + full tools.</p>
+          <p className="text-xs text-muted-foreground">Sell gift cards now — a 3% platform commission applies on Spark. Upgrade to Maverick ($79/mo) for 0% commission + 12 cards, or Supernova ($149/mo) for all 16 cards.</p>
+
         </div>
         <div className="hidden sm:flex items-center gap-1.5 text-xs font-medium text-primary">
           <TrendingUp className="w-3.5 h-3.5" />

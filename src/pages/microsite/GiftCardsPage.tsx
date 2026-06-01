@@ -17,6 +17,10 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
+import { addTransaction } from "@/lib/wallet";
+import { getSubscription } from "@/lib/subscription";
+import { SPARK_GIFT_CARD_COMMISSION } from "@/lib/plans";
+
 
 const giftCards = [
   { id: "1", name: "Classic Dinner", amount: 50, description: "Perfect for a starter and main course", color: "from-primary/20 to-primary/5", popular: false },
@@ -256,12 +260,36 @@ const GiftCardsPage = () => {
     e.preventDefault();
     setProcessing(true);
     setTimeout(() => {
-      setOrderCode(generateCode());
+      const code = generateCode();
+      setOrderCode(code);
+
+      // Record sale in wallet (+ deduct 3% commission for Spark plan)
+      const sub = getSubscription();
+      const ref = `GC-${code.slice(-4)}`;
+      addTransaction({
+        type: "gift_card",
+        description: `Gift card — $${purchaseAmount} (${senderName || "Guest"})`,
+        amount: purchaseAmount,
+        status: "completed",
+        reference: ref,
+      });
+      if (sub.plan === "spark") {
+        const fee = +(purchaseAmount * SPARK_GIFT_CARD_COMMISSION).toFixed(2);
+        addTransaction({
+          type: "fee",
+          description: `Platform commission (3%) — ${ref}`,
+          amount: -fee,
+          status: "completed",
+          reference: ref,
+        });
+      }
+
       setProcessing(false);
       setStep("success");
       toast.success("Payment successful! Gift card sent.");
     }, 1400);
   };
+
 
   const handleBackHome = () => navigate("/microsite");
 

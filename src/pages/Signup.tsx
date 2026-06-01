@@ -20,7 +20,9 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [agreed, setAgreed] = useState(false);
   const [error, setError] = useState("");
+
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,6 +32,11 @@ const Signup = () => {
       setError("Password must be at least 6 characters");
       return;
     }
+    if (!agreed) {
+      setError("Please accept the Terms of Service and Privacy Policy to continue");
+      return;
+    }
+
 
     setLoading(true);
     try {
@@ -149,10 +156,25 @@ const Signup = () => {
               </div>
             </div>
 
+            <label className="flex items-start gap-2.5 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={agreed}
+                onChange={(e) => setAgreed(e.target.checked)}
+                className="mt-0.5 h-4 w-4 rounded border-border text-primary focus:ring-2 focus:ring-primary/30 cursor-pointer"
+              />
+              <span className="text-xs text-muted-foreground leading-relaxed">
+                I agree to the{" "}
+                <a href="/terms" target="_blank" className="text-primary font-semibold hover:underline">Terms of Service</a>{" "}
+                and{" "}
+                <a href="/privacy" target="_blank" className="text-primary font-semibold hover:underline">Privacy Policy</a>.
+              </span>
+            </label>
+
             <button
               type="submit"
-              disabled={loading}
-              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity disabled:opacity-50"
+              disabled={loading || !agreed}
+              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
                 <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
@@ -163,6 +185,7 @@ const Signup = () => {
                 </>
               )}
             </button>
+
           </form>
 
           <p className="text-center text-sm text-muted-foreground">
