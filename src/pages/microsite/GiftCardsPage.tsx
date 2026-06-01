@@ -772,6 +772,8 @@ const GiftCardsPage = () => {
                                 name: lookupResult.name,
                                 amount: lastRedeemed,
                                 balance: lookupResult.balance ?? 0,
+                                recipientName: lookupResult.from,
+                                expiryDate: getExpiryDate(12),
                               }}
                             />
                           </motion.div>
