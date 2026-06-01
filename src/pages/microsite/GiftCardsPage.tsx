@@ -39,9 +39,29 @@ type BuyStep = "select" | "details" | "checkout" | "success";
 
 const inputCls = "w-full px-4 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all";
 
+/* Restaurant details — would come from microsite config in production */
+const RESTAURANT = {
+  name: "Bella Vista Restaurant",
+  tagline: "Authentic Italian · Since 2008",
+  address: "412 Riverside Avenue, Brooklyn, NY 11211",
+  phone: "+1 (718) 555-0142",
+  email: "reservations@bellavista.com",
+  website: "bellavista.auralink.app",
+  hours: "Tue–Sun · 5:00 PM – 11:00 PM",
+};
+
 const generateCode = () => {
   const rnd = Math.random().toString(36).slice(2, 6).toUpperCase();
   return `BV-GIFT-${rnd}`;
+};
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+
+const getExpiryDate = (monthsFromNow = 12) => {
+  const d = new Date();
+  d.setMonth(d.getMonth() + monthsFromNow);
+  return formatDate(d);
 };
 
 /* ---------- Email Preview component (purchase + redemption) ---------- */
@@ -71,25 +91,31 @@ const EmailPreview = ({
         </div>
         <h3 className="text-lg font-bold">
           {variant === "purchase"
-            ? `🎁 You've received a gift card!`
-            : `✅ Gift card redeemed`}
+            ? `🎁 ${data.senderName || "Someone"} sent you a gift!`
+            : `✅ Gift card redeemed at ${RESTAURANT.name}`}
         </h3>
-        <p className="text-xs text-[#666] mt-1">From Bella Vista Restaurant</p>
+        <p className="text-xs text-[#666] mt-1">
+          From {RESTAURANT.name} · {RESTAURANT.tagline}
+        </p>
       </div>
 
       {variant === "purchase" ? (
         <>
           <p className="text-sm leading-relaxed mb-3">
-            Hi <span className="font-semibold">{data.recipientName}</span>,
+            Hi <span className="font-semibold">{data.recipientName || "there"}</span>,
           </p>
           <p className="text-sm leading-relaxed mb-4">
-            <span className="font-semibold">{data.senderName}</span> has sent
-            you a <span className="font-semibold">${data.amount}</span> gift
-            card{data.cardName ? ` — ${data.cardName}` : ""}.
+            <span className="font-semibold">{data.senderName || "A friend"}</span> has sent
+            you a <span className="font-semibold">${data.amount}</span> gift card to enjoy
+            at <span className="font-semibold">{RESTAURANT.name}</span>
+            {data.cardName ? ` — ${data.cardName}` : ""}.
           </p>
           {data.message && (
             <div className="p-3 rounded-lg bg-[#f7f5f0] border-l-2 border-primary mb-4 text-xs italic text-[#444]">
               "{data.message}"
+              <p className="not-italic mt-1.5 text-[10px] text-[#888]">
+                — {data.senderName}
+              </p>
             </div>
           )}
           <div className="rounded-xl border border-dashed border-primary/40 bg-primary/5 p-4 text-center mb-4">
@@ -100,21 +126,27 @@ const EmailPreview = ({
               {data.code}
             </p>
             <p className="text-[10px] text-[#888] mt-1">
-              Value: ${data.amount} · Never expires
+              Value: ${data.amount}
+            </p>
+            <p className="text-[10px] font-semibold text-primary mt-1">
+              Redeem before {data.expiryDate}
             </p>
           </div>
-          <p className="text-xs text-[#666] leading-relaxed">
-            Redeem in person or on our website. Show this code to your server
-            or paste it on our redemption page.
+          <p className="text-xs text-[#666] leading-relaxed mb-3">
+            Redeem in person at our restaurant or on our website. Show this code
+            to your server or paste it on our redemption page.
           </p>
         </>
       ) : (
         <>
-          <p className="text-sm leading-relaxed mb-3">Hi there,</p>
+          <p className="text-sm leading-relaxed mb-3">
+            Hi <span className="font-semibold">{data.recipientName || "there"}</span>,
+          </p>
           <p className="text-sm leading-relaxed mb-4">
             We've successfully redeemed{" "}
             <span className="font-semibold">${data.amount}</span> from your
-            gift card.
+            gift card at <span className="font-semibold">{RESTAURANT.name}</span>.
+            Thank you for dining with us!
           </p>
           <div className="grid grid-cols-2 gap-2 text-xs mb-4">
             <div className="p-2.5 rounded-lg bg-[#f7f5f0]">
@@ -136,21 +168,40 @@ const EmailPreview = ({
               </p>
             </div>
           </div>
-          <p className="text-xs text-[#666] leading-relaxed">
-            Keep this email for your records. You can use the remaining balance
-            on any future visit.
+          {data.balance > 0 && (
+            <div className="p-3 rounded-lg bg-primary/5 border border-primary/20 mb-3">
+              <p className="text-xs text-[#444]">
+                You still have <span className="font-bold text-primary">${data.balance.toFixed(2)}</span> available.
+                Use it before <span className="font-semibold">{data.expiryDate}</span>.
+              </p>
+            </div>
+          )}
+          <p className="text-xs text-[#666] leading-relaxed mb-3">
+            Keep this email for your records. We'd love to see you again soon
+            at {RESTAURANT.name}.
           </p>
         </>
       )}
 
-      <div className="mt-5 pt-4 border-t text-center">
-        <p className="text-[10px] text-[#999]">
-          Bella Vista Restaurant · Powered by AuraLink
+      {/* Restaurant footer block */}
+      <div className="mt-5 pt-4 border-t">
+        <p className="text-[11px] font-bold text-[#1a1a1a] mb-1.5">
+          Visit {RESTAURANT.name}
+        </p>
+        <div className="space-y-0.5 text-[10px] text-[#666] leading-relaxed">
+          <p>📍 {RESTAURANT.address}</p>
+          <p>📞 {RESTAURANT.phone} · ✉ {RESTAURANT.email}</p>
+          <p>🕐 {RESTAURANT.hours}</p>
+          <p>🌐 {RESTAURANT.website}</p>
+        </div>
+        <p className="text-[10px] text-[#999] mt-3 text-center">
+          {RESTAURANT.name} · Powered by AuraLink
         </p>
       </div>
     </div>
   </div>
 );
+
 
 const GiftCardsPage = () => {
   const navigate = useNavigate();
@@ -536,6 +587,7 @@ const GiftCardsPage = () => {
                 cardName: purchaseCardName,
                 message,
                 code: orderCode,
+                expiryDate: getExpiryDate(12),
               }}
             />
 
@@ -720,6 +772,8 @@ const GiftCardsPage = () => {
                                 name: lookupResult.name,
                                 amount: lastRedeemed,
                                 balance: lookupResult.balance ?? 0,
+                                recipientName: lookupResult.from,
+                                expiryDate: getExpiryDate(12),
                               }}
                             />
                           </motion.div>
