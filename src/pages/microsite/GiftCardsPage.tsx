@@ -39,9 +39,29 @@ type BuyStep = "select" | "details" | "checkout" | "success";
 
 const inputCls = "w-full px-4 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all";
 
+/* Restaurant details — would come from microsite config in production */
+const RESTAURANT = {
+  name: "Bella Vista Restaurant",
+  tagline: "Authentic Italian · Since 2008",
+  address: "412 Riverside Avenue, Brooklyn, NY 11211",
+  phone: "+1 (718) 555-0142",
+  email: "reservations@bellavista.com",
+  website: "bellavista.auralink.app",
+  hours: "Tue–Sun · 5:00 PM – 11:00 PM",
+};
+
 const generateCode = () => {
   const rnd = Math.random().toString(36).slice(2, 6).toUpperCase();
   return `BV-GIFT-${rnd}`;
+};
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+
+const getExpiryDate = (monthsFromNow = 12) => {
+  const d = new Date();
+  d.setMonth(d.getMonth() + monthsFromNow);
+  return formatDate(d);
 };
 
 /* ---------- Email Preview component (purchase + redemption) ---------- */
