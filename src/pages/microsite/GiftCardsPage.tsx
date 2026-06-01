@@ -587,6 +587,7 @@ const GiftCardsPage = () => {
                 cardName: purchaseCardName,
                 message,
                 code: orderCode,
+                expiryDate: getExpiryDate(12),
               }}
             />
 
