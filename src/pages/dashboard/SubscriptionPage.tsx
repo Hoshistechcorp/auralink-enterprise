@@ -211,7 +211,8 @@ const SubscriptionPage = () => {
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-sm font-semibold">You're on the Spark plan</p>
-          <p className="text-xs text-muted-foreground">Upgrade to Maverick ($79/mo) for 11 cards, or Supernova ($149/mo) for all 16 cards + full tools.</p>
+          <p className="text-xs text-muted-foreground">Sell gift cards now — a 3% platform commission applies on Spark. Upgrade to Maverick ($79/mo) for 0% commission + 12 cards, or Supernova ($149/mo) for all 16 cards.</p>
+
         </div>
         <div className="hidden sm:flex items-center gap-1.5 text-xs font-medium text-primary">
           <TrendingUp className="w-3.5 h-3.5" />
