@@ -20,27 +20,30 @@ export const PLANS: Plan[] = [
     name: "Spark",
     price: 0,
     tagline: "Get started with the essentials",
-    cardCount: "6 cards",
+    cardCount: "7 cards",
     highlights: [
       "Details, Menu, Social, Reviews, FAQs",
+      "Gift Cards (3% platform commission per sale)",
       "1 QR code",
       "2 staff profiles",
     ],
   },
+
   {
     id: "maverick",
     name: "Maverick",
     price: 79,
     tagline: "For growing venues",
-    cardCount: "11 cards",
+    cardCount: "12 cards",
     featured: true,
     highlights: [
-      "Gift Cards, Events, Awards, Staff",
+      "Gift Cards (0% commission), Events, Awards, Staff",
       "5 QR codes · 10 staff profiles",
       "Analytics dashboard",
       "Basic SEO",
     ],
   },
+
   {
     id: "supernova",
     name: "Supernova",
@@ -58,3 +61,5 @@ export const PLANS: Plan[] = [
 
 export const annualPrice = (monthly: number) => Math.round(monthly * 0.8);
 export const TRIAL_DAYS = 21;
+export const SPARK_GIFT_CARD_COMMISSION = 0.03; // 3% platform commission on Spark plan gift card sales
+
