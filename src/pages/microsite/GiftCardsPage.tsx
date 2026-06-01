@@ -1,6 +1,20 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Gift, CreditCard, Check, Ticket, Search, DollarSign, ShieldCheck, ArrowRight } from "lucide-react";
+import {
+  ArrowLeft,
+  Gift,
+  CreditCard,
+  Check,
+  Ticket,
+  Search,
+  DollarSign,
+  ShieldCheck,
+  ArrowRight,
+  Mail,
+  Lock,
+  Sparkles,
+  Home,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 
@@ -13,75 +27,200 @@ const giftCards = [
 
 const customAmounts = [25, 75, 150, 250, 300];
 
-/* Mock redeemable codes for demo */
 const mockCodes: Record<string, { balance: number; original: number; name: string; from: string }> = {
   "BV-GIFT-50A": { balance: 50, original: 50, name: "Classic Dinner", from: "Sarah M." },
-  "BV-GIFT-100B": { balance: 72.50, original: 100, name: "Fine Dining Experience", from: "David K." },
+  "BV-GIFT-100B": { balance: 72.5, original: 100, name: "Fine Dining Experience", from: "David K." },
   "BV-GIFT-200C": { balance: 200, original: 200, name: "Chef's Table", from: "Emily R." },
   "BV-GIFT-500D": { balance: 0, original: 500, name: "Ultimate Celebration", from: "James W." },
 };
 
 type TabMode = "buy" | "redeem";
+type BuyStep = "select" | "details" | "checkout" | "success";
 
 const inputCls = "w-full px-4 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all";
+
+const generateCode = () => {
+  const rnd = Math.random().toString(36).slice(2, 6).toUpperCase();
+  return `BV-GIFT-${rnd}`;
+};
+
+/* ---------- Email Preview component (purchase + redemption) ---------- */
+const EmailPreview = ({
+  variant,
+  data,
+}: {
+  variant: "purchase" | "redeem";
+  data: any;
+}) => (
+  <div className="rounded-2xl border bg-card overflow-hidden">
+    <div className="px-4 py-2.5 bg-muted/40 border-b flex items-center gap-2">
+      <Mail className="w-3.5 h-3.5 text-muted-foreground" />
+      <p className="text-[11px] font-medium text-muted-foreground">
+        Email preview — sent to{" "}
+        <span className="text-foreground font-semibold">{data.email}</span>
+      </p>
+    </div>
+    <div className="p-5 bg-white text-[#1a1a1a]">
+      <div className="text-center mb-4">
+        <div className="inline-flex w-12 h-12 rounded-2xl bg-primary/10 items-center justify-center mb-2">
+          {variant === "purchase" ? (
+            <Gift className="w-6 h-6 text-primary" />
+          ) : (
+            <Check className="w-6 h-6 text-primary" />
+          )}
+        </div>
+        <h3 className="text-lg font-bold">
+          {variant === "purchase"
+            ? `🎁 You've received a gift card!`
+            : `✅ Gift card redeemed`}
+        </h3>
+        <p className="text-xs text-[#666] mt-1">From Bella Vista Restaurant</p>
+      </div>
+
+      {variant === "purchase" ? (
+        <>
+          <p className="text-sm leading-relaxed mb-3">
+            Hi <span className="font-semibold">{data.recipientName}</span>,
+          </p>
+          <p className="text-sm leading-relaxed mb-4">
+            <span className="font-semibold">{data.senderName}</span> has sent
+            you a <span className="font-semibold">${data.amount}</span> gift
+            card{data.cardName ? ` — ${data.cardName}` : ""}.
+          </p>
+          {data.message && (
+            <div className="p-3 rounded-lg bg-[#f7f5f0] border-l-2 border-primary mb-4 text-xs italic text-[#444]">
+              "{data.message}"
+            </div>
+          )}
+          <div className="rounded-xl border border-dashed border-primary/40 bg-primary/5 p-4 text-center mb-4">
+            <p className="text-[10px] uppercase tracking-wider text-[#888]">
+              Your gift code
+            </p>
+            <p className="font-mono text-lg font-bold tracking-wider mt-1">
+              {data.code}
+            </p>
+            <p className="text-[10px] text-[#888] mt-1">
+              Value: ${data.amount} · Never expires
+            </p>
+          </div>
+          <p className="text-xs text-[#666] leading-relaxed">
+            Redeem in person or on our website. Show this code to your server
+            or paste it on our redemption page.
+          </p>
+        </>
+      ) : (
+        <>
+          <p className="text-sm leading-relaxed mb-3">Hi there,</p>
+          <p className="text-sm leading-relaxed mb-4">
+            We've successfully redeemed{" "}
+            <span className="font-semibold">${data.amount}</span> from your
+            gift card.
+          </p>
+          <div className="grid grid-cols-2 gap-2 text-xs mb-4">
+            <div className="p-2.5 rounded-lg bg-[#f7f5f0]">
+              <p className="text-[#888]">Code</p>
+              <p className="font-mono font-semibold mt-0.5">{data.code}</p>
+            </div>
+            <div className="p-2.5 rounded-lg bg-[#f7f5f0]">
+              <p className="text-[#888]">Card</p>
+              <p className="font-semibold mt-0.5">{data.name}</p>
+            </div>
+            <div className="p-2.5 rounded-lg bg-[#f7f5f0]">
+              <p className="text-[#888]">Redeemed</p>
+              <p className="font-semibold mt-0.5">${data.amount}</p>
+            </div>
+            <div className="p-2.5 rounded-lg bg-primary/10">
+              <p className="text-[#888]">Remaining</p>
+              <p className="font-bold text-primary mt-0.5">
+                ${data.balance.toFixed(2)}
+              </p>
+            </div>
+          </div>
+          <p className="text-xs text-[#666] leading-relaxed">
+            Keep this email for your records. You can use the remaining balance
+            on any future visit.
+          </p>
+        </>
+      )}
+
+      <div className="mt-5 pt-4 border-t text-center">
+        <p className="text-[10px] text-[#999]">
+          Bella Vista Restaurant · Powered by AuraLink
+        </p>
+      </div>
+    </div>
+  </div>
+);
 
 const GiftCardsPage = () => {
   const navigate = useNavigate();
   const [tab, setTab] = useState<TabMode>("buy");
 
   // Buy state
+  const [step, setStep] = useState<BuyStep>("select");
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const [customAmount, setCustomAmount] = useState("");
   const [recipientName, setRecipientName] = useState("");
   const [recipientEmail, setRecipientEmail] = useState("");
   const [senderName, setSenderName] = useState("");
+  const [senderEmail, setSenderEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [showForm, setShowForm] = useState(false);
+  const [cardNumber, setCardNumber] = useState("");
+  const [cardExpiry, setCardExpiry] = useState("");
+  const [cardCvc, setCardCvc] = useState("");
+  const [processing, setProcessing] = useState(false);
+  const [orderCode, setOrderCode] = useState("");
 
   // Redeem state
   const [redeemCode, setRedeemCode] = useState("");
   const [lookupResult, setLookupResult] = useState<null | { found: boolean; balance?: number; original?: number; name?: string; from?: string }>(null);
   const [redeemAmount, setRedeemAmount] = useState("");
-  const [redeemed, setRedeemed] = useState(false);
+  const [lastRedeemed, setLastRedeemed] = useState<number | null>(null);
+
+  const purchaseAmount = selectedCard
+    ? giftCards.find((c) => c.id === selectedCard)?.amount ?? 0
+    : Number(customAmount) || 0;
+  const purchaseCardName = selectedCard
+    ? giftCards.find((c) => c.id === selectedCard)?.name
+    : "Custom Gift Card";
 
   const handleSelectCard = (id: string) => {
     setSelectedCard(id);
-    setShowForm(true);
     setCustomAmount("");
+    setStep("details");
   };
 
   const handleCustomAmount = (amt: number) => {
     setSelectedCard(null);
     setCustomAmount(amt.toString());
-    setShowForm(true);
+    setStep("details");
   };
 
-  const handlePurchase = (e: React.FormEvent) => {
+  const handleDetailsSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const amount = selectedCard
-      ? giftCards.find((c) => c.id === selectedCard)?.amount
-      : customAmount;
-    toast.success(`Gift card of $${amount} purchased! A confirmation has been sent.`);
-    setShowForm(false);
-    setSelectedCard(null);
-    setCustomAmount("");
-    setRecipientName("");
-    setRecipientEmail("");
-    setSenderName("");
-    setMessage("");
+    setStep("checkout");
   };
+
+  const handlePay = (e: React.FormEvent) => {
+    e.preventDefault();
+    setProcessing(true);
+    setTimeout(() => {
+      setOrderCode(generateCode());
+      setProcessing(false);
+      setStep("success");
+      toast.success("Payment successful! Gift card sent.");
+    }, 1400);
+  };
+
+  const handleBackHome = () => navigate("/microsite");
 
   const handleLookup = (e: React.FormEvent) => {
     e.preventDefault();
     const code = redeemCode.trim().toUpperCase();
     if (!code) return;
     const match = mockCodes[code];
-    if (match) {
-      setLookupResult({ found: true, ...match });
-    } else {
-      setLookupResult({ found: false });
-    }
-    setRedeemed(false);
+    setLookupResult(match ? { found: true, ...match } : { found: false });
+    setLastRedeemed(null);
     setRedeemAmount("");
   };
 
@@ -95,55 +234,71 @@ const GiftCardsPage = () => {
     }
     const newBalance = lookupResult.balance - amt;
     setLookupResult({ ...lookupResult, balance: newBalance });
-    setRedeemed(true);
+    setLastRedeemed(amt);
     setRedeemAmount("");
-    toast.success(`$${amt.toFixed(2)} redeemed! Remaining balance: $${newBalance.toFixed(2)}`);
+    toast.success(`$${amt.toFixed(2)} redeemed! Confirmation email sent.`);
   };
 
   return (
-    <div className="min-h-screen bg-background max-w-[430px] mx-auto">
+    <div className="min-h-screen bg-background max-w-[430px] mx-auto pb-10">
       <div className="sticky top-0 z-30 bg-background/80 backdrop-blur-xl border-b border-border/40 px-4 py-3 flex items-center gap-3">
-        <button onClick={() => navigate("/microsite")} className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
+        <button
+          onClick={() => {
+            if (step !== "select" && tab === "buy") {
+              if (step === "success") handleBackHome();
+              else setStep(step === "checkout" ? "details" : "select");
+            } else {
+              navigate("/microsite");
+            }
+          }}
+          className="w-8 h-8 rounded-full bg-muted flex items-center justify-center"
+        >
           <ArrowLeft className="w-4 h-4" />
         </button>
         <div>
-          <h1 className="font-display font-bold text-base">Gift Cards</h1>
-          <p className="text-[10px] text-muted-foreground">Give the gift of great dining</p>
+          <h1 className="font-display font-bold text-base">
+            {step === "checkout" && tab === "buy"
+              ? "Checkout"
+              : step === "success" && tab === "buy"
+              ? "Order Complete"
+              : "Gift Cards"}
+          </h1>
+          <p className="text-[10px] text-muted-foreground">
+            {step === "checkout"
+              ? "Secure payment"
+              : step === "success"
+              ? "Confirmation sent"
+              : "Give the gift of great dining"}
+          </p>
         </div>
       </div>
 
-      {/* Tab Toggle */}
-      <div className="px-4 pt-4">
-        <div className="flex rounded-xl bg-muted p-1 gap-1">
-          <button
-            onClick={() => { setTab("buy"); setLookupResult(null); setRedeemCode(""); }}
-            className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold transition-all ${
-              tab === "buy" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground"
-            }`}
-          >
-            <Gift className="w-3.5 h-3.5" /> Buy a Card
-          </button>
-          <button
-            onClick={() => { setTab("redeem"); setShowForm(false); setSelectedCard(null); }}
-            className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold transition-all ${
-              tab === "redeem" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground"
-            }`}
-          >
-            <Ticket className="w-3.5 h-3.5" /> Redeem / Check Balance
-          </button>
+      {step === "select" && (
+        <div className="px-4 pt-4">
+          <div className="flex rounded-xl bg-muted p-1 gap-1">
+            <button
+              onClick={() => { setTab("buy"); setLookupResult(null); setRedeemCode(""); }}
+              className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold transition-all ${
+                tab === "buy" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground"
+              }`}
+            >
+              <Gift className="w-3.5 h-3.5" /> Buy a Card
+            </button>
+            <button
+              onClick={() => { setTab("redeem"); }}
+              className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold transition-all ${
+                tab === "redeem" ? "bg-card text-foreground shadow-sm" : "text-muted-foreground"
+              }`}
+            >
+              <Ticket className="w-3.5 h-3.5" /> Redeem / Check Balance
+            </button>
+          </div>
         </div>
-      </div>
+      )}
 
       <AnimatePresence mode="wait">
-        {tab === "buy" ? (
-          <motion.div
-            key="buy"
-            initial={{ opacity: 0, x: -12 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -12 }}
-            className="px-4 py-5 space-y-5"
-          >
-            {/* Preset Cards */}
+        {tab === "buy" && step === "select" && (
+          <motion.div key="select" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="px-4 py-5 space-y-5">
             <div>
               <h2 className="text-sm font-semibold mb-3">Choose a Gift Card</h2>
               <div className="grid grid-cols-2 gap-3">
@@ -154,11 +309,7 @@ const GiftCardsPage = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.06 }}
                     onClick={() => handleSelectCard(card.id)}
-                    className={`relative p-4 rounded-2xl border text-left transition-all ${
-                      selectedCard === card.id
-                        ? "border-primary ring-2 ring-primary/20"
-                        : "border-border hover:border-primary/30"
-                    } bg-gradient-to-br ${card.color}`}
+                    className={`relative p-4 rounded-2xl border text-left transition-all border-border hover:border-primary/30 bg-gradient-to-br ${card.color}`}
                   >
                     {card.popular && (
                       <span className="absolute -top-2 right-2 px-2 py-0.5 rounded-full bg-primary text-primary-foreground text-[9px] font-bold">
@@ -169,17 +320,11 @@ const GiftCardsPage = () => {
                     <p className="text-lg font-bold">${card.amount}</p>
                     <p className="text-xs font-medium mt-0.5">{card.name}</p>
                     <p className="text-[10px] text-muted-foreground mt-1 leading-relaxed">{card.description}</p>
-                    {selectedCard === card.id && (
-                      <div className="absolute top-2 left-2 w-5 h-5 rounded-full bg-primary flex items-center justify-center">
-                        <Check className="w-3 h-3 text-primary-foreground" />
-                      </div>
-                    )}
                   </motion.button>
                 ))}
               </div>
             </div>
 
-            {/* Custom Amount */}
             <div>
               <h2 className="text-sm font-semibold mb-3">Or pick a custom amount</h2>
               <div className="flex flex-wrap gap-2">
@@ -187,64 +332,225 @@ const GiftCardsPage = () => {
                   <button
                     key={amt}
                     onClick={() => handleCustomAmount(amt)}
-                    className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
-                      customAmount === amt.toString()
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-muted text-muted-foreground hover:bg-muted/80"
-                    }`}
+                    className="px-4 py-2 rounded-xl text-sm font-medium bg-muted text-muted-foreground hover:bg-muted/80 transition-colors"
                   >
                     ${amt}
                   </button>
                 ))}
               </div>
             </div>
-
-            {/* Purchase Form */}
-            {showForm && (
-              <motion.form
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                onSubmit={handlePurchase}
-                className="p-5 rounded-2xl bg-card border space-y-4"
-              >
-                <div className="flex items-center gap-2 mb-1">
-                  <CreditCard className="w-4 h-4 text-primary" />
-                  <h3 className="text-sm font-semibold">
-                    Gift Card — ${selectedCard ? giftCards.find((c) => c.id === selectedCard)?.amount : customAmount}
-                  </h3>
-                </div>
-                <div>
-                  <label className="text-xs font-medium text-muted-foreground mb-1 block">Your Name</label>
-                  <input value={senderName} onChange={(e) => setSenderName(e.target.value)} required placeholder="Your name" className={inputCls} maxLength={100} />
-                </div>
-                <div>
-                  <label className="text-xs font-medium text-muted-foreground mb-1 block">Recipient Name</label>
-                  <input value={recipientName} onChange={(e) => setRecipientName(e.target.value)} required placeholder="Who is this for?" className={inputCls} maxLength={100} />
-                </div>
-                <div>
-                  <label className="text-xs font-medium text-muted-foreground mb-1 block">Recipient Email</label>
-                  <input type="email" value={recipientEmail} onChange={(e) => setRecipientEmail(e.target.value)} required placeholder="their@email.com" className={inputCls} maxLength={255} />
-                </div>
-                <div>
-                  <label className="text-xs font-medium text-muted-foreground mb-1 block">Personal Message (optional)</label>
-                  <textarea value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Add a note..." rows={2}
-                    className={`${inputCls} resize-none`} maxLength={200} />
-                </div>
-                <button type="submit" className="w-full py-3 rounded-xl bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity">
-                  Purchase Gift Card
-                </button>
-              </motion.form>
-            )}
           </motion.div>
-        ) : (
-          <motion.div
-            key="redeem"
-            initial={{ opacity: 0, x: 12 }}
+        )}
+
+        {/* DETAILS */}
+        {tab === "buy" && step === "details" && (
+          <motion.form
+            key="details"
+            initial={{ opacity: 0, x: 16 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 12 }}
-            className="px-4 py-5 space-y-5"
+            exit={{ opacity: 0, x: -16 }}
+            onSubmit={handleDetailsSubmit}
+            className="px-4 py-5 space-y-4"
           >
-            {/* Code Lookup */}
+            <div className="p-4 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 border flex items-center gap-3">
+              <Gift className="w-6 h-6 text-primary" />
+              <div className="flex-1">
+                <p className="text-xs text-muted-foreground">{purchaseCardName}</p>
+                <p className="text-xl font-bold">${purchaseAmount}</p>
+              </div>
+            </div>
+
+            <div>
+              <label className="text-xs font-medium text-muted-foreground mb-1 block">Your Name</label>
+              <input value={senderName} onChange={(e) => setSenderName(e.target.value)} required placeholder="Your name" className={inputCls} maxLength={100} />
+            </div>
+            <div>
+              <label className="text-xs font-medium text-muted-foreground mb-1 block">Your Email (for receipt)</label>
+              <input type="email" value={senderEmail} onChange={(e) => setSenderEmail(e.target.value)} required placeholder="you@email.com" className={inputCls} maxLength={255} />
+            </div>
+            <div>
+              <label className="text-xs font-medium text-muted-foreground mb-1 block">Recipient Name</label>
+              <input value={recipientName} onChange={(e) => setRecipientName(e.target.value)} required placeholder="Who is this for?" className={inputCls} maxLength={100} />
+            </div>
+            <div>
+              <label className="text-xs font-medium text-muted-foreground mb-1 block">Recipient Email</label>
+              <input type="email" value={recipientEmail} onChange={(e) => setRecipientEmail(e.target.value)} required placeholder="their@email.com" className={inputCls} maxLength={255} />
+            </div>
+            <div>
+              <label className="text-xs font-medium text-muted-foreground mb-1 block">Personal Message (optional)</label>
+              <textarea value={message} onChange={(e) => setMessage(e.target.value)} placeholder="Add a note..." rows={2} className={`${inputCls} resize-none`} maxLength={200} />
+            </div>
+
+            <button type="submit" className="w-full py-3 rounded-xl bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+              Continue to Checkout <ArrowRight className="w-4 h-4" />
+            </button>
+          </motion.form>
+        )}
+
+        {/* CHECKOUT */}
+        {tab === "buy" && step === "checkout" && (
+          <motion.div
+            key="checkout"
+            initial={{ opacity: 0, x: 16 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -16 }}
+            className="px-4 py-5 space-y-4"
+          >
+            {/* Order summary */}
+            <div className="p-4 rounded-2xl bg-card border space-y-3">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-primary" />
+                <h3 className="text-sm font-semibold">Order Summary</h3>
+              </div>
+              <div className="space-y-2 text-xs">
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">{purchaseCardName}</span>
+                  <span className="font-medium">${purchaseAmount.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-muted-foreground">Processing fee</span>
+                  <span className="font-medium">$0.00</span>
+                </div>
+                <div className="h-px bg-border my-1" />
+                <div className="flex justify-between text-sm">
+                  <span className="font-semibold">Total</span>
+                  <span className="font-bold">${purchaseAmount.toFixed(2)}</span>
+                </div>
+              </div>
+              <div className="pt-2 border-t text-[11px] text-muted-foreground space-y-0.5">
+                <p>To: <span className="text-foreground font-medium">{recipientName}</span> ({recipientEmail})</p>
+                <p>From: <span className="text-foreground font-medium">{senderName}</span></p>
+              </div>
+            </div>
+
+            {/* Payment form */}
+            <form onSubmit={handlePay} className="p-4 rounded-2xl bg-card border space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <CreditCard className="w-4 h-4 text-primary" />
+                  <h3 className="text-sm font-semibold">Payment</h3>
+                </div>
+                <div className="flex items-center gap-1 text-[10px] text-muted-foreground">
+                  <Lock className="w-3 h-3" /> Secure
+                </div>
+              </div>
+
+              <div>
+                <label className="text-xs font-medium text-muted-foreground mb-1 block">Card Number</label>
+                <input
+                  value={cardNumber}
+                  onChange={(e) => setCardNumber(e.target.value.replace(/\D/g, "").slice(0, 16))}
+                  required
+                  placeholder="4242 4242 4242 4242"
+                  inputMode="numeric"
+                  className={`${inputCls} font-mono tracking-wider`}
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="text-xs font-medium text-muted-foreground mb-1 block">Expiry</label>
+                  <input
+                    value={cardExpiry}
+                    onChange={(e) => setCardExpiry(e.target.value.slice(0, 5))}
+                    required
+                    placeholder="MM/YY"
+                    className={`${inputCls} font-mono`}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-medium text-muted-foreground mb-1 block">CVC</label>
+                  <input
+                    value={cardCvc}
+                    onChange={(e) => setCardCvc(e.target.value.replace(/\D/g, "").slice(0, 4))}
+                    required
+                    placeholder="123"
+                    className={`${inputCls} font-mono`}
+                  />
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                disabled={processing}
+                className="w-full py-3 rounded-xl bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2 disabled:opacity-60"
+              >
+                {processing ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-primary-foreground/40 border-t-primary-foreground rounded-full animate-spin" />
+                    Processing payment...
+                  </>
+                ) : (
+                  <>
+                    <Lock className="w-4 h-4" />
+                    Pay ${purchaseAmount.toFixed(2)}
+                  </>
+                )}
+              </button>
+              <p className="text-[10px] text-center text-muted-foreground">
+                Demo checkout — no real charges
+              </p>
+            </form>
+          </motion.div>
+        )}
+
+        {/* SUCCESS */}
+        {tab === "buy" && step === "success" && (
+          <motion.div
+            key="success"
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            className="px-4 py-5 space-y-4"
+          >
+            <div className="p-6 rounded-2xl bg-gradient-to-br from-chart-2/10 to-primary/5 border text-center">
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", delay: 0.1 }}
+                className="w-16 h-16 mx-auto rounded-2xl bg-chart-2 flex items-center justify-center mb-3"
+              >
+                <Check className="w-9 h-9 text-white" strokeWidth={3} />
+              </motion.div>
+              <h2 className="text-lg font-bold">Payment Successful!</h2>
+              <p className="text-xs text-muted-foreground mt-1">
+                Your ${purchaseAmount} gift card has been emailed to{" "}
+                <span className="font-semibold text-foreground">{recipientEmail}</span>
+              </p>
+
+              <div className="mt-4 p-3 rounded-xl bg-card border text-left">
+                <p className="text-[10px] text-muted-foreground uppercase tracking-wider">Gift Code</p>
+                <p className="font-mono font-bold text-base mt-0.5">{orderCode}</p>
+                <p className="text-[10px] text-muted-foreground mt-1">
+                  Also sent to your inbox at {senderEmail}
+                </p>
+              </div>
+            </div>
+
+            <EmailPreview
+              variant="purchase"
+              data={{
+                email: recipientEmail,
+                recipientName,
+                senderName,
+                amount: purchaseAmount,
+                cardName: purchaseCardName,
+                message,
+                code: orderCode,
+              }}
+            />
+
+            <button
+              onClick={handleBackHome}
+              className="w-full py-3 rounded-xl bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2"
+            >
+              <Home className="w-4 h-4" /> Back to Home
+            </button>
+          </motion.div>
+        )}
+
+        {/* REDEEM */}
+        {tab === "redeem" && (
+          <motion.div key="redeem" initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 12 }} className="px-4 py-5 space-y-5">
             <div>
               <h2 className="text-sm font-semibold mb-1">Enter your gift card code</h2>
               <p className="text-[11px] text-muted-foreground mb-3">Find the code on your gift card email or physical card</p>
@@ -253,7 +559,7 @@ const GiftCardsPage = () => {
                   <Ticket className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                   <input
                     value={redeemCode}
-                    onChange={(e) => { setRedeemCode(e.target.value.toUpperCase()); setLookupResult(null); setRedeemed(false); }}
+                    onChange={(e) => { setRedeemCode(e.target.value.toUpperCase()); setLookupResult(null); setLastRedeemed(null); }}
                     placeholder="BV-GIFT-XXXX"
                     className={`${inputCls} pl-10 font-mono tracking-wider`}
                     maxLength={20}
@@ -265,7 +571,6 @@ const GiftCardsPage = () => {
               </form>
             </div>
 
-            {/* Demo hint */}
             <div className="p-3 rounded-xl bg-muted/50 border border-border/50">
               <p className="text-[10px] text-muted-foreground leading-relaxed">
                 <span className="font-semibold text-foreground">Demo codes:</span>{" "}
@@ -273,16 +578,9 @@ const GiftCardsPage = () => {
               </p>
             </div>
 
-            {/* Lookup Result */}
             <AnimatePresence mode="wait">
               {lookupResult && (
-                <motion.div
-                  key={redeemCode}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12 }}
-                  className="space-y-4"
-                >
+                <motion.div key={redeemCode} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} className="space-y-4">
                   {!lookupResult.found ? (
                     <div className="p-5 rounded-2xl bg-destructive/5 border border-destructive/20 text-center">
                       <p className="text-sm font-semibold text-destructive">Code not found</p>
@@ -290,7 +588,6 @@ const GiftCardsPage = () => {
                     </div>
                   ) : (
                     <>
-                      {/* Balance Card */}
                       <div className="p-5 rounded-2xl bg-card border overflow-hidden relative">
                         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2" />
                         <div className="relative">
@@ -329,7 +626,6 @@ const GiftCardsPage = () => {
                             </div>
                           </div>
 
-                          {/* Progress bar */}
                           <div className="mt-4">
                             <div className="flex justify-between text-[10px] text-muted-foreground mb-1">
                               <span>Used: ${(lookupResult.original! - lookupResult.balance!).toFixed(2)}</span>
@@ -347,7 +643,6 @@ const GiftCardsPage = () => {
                         </div>
                       </div>
 
-                      {/* Redeem Form */}
                       {lookupResult.balance! > 0 ? (
                         <form onSubmit={handleRedeem} className="p-5 rounded-2xl bg-card border space-y-4">
                           <div className="flex items-center gap-2">
@@ -389,7 +684,7 @@ const GiftCardsPage = () => {
                           <p className="text-sm font-semibold text-muted-foreground">This card has been fully redeemed</p>
                           <p className="text-xs text-muted-foreground mt-1">The entire ${lookupResult.original?.toFixed(2)} balance has been used</p>
                           <button
-                            onClick={() => setTab("buy")}
+                            onClick={() => { setTab("buy"); setStep("select"); }}
                             className="mt-3 px-5 py-2 rounded-xl bg-primary text-primary-foreground text-xs font-semibold hover:opacity-90 transition-opacity"
                           >
                             Buy a New Gift Card
@@ -397,22 +692,36 @@ const GiftCardsPage = () => {
                         </div>
                       )}
 
-                      {/* Success animation */}
                       <AnimatePresence>
-                        {redeemed && (
+                        {lastRedeemed !== null && (
                           <motion.div
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0 }}
-                            className="p-4 rounded-2xl bg-chart-2/10 border border-chart-2/20 flex items-center gap-3"
+                            className="space-y-3"
                           >
-                            <div className="w-9 h-9 rounded-xl bg-chart-2/20 flex items-center justify-center shrink-0">
-                              <Check className="w-5 h-5 text-chart-2" />
+                            <div className="p-4 rounded-2xl bg-chart-2/10 border border-chart-2/20 flex items-center gap-3">
+                              <div className="w-9 h-9 rounded-xl bg-chart-2/20 flex items-center justify-center shrink-0">
+                                <Check className="w-5 h-5 text-chart-2" />
+                              </div>
+                              <div>
+                                <p className="text-xs font-semibold text-chart-2">Successfully redeemed!</p>
+                                <p className="text-[10px] text-muted-foreground mt-0.5">
+                                  ${lastRedeemed.toFixed(2)} applied · New balance: ${lookupResult.balance?.toFixed(2)}
+                                </p>
+                              </div>
                             </div>
-                            <div>
-                              <p className="text-xs font-semibold text-chart-2">Successfully redeemed!</p>
-                              <p className="text-[10px] text-muted-foreground mt-0.5">New balance: ${lookupResult.balance?.toFixed(2)}</p>
-                            </div>
+
+                            <EmailPreview
+                              variant="redeem"
+                              data={{
+                                email: `${lookupResult.from?.toLowerCase().replace(/\s+|\./g, "") || "guest"}@email.com`,
+                                code: redeemCode,
+                                name: lookupResult.name,
+                                amount: lastRedeemed,
+                                balance: lookupResult.balance ?? 0,
+                              }}
+                            />
                           </motion.div>
                         )}
                       </AnimatePresence>
