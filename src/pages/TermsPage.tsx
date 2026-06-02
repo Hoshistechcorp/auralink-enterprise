@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, FileText, Sparkles, Mail, ChevronRight } from "lucide-react";
 import { termsSections, TERMS_META } from "@/lib/legalContent";
+import { ReadingProgress } from "@/components/legal/ReadingProgress";
 
 const TermsPage = () => {
   const [activeId, setActiveId] = useState(termsSections[0].id);
