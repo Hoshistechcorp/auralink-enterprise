@@ -214,8 +214,28 @@ const Signup = () => {
           </p>
         </motion.div>
       </div>
+
+      <LegalDialog
+        open={termsOpen}
+        onOpenChange={setTermsOpen}
+        variant="terms"
+        title="Terms of Service"
+        effective={TERMS_META.effective}
+        version={TERMS_META.version}
+        sections={termsSections}
+      />
+      <LegalDialog
+        open={privacyOpen}
+        onOpenChange={setPrivacyOpen}
+        variant="privacy"
+        title="Privacy Policy"
+        effective={PRIVACY_META.effective}
+        version={PRIVACY_META.version}
+        sections={privacySections}
+      />
     </div>
   );
 };
+
 
 export default Signup;
