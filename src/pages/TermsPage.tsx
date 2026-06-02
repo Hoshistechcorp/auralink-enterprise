@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, FileText, Sparkles, Mail, ChevronRight } from "lucide-react";
 import { termsSections, TERMS_META } from "@/lib/legalContent";
+import { ReadingProgress } from "@/components/legal/ReadingProgress";
 
 const TermsPage = () => {
   const [activeId, setActiveId] = useState(termsSections[0].id);
@@ -29,6 +30,7 @@ const TermsPage = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <ReadingProgress />
       {/* Header */}
       <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">

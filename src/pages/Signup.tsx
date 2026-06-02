@@ -171,21 +171,13 @@ const Signup = () => {
               />
               <span className="text-xs text-muted-foreground leading-relaxed">
                 I agree to the{" "}
-                <button
-                  type="button"
-                  onClick={() => setTermsOpen(true)}
-                  className="text-primary font-semibold hover:underline"
-                >
+                <Link to="/terms" target="_blank" className="text-primary font-semibold hover:underline">
                   Terms of Service
-                </button>{" "}
+                </Link>{" "}
                 and{" "}
-                <button
-                  type="button"
-                  onClick={() => setPrivacyOpen(true)}
-                  className="text-primary font-semibold hover:underline"
-                >
+                <Link to="/privacy" target="_blank" className="text-primary font-semibold hover:underline">
                   Privacy Policy
-                </button>.
+                </Link>.
               </span>
             </label>
 
