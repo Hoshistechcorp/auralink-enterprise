@@ -14,6 +14,8 @@ import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
 import VerifyOtp from "./pages/VerifyOtp";
 import ResetPassword from "./pages/ResetPassword";
+import TermsPage from "./pages/TermsPage";
+import PrivacyPage from "./pages/PrivacyPage";
 import QRManagement from "./pages/dashboard/QRManagement";
 import LinksPage from "./pages/dashboard/LinksPage";
 import AffiliateDashboard from "./pages/dashboard/AffiliateDashboard";
