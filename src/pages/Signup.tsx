@@ -24,6 +24,10 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
   const [agreed, setAgreed] = useState(false);
   const [error, setError] = useState("");
+  const [termsOpen, setTermsOpen] = useState(false);
+  const [privacyOpen, setPrivacyOpen] = useState(false);
+
+
 
 
   const handleSubmit = (e: React.FormEvent) => {
