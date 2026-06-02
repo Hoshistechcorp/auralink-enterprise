@@ -5,6 +5,8 @@ import { Eye, EyeOff, UserPlus, ArrowRight, Check } from "lucide-react";
 import { requestSignUpOtp } from "@/lib/auth";
 import { toast } from "sonner";
 import ibloovLogo from "@/assets/ibloov-logo.jpeg";
+import { LegalDialog } from "@/components/legal/LegalDialog";
+import { termsSections, privacySections, TERMS_META, PRIVACY_META } from "@/lib/legalContent";
 
 const features = [
   "Smart QR codes & digital menus",
@@ -22,6 +24,10 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
   const [agreed, setAgreed] = useState(false);
   const [error, setError] = useState("");
+  const [termsOpen, setTermsOpen] = useState(false);
+  const [privacyOpen, setPrivacyOpen] = useState(false);
+
+
 
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -165,9 +171,21 @@ const Signup = () => {
               />
               <span className="text-xs text-muted-foreground leading-relaxed">
                 I agree to the{" "}
-                <a href="/terms" target="_blank" className="text-primary font-semibold hover:underline">Terms of Service</a>{" "}
+                <button
+                  type="button"
+                  onClick={() => setTermsOpen(true)}
+                  className="text-primary font-semibold hover:underline"
+                >
+                  Terms of Service
+                </button>{" "}
                 and{" "}
-                <a href="/privacy" target="_blank" className="text-primary font-semibold hover:underline">Privacy Policy</a>.
+                <button
+                  type="button"
+                  onClick={() => setPrivacyOpen(true)}
+                  className="text-primary font-semibold hover:underline"
+                >
+                  Privacy Policy
+                </button>.
               </span>
             </label>
 
@@ -196,8 +214,28 @@ const Signup = () => {
           </p>
         </motion.div>
       </div>
+
+      <LegalDialog
+        open={termsOpen}
+        onOpenChange={setTermsOpen}
+        variant="terms"
+        title="Terms of Service"
+        effective={TERMS_META.effective}
+        version={TERMS_META.version}
+        sections={termsSections}
+      />
+      <LegalDialog
+        open={privacyOpen}
+        onOpenChange={setPrivacyOpen}
+        variant="privacy"
+        title="Privacy Policy"
+        effective={PRIVACY_META.effective}
+        version={PRIVACY_META.version}
+        sections={privacySections}
+      />
     </div>
   );
 };
+
 
 export default Signup;
