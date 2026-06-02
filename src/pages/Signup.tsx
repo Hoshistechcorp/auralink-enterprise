@@ -5,6 +5,8 @@ import { Eye, EyeOff, UserPlus, ArrowRight, Check } from "lucide-react";
 import { requestSignUpOtp } from "@/lib/auth";
 import { toast } from "sonner";
 import ibloovLogo from "@/assets/ibloov-logo.jpeg";
+import { LegalDialog } from "@/components/legal/LegalDialog";
+import { termsSections, privacySections, TERMS_META, PRIVACY_META } from "@/lib/legalContent";
 
 const features = [
   "Smart QR codes & digital menus",
