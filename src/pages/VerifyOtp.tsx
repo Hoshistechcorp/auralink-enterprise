@@ -156,7 +156,7 @@ const VerifyOtp = () => {
                   {mode === "signup" ? "Complete your registration" : "Verify your email"}
                 </h1>
                 <p className="max-w-lg text-sm leading-6 text-muted-foreground">
-                  We sent a 6-digit code to <span className="font-semibold text-foreground">{email}</span>. Enter it below to continue.
+                  We sent a 4-digit code to <span className="font-semibold text-foreground">{email}</span>. Enter it below to continue.
                 </p>
               </div>
             </div>
