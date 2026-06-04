@@ -37,7 +37,7 @@ const saveUsers = (users: StoredUser[]) => {
   localStorage.setItem(USERS_KEY, JSON.stringify(users));
 };
 
-const generateOtp = () => `${Math.floor(100000 + Math.random() * 900000)}`;
+const generateOtp = () => `${Math.floor(1000 + Math.random() * 9000)}`;
 
 const savePendingOtp = (session: PendingOtpSession) => {
   localStorage.setItem(OTP_KEY, JSON.stringify(session));
