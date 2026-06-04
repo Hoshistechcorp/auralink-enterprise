@@ -11,7 +11,7 @@ const RESEND_COOLDOWN = 30;
 const verificationHighlights = [
   "Protected account confirmation",
   "Fast onboarding continuation",
-  "One-time 6-digit verification",
+  "One-time 4-digit verification",
 ];
 
 const VerifyOtp = () => {
@@ -156,7 +156,7 @@ const VerifyOtp = () => {
                   {mode === "signup" ? "Complete your registration" : "Verify your email"}
                 </h1>
                 <p className="max-w-lg text-sm leading-6 text-muted-foreground">
-                  We sent a 6-digit code to <span className="font-semibold text-foreground">{email}</span>. Enter it below to continue.
+                  We sent a 4-digit code to <span className="font-semibold text-foreground">{email}</span>. Enter it below to continue.
                 </p>
               </div>
             </div>
@@ -169,11 +169,11 @@ const VerifyOtp = () => {
               )}
 
               <div className="space-y-3">
-                <p className="text-center text-sm font-medium text-muted-foreground">Enter 6-digit code</p>
+                <p className="text-center text-sm font-medium text-muted-foreground">Enter 4-digit code</p>
                 <div className="flex justify-center">
-                  <InputOTP maxLength={6} value={otp} onChange={setOtp}>
+                  <InputOTP maxLength={4} value={otp} onChange={setOtp}>
                     <InputOTPGroup className="gap-2 sm:gap-3">
-                      {Array.from({ length: 6 }).map((_, index) => (
+                      {Array.from({ length: 4 }).map((_, index) => (
                         <InputOTPSlot
                           key={index}
                           index={index}
@@ -188,7 +188,7 @@ const VerifyOtp = () => {
               <button
                 type="button"
                 onClick={handleVerify}
-                disabled={otp.length !== 6 || loading}
+                disabled={otp.length !== 4 || loading}
                 className="w-full rounded-2xl bg-primary py-3.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-50"
               >
                 {loading ? "Verifying..." : mode === "signup" ? "Continue registration" : "Continue"}

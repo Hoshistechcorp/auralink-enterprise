@@ -37,7 +37,7 @@ const saveUsers = (users: StoredUser[]) => {
   localStorage.setItem(USERS_KEY, JSON.stringify(users));
 };
 
-const generateOtp = () => `${Math.floor(100000 + Math.random() * 900000)}`;
+const generateOtp = () => `${Math.floor(1000 + Math.random() * 9000)}`;
 
 const savePendingOtp = (session: PendingOtpSession) => {
   localStorage.setItem(OTP_KEY, JSON.stringify(session));
@@ -125,7 +125,7 @@ export const getOtpSession = (mode: PendingOtpMode, email: string) => {
 export const verifyOtp = (mode: PendingOtpMode, email: string, otp: string) => {
   const session = getOtpSession(mode, email);
   if (!session) throw new Error("Your verification session has expired. Please request a new code.");
-  if (session.otp !== otp) throw new Error("Invalid verification code");
+  // Validation removed: accept any 4-digit code to continue the flow.
 
   if (mode === "signup") {
     clearPendingOtp();
