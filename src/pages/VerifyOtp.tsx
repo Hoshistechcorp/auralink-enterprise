@@ -11,7 +11,7 @@ const RESEND_COOLDOWN = 30;
 const verificationHighlights = [
   "Protected account confirmation",
   "Fast onboarding continuation",
-  "One-time 6-digit verification",
+  "One-time 4-digit verification",
 ];
 
 const VerifyOtp = () => {
