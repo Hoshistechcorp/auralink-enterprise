@@ -2,11 +2,13 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
 const faqs = [
-  { q: "How fast can we launch?", a: "Most venues are live in under 3 minutes — no developers, no IT." },
-  { q: "What does AuraLink cost?", a: "Spark is free. Maverick is $79/mo. Supernova is $149/mo. Save 20% annually." },
-  { q: "Do you take booking commission?", a: "No. AuraLink charges 0% on every direct reservation." },
-  { q: "Is the AI Concierge multilingual?", a: "Yes — 40+ languages, 24/7, trained on your venue's content." },
-  { q: "Can I cancel anytime?", a: "Yes. Month-to-month, cancel anytime from your dashboard." },
+  { q: "What is AuraLink?", a: "AuraLink is a web-native, QR-powered operating system by iBloov that replaces fragmented venue websites, apps, and menus with a single digital interface." },
+  { q: "Do guests need to download an app?", a: "No, it is completely zero-install. Guests simply scan a QR code to instantly launch the mobile-first microsite in their browser." },
+  { q: "Who is AuraLink built for?", a: "It features two specialized use cases: Hospitality (restaurants, hotels, lounges) to drive direct revenue, and Tourism Boards (cities, destination marketing organizations) to boost visitor engagement." },
+  { q: "What features does the microsite include?", a: "It uses a modular layout of up to 15 swappable cards including Menus, Reviews, Digital Gift Cards, Event RSVP, Loyalty rewards, and an AI Concierge." },
+  { q: "How does the AI Concierge work?", a: "It is an automated conversational agent trained directly on the specific venue or destination's content to answer guest questions instantly." },
+  { q: "Can I manage multiple locations from one account?", a: "Yes. The Enterprise dashboard allows multi-location groups to push global updates to branding, menus, and hours simultaneously while keeping an audit trail." },
+  { q: "How much does AuraLink cost?", a: "Hospitality plans range from $29 to $199/month (with a 21-day free trial). Tourism plans are tier-based annual contracts starting at $36k/year." },
 ];
 
 const Faq = () => {

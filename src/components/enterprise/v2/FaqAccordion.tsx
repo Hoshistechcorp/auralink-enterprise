@@ -3,28 +3,32 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 const faqs = [
   {
-    q: "Does AuraLink replace our POS?",
-    a: "No — AuraLink sits alongside your POS as the guest-facing layer. It integrates with most major systems and handles bookings, gift cards, AI concierge, loyalty, and analytics, while your POS continues to manage in-venue transactions.",
+    q: "What is AuraLink?",
+    a: "AuraLink is a web-native, QR-powered operating system by iBloov that replaces fragmented venue websites, apps, and menus with a single digital interface.",
   },
   {
-    q: "How quickly can we go live?",
-    a: "Most venues launch in under 3 minutes. Sign up, drop in your logo and content, and a polished public AuraLink is ready to share. Enterprise rollouts with multi-location templates and custom branding typically launch within a week.",
+    q: "Do guests need to download an app?",
+    a: "No, it is completely zero-install. Guests simply scan a QR code to instantly launch the mobile-first microsite in their browser.",
   },
   {
-    q: "Can AuraLink support multiple venues or locations?",
-    a: "Yes. Hotel groups, restaurant chains, and tourism boards run multiple AuraLinks under one parent account, with shared branding, role-based access, centralized analytics, and per-location overrides.",
+    q: "Who is AuraLink built for?",
+    a: "It features two specialized use cases: Hospitality (restaurants, hotels, lounges) to drive direct revenue, and Tourism Boards (cities, destination marketing organizations) to boost visitor engagement.",
   },
   {
-    q: "What makes AuraLink different from link-in-bio or booking tools?",
-    a: "Link-in-bio tools route traffic away from you. Booking tools take a cut of every reservation. AuraLink is a full hospitality operating system: you own the hub, the guest data, and the revenue, with built-in AI, commerce, loyalty, and growth.",
+    q: "What features does the microsite include?",
+    a: "It uses a modular layout of up to 15 swappable cards including Menus, Reviews, Digital Gift Cards, Event RSVP, Loyalty rewards, and an AI Concierge.",
   },
   {
-    q: "How does the AI concierge work?",
-    a: "The concierge is trained on your venue's menu, FAQs, hours, and policies. It answers in 40+ languages, secures bookings, and escalates complex requests to your team. You review and refine its knowledge base from the dashboard at any time.",
+    q: "How does the AI Concierge work?",
+    a: "It is an automated conversational agent trained directly on the specific venue or destination's content to answer guest questions instantly.",
   },
   {
-    q: "What enterprise support is available?",
-    a: "Enterprise plans include a dedicated success manager, priority SLA, custom onboarding, security and procurement reviews, and direct access to the engineering team for integrations and roadmap input.",
+    q: "Can I manage multiple locations from one account?",
+    a: "Yes. The Enterprise dashboard allows multi-location groups to push global updates to branding, menus, and hours simultaneously while keeping an audit trail.",
+  },
+  {
+    q: "How much does AuraLink cost?",
+    a: "Hospitality plans range from $29 to $199/month (with a 21-day free trial). Tourism plans are tier-based annual contracts starting at $36k/year.",
   },
 ];
 
