@@ -22,7 +22,7 @@ const superApps: SuperApp[] = [
     id: "venues",
     icon: MapPin,
     name: "Venues",
-    tagline: "Discover AuraLink spots",
+    tagline: "Discover IBloov spots",
     color: "hsl(var(--primary))",
     action: "Explore",
     path: "/microsite",

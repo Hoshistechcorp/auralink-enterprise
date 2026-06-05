@@ -45,7 +45,7 @@ const LocationsPage = () => {
   const [copiedSlug, setCopiedSlug] = useState<string | null>(null);
   const [form, setForm] = useState<Partial<Location>>({});
 
-  const baseUrl = "auralink.app/m/";
+  const baseUrl = "ibloov.app/m/";
 
   const handleCopyLink = (slug: string) => {
     navigator.clipboard.writeText(`${baseUrl}${slug}`);

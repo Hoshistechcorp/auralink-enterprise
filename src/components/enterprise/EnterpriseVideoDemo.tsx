@@ -33,7 +33,7 @@ const EnterpriseVideoDemo = () => {
             <iframe
               className="absolute inset-0 w-full h-full"
               src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
-              title="AuraLink Demo"
+              title="IBloov Demo"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />

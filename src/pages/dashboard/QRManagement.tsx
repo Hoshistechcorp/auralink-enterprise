@@ -4,7 +4,7 @@ import { QrCode, Download, Copy, UtensilsCrossed, CalendarDays, Users, Smartphon
 import DashboardLayout from "@/components/aura/DashboardLayout";
 
 const qrTypes = [
-  { id: "main", label: "Main Page", icon: Smartphone, desc: "Link to your AuraLink page", scans: 1284, color: "bg-primary/10 text-primary" },
+  { id: "main", label: "Main Page", icon: Smartphone, desc: "Link to your IBloov page", scans: 1284, color: "bg-primary/10 text-primary" },
   { id: "table", label: "Table QR", icon: QrCode, desc: "Menu access per table", scans: 892, color: "bg-aura-gold/20 text-secondary" },
   { id: "menu", label: "Menu QR", icon: UtensilsCrossed, desc: "Direct to menu card", scans: 2103, color: "bg-aura-success/15 text-aura-success" },
   { id: "event", label: "Event QR", icon: CalendarDays, desc: "Event-specific landing", scans: 347, color: "bg-aura-info/15 text-aura-info" },

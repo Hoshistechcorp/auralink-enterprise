@@ -66,7 +66,7 @@ const EnterpriseHero = () => {
               onClick={() => navigate("/signup")}
               className="flex items-center gap-2 px-8 py-4 rounded-2xl bg-[#E8604C] text-white font-semibold text-[15px] hover:bg-[#d4533f] transition-colors shadow-lg shadow-[#E8604C]/20"
             >
-              Launch Your AuraLink
+              Launch Your IBloov
               <ArrowRight className="w-4 h-4" />
             </button>
             <button

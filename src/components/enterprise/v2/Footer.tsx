@@ -4,7 +4,7 @@ const Footer = () => (
       <div className="flex items-center gap-2.5">
         <span className="h-6 w-6 rounded-md bg-brass-gradient" />
         <span className="font-fraunces font-bold text-ivory text-[15px] tracking-tight">
-          AuraLink{" "}
+          IBloov{" "}
           <span className="font-jakarta italic font-medium text-stone-warm text-[11px]">by iBloov</span>
         </span>
       </div>

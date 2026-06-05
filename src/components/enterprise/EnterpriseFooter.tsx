@@ -5,7 +5,7 @@ const EnterpriseFooter = () => (
     <div className="max-w-5xl mx-auto px-5 sm:px-8 text-center">
       <div className="flex items-center justify-center gap-2 mb-3">
         <img src={ibloovLogo} alt="iBloov" className="h-6 w-auto rounded-md" />
-        <span className="text-white/60 text-sm font-semibold">AuraLink Enterprise</span>
+        <span className="text-white/60 text-sm font-semibold">IBloov Enterprise</span>
         <span className="text-white/20">by</span>
         <span className="text-white/40 text-sm">iBloov Global Inc.</span>
       </div>

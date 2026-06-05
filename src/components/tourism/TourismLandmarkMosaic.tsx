@@ -79,7 +79,7 @@ const TourismLandmarkMosaic = () => {
             </span>
           </h2>
           <p className="mt-4 text-white/50 max-w-lg mx-auto text-sm sm:text-base">
-            From the Eiffel Tower to the Great Wall — AuraLink helps tourism boards worldwide showcase their destinations digitally.
+            From the Eiffel Tower to the Great Wall — IBloov helps tourism boards worldwide showcase their destinations digitally.
           </p>
         </motion.div>
 

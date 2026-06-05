@@ -39,7 +39,7 @@ const TermsPage = () => {
             className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to AuraLink
+            Back to IBloov
           </Link>
           <Link
             to="/privacy"
@@ -71,7 +71,7 @@ const TermsPage = () => {
               Terms of <span className="text-primary">Service</span>
             </h1>
             <p className="mt-5 text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl">
-              The ground rules for using AuraLink — written plainly so you know exactly what you're agreeing to.
+              The ground rules for using IBloov — written plainly so you know exactly what you're agreeing to.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
               <div className="flex items-center gap-2">
@@ -209,10 +209,10 @@ const TermsPage = () => {
             <div>
               <p className="text-sm font-semibold text-foreground">Questions about these terms?</p>
               <a
-                href="mailto:legal@auralink.com"
+                href="mailto:legal@ibloov.com"
                 className="text-sm text-primary hover:underline"
               >
-                legal@auralink.com
+                legal@ibloov.com
               </a>
             </div>
           </div>

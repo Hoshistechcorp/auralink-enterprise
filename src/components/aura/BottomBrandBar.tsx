@@ -36,7 +36,7 @@ const BottomBrandBar = () => {
             >
               <Share2 className="w-3.5 h-3.5" />
             </button>
-            Powered by <span className="font-display text-primary">AuraLink</span>
+            Powered by <span className="font-display text-primary">IBloov</span>
           </div>
         </div>
       </div>

@@ -40,7 +40,7 @@ const PhoneMockup = () => (
         </div>
         <div className="px-4 pb-3 border-b border-[#1F2638]">
           <p className="font-fraunces text-tourism-ivory text-[15px] font-bold">Visit Atlanta</p>
-          <p className="text-[10px] text-tourism-slate">auralink.app/visitatlanta</p>
+          <p className="text-[10px] text-tourism-slate">ibloov.app/visitatlanta</p>
         </div>
         <div className="grid grid-cols-3 gap-2 p-3">
           {cards.map((label, i) => (
@@ -117,7 +117,7 @@ const TourismHero = () => {
         >
           <span className="inline-flex items-center gap-2 text-[11px] font-bold tracking-[0.32em] uppercase text-tourism-brass">
             <span className="h-px w-8 bg-[#C9A35B]/60" />
-            AURALINK · BY IBLOOV
+            IBLOOV · DIGITAL RESUME
           </span>
 
           <h1 className="font-fraunces mt-5 text-[40px] sm:text-[54px] lg:text-[64px] leading-[1.02] tracking-tight font-bold text-tourism-ivory">

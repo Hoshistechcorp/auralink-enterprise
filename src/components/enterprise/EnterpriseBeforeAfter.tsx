@@ -38,7 +38,7 @@ const EnterpriseBeforeAfter = () => (
       <div className="grid md:grid-cols-2 gap-4">
         <div className="space-y-3">
           <div className="text-xs font-bold tracking-[0.2em] uppercase text-red-400/60 mb-4 text-center">
-            Without AuraLink
+            Without IBloov
           </div>
           {comparisons.map((c, i) => (
             <motion.div
@@ -57,7 +57,7 @@ const EnterpriseBeforeAfter = () => (
 
         <div className="space-y-3">
           <div className="text-xs font-bold tracking-[0.2em] uppercase text-emerald-400/60 mb-4 text-center">
-            With AuraLink
+            With IBloov
           </div>
           {comparisons.map((c, i) => (
             <motion.div

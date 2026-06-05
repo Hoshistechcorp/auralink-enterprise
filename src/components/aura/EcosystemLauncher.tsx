@@ -20,7 +20,7 @@ const ecosystemApps: EcosystemApp[] = [
   {
     id: "auralink",
     icon: Sparkles,
-    name: "AuraLink",
+    name: "IBloov",
     description: "Business microsites & customer engagement",
     color: "hsl(var(--primary))",
     path: "/dashboard/ecosystem/auralink",

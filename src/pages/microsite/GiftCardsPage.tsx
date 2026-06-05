@@ -50,7 +50,7 @@ const RESTAURANT = {
   address: "412 Riverside Avenue, Brooklyn, NY 11211",
   phone: "+1 (718) 555-0142",
   email: "reservations@bellavista.com",
-  website: "bellavista.auralink.app",
+  website: "bellavista.ibloov.app",
   hours: "Tue–Sun · 5:00 PM – 11:00 PM",
 };
 
@@ -199,7 +199,7 @@ const EmailPreview = ({
           <p>🌐 {RESTAURANT.website}</p>
         </div>
         <p className="text-[10px] text-[#999] mt-3 text-center">
-          {RESTAURANT.name} · Powered by AuraLink
+          {RESTAURANT.name} · Powered by IBloov
         </p>
       </div>
     </div>

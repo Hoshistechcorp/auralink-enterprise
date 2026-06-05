@@ -12,9 +12,9 @@ const PrivacyPage = () => {
     {
       id: "introduction",
       title: "1. Introduction",
-      content: `AuraLink (“we,” “us,” or “our”) respects your privacy and is committed to protecting your personal data. This Privacy Policy explains how we collect, use, store, and share information when you use the AuraLink platform and related services (collectively, the “Services”).
+      content: `IBloov (“we,” “us,” or “our”) respects your privacy and is committed to protecting your personal data. This Privacy Policy explains how we collect, use, store, and share information when you use the IBloov platform and related services (collectively, the “Services”).
 
-This policy applies to all users of AuraLink, including business owners (our “Customers”) and the customers of those businesses who interact with AuraLink-powered microsites, gift cards, loyalty programs, and other features.
+This policy applies to all users of IBloov, including business owners (our “Customers”) and the customers of those businesses who interact with IBloov-powered microsites, gift cards, loyalty programs, and other features.
 
 By using the Services, you acknowledge that you have read and understood this Privacy Policy.`
     },
@@ -22,7 +22,7 @@ By using the Services, you acknowledge that you have read and understood this Pr
       id: "information-we-collect",
       title: "2. Information We Collect",
       content: `2.1 Information You Provide Directly
-When you sign up for an AuraLink account, we collect:
+When you sign up for an IBloov account, we collect:
 • Name, email address, and phone number;
 • Business name, address, and category;
 • Payment information (processed securely by our payment partners; we do not store full credit card numbers);
@@ -37,13 +37,13 @@ When you or your customers use a microsite or dashboard, we may automatically co
 • Cookies and similar tracking technologies (see Section 8).
 
 2.3 Customer Data
-As a business using AuraLink, you may collect personal information from your own customers through your microsite — such as names, emails, phone numbers, reservation details, loyalty points, visit history, and gift card purchases. You are the “data controller” for this information; AuraLink acts as your “data processor.”`
+As a business using IBloov, you may collect personal information from your own customers through your microsite — such as names, emails, phone numbers, reservation details, loyalty points, visit history, and gift card purchases. You are the “data controller” for this information; IBloov acts as your “data processor.”`
     },
     {
       id: "how-we-use",
       title: "3. How We Use Your Information",
       content: `We use the information we collect to:
-• Provide, operate, and maintain the AuraLink platform;
+• Provide, operate, and maintain the IBloov platform;
 • Process payments and manage subscriptions;
 • Send transactional emails, account notifications, and service updates;
 • Provide customer support and respond to inquiries;
@@ -78,12 +78,12 @@ These providers are contractually obligated to protect your data and use it only
 
 5.3 Legal Requirements. We may disclose information if required by law, subpoena, or government request, or when we believe disclosure is necessary to protect our rights, property, or safety, or that of our users.
 
-5.4 Business Transfers. If AuraLink is involved in a merger, acquisition, or sale of assets, your information may be transferred as part of that transaction. We will notify you of any such change.`
+5.4 Business Transfers. If IBloov is involved in a merger, acquisition, or sale of assets, your information may be transferred as part of that transaction. We will notify you of any such change.`
     },
     {
       id: "ai-data",
       title: "6. AI Features & Data Processing",
-      content: `AuraLink offers AI-powered features, including the AI Concierge and automated review reply suggestions. When you enable these features:
+      content: `IBloov offers AI-powered features, including the AI Concierge and automated review reply suggestions. When you enable these features:
 • Customer inquiries and your business content may be processed by AI models to generate responses;
 • We do not use customer data to train general-purpose AI models without your consent;
 • You are responsible for reviewing AI-generated content before it is published or sent to customers;
@@ -101,7 +101,7 @@ If you are a business customer, you are responsible for determining appropriate 
     {
       id: "cookies",
       title: "8. Cookies & Tracking Technologies",
-      content: `AuraLink and our partners use cookies and similar technologies to:
+      content: `IBloov and our partners use cookies and similar technologies to:
 • Authenticate users and maintain sessions;
 • Remember preferences and settings;
 • Analyze usage and improve the platform;
@@ -109,12 +109,12 @@ If you are a business customer, you are responsible for determining appropriate 
 
 You can manage cookie preferences through your browser settings. Please note that disabling certain cookies may affect the functionality of the Services.
 
-As a business using AuraLink, you are responsible for ensuring your microsite complies with applicable cookie consent laws (such as the EU Cookie Directive) if you serve visitors from those jurisdictions.`
+As a business using IBloov, you are responsible for ensuring your microsite complies with applicable cookie consent laws (such as the EU Cookie Directive) if you serve visitors from those jurisdictions.`
     },
     {
       id: "security",
       title: "9. Security Measures",
-      content: `AuraLink implements industry-standard security measures to protect your data, including:
+      content: `IBloov implements industry-standard security measures to protect your data, including:
 • Encryption of data in transit (TLS/SSL) and at rest;
 • Regular security audits and vulnerability assessments;
 • Role-based access controls for team accounts;
@@ -125,14 +125,14 @@ However, no system is 100% secure. You are responsible for maintaining the secur
     {
       id: "third-party",
       title: "10. Third-Party Links & Integrations",
-      content: `AuraLink integrates with third-party services such as Google Maps, social media platforms, reservation providers, and review sites. This Privacy Policy does not cover the data practices of those third parties. We encourage you to review their privacy policies before connecting them to your AuraLink account.
+      content: `IBloov integrates with third-party services such as Google Maps, social media platforms, reservation providers, and review sites. This Privacy Policy does not cover the data practices of those third parties. We encourage you to review their privacy policies before connecting them to your IBloov account.
 
 We are not responsible for the privacy practices or content of third-party websites or services linked from your microsite.`
     },
     {
       id: "children",
       title: "11. Children’s Privacy",
-      content: `AuraLink is not intended for use by individuals under the age of 18, and we do not knowingly collect personal data from children. If you believe we have inadvertently collected data from a child, please contact us immediately so we can delete it.`
+      content: `IBloov is not intended for use by individuals under the age of 18, and we do not knowingly collect personal data from children. If you believe we have inadvertently collected data from a child, please contact us immediately so we can delete it.`
     },
     {
       id: "your-rights",
@@ -146,19 +146,19 @@ We are not responsible for the privacy practices or content of third-party websi
 • Objection — object to certain types of processing (e.g., direct marketing);
 • Withdraw Consent — withdraw consent where processing is based on consent.
 
-To exercise these rights, contact us at privacy@auralink.com. We will respond within the timeframe required by applicable law.`
+To exercise these rights, contact us at privacy@ibloov.com. We will respond within the timeframe required by applicable law.`
     },
     {
       id: "dpa",
       title: "13. Data Processing Agreement (DPA)",
-      content: `For business customers subject to GDPR, CCPA, or similar regulations, AuraLink acts as a data processor for Customer Data collected through your microsite. Our Data Processing Agreement (DPA) is incorporated by reference into our Terms of Service.
+      content: `For business customers subject to GDPR, CCPA, or similar regulations, IBloov acts as a data processor for Customer Data collected through your microsite. Our Data Processing Agreement (DPA) is incorporated by reference into our Terms of Service.
 
-If you require a signed DPA for your records, please contact us at privacy@auralink.com and we will provide one.`
+If you require a signed DPA for your records, please contact us at privacy@ibloov.com and we will provide one.`
     },
     {
       id: "international",
       title: "14. International Data Transfers",
-      content: `AuraLink is based in the United States. If you access the Services from outside the United States, your data may be transferred to, stored, and processed in the United States or other countries where our service providers operate.
+      content: `IBloov is based in the United States. If you access the Services from outside the United States, your data may be transferred to, stored, and processed in the United States or other countries where our service providers operate.
 
 We use appropriate safeguards (such as Standard Contractual Clauses) to ensure your data receives an adequate level of protection when transferred internationally.`
     },
@@ -172,8 +172,8 @@ We use appropriate safeguards (such as Standard Contractual Clauses) to ensure y
       title: "16. Contact Us",
       content: `If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:
 
-• Email: privacy@auralink.com
-• Address: AuraLink Legal, [Business Address — to be updated]`
+• Email: privacy@ibloov.com
+• Address: IBloov Legal, [Business Address — to be updated]`
     },
   ];
 
@@ -296,7 +296,7 @@ We use appropriate safeguards (such as Standard Contractual Clauses) to ensure y
                   { icon: Cookie, label: "Cookies", text: "We use cookies for authentication, preferences, and analytics. You can manage these in your browser." },
                   { icon: Mail, label: "Marketing", text: "We only send marketing emails with your consent. You can unsubscribe anytime." },
                   { icon: Globe, label: "Third parties", text: "We share data only with service providers who help us run the platform, and with you (the business owner)." },
-                  { icon: UserX, label: "Your rights", text: "You can access, correct, delete, or export your data. Contact privacy@auralink.com." },
+                  { icon: UserX, label: "Your rights", text: "You can access, correct, delete, or export your data. Contact privacy@ibloov.com." },
                 ].map((item) => (
                   <div
                     key={item.label}
@@ -322,8 +322,8 @@ We use appropriate safeguards (such as Standard Contractual Clauses) to ensure y
         <div className="max-w-3xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
             Questions about your privacy? Contact us at{" "}
-            <a href="mailto:privacy@auralink.com" className="text-primary font-medium hover:underline">
-              privacy@auralink.com
+            <a href="mailto:privacy@ibloov.com" className="text-primary font-medium hover:underline">
+              privacy@ibloov.com
             </a>
           </p>
           <Link

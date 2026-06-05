@@ -3,15 +3,15 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 const faqs = [
   {
-    q: "What is AuraLink?",
-    a: "AuraLink is a web-native, QR-powered operating system by iBloov that replaces fragmented venue websites, apps, and menus with a single digital interface.",
+    q: "What is IBloov?",
+    a: "IBloov is a web-native, QR-powered operating system by iBloov that replaces fragmented venue websites, apps, and menus with a single digital interface.",
   },
   {
     q: "Do guests need to download an app?",
     a: "No, it is completely zero-install. Guests simply scan a QR code to instantly launch the mobile-first microsite in their browser.",
   },
   {
-    q: "Who is AuraLink built for?",
+    q: "Who is IBloov built for?",
     a: "It features two specialized use cases: Hospitality (restaurants, hotels, lounges) to drive direct revenue, and Tourism Boards (cities, destination marketing organizations) to boost visitor engagement.",
   },
   {
@@ -27,7 +27,7 @@ const faqs = [
     a: "Yes. The Enterprise dashboard allows multi-location groups to push global updates to branding, menus, and hours simultaneously while keeping an audit trail.",
   },
   {
-    q: "How much does AuraLink cost?",
+    q: "How much does IBloov cost?",
     a: "Hospitality plans range from $29 to $199/month (with a 21-day free trial). Tourism plans are tier-based annual contracts starting at $36k/year.",
   },
 ];

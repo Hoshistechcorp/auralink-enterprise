@@ -30,7 +30,7 @@ const PhoneMockup = () => (
         {/* Header */}
         <div className="px-4 pb-3 border-b border-[#1B1714]">
           <p className="font-fraunces text-ivory text-[15px] font-bold">Bella Vista</p>
-          <p className="text-[10px] text-stone-warm">auralink.app/bellavista</p>
+          <p className="text-[10px] text-stone-warm">ibloov.app/bellavista</p>
         </div>
 
         {/* 15-card grid */}
@@ -112,7 +112,7 @@ const Hero = () => {
           </span>
 
           <h1 className="font-fraunces mt-5 text-[40px] sm:text-[54px] lg:text-[64px] leading-[1.02] tracking-tight font-bold text-ivory">
-            AuraLink is the hospitality{" "}
+            IBloov is the hospitality{" "}
             <span className="italic text-brass-gradient">operating system</span>{" "}
             for modern venues.
           </h1>

@@ -105,7 +105,7 @@ const Onboarding = () => {
         <div className="max-w-3xl mx-auto px-5 h-14 flex items-center">
           <div className="flex items-center gap-2">
             <img src={ibloovLogo} alt="iBloov" className="h-7 w-auto rounded-lg" />
-            <span className="font-semibold text-sm">AuraLink</span>
+            <span className="font-semibold text-sm">IBloov</span>
           </div>
         </div>
       </div>
@@ -254,7 +254,7 @@ const Onboarding = () => {
                 <div className="text-center mb-6">
                   <h2 className="text-xl sm:text-2xl font-display font-bold">Team Setup</h2>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Invite your team members to help manage your AuraLink presence. You can skip this and add later.
+                    Invite your team members to help manage your IBloov presence. You can skip this and add later.
                   </p>
                 </div>
 

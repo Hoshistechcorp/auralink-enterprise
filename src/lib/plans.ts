@@ -1,5 +1,5 @@
 /**
- * Single source of truth for AuraLink subscription tiers.
+ * Single source of truth for IBloov subscription tiers.
  * Used by /pricing on the landing page and the in-app Subscription page.
  */
 export type PlanId = "spark" | "maverick" | "supernova";
