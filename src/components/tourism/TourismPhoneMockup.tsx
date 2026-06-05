@@ -44,7 +44,7 @@ const TourismPhoneMockup = () => {
             <span className="italic text-tourism-brass">Everything a visitor needs.</span>
           </h2>
           <p className="text-base text-tourism-slate max-w-[620px] mx-auto mb-14 leading-relaxed">
-            IBloov gives your city, state, or country a beautiful, mobile-first destination
+            AuraLink gives your city, state, or country a beautiful, mobile-first destination
             page — built from 15 modular cards covering every aspect of the visitor experience.
           </p>
         </motion.div>

@@ -45,7 +45,7 @@ const EnterpriseVenueTypes = () => (
       >
         <span className="text-xs font-semibold tracking-widest uppercase text-[#1B9AAA]">Built For Every Venue</span>
         <h2 className="mt-3 font-display text-3xl sm:text-4xl font-bold text-white">
-          Your venue type. <span className="italic text-white/40">Your IBloov.</span>
+          Your venue type. <span className="italic text-white/40">Your AuraLink.</span>
         </h2>
       </motion.div>
 

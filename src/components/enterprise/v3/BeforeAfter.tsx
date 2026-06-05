@@ -21,7 +21,7 @@ const BeforeAfter = () => (
     <div className="text-center mb-8">
       <span className="text-[10px] uppercase tracking-[0.3em] text-[#C9A35B]">The shift</span>
       <h2 className="font-grotesk mt-2 text-[28px] font-bold text-[#F5F0E8] tracking-tight">Replace six tools.</h2>
-      <p className="text-[14px] text-[#A89B8B] mt-1.5">One IBloov, no more chaos.</p>
+      <p className="text-[14px] text-[#A89B8B] mt-1.5">One AuraLink, no more chaos.</p>
     </div>
     <div className="grid sm:grid-cols-2 gap-4">
       <div className="rounded-2xl border border-[#1F1A17] bg-[#0F0D0B] p-5">
@@ -29,7 +29,7 @@ const BeforeAfter = () => (
         <ul className="space-y-2.5">{before.map((t) => <Row key={t} ok={false} text={t} />)}</ul>
       </div>
       <div className="rounded-2xl border border-[#C9A35B]/30 bg-gradient-to-b from-[#1A1410] to-[#0F0D0B] p-5">
-        <p className="text-[11px] uppercase tracking-wider text-[#C9A35B] mb-3">With IBloov</p>
+        <p className="text-[11px] uppercase tracking-wider text-[#C9A35B] mb-3">With AuraLink</p>
         <ul className="space-y-2.5">{after.map((t) => <Row key={t} ok text={t} />)}</ul>
       </div>
     </div>

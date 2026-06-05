@@ -10,7 +10,7 @@ const problems = [
 ];
 
 const solutions = [
-  "One IBloov hub — always current",
+  "One AuraLink hub — always current",
   "Real-time visitor analytics built in",
   "Mobile-first, zero download required",
   "15 smart cards, infinite content",
@@ -68,7 +68,7 @@ const TourismUseCases = () => {
             viewport={{ once: true }}
             className="p-6 rounded-2xl bg-[#2ECC71]/5 border border-[#2ECC71]/10"
           >
-            <p className="text-xs font-bold text-[#2ECC71] uppercase tracking-wider mb-4">With IBloov</p>
+            <p className="text-xs font-bold text-[#2ECC71] uppercase tracking-wider mb-4">With AuraLink</p>
             <div className="space-y-3">
               {solutions.map((s) => (
                 <div key={s} className="flex items-center gap-3">

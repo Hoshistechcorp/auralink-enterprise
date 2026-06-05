@@ -102,7 +102,7 @@ const TourismWhyQR = () => {
                 <div className="flex items-start gap-3">
                   <Check className="w-4 h-4 text-tourism-teal mt-0.5 shrink-0" />
                   <div>
-                    <p className="text-[11px] uppercase tracking-wider font-bold text-tourism-teal">IBloov model</p>
+                    <p className="text-[11px] uppercase tracking-wider font-bold text-tourism-teal">AuraLink model</p>
                     <p className="font-fraunces text-tourism-ivory text-[16px] mt-1">
                       One scan. Instant destination experience.
                     </p>

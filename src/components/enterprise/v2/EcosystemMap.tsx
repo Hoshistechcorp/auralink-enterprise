@@ -24,7 +24,7 @@ const EcosystemMap = () => (
           <span className="italic text-brass-gradient">operating system.</span>
         </h2>
         <p className="mt-4 text-stone-warm text-[15px]">
-          IBloov connects your venue directly to the iBloov ecosystem to solve staffing,
+          AuraLink connects your venue directly to the iBloov ecosystem to solve staffing,
           payments, growth, and guest engagement from one hub.
         </p>
       </motion.div>
@@ -37,7 +37,7 @@ const EcosystemMap = () => (
             <div className="absolute -inset-8 rounded-full bg-[#C9A35B]/25 blur-2xl animate-glow-pulse" />
             <div className="relative h-32 w-32 rounded-full bg-brass-gradient flex items-center justify-center glow-brass border border-[#E8C886]">
               <div className="text-center">
-                <p className="font-fraunces font-bold text-[#1B1310] text-[18px] leading-none">IBloov</p>
+                <p className="font-fraunces font-bold text-[#1B1310] text-[18px] leading-none">AuraLink</p>
                 <p className="text-[9px] text-[#1B1310]/70 font-jakarta italic mt-1">by iBloov</p>
               </div>
             </div>
@@ -97,7 +97,7 @@ const EcosystemMap = () => (
       {/* Mobile / tablet vertical list */}
       <div className="lg:hidden">
         <div className="mx-auto mb-8 h-24 w-24 rounded-full bg-brass-gradient flex items-center justify-center glow-brass">
-          <p className="font-fraunces font-bold text-[#1B1310] text-[14px]">IBloov</p>
+          <p className="font-fraunces font-bold text-[#1B1310] text-[14px]">AuraLink</p>
         </div>
         <div className="grid sm:grid-cols-2 gap-3">
           {nodes.map((n) => {

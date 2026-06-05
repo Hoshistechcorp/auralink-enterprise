@@ -38,7 +38,7 @@ const ForgotPassword = () => {
       >
         <div className="mb-8 flex items-center justify-center gap-3">
           <img src={ibloovLogo} alt="iBloov" className="h-10 w-auto rounded-lg" />
-          <span className="text-xl font-display font-bold">IBloov</span>
+          <span className="text-xl font-display font-bold">AuraLink</span>
         </div>
 
         <div className="mb-6 text-center">

@@ -83,7 +83,7 @@ const TeamPage = () => {
   };
 
   const handleCopyCreds = (m: BranchManager) => {
-    const text = `IBloov Manager Login\nEmail: ${m.email}\nPassword: ${m.password}\nBranch: ${m.branchLabel}\nLogin: ${window.location.origin}/login`;
+    const text = `AuraLink Manager Login\nEmail: ${m.email}\nPassword: ${m.password}\nBranch: ${m.branchLabel}\nLogin: ${window.location.origin}/login`;
     navigator.clipboard.writeText(text);
     setCopiedId(m.id);
     setTimeout(() => setCopiedId(null), 2000);

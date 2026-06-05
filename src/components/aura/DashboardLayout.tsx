@@ -181,7 +181,7 @@ const DashboardLayout = ({ children, title, subtitle = "Bella Vista · Restauran
       <aside className="w-56 bg-card border-r hidden lg:flex flex-col">
         <div className="p-4 pb-2">
           <div className="font-display text-xl font-bold text-primary cursor-pointer" onClick={() => navigate("/")}>
-            IBloov
+            AuraLink
           </div>
           <p className="text-[10px] text-muted-foreground mt-0.5">Enterprise Platform</p>
         </div>
@@ -208,7 +208,7 @@ const DashboardLayout = ({ children, title, subtitle = "Bella Vista · Restauran
           <SheetTitle className="sr-only">Navigation</SheetTitle>
           <div className="p-4 pb-2">
             <div className="font-display text-xl font-bold text-primary cursor-pointer" onClick={() => { navigate("/"); setMobileOpen(false); }}>
-              IBloov
+              AuraLink
             </div>
             <p className="text-[10px] text-muted-foreground mt-0.5">Enterprise Platform</p>
           </div>
