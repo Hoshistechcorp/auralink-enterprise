@@ -146,14 +146,14 @@ We are not responsible for the privacy practices or content of third-party websi
 • Objection — object to certain types of processing (e.g., direct marketing);
 • Withdraw Consent — withdraw consent where processing is based on consent.
 
-To exercise these rights, contact us at privacy@auralink.com. We will respond within the timeframe required by applicable law.`
+To exercise these rights, contact us at privacy@ibloov.com. We will respond within the timeframe required by applicable law.`
     },
     {
       id: "dpa",
       title: "13. Data Processing Agreement (DPA)",
       content: `For business customers subject to GDPR, CCPA, or similar regulations, IBloov acts as a data processor for Customer Data collected through your microsite. Our Data Processing Agreement (DPA) is incorporated by reference into our Terms of Service.
 
-If you require a signed DPA for your records, please contact us at privacy@auralink.com and we will provide one.`
+If you require a signed DPA for your records, please contact us at privacy@ibloov.com and we will provide one.`
     },
     {
       id: "international",
@@ -172,7 +172,7 @@ We use appropriate safeguards (such as Standard Contractual Clauses) to ensure y
       title: "16. Contact Us",
       content: `If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:
 
-• Email: privacy@auralink.com
+• Email: privacy@ibloov.com
 • Address: IBloov Legal, [Business Address — to be updated]`
     },
   ];
@@ -296,7 +296,7 @@ We use appropriate safeguards (such as Standard Contractual Clauses) to ensure y
                   { icon: Cookie, label: "Cookies", text: "We use cookies for authentication, preferences, and analytics. You can manage these in your browser." },
                   { icon: Mail, label: "Marketing", text: "We only send marketing emails with your consent. You can unsubscribe anytime." },
                   { icon: Globe, label: "Third parties", text: "We share data only with service providers who help us run the platform, and with you (the business owner)." },
-                  { icon: UserX, label: "Your rights", text: "You can access, correct, delete, or export your data. Contact privacy@auralink.com." },
+                  { icon: UserX, label: "Your rights", text: "You can access, correct, delete, or export your data. Contact privacy@ibloov.com." },
                 ].map((item) => (
                   <div
                     key={item.label}
@@ -322,8 +322,8 @@ We use appropriate safeguards (such as Standard Contractual Clauses) to ensure y
         <div className="max-w-3xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
             Questions about your privacy? Contact us at{" "}
-            <a href="mailto:privacy@auralink.com" className="text-primary font-medium hover:underline">
-              privacy@auralink.com
+            <a href="mailto:privacy@ibloov.com" className="text-primary font-medium hover:underline">
+              privacy@ibloov.com
             </a>
           </p>
           <Link

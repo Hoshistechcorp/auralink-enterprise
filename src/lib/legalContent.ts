@@ -190,7 +190,7 @@ By creating an account, subscribing to a plan, or using any part of the Services
     title: "18. General & Contact",
     content: `These Terms, together with our Privacy Policy and DPA, constitute the entire agreement between you and IBloov. If any part is found invalid, the rest remains in effect.
 
-For questions about these Terms, contact us at: legal@auralink.com`,
+For questions about these Terms, contact us at: legal@ibloov.com`,
   },
 ];
 
@@ -267,12 +267,12 @@ For Customer Data collected through your microsite, we process it solely to deli
   {
     id: "your-rights",
     title: "12. Your Privacy Rights",
-    content: `You may have rights to access, correct, delete, restrict, port, object to processing, or withdraw consent. To exercise these rights, contact us at privacy@auralink.com.`,
+    content: `You may have rights to access, correct, delete, restrict, port, object to processing, or withdraw consent. To exercise these rights, contact us at privacy@ibloov.com.`,
   },
   {
     id: "dpa",
     title: "13. Data Processing Agreement (DPA)",
-    content: `For business customers subject to GDPR, CCPA, or similar regulations, IBloov acts as a data processor. Our DPA is incorporated by reference into our Terms of Service. If you require a signed DPA, contact privacy@auralink.com.`,
+    content: `For business customers subject to GDPR, CCPA, or similar regulations, IBloov acts as a data processor. Our DPA is incorporated by reference into our Terms of Service. If you require a signed DPA, contact privacy@ibloov.com.`,
   },
   {
     id: "international",
@@ -287,7 +287,7 @@ For Customer Data collected through your microsite, we process it solely to deli
   {
     id: "contact",
     title: "16. Contact Us",
-    content: `Email: privacy@auralink.com
+    content: `Email: privacy@ibloov.com
 Address: IBloov Legal, [Business Address — to be updated]`,
   },
 ];

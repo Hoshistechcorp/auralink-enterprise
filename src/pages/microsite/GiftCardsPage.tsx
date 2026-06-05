@@ -50,7 +50,7 @@ const RESTAURANT = {
   address: "412 Riverside Avenue, Brooklyn, NY 11211",
   phone: "+1 (718) 555-0142",
   email: "reservations@bellavista.com",
-  website: "bellavista.auralink.app",
+  website: "bellavista.ibloov.app",
   hours: "Tue–Sun · 5:00 PM – 11:00 PM",
 };
 

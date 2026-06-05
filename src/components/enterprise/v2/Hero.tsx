@@ -30,7 +30,7 @@ const PhoneMockup = () => (
         {/* Header */}
         <div className="px-4 pb-3 border-b border-[#1B1714]">
           <p className="font-fraunces text-ivory text-[15px] font-bold">Bella Vista</p>
-          <p className="text-[10px] text-stone-warm">auralink.app/bellavista</p>
+          <p className="text-[10px] text-stone-warm">ibloov.app/bellavista</p>
         </div>
 
         {/* 15-card grid */}

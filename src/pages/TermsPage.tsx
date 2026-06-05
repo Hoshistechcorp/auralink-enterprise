@@ -209,10 +209,10 @@ const TermsPage = () => {
             <div>
               <p className="text-sm font-semibold text-foreground">Questions about these terms?</p>
               <a
-                href="mailto:legal@auralink.com"
+                href="mailto:legal@ibloov.com"
                 className="text-sm text-primary hover:underline"
               >
-                legal@auralink.com
+                legal@ibloov.com
               </a>
             </div>
           </div>

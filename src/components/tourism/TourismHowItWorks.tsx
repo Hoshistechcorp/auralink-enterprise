@@ -4,7 +4,7 @@ const steps = [
   {
     num: "01",
     title: "Claim your destination",
-    desc: "We create your custom destination URL and a branded mobile-first hub. Example: auralink.app/visitatlanta.",
+    desc: "We create your custom destination URL and a branded mobile-first hub. Example: ibloov.app/visitatlanta.",
   },
   {
     num: "02",
