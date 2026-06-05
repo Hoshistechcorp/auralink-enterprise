@@ -35,7 +35,7 @@ const TourismLanding = () => {
     {
       "@context": "https://schema.org",
       "@type": "Service",
-      name: "AuraLink for Tourism",
+      name: "IBloov for Tourism",
       serviceType: "Destination digital platform",
       provider: { "@type": "Organization", name: "iBloov" },
       areaServed: "Worldwide",
@@ -49,7 +49,7 @@ const TourismLanding = () => {
       mainEntity: [
         {
           "@type": "Question",
-          name: "Who is AuraLink for Tourism built for?",
+          name: "Who is IBloov for Tourism built for?",
           acceptedAnswer: { "@type": "Answer", text: "City tourism boards, state tourism offices, convention bureaus, airport authorities, and national ministries of tourism." },
         },
         {
@@ -69,20 +69,20 @@ const TourismLanding = () => {
   return (
     <>
       <SEO
-        title="AuraLink for Tourism | QR-Powered Destination Platform by iBloov"
+        title="IBloov for Tourism | QR-Powered Destination Platform by iBloov"
         description="Turn your city into a digital destination. One mobile-first hub for attractions, events, hotels, restaurants, transit, and visitor services — deployed citywide via QR."
         type="website"
-        keywords="destination platform, city tourism technology, QR tourism, visitor experience, smart city, tourism board software, AuraLink Tourism"
+        keywords="destination platform, city tourism technology, QR tourism, visitor experience, smart city, tourism board software, IBloov Tourism"
         jsonLd={jsonLd}
       />
       <div className="min-h-screen bg-tourism-midnight font-jakarta antialiased text-tourism-ivory selection:bg-[#C9A35B]/40 selection:text-tourism-ivory overflow-x-hidden">
         {/* Top nav — dark institutional */}
         <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0A0F1C]/85 backdrop-blur-xl border-b border-tourism-divider" aria-label="Primary">
           <div className="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
-            <button onClick={() => navigate("/tourism")} className="flex items-center gap-2.5" aria-label="AuraLink Tourism home">
+            <button onClick={() => navigate("/tourism")} className="flex items-center gap-2.5" aria-label="IBloov Tourism home">
               <img src={ibloovLogo} alt="iBloov logo" className="h-7 w-auto rounded-md" />
               <div className="flex items-baseline gap-1.5">
-                <span className="font-fraunces text-tourism-ivory text-[20px] font-bold leading-none">AuraLink</span>
+                <span className="font-fraunces text-tourism-ivory text-[20px] font-bold leading-none">IBloov</span>
                 <span className="text-[9px] uppercase tracking-[0.3em] text-tourism-slate hidden sm:inline">by iBloov</span>
               </div>
             </button>
@@ -122,7 +122,7 @@ const TourismLanding = () => {
           <TourismStatsStrip />
           <TourismProblem />
           <TourismPhoneMockup />
-          <section id="how-it-works" aria-label="How AuraLink Tourism works"><TourismHowItWorks /></section>
+          <section id="how-it-works" aria-label="How IBloov Tourism works"><TourismHowItWorks /></section>
           <section id="cards" aria-label="Tourism card modules"><TourismCardShowcase /></section>
           <TourismWhyQR />
           <TourismContentDepth />

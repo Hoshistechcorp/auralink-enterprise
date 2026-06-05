@@ -125,7 +125,7 @@ const generateDocsPdf = (progress: OnboardingProgress) => {
 <html>
 <head>
   <meta charset="utf-8">
-  <title>AuraLink Platform Documentation</title>
+  <title>IBloov Platform Documentation</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: #1a1a1a; padding: 48px; line-height: 1.6; }
@@ -155,7 +155,7 @@ const generateDocsPdf = (progress: OnboardingProgress) => {
   </style>
 </head>
 <body>
-  <h1>AuraLink Platform Documentation</h1>
+  <h1>IBloov Platform Documentation</h1>
   <p class="subtitle">Complete Feature Reference · v1.0 · March 2026</p>
   <div class="stats">
     <div class="stat-box"><div class="stat-num">${sections.length}</div><div class="stat-label">Modules</div></div>
@@ -180,7 +180,7 @@ const generateDocsPdf = (progress: OnboardingProgress) => {
       <ul>${s.features.map(f => `<li>${f}</li>`).join("")}</ul>
     </div>
   `).join("")}
-  <div class="footer">AuraLink Enterprise Platform · Generated ${new Date().toLocaleDateString()}</div>
+  <div class="footer">IBloov Enterprise Platform · Generated ${new Date().toLocaleDateString()}</div>
 </body>
 </html>`;
 
@@ -367,7 +367,7 @@ const DocumentationTab = () => {
           </button>
         </div>
         <p className="text-sm text-muted-foreground mb-5">
-          A complete reference of every feature and function in AuraLink. Click any section to expand.
+          A complete reference of every feature and function in IBloov. Click any section to expand.
         </p>
 
         <div className="relative mb-5">
@@ -406,7 +406,7 @@ const DocumentationTab = () => {
       </div>
 
       <div className="text-center text-xs text-muted-foreground">
-        AuraLink Platform v1.0 · Last updated March 2026
+        IBloov Platform v1.0 · Last updated March 2026
       </div>
     </motion.div>
   );

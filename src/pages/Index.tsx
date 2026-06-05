@@ -35,7 +35,7 @@ const Index = () => {
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      name: "AuraLink",
+      name: "IBloov",
       applicationCategory: "BusinessApplication",
       operatingSystem: "Web",
       description: "QR-powered guest operating system for restaurants, hotels, and lounges.",
@@ -56,10 +56,10 @@ const Index = () => {
   return (
     <>
       <SEO
-        title="AuraLink — QR Guest OS for Hospitality | from $0"
+        title="IBloov — QR Guest OS for Hospitality | from $0"
         description="One QR for bookings, gift cards, loyalty, AI concierge. Live in 3 minutes. Spark free · Maverick $79 · Supernova $149."
         type="website"
-        keywords="hospitality OS, QR microsite, restaurant guest experience, hotel AI concierge, gift cards, loyalty, AuraLink"
+        keywords="hospitality OS, QR microsite, restaurant guest experience, hotel AI concierge, gift cards, loyalty, IBloov"
         jsonLd={jsonLd}
       />
       <div className="min-h-screen bg-[#0B0907] text-[#F5F0E8] font-dm antialiased selection:bg-[#C9A35B]/40">

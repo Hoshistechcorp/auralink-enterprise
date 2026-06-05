@@ -199,7 +199,7 @@ const EmailPreview = ({
           <p>🌐 {RESTAURANT.website}</p>
         </div>
         <p className="text-[10px] text-[#999] mt-3 text-center">
-          {RESTAURANT.name} · Powered by AuraLink
+          {RESTAURANT.name} · Powered by IBloov
         </p>
       </div>
     </div>

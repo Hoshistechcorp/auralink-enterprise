@@ -12,7 +12,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 const appData: Record<string, { name: string; icon: any; description: string; color: string; features: { icon: any; title: string; desc: string }[] }> = {
   auralink: {
-    name: "AuraLink",
+    name: "IBloov",
     icon: Sparkles,
     description: "Business microsites and customer engagement platform.",
     color: "hsl(var(--primary))",

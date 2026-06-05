@@ -80,7 +80,7 @@ const ProblemSolution = () => (
           <div className="relative">
             <div className="flex items-center gap-2 mb-5">
               <span className="h-2 w-2 rounded-full bg-[#7E9B6A] animate-pulse" />
-              <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-brass-gradient">The AuraLink Way</span>
+              <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-brass-gradient">The IBloov Way</span>
             </div>
             <h3 className="font-fraunces text-xl font-bold text-ivory mb-5">One link. Total ownership.</h3>
             <ul className="space-y-3.5">
