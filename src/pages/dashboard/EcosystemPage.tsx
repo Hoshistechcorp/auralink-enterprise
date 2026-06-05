@@ -138,7 +138,7 @@ const ConnectAppPage = () => {
           <h3 className="font-display text-lg font-semibold">API Connection</h3>
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="text-sm font-medium text-muted-foreground mb-1.5 block">Aura Protocol API Key</label>
+              <label className="text-sm font-medium text-muted-foreground mb-1.5 block">IBloov Protocol API Key</label>
               <input className="w-full px-3 py-2 rounded-xl border bg-background text-sm" placeholder="ap_live_xxxxxxxxxxxx" />
             </div>
             <div>
