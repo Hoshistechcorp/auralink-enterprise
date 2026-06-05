@@ -21,7 +21,7 @@ const NavBar = () => {
         <button onClick={() => navigate("/enterprise")} className="flex items-center gap-2.5">
           <span className="h-7 w-7 rounded-md bg-brass-gradient" />
           <span className="font-fraunces font-bold text-ivory text-[18px] tracking-tight leading-none">
-            IBloov{" "}
+            AuraLink{" "}
             <span className="font-jakarta italic font-medium text-stone-warm text-[12px] tracking-normal">
               by iBloov
             </span>

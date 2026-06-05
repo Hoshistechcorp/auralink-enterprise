@@ -43,7 +43,7 @@ const Login = () => {
         >
           <div className="flex items-center justify-center gap-3 mb-8">
             <img src={ibloovLogo} alt="iBloov" className="h-12 w-auto rounded-xl" />
-            <span className="text-2xl font-display font-bold text-primary-foreground">IBloov</span>
+            <span className="text-2xl font-display font-bold text-primary-foreground">AuraLink</span>
           </div>
           <h1 className="text-3xl font-display font-bold text-primary-foreground leading-tight">
             Your entire brand.<br />One powerful link.
@@ -65,7 +65,7 @@ const Login = () => {
           {/* Mobile logo */}
           <div className="lg:hidden flex items-center gap-2 justify-center mb-4">
             <img src={ibloovLogo} alt="iBloov" className="h-8 w-auto rounded-lg" />
-            <span className="font-display font-bold text-lg">IBloov</span>
+            <span className="font-display font-bold text-lg">AuraLink</span>
           </div>
 
           <div className="text-center">

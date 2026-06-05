@@ -24,7 +24,7 @@ const products = [
     name: "VibesGigs",
     emoji: "🎵",
     oneLiner: 'The "Uber for Hospitality" that matches verified talent with instant, high-paying shifts at World Cup-ready venues.',
-    sync: 'Uses IBloov as your "Digital Resume" — Enterprises hire you with one tap based on your verified reputation.',
+    sync: 'Uses AuraLink as your "Digital Resume" — Enterprises hire you with one tap based on your verified reputation.',
     color: "#A855F7",
     image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&q=70",
     video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
@@ -42,7 +42,7 @@ const products = [
     name: "PicPop",
     emoji: "📸",
     oneLiner: "The collaborative cloud for event memories, turning every guest into a contributor to a venue's visual soul.",
-    sync: 'Embeds a "Live Memory Wall" on your IBloov — real-time social proof you were there.',
+    sync: 'Embeds a "Live Memory Wall" on your AuraLink — real-time social proof you were there.',
     color: "#EC4899",
     image: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=400&q=70",
     video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
@@ -72,7 +72,7 @@ const EnterpriseEcosystem = () => (
         <h2 className="mt-3 font-display text-3xl sm:text-4xl font-bold text-white">
           Six products. <span className="italic text-white/40">One platform.</span>
         </h2>
-        <p className="mt-3 text-white/40 text-sm max-w-lg mx-auto">Every product syncs through IBloov — your single hub for reputation, revenue, and reach.</p>
+        <p className="mt-3 text-white/40 text-sm max-w-lg mx-auto">Every product syncs through AuraLink — your single hub for reputation, revenue, and reach.</p>
       </motion.div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -109,7 +109,7 @@ const EnterpriseEcosystem = () => (
               </div>
               <p className="text-white/60 text-[13px] leading-relaxed mt-1">{p.oneLiner}</p>
               <div className="mt-3 pt-3 border-t border-white/[0.06]">
-                <p className="text-[11px] font-semibold uppercase tracking-wider mb-1" style={{ color: p.color }}>IBloov Sync</p>
+                <p className="text-[11px] font-semibold uppercase tracking-wider mb-1" style={{ color: p.color }}>AuraLink Sync</p>
                 <p className="text-white/40 text-[12px] leading-relaxed">{p.sync}</p>
               </div>
             </div>

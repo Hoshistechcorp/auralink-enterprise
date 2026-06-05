@@ -141,7 +141,7 @@ const Microsite = () => {
     "@context": "https://schema.org",
     "@type": "Restaurant",
     name: "Bella Vista",
-    description: "Award-winning Italian fine dining, established 1998. Reservations, menu, gift cards, AI concierge, and more — powered by IBloov.",
+    description: "Award-winning Italian fine dining, established 1998. Reservations, menu, gift cards, AI concierge, and more — powered by AuraLink.",
     servesCuisine: "Italian",
     priceRange: "$$$",
     image: "https://aura-link-enterpries.lovable.app/og-microsite.jpg",
@@ -156,9 +156,9 @@ const Microsite = () => {
   return (
     <div className="relative min-h-screen">
       <SEO
-        title="Bella Vista — Menu, Reservations & Gift Cards | IBloov"
-        description="Bella Vista — award-winning Italian fine dining in NYC. View the menu, book a table, send gift cards, and chat with our AI concierge. Powered by IBloov."
-        keywords="Bella Vista, Italian restaurant NYC, fine dining, reservations, gift cards, AI concierge, IBloov microsite"
+        title="Bella Vista — Menu, Reservations & Gift Cards | AuraLink"
+        description="Bella Vista — award-winning Italian fine dining in NYC. View the menu, book a table, send gift cards, and chat with our AI concierge. Powered by AuraLink."
+        keywords="Bella Vista, Italian restaurant NYC, fine dining, reservations, gift cards, AI concierge, AuraLink microsite"
         jsonLd={jsonLd}
       />
       {/* Skip link for keyboard & assistive tech */}

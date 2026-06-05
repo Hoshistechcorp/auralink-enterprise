@@ -112,7 +112,7 @@ const Hero = () => {
           </span>
 
           <h1 className="font-fraunces mt-5 text-[40px] sm:text-[54px] lg:text-[64px] leading-[1.02] tracking-tight font-bold text-ivory">
-            IBloov is the hospitality{" "}
+            AuraLink is the hospitality{" "}
             <span className="italic text-brass-gradient">operating system</span>{" "}
             for modern venues.
           </h1>

@@ -124,7 +124,7 @@ const VerifyOtp = () => {
             <p className="mt-3 text-sm leading-6 text-primary-foreground/85">
               Verification keeps the experience fast while making sure each account action stays intentional and secure.
             </p>
-            <p className="mt-5 text-sm font-semibold">IBloov onboarding flow</p>
+            <p className="mt-5 text-sm font-semibold">AuraLink onboarding flow</p>
           </div>
         </motion.div>
       </div>

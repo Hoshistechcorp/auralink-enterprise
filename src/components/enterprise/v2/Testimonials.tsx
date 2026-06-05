@@ -11,7 +11,7 @@ const kpis = [
 
 const items = [
   {
-    quote: "We replaced six subscriptions with IBloov. Direct bookings are up, and our team finally focuses on guests instead of dashboards.",
+    quote: "We replaced six subscriptions with AuraLink. Direct bookings are up, and our team finally focuses on guests instead of dashboards.",
     name: "Marcus Chen",
     role: "Executive Chef · Akira Tokyo",
     initials: "MC",

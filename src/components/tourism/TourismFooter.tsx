@@ -10,7 +10,7 @@ const TourismFooter = () => {
         <div className="flex items-center justify-center gap-3 mb-3">
           <img src={ibloovLogo} alt="iBloov" className="h-7 w-auto rounded-md opacity-90" />
           <div className="flex items-baseline gap-1.5">
-            <span className="font-fraunces text-tourism-ivory text-lg font-bold">IBloov</span>
+            <span className="font-fraunces text-tourism-ivory text-lg font-bold">AuraLink</span>
             <span className="text-[10px] uppercase tracking-[0.3em] text-tourism-slate">by iBloov</span>
           </div>
         </div>

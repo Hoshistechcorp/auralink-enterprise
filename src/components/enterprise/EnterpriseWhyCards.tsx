@@ -45,7 +45,7 @@ const EnterpriseWhyCards = () => (
         transition={{ duration: 0.5 }}
         className="text-center mb-12"
       >
-        <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#E8604C]">Why IBloov</span>
+        <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#E8604C]">Why AuraLink</span>
         <h2 className="mt-3 font-display text-3xl sm:text-4xl font-bold text-white">
           Everything your venue needs. <span className="italic text-white/40">Nothing it doesn't.</span>
         </h2>

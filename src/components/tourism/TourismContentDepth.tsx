@@ -34,7 +34,7 @@ const TourismContentDepth = () => {
             <span className="italic text-tourism-brass">already organized</span>.
           </h2>
           <p className="mt-5 text-tourism-slate text-base leading-relaxed">
-            IBloov captures the full destination journey — not just brochure content.
+            AuraLink captures the full destination journey — not just brochure content.
           </p>
         </motion.div>
 

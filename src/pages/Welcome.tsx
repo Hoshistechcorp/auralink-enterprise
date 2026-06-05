@@ -55,7 +55,7 @@ const Welcome = () => {
         
 
         <h1 className="text-3xl sm:text-4xl font-display font-bold leading-tight">
-          Welcome to <span className="text-primary">IBloov</span>
+          Welcome to <span className="text-primary">AuraLink</span>
         </h1>
         <p className="mt-3 text-muted-foreground text-sm max-w-md mx-auto leading-relaxed">
           Your dashboard is ready. Here's a quick guide to get the most out of your platform.

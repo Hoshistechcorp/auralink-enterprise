@@ -12,7 +12,7 @@ const NavBar = () => {
       <div className="max-w-3xl mx-auto px-5 h-14 flex items-center justify-between">
         <button onClick={() => navigate("/")} className="flex items-center gap-2">
           <span className="h-6 w-6 rounded bg-gradient-to-br from-[#E8C886] to-[#C9A35B]" />
-          <span className="font-grotesk font-bold text-[#F5F0E8] text-[16px] tracking-tight">IBloov</span>
+          <span className="font-grotesk font-bold text-[#F5F0E8] text-[16px] tracking-tight">AuraLink</span>
         </button>
         <div className="flex items-center gap-1">
           <button
