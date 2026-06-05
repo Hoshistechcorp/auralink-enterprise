@@ -13,11 +13,6 @@ const Hero = () => {
   return (
     <section className="px-5 pt-12 pb-16 text-center">
       <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[#2A2320] bg-[#141110] text-[11px] font-medium text-[#C9A35B] tracking-wide uppercase">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#7E9B6A] animate-pulse" />
-          New · Guest OS for hospitality
-        </span>
-
         <h1 className="font-grotesk mt-5 text-[40px] sm:text-[56px] leading-[1.05] font-bold tracking-tight text-[#F5F0E8]">
           One QR.
           <br />
