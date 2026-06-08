@@ -9,6 +9,7 @@ import {
 import { Progress } from "@/components/ui/progress";
 import { toast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/aura/DashboardLayout";
+import { confirmAction } from "@/components/ui/confirm-dialog";
 
 /* ── Data ─────────────────────────────────────────── */
 const metrics = [
@@ -410,7 +411,10 @@ const GamificationPage = () => {
                         ...c,
                         prizes: c.prizes.map((p) => p.id === prize.id ? { ...p, enabled: v } : p),
                       }))} />
-                    <button onClick={() => setFreebieConfig((c) => ({ ...c, prizes: c.prizes.filter((p) => p.id !== prize.id) }))}
+                    <button onClick={async () => {
+                      if (!(await confirmAction({ title: "Remove prize?", description: "This prize will be removed from the Spin & Win wheel." }))) return;
+                      setFreebieConfig((c) => ({ ...c, prizes: c.prizes.filter((p) => p.id !== prize.id) }));
+                    }}
                       className="p-1.5 rounded-lg hover:bg-destructive/10 transition-colors">
                       <Trash2 className="w-3.5 h-3.5 text-destructive" />
                     </button>

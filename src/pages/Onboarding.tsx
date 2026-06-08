@@ -6,6 +6,7 @@ import {
   Plus, Trash2, Check, SkipForward,
 } from "lucide-react";
 import ibloovLogo from "@/assets/ibloov-logo.jpeg";
+import { confirmAction } from "@/components/ui/confirm-dialog";
 
 /* ── Types ── */
 interface Venue {
@@ -57,7 +58,11 @@ const Onboarding = () => {
 
 
   const addVenue = () => setVenues([...venues, { name: "", type: "" }]);
-  const removeVenue = (i: number) => venues.length > 1 && setVenues(venues.filter((_, idx) => idx !== i));
+  const removeVenue = async (i: number) => {
+    if (venues.length <= 1) return;
+    if (!(await confirmAction({ title: "Remove venue?", description: "This venue will be removed from onboarding." }))) return;
+    setVenues(venues.filter((_, idx) => idx !== i));
+  };
   const updateVenue = (i: number, field: keyof Venue, val: string) => {
     const updated = [...venues];
     updated[i] = { ...updated[i], [field]: val };
@@ -65,7 +70,11 @@ const Onboarding = () => {
   };
 
   const addMember = () => setMembers([...members, { name: "", email: "", role: "" }]);
-  const removeMember = (i: number) => members.length > 1 && setMembers(members.filter((_, idx) => idx !== i));
+  const removeMember = async (i: number) => {
+    if (members.length <= 1) return;
+    if (!(await confirmAction({ title: "Remove team member?", description: "This team member will be removed." }))) return;
+    setMembers(members.filter((_, idx) => idx !== i));
+  };
   const updateMember = (i: number, field: keyof TeamMember, val: string) => {
     const updated = [...members];
     updated[i] = { ...updated[i], [field]: val };

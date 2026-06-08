@@ -11,6 +11,7 @@ import { Switch } from "@/components/ui/switch";
 import { Progress } from "@/components/ui/progress";
 import { toast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/aura/DashboardLayout";
+import { confirmAction } from "@/components/ui/confirm-dialog";
 
 const uid = () => crypto.randomUUID();
 const inputCls = "w-full px-4 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all";
@@ -450,7 +451,10 @@ const AffiliateDashboard = () => {
                             className="w-7 h-7 rounded-lg hover:bg-muted flex items-center justify-center" title={p.active ? "Deactivate" : "Activate"}>
                             <Eye className="w-3.5 h-3.5 text-muted-foreground" />
                           </button>
-                          <button onClick={() => setPromoCodes(promoCodes.filter((x) => x.id !== p.id))}
+                          <button onClick={async () => {
+                            if (!(await confirmAction({ title: "Delete promo code?", description: "This promo code will no longer be redeemable." }))) return;
+                            setPromoCodes(promoCodes.filter((x) => x.id !== p.id));
+                          }}
                             className="w-7 h-7 rounded-lg hover:bg-destructive/10 flex items-center justify-center">
                             <Trash2 className="w-3.5 h-3.5 text-destructive" />
                           </button>

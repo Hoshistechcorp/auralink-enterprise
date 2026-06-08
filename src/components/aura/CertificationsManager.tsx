@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Award, Plus, Trash2, Save, Check } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { confirmAction } from "@/components/ui/confirm-dialog";
 import {
   getCertifications,
   saveCertifications,
@@ -54,7 +55,10 @@ const CertificationsManager = () => {
   const update = (id: string, patch: Partial<Certification>) =>
     setItems((s) => s.map((i) => (i.id === id ? { ...i, ...patch } : i)));
 
-  const remove = (id: string) => setItems((s) => s.filter((i) => i.id !== id));
+  const remove = async (id: string) => {
+    if (!(await confirmAction({ title: "Remove certification?", description: "This badge will no longer appear on your microsite." }))) return;
+    setItems((s) => s.filter((i) => i.id !== id));
+  };
 
   const save = () => {
     saveCertifications(items);

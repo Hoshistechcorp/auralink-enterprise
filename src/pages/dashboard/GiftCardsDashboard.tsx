@@ -13,6 +13,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { toast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/aura/DashboardLayout";
 import { addTransaction as addWalletTx } from "@/lib/wallet";
+import { confirmAction } from "@/components/ui/confirm-dialog";
 
 const uid = () => crypto.randomUUID();
 const inputCls = "w-full px-4 py-2.5 rounded-xl bg-muted/50 border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all";
@@ -166,7 +167,10 @@ const GiftCardsDashboard = () => {
   };
 
   const updateGiftCard = (id: string, patch: Partial<GiftCardItem>) => setGiftCards((g) => g.map((gc) => (gc.id === id ? { ...gc, ...patch } : gc)));
-  const deleteGiftCard = (id: string) => setGiftCards((g) => g.filter((gc) => gc.id !== id));
+  const deleteGiftCard = async (id: string) => {
+    if (!(await confirmAction({ title: "Delete gift card type?", description: "This gift card option will be removed from your microsite." }))) return;
+    setGiftCards((g) => g.filter((gc) => gc.id !== id));
+  };
   const saveCards = () => toast({ title: "Gift Cards saved", description: "Changes published to your microsite." });
 
   const handlePurchase = () => {
