@@ -11,6 +11,7 @@ import CertificationsManager from "@/components/aura/CertificationsManager";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/aura/DashboardLayout";
+import { confirmAction } from "@/components/ui/confirm-dialog";
 import { useDarkMode } from "@/hooks/use-dark-mode";
 import { getSubscription, saveSubscription } from "@/lib/subscription";
 import { getBusinessContact, saveBusinessContact, type BusinessContact } from "@/lib/businessContact";
@@ -148,12 +149,20 @@ const SettingsPage = () => {
   });
 
   const addVenue = () => setVenues([...venues, { name: "", type: "" }]);
-  const removeVenue = (i: number) => venues.length > 1 && setVenues(venues.filter((_, idx) => idx !== i));
+  const removeVenue = async (i: number) => {
+    if (venues.length <= 1) return;
+    if (!(await confirmAction({ title: "Remove venue?", description: "This venue will be removed from your business profile." }))) return;
+    setVenues(venues.filter((_, idx) => idx !== i));
+  };
   const updateVenue = (i: number, field: keyof Venue, val: string) => {
     const updated = [...venues]; updated[i] = { ...updated[i], [field]: val }; setVenues(updated);
   };
   const addMember = () => setMembers([...members, { name: "", email: "", role: "" }]);
-  const removeMember = (i: number) => members.length > 1 && setMembers(members.filter((_, idx) => idx !== i));
+  const removeMember = async (i: number) => {
+    if (members.length <= 1) return;
+    if (!(await confirmAction({ title: "Remove team member?", description: "This team member will be removed." }))) return;
+    setMembers(members.filter((_, idx) => idx !== i));
+  };
   const updateMember = (i: number, field: keyof TeamMember, val: string) => {
     const updated = [...members]; updated[i] = { ...updated[i], [field]: val }; setMembers(updated);
   };

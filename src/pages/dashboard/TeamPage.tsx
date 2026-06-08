@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/aura/DashboardLayout";
+import { confirmAction } from "@/components/ui/confirm-dialog";
 import {
   BRANCHES,
   BranchManager,
@@ -76,7 +77,8 @@ const TeamPage = () => {
     toast({ title: "Manager updated" });
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
+    if (!(await confirmAction({ title: "Remove manager?", description: "This manager will lose access to their assigned branch." }))) return;
     removeManager(id);
     refresh();
     toast({ title: "Manager removed" });

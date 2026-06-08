@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/aura/DashboardLayout";
+import { confirmAction } from "@/components/ui/confirm-dialog";
 
 interface Location {
   id: string;
@@ -78,7 +79,8 @@ const LocationsPage = () => {
     toast({ title: "Location added", description: "New location created as draft." });
   };
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
+    if (!(await confirmAction({ title: "Delete location?", description: "This location and its microsite link will be removed." }))) return;
     setLocations((prev) => prev.filter((l) => l.id !== id));
     toast({ title: "Location removed" });
   };

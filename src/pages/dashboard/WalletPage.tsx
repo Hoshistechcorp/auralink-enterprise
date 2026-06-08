@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Wallet as WalletIcon, ArrowDownToLine, TrendingUp, Clock, Plus, Building2, Trash2 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { confirmAction } from "@/components/ui/confirm-dialog";
 import {
   getTransactions, getBalance, getPending, getLifetimeRevenue, addTransaction,
   getMethods, saveMethods, TYPE_LABELS, WALLET_EVENT,
@@ -102,7 +103,8 @@ export default function WalletPage() {
     toast({ title: "Method added" });
   };
 
-  const removeMethod = (id: string) => {
+  const removeMethod = async (id: string) => {
+    if (!(await confirmAction({ title: "Remove payment method?", description: "This withdrawal method will be removed from your account." }))) return;
     const updated = methods.filter((m) => m.id !== id);
     saveMethods(updated);
     setMethods(updated);
