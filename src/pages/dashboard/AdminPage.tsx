@@ -234,7 +234,10 @@ const AdminPage = () => {
     toast({ title: "Menu item added" });
   };
   const updateMenuItem = (id: string, patch: Partial<MenuItem>) => setMenuItems((items) => items.map((m) => (m.id === id ? { ...m, ...patch } : m)));
-  const deleteMenuItem = (id: string) => setMenuItems((items) => items.filter((m) => m.id !== id));
+  const deleteMenuItem = async (id: string) => {
+    if (!(await confirmAction({ title: "Delete menu item?", description: "This menu item will be permanently removed." }))) return;
+    setMenuItems((items) => items.filter((m) => m.id !== id));
+  };
 
   // Staff handlers
   const addStaffMember = () => {
@@ -244,12 +247,18 @@ const AdminPage = () => {
     toast({ title: "Staff member added" });
   };
   const updateStaff = (id: string, patch: Partial<StaffMember>) => setStaff((s) => s.map((m) => (m.id === id ? { ...m, ...patch } : m)));
-  const deleteStaff = (id: string) => setStaff((s) => s.filter((m) => m.id !== id));
+  const deleteStaff = async (id: string) => {
+    if (!(await confirmAction({ title: "Remove staff member?", description: "This person will be removed from your staff list." }))) return;
+    setStaff((s) => s.filter((m) => m.id !== id));
+  };
 
   // Gallery handlers
   const addGalleryImage = () => setGallery([...gallery, { id: uid(), url: "/placeholder.svg", caption: "" }]);
   const updateGallery = (id: string, patch: Partial<GalleryImage>) => setGallery((g) => g.map((img) => (img.id === id ? { ...img, ...patch } : img)));
-  const deleteGalleryImage = (id: string) => setGallery((g) => g.filter((img) => img.id !== id));
+  const deleteGalleryImage = async (id: string) => {
+    if (!(await confirmAction({ title: "Delete image?", description: "This image will be removed from your gallery." }))) return;
+    setGallery((g) => g.filter((img) => img.id !== id));
+  };
 
   // Hours handler
   const updateHour = (idx: number, patch: Partial<DayHours>) => setHours((h) => h.map((d, i) => (i === idx ? { ...d, ...patch } : d)));
@@ -262,7 +271,10 @@ const AdminPage = () => {
     toast({ title: "Event added" });
   };
   const updateEvent = (id: string, patch: Partial<EventItem>) => setEvents((e) => e.map((ev) => (ev.id === id ? { ...ev, ...patch } : ev)));
-  const deleteEvent = (id: string) => setEvents((e) => e.filter((ev) => ev.id !== id));
+  const deleteEvent = async (id: string) => {
+    if (!(await confirmAction({ title: "Delete event?", description: "This event will be permanently removed." }))) return;
+    setEvents((e) => e.filter((ev) => ev.id !== id));
+  };
 
   // Awards handlers
   const addAwardItem = () => {
@@ -272,7 +284,10 @@ const AdminPage = () => {
     toast({ title: "Award added" });
   };
   const updateAward = (id: string, patch: Partial<AwardItem>) => setAwards((a) => a.map((aw) => (aw.id === id ? { ...aw, ...patch } : aw)));
-  const deleteAward = (id: string) => setAwards((a) => a.filter((aw) => aw.id !== id));
+  const deleteAward = async (id: string) => {
+    if (!(await confirmAction({ title: "Delete award?", description: "This award will be permanently removed." }))) return;
+    setAwards((a) => a.filter((aw) => aw.id !== id));
+  };
 
   // Rooms handlers
   const addRoomItem = () => {
@@ -282,7 +297,10 @@ const AdminPage = () => {
     toast({ title: "Room added" });
   };
   const updateRoom = (id: string, patch: Partial<PrivateRoom>) => setRooms((r) => r.map((rm) => (rm.id === id ? { ...rm, ...patch } : rm)));
-  const deleteRoom = (id: string) => setRooms((r) => r.filter((rm) => rm.id !== id));
+  const deleteRoom = async (id: string) => {
+    if (!(await confirmAction({ title: "Delete room?", description: "This private room will be permanently removed." }))) return;
+    setRooms((r) => r.filter((rm) => rm.id !== id));
+  };
 
   // FAQs handlers
   const addFAQItem = () => {
@@ -292,7 +310,10 @@ const AdminPage = () => {
     toast({ title: "FAQ added" });
   };
   const updateFAQ = (id: string, patch: Partial<FAQItem>) => setFaqs((f) => f.map((fq) => (fq.id === id ? { ...fq, ...patch } : fq)));
-  const deleteFAQ = (id: string) => setFaqs((f) => f.filter((fq) => fq.id !== id));
+  const deleteFAQ = async (id: string) => {
+    if (!(await confirmAction({ title: "Delete FAQ?", description: "This question will be permanently removed." }))) return;
+    setFaqs((f) => f.filter((fq) => fq.id !== id));
+  };
 
   // Socials handlers
   const updateSocial = (id: string, patch: Partial<SocialLink>) => setSocials((s) => s.map((sl) => (sl.id === id ? { ...sl, ...patch } : sl)));
