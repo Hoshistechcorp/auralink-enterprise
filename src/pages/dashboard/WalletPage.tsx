@@ -102,7 +102,8 @@ export default function WalletPage() {
     toast({ title: "Method added" });
   };
 
-  const removeMethod = (id: string) => {
+  const removeMethod = async (id: string) => {
+    if (!(await confirmAction({ title: "Remove payment method?", description: "This withdrawal method will be removed from your account." }))) return;
     const updated = methods.filter((m) => m.id !== id);
     saveMethods(updated);
     setMethods(updated);

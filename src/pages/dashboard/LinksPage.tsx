@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { toast } from "sonner";
+import { confirmAction } from "@/components/ui/confirm-dialog";
 
 type LinkStatus = "active" | "suspended" | "discontinued";
 
@@ -93,8 +94,8 @@ const LinksPage = () => {
     toast.success(`Link ${status}`);
   };
 
-  const handleDelete = (l: ManagedLink) => {
-    if (!confirm(`Delete "${l.label}"? This cannot be undone.`)) return;
+  const handleDelete = async (l: ManagedLink) => {
+    if (!(await confirmAction({ title: `Delete "${l.label}"?`, description: "This link will be permanently deleted and can no longer be tracked." }))) return;
     setLinks((prev) => prev.filter((x) => x.id !== l.id));
     toast.success("Link deleted");
   };
