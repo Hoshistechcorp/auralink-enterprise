@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Wallet as WalletIcon, ArrowDownToLine, TrendingUp, Clock, Plus, Building2, Trash2 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { confirmAction } from "@/components/ui/confirm-dialog";
 import {
   getTransactions, getBalance, getPending, getLifetimeRevenue, addTransaction,
   getMethods, saveMethods, TYPE_LABELS, WALLET_EVENT,
