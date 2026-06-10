@@ -45,6 +45,7 @@ const navSections: NavSection[] = [
       { icon: Link2, label: "Links", path: "/dashboard/links" },
       { icon: Users2, label: "Affiliates", path: "/dashboard/affiliates" },
       { icon: Megaphone, label: "Influencers", path: "/dashboard/influencers" },
+      { icon: Gift, label: "Gift Cards", path: "/dashboard/gift-cards" },
     ],
   },
   {
@@ -54,7 +55,6 @@ const navSections: NavSection[] = [
       { icon: MapPin, label: "Locations", path: "/dashboard/locations" },
       { icon: UserCog, label: "Team", path: "/dashboard/team" },
       { icon: Building2, label: "Enterprise", path: "/dashboard/enterprise" },
-      { icon: Gift, label: "Gift Cards", path: "/dashboard/gift-cards" },
       { icon: CreditCard, label: "Subscription", path: "/dashboard/subscription" },
       { icon: Settings, label: "Settings", path: "/dashboard/settings" },
     ],
@@ -129,7 +129,6 @@ const locations = BRANCHES.map((b) => ({ id: b.id, label: b.label }));
 // Paths visible only to super admins
 const ADMIN_ONLY_PATHS = new Set<string>([
   "/dashboard/admin",
-  "/dashboard/team",
   "/dashboard/enterprise",
   "/dashboard/subscription",
   "/dashboard/locations",
