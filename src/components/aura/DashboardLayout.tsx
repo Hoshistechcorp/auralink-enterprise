@@ -129,7 +129,6 @@ const locations = BRANCHES.map((b) => ({ id: b.id, label: b.label }));
 // Paths visible only to super admins
 const ADMIN_ONLY_PATHS = new Set<string>([
   "/dashboard/admin",
-  "/dashboard/team",
   "/dashboard/enterprise",
   "/dashboard/subscription",
   "/dashboard/locations",
