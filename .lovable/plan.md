@@ -1,79 +1,110 @@
-## Goal
+# AuraLink Feature Removal Stakeholder Document
 
-Transform `/` (Enterprise landing) into a world-class, mobile-first SaaS page that an AI agent can scan in seconds and a busy hospitality manager can skim in under a minute. Cut text by ~60%, lead with outcomes and numbers, and surface the real in-app pricing (Spark / Maverick / Supernova).
+## Objective
+Generate a professional internal stakeholder document (DOCX) that records what product features were removed from the AuraLink platform, why they were removed, and the impact on Engineering, Marketing, and Business Development teams.
 
-## Direction (locked from your picks)
+## Document Structure
 
-- Palette: Noir & Gold — `#0B0907` base, `#1B1714` surfaces, `#C9A35B → #E8C886` brass accent
-- Type: Space Grotesk (display) + DM Sans (body), tight tracking, generous line-height
-- Layout: Single-column focused storytelling, full-bleed on mobile, max-w-3xl on desktop centered
+### 1. Executive Summary
+- Brief overview of the scope reduction decision
+- Timeline context (removed now, to be revisited later)
+- High-level impact statement
 
-## New page structure (replaces current 11-section sprawl)
+### 2. Removed Features (Detailed Inventory)
 
-```text
-1. NavBar (slim, sticky)              — logo · Pricing · Sign in · [Start free trial]
-2. Hero                               — 1 headline, 1 sub, 2 CTAs, 1 phone mockup
-3. Social proof strip                 — 5 logos + "Live in 3 min" badge
-4. Problem → Solution (2 cards)       — "Before AuraLink / After AuraLink"
-5. What you get (6 icon tiles)        — Gift cards · Reservations · AI Concierge · Loyalty · Analytics · QR
-6. How it works (3 steps)             — Scan → Customize → Go live
-7. Live preview (phone + caption)     — single screenshot, no carousel
-8. Pricing (3 tiers, from app)        — Spark $0 · Maverick $79 · Supernova $149 + 20% annual toggle
-9. FAQ (5 Q's, accordion)
-10. Final CTA + Footer
-```
+#### 2.1 Engagement Section (Entire Section Removed)
+The following dashboard modules and their corresponding microsite cards are no longer accessible via the UI:
 
-Every section: one H2 (≤6 words), one sub-line (≤14 words), then visual. No paragraphs longer than 2 lines on mobile.
+| Feature | Dashboard Path | Microsite Card | Notes |
+|---------|---------------|----------------|-------|
+| Gamification | /dashboard/gamification | Freebie Game | Spin & Win game engine |
+| Loyalty Program | /dashboard/loyalty | (none) | Points-based loyalty system |
+| Referrals | /dashboard/referrals | Refer a Friend | Give $10, Get $10 program |
 
-## Pricing section (pulled from `src/pages/dashboard/SubscriptionPage.tsx`)
+#### 2.2 Insights Section (Entire Section Removed)
+| Feature | Dashboard Path | Notes |
+|---------|---------------|-------|
+| SEO & Maps | /dashboard/seo | Local SEO optimization tools |
+| Reputation | /dashboard/reputation | Review aggregation & management |
 
-Extract the canonical tier data into a new shared module so the landing page and the in-app subscription page stay in sync.
+#### 2.3 Card Studio — Removed Cards
+- Freebie Game card
+- Refer a Friend card
 
-- `src/lib/plans.ts` — exports `PLANS` array: `{ id, name, price, tagline, highlights[], cards, cta, featured }`
-- Spark — $0, 4 cards, "Get started free"
-- Maverick — $79/mo, 11 cards, "Most popular" (featured)
-- Supernova — $149/mo, all 16 cards + AI Concierge, "Go pro"
-- Annual toggle shows −20% (same logic as in-app)
-- Mention the 21-day Supernova trial on signup (already a core memory)
+#### 2.4 Plans & Subscription — Removed from Marketing Copy
+- Loyalty program mentions removed from plan highlights
+- Reputation management mentions removed from plan highlights
+- SEO tools mentions removed from plan highlights
+- Maverick plan card count adjusted from "12 cards" to "10 cards"
 
-`SubscriptionPage.tsx` is refactored to import from `plans.ts` (no behavior change).
+#### 2.5 Analytics — Removed Tracking
+- Freebie Game performance metrics removed from card performance table
+- Refer a Friend performance metrics removed from card performance table
 
-## Mobile-first / AI-scannable rules applied everywhere
+#### 2.6 Documentation — Removed Sections
+- Gamification module documentation removed
+- Loyalty module documentation removed
+- SEO & Maps module documentation removed
+- Reputation module documentation removed
+- Card Studio documentation updated to reflect 13 active cards (was 15)
 
-- Every section has a 2-3 word eyebrow + short H2 + ≤14-word sub
-- Numbers and outcomes lead (e.g. `312% engagement · 0% commission · 3 min setup`)
-- Icon + label tiles instead of paragraphs
-- Semantic HTML: one `<h1>`, one `<main>`, `<section aria-labelledby>` per block — improves both SEO and AI parsing
-- Updated JSON-LD: add `Product` + `Offer` entries for the 3 tiers so AI agents extract pricing directly
-- Touch targets ≥44px, CTAs full-width on mobile, sticky bottom CTA bar on scroll
-- Test viewport: 390×844 (iPhone 14)
+#### 2.7 Admin Panel — Removed Gating
+- Tier gating rules for Freebie Game, Refer a Friend, Loyalty, Reputation, and SEO removed from the `tabRequiredPlan` map
 
-## Files
+### 3. Rationale
+- **Primary reason:** Time constraints per Product Manager directive
+- **Secondary reason:** Focus engineering and go-to-market efforts on core platform features (Menu, Gift Cards, Staff, Events, AI Concierge, Affiliate, etc.)
+- **Decision authority:** Product Management
+- **Expected revisit:** These features will be revisited and potentially restored in a future release cycle
 
-New
-- `src/lib/plans.ts` — single source of truth for pricing
-- `src/components/enterprise/v3/NavBar.tsx`
-- `src/components/enterprise/v3/Hero.tsx`
-- `src/components/enterprise/v3/LogoStrip.tsx`
-- `src/components/enterprise/v3/BeforeAfter.tsx`
-- `src/components/enterprise/v3/FeatureTiles.tsx` (6 icon tiles)
-- `src/components/enterprise/v3/HowItWorks.tsx` (3 steps)
-- `src/components/enterprise/v3/LivePreview.tsx`
-- `src/components/enterprise/v3/Pricing.tsx` (consumes `plans.ts`)
-- `src/components/enterprise/v3/Faq.tsx` (5 Q's)
-- `src/components/enterprise/v3/FinalCta.tsx`
-- `src/components/enterprise/v3/StickyMobileCta.tsx`
+### 4. Impact by Stakeholder Team
 
-Edited
-- `src/pages/Index.tsx` — swap v2 sections for v3, add Product JSON-LD with prices
-- `src/pages/dashboard/SubscriptionPage.tsx` — read from `plans.ts`
-- `tailwind.config.ts` / `src/index.css` — add brass-soft semantic tokens if missing (no overrides to other surfaces)
+#### Engineering
+- Source code for removed features remains in the codebase (pages, components, logic) to facilitate future restoration
+- No active maintenance required for removed UI entry points
+- Route definitions preserved; direct URL access to removed pages is still technically possible but unlinked
 
-Untouched
-- Tourism landing, dashboard pages other than Subscription, microsite, all libs except `plans.ts`
+#### Marketing
+- Remove Engagement and Insights sections from all sales collateral, landing pages, and pitch decks
+- Update plan comparison charts: Maverick now shows 10 cards (not 12)
+- Update feature lists: remove Gamification, Loyalty, Referrals, SEO, Reputation
+- Messaging pivot: emphasize core cards (Menu, Gift Cards, Staff, Events, AI Concierge, Private Dining, Gallery, Affiliate)
 
-## Out of scope
+#### Business Development
+- Do not sell or demo Engagement or Insights modules to prospects
+- Existing conversations mentioning these features should be redirected to the core value proposition
+- Partnership discussions (e.g., SEO integrations, reputation platforms) should be paused
+- Gift Cards remains a sellable feature (moved to Business section, unchanged functionality)
 
-- No backend changes (frontend-only per project memory)
-- No changes to Tourism landing or microsite
-- No new payment integration — pricing is presentational and routes to existing `/signup`
+### 5. Related Changes (Not Removals)
+- **Gift Cards moved:** Relocated from Engagement section to Business section in the dashboard sidebar navigation
+- **Delete Confirmation Modals:** Added project-wide confirmation dialogs before any delete action (prevents accidental data loss)
+- **Branding Text Update:** "IBloov" replaced with "AuraLink" across the platform (except microsite footer, which remains "Powered by IBloov")
+
+### 6. Technical Preservation Notes
+- Files retained for future restoration:
+  - `src/pages/dashboard/GamificationPage.tsx`
+  - `src/pages/dashboard/LoyaltyPage.tsx`
+  - `src/pages/dashboard/ReferralPage.tsx`
+  - `src/pages/dashboard/ReputationPage.tsx`
+  - `src/pages/dashboard/SEOPage.tsx`
+  - `src/pages/microsite/FreebieGamePage.tsx`
+  - `src/pages/microsite/ReferralLinkPage.tsx`
+- All UI entry points (sidebar nav, Card Studio, plans, analytics, documentation, admin gating) have been stripped
+
+### 7. Next Steps & Revisit Criteria
+- Features are shelved, not deleted
+- Revisit triggers: post-launch stability, customer demand signals, competitive pressure, or dedicated sprint capacity
+- Engineering estimate to restore: low (code preserved; primarily re-enabling UI links and updating copy)
+
+## Output
+- Format: DOCX (Microsoft Word)
+- Styling: Professional corporate memo style, clean tables for feature inventory
+- File location: `/mnt/documents/AuraLink_Feature_Removal_Stakeholder_Document.docx`
+
+## Technical Details
+- Generate using `docx` npm package via Node.js script
+- US Letter page size, 1-inch margins
+- Arial font family, professional heading hierarchy
+- Tables with clear borders for the feature inventory
+- No emojis, no decorative accent lines under titles
