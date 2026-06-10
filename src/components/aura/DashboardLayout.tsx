@@ -44,7 +44,6 @@ const navSections: NavSection[] = [
       { icon: Gamepad2, label: "Gamification", path: "/dashboard/gamification" },
       { icon: Heart, label: "Loyalty", path: "/dashboard/loyalty" },
       { icon: Share2, label: "Referrals", path: "/dashboard/referrals" },
-      { icon: Gift, label: "Gift Cards", path: "/dashboard/gift-cards" },
     ],
   },
   {
