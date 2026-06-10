@@ -38,15 +38,6 @@ const navSections: NavSection[] = [
     ],
   },
   {
-    title: "Engagement",
-    defaultOpen: true,
-    items: [
-      { icon: Gamepad2, label: "Gamification", path: "/dashboard/gamification" },
-      { icon: Heart, label: "Loyalty", path: "/dashboard/loyalty" },
-      { icon: Share2, label: "Referrals", path: "/dashboard/referrals" },
-    ],
-  },
-  {
     title: "Marketing",
     defaultOpen: true,
     items: [
@@ -54,14 +45,6 @@ const navSections: NavSection[] = [
       { icon: Link2, label: "Links", path: "/dashboard/links" },
       { icon: Users2, label: "Affiliates", path: "/dashboard/affiliates" },
       { icon: Megaphone, label: "Influencers", path: "/dashboard/influencers" },
-    ],
-  },
-  {
-    title: "Insights",
-    defaultOpen: false,
-    items: [
-      { icon: Search, label: "SEO & Maps", path: "/dashboard/seo" },
-      { icon: Shield, label: "Reputation", path: "/dashboard/reputation" },
     ],
   },
   {

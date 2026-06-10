@@ -165,10 +165,8 @@ const tabRequiredPlan: Record<string, string> = {
   "Events": "Maverick",
   "Awards": "Maverick",
   "Private Dining": "Supernova",
-  "Freebie Game": "Maverick",
   "Popular Dishes": "Maverick",
   "AI Concierge": "Supernova",
-  "Refer a Friend": "Supernova",
   "Affiliate": "Supernova",
 };
 

@@ -38,7 +38,6 @@ const defaultCards: MicrositeCard[] = [
   { id: "3",  title: "Social Links",   subtitle: "Follow us",     icon: "Globe",           path: "/microsite/social-links",   visible: true,  color: "hsl(var(--aura-info))" },
   { id: "4",  title: "Love Letter",     subtitle: "Send us love",  icon: "Star",            path: "https://loveletterreview.lovable.app",        visible: true,  color: "hsl(var(--primary))" },
   { id: "5",  title: "FAQs",           subtitle: "24 answers",    icon: "HelpCircle",      path: "/microsite/faqs",           visible: true,  color: "hsl(var(--primary))" },
-  { id: "6",  title: "Freebie Game",   subtitle: "Spin & win",    icon: "Gamepad2",        path: "/microsite/freebie-game",   visible: true,  color: "hsl(var(--aura-success))" },
   { id: "7",  title: "Staff",          subtitle: "Meet team",     icon: "Users",           path: "/microsite/staff",          visible: true,  color: "hsl(var(--primary))" },
   { id: "8",  title: "Awards",         subtitle: "8 awards",      icon: "Award",           path: "/microsite/awards",         visible: true,  color: "hsl(var(--secondary))" },
   { id: "9",  title: "Events",         subtitle: "Upcoming",      icon: "CalendarDays",    path: "/microsite/events",         visible: true,  color: "hsl(var(--aura-warning))" },
@@ -46,7 +45,6 @@ const defaultCards: MicrositeCard[] = [
   { id: "11", title: "AI Concierge",   subtitle: "Ask anything",  icon: "Bot",             path: "/microsite/concierge",      visible: true,  color: "hsl(var(--aura-info))" },
   { id: "12", title: "Private Dining", subtitle: "Book now",      icon: "Wine",            path: "/microsite/private-dining", visible: true,  color: "hsl(var(--primary))" },
   { id: "13", title: "Photo Gallery",  subtitle: "248 photos",    icon: "Camera",          path: "/microsite/gallery",        visible: true,  color: "hsl(var(--primary))" },
-  { id: "14", title: "Refer a Friend", subtitle: "Earn rewards",  icon: "Link2",           path: "/microsite/referral",       visible: true,  color: "hsl(var(--aura-warning))" },
   { id: "15", title: "Affiliate",      subtitle: "Partner up",    icon: "Handshake",       path: "/microsite/affiliate",      visible: true,  color: "hsl(var(--secondary))" },
 ];
 

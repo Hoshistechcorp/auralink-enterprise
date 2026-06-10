@@ -44,10 +44,8 @@ const cardPerformance = [
   { name: "FAQs", views: 980, clicks: 490, ctr: 50 },
   { name: "Popular Dishes", views: 890, clicks: 712, ctr: 80 },
   { name: "Awards", views: 720, clicks: 360, ctr: 50 },
-  { name: "Freebie Game", views: 680, clicks: 612, ctr: 90 },
   { name: "AI Concierge", views: 540, clicks: 486, ctr: 90 },
   { name: "Private Dining", views: 420, clicks: 294, ctr: 70 },
-  { name: "Refer a Friend", views: 380, clicks: 228, ctr: 60 },
   { name: "Affiliate", views: 220, clicks: 110, ctr: 50 },
 ];
 
@@ -176,7 +174,7 @@ const AnalyticsPage = () => {
 
       {tab === "cards" && (
         <div className="p-5 rounded-2xl bg-card border">
-          <h3 className="font-display font-semibold mb-4">Card Performance — All 16 Cards</h3>
+          <h3 className="font-display font-semibold mb-4">Card Performance</h3>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>

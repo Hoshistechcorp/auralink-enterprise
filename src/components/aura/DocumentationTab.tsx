@@ -42,21 +42,6 @@ const sections: DocSection[] = [
     features: ["Visitor count and trend charts (daily, weekly, monthly)", "Card-level engagement metrics — views, taps, and conversion rates", "Top-performing content identification", "Revenue tracking and goal progress", "Geographic visitor breakdown", "Device and platform distribution"],
   },
   {
-    id: "gamification", icon: Gamepad2, title: "Gamification",
-    description: "Engage customers with interactive games and rewards that drive repeat visits and social sharing.",
-    features: ["Spin-the-wheel and scratch card prize games", "Configurable prize pools and win probabilities", "Freebie Game card on the microsite for instant engagement", "Prize redemption tracking and analytics", "Social sharing incentives for game results"],
-  },
-  {
-    id: "loyalty", icon: Heart, title: "Loyalty Program",
-    description: "Build a tiered loyalty program with points, rewards, and milestone tracking to keep customers coming back.",
-    features: ["Multi-tier loyalty levels (Bronze, Silver, Gold, Platinum)", "Points-per-visit and points-per-dollar configuration", "Reward catalog with redemption thresholds", "Member activity tracking and engagement analytics", "Automated milestone notifications", "VIP perks and exclusive offers management"],
-  },
-  {
-    id: "referrals", icon: Share2, title: "Referral Program",
-    description: "Enable customers to refer friends via unique links on the microsite's Refer a Friend card, with tracking and rewards.",
-    features: ["Unique referral link generation for each customer", "Refer a Friend card on the public microsite", "Referral tracking with conversion metrics", "Configurable rewards for referrer and referee", "Social sharing integration (SMS, email, social media)", "Referral leaderboard and top advocate tracking"],
-  },
-  {
     id: "qr", icon: QrCode, title: "QR Code Management",
     description: "Generate, customize, and track QR codes that link to your microsite, specific cards, or custom URLs.",
     features: ["One-click QR code generation for any microsite page", "Custom branding with logo overlay and color matching", "Download in multiple formats (PNG, SVG, PDF)", "Scan analytics with location and device tracking", "Batch QR code creation for multi-location setups", "Dynamic QR codes that can be updated without reprinting"],
@@ -70,16 +55,6 @@ const sections: DocSection[] = [
     id: "influencers", icon: Megaphone, title: "Influencer Management",
     description: "Discover, onboard, and track influencer partnerships to amplify your brand reach.",
     features: ["Influencer discovery and outreach tools", "Campaign assignment and brief management", "Content tracking across social platforms", "ROI measurement per influencer partnership", "Automated reporting and performance summaries"],
-  },
-  {
-    id: "seo", icon: Search, title: "SEO & Maps",
-    description: "Optimize your local search presence with Google Maps integration, keyword tracking, and listing management.",
-    features: ["Google Maps card integration on the microsite", "Local SEO audit and optimization suggestions", "Keyword ranking tracker for local search terms", "Business listing consistency checker", "Review response management for SEO impact"],
-  },
-  {
-    id: "reputation", icon: Shield, title: "Reputation Management",
-    description: "Monitor and manage your online reputation across review platforms with sentiment analysis and response tools.",
-    features: ["Multi-platform review aggregation (Google, Yelp, TripAdvisor)", "Sentiment analysis with trend tracking", "Automated alerts for negative reviews", "Review response templates and AI suggestions", "Reputation score tracking over time", "Competitor benchmarking"],
   },
   {
     id: "gift-cards", icon: Gift, title: "Gift Cards",

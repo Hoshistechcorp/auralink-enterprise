@@ -32,8 +32,8 @@ const plans = SHARED_PLANS.map((p) => ({
 
 /* ── Cards by tier ────────────────────────────────── */
 const sparkCards = ["Details", "Menu", "Social Links", "Reviews", "FAQs", "Gift Cards"];
-const maverickCards = ["Freebie Game", "Staff", "Awards", "Events", "Popular Dishes"];
-const supernovaCards = ["AI Concierge", "Private Dining", "Photo Gallery", "Refer a Friend", "Affiliate"];
+const maverickCards = ["Staff", "Awards", "Events", "Popular Dishes"];
+const supernovaCards = ["AI Concierge", "Private Dining", "Photo Gallery", "Affiliate"];
 
 
 /* ── Feature comparison ──────────────────────────── */
@@ -47,7 +47,6 @@ const featureGroups = [
       { name: "Social Links", spark: true, maverick: true, supernova: true },
       { name: "Reviews", spark: true, maverick: true, supernova: true },
       { name: "FAQs", spark: true, maverick: true, supernova: true },
-      { name: "Freebie Game", spark: false, maverick: true, supernova: true },
       { name: "Staff", spark: false, maverick: true, supernova: true },
       { name: "Awards", spark: false, maverick: true, supernova: true },
       { name: "Events", spark: false, maverick: true, supernova: true },
@@ -55,7 +54,6 @@ const featureGroups = [
       { name: "AI Concierge", spark: false, maverick: false, supernova: true },
       { name: "Private Dining", spark: false, maverick: false, supernova: true },
       { name: "Photo Gallery", spark: false, maverick: false, supernova: true },
-      { name: "Refer a Friend", spark: false, maverick: false, supernova: true },
       { name: "Affiliate", spark: false, maverick: false, supernova: true },
     ],
   },
@@ -65,10 +63,6 @@ const featureGroups = [
       { name: "QR Codes", spark: "1", maverick: "5", supernova: "Unlimited" },
       { name: "Staff Profiles", spark: "2", maverick: "10", supernova: "Unlimited" },
       { name: "Analytics Dashboard", spark: false, maverick: true, supernova: true },
-      { name: "SEO Dashboard", spark: false, maverick: "Basic", supernova: true },
-      { name: "Gamification & Badges", spark: false, maverick: false, supernova: true },
-      { name: "Loyalty Program", spark: false, maverick: false, supernova: true },
-      { name: "Reputation Management", spark: false, maverick: false, supernova: true },
       { name: "Custom Branding", spark: false, maverick: false, supernova: true },
       { name: "Priority Support", spark: false, maverick: false, supernova: true },
     ],
@@ -83,8 +77,8 @@ const renderCell = (val: boolean | string) => {
 
 /* ── Highlights per plan (for modal) ──────────────── */
 const planHighlights: Record<string, string[]> = {
-  maverick: ["11 Card Slots", "Analytics Dashboard", "5 QR Codes", "Up to 10 Staff Profiles", "Basic SEO", "Freebie Game & Events"],
-  supernova: ["All 16 Cards Unlocked", "AI Concierge", "Private Dining", "Photo Gallery", "Loyalty & Reputation Tools", "Priority Support"],
+  maverick: ["10 Card Slots", "Analytics Dashboard", "5 QR Codes", "Up to 10 Staff Profiles", "Events & Awards"],
+  supernova: ["All Cards Unlocked", "AI Concierge", "Private Dining", "Photo Gallery", "Affiliate Program", "Priority Support"],
 };
 
 const SubscriptionPage = () => {
