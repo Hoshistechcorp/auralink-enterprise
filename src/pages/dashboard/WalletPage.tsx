@@ -87,20 +87,84 @@ export default function WalletPage() {
     setWithdrawOpen(false);
   };
 
-  // Method form
+  // Method form — US-tailored
   const [mLabel, setMLabel] = useState("");
   const [mType, setMType] = useState<WithdrawalMethod["type"]>("bank");
-  const [mDetails, setMDetails] = useState("");
+  // Bank fields
+  const [bHolderName, setBHolderName] = useState("");
+  const [bHolderType, setBHolderType] = useState<"individual" | "business">("individual");
+  const [bBankName, setBBankName] = useState("");
+  const [bRouting, setBRouting] = useState("");
+  const [bAccount, setBAccount] = useState("");
+  const [bAccountConfirm, setBAccountConfirm] = useState("");
+  const [bAccountType, setBAccountType] = useState<"checking" | "savings">("checking");
+  const [bZip, setBZip] = useState("");
+  // PayPal
+  const [pEmail, setPEmail] = useState("");
+  // Stripe
+  const [sAccountId, setSAccountId] = useState("");
+
+  const resetMethodForm = () => {
+    setMLabel(""); setMType("bank");
+    setBHolderName(""); setBHolderType("individual"); setBBankName("");
+    setBRouting(""); setBAccount(""); setBAccountConfirm("");
+    setBAccountType("checking"); setBZip("");
+    setPEmail(""); setSAccountId("");
+  };
 
   const addMethod = () => {
-    if (!mLabel || !mDetails) return toast({ title: "Fill out both fields", variant: "destructive" });
-    const next: WithdrawalMethod = { id: `m_${Date.now()}`, label: mLabel, type: mType, details: mDetails };
+    if (!mLabel.trim()) return toast({ title: "Add a label for this method", variant: "destructive" });
+
+    let next: WithdrawalMethod;
+
+    if (mType === "bank") {
+      if (!bHolderName.trim()) return toast({ title: "Enter the account holder's full name", variant: "destructive" });
+      if (!bBankName.trim()) return toast({ title: "Enter the bank name", variant: "destructive" });
+      if (!/^\d{9}$/.test(bRouting)) return toast({ title: "Routing number must be 9 digits", variant: "destructive" });
+      if (!/^\d{4,17}$/.test(bAccount)) return toast({ title: "Enter a valid account number (4–17 digits)", variant: "destructive" });
+      if (bAccount !== bAccountConfirm) return toast({ title: "Account numbers do not match", variant: "destructive" });
+      if (!/^\d{5}(-\d{4})?$/.test(bZip)) return toast({ title: "Enter a valid US ZIP code", variant: "destructive" });
+
+      const last4 = bAccount.slice(-4);
+      next = {
+        id: `m_${Date.now()}`,
+        label: mLabel.trim(),
+        type: "bank",
+        details: `${bBankName.trim()} •••• ${last4}`,
+        accountHolderName: bHolderName.trim(),
+        accountHolderType: bHolderType,
+        bankName: bBankName.trim(),
+        routingNumber: bRouting,
+        accountNumberLast4: last4,
+        accountType: bAccountType,
+        billingZip: bZip,
+      };
+    } else if (mType === "paypal") {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(pEmail)) return toast({ title: "Enter a valid PayPal email", variant: "destructive" });
+      next = {
+        id: `m_${Date.now()}`,
+        label: mLabel.trim(),
+        type: "paypal",
+        details: `PayPal · ${pEmail}`,
+        paypalEmail: pEmail.trim(),
+      };
+    } else {
+      if (!/^acct_[A-Za-z0-9]+$/.test(sAccountId)) return toast({ title: "Enter a valid Stripe account ID (acct_...)", variant: "destructive" });
+      next = {
+        id: `m_${Date.now()}`,
+        label: mLabel.trim(),
+        type: "stripe",
+        details: `Stripe · ${sAccountId}`,
+        stripeAccountId: sAccountId.trim(),
+      };
+    }
+
     const updated = [...methods, next];
     saveMethods(updated);
     setMethods(updated);
-    setMLabel(""); setMDetails(""); setMType("bank");
+    resetMethodForm();
     setMethodOpen(false);
-    toast({ title: "Method added" });
+    toast({ title: "Withdrawal method added" });
   };
 
   const removeMethod = async (id: string) => {
@@ -256,28 +320,130 @@ export default function WalletPage() {
                 <DialogTrigger asChild>
                   <Button size="sm"><Plus className="w-4 h-4" /> Add method</Button>
                 </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader><DialogTitle>Add withdrawal method</DialogTitle></DialogHeader>
+                <DialogContent className="max-h-[85vh] overflow-y-auto">
+                  <DialogHeader>
+                    <DialogTitle>Add withdrawal method</DialogTitle>
+                    <p className="text-xs text-muted-foreground">For US-based account holders. All payouts are processed in USD.</p>
+                  </DialogHeader>
                   <div className="space-y-4">
                     <div>
-                      <Label>Label</Label>
-                      <Input value={mLabel} onChange={(e) => setMLabel(e.target.value)} placeholder="Primary bank" />
+                      <Label>Nickname</Label>
+                      <Input value={mLabel} onChange={(e) => setMLabel(e.target.value)} placeholder="e.g. Primary checking" maxLength={60} />
                     </div>
                     <div>
-                      <Label>Type</Label>
+                      <Label>Method type</Label>
                       <Select value={mType} onValueChange={(v) => setMType(v as WithdrawalMethod["type"])}>
                         <SelectTrigger><SelectValue /></SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="bank">Bank account</SelectItem>
+                          <SelectItem value="bank">US Bank account (ACH)</SelectItem>
                           <SelectItem value="paypal">PayPal</SelectItem>
-                          <SelectItem value="stripe">Stripe</SelectItem>
+                          <SelectItem value="stripe">Stripe Connect</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
-                    <div>
-                      <Label>Details</Label>
-                      <Input value={mDetails} onChange={(e) => setMDetails(e.target.value)} placeholder="e.g. Chase •••• 4821" />
-                    </div>
+
+                    {mType === "bank" && (
+                      <div className="space-y-4 rounded-lg border bg-muted/30 p-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          <div className="sm:col-span-2">
+                            <Label>Account holder name</Label>
+                            <Input value={bHolderName} onChange={(e) => setBHolderName(e.target.value)} placeholder="As it appears on the account" maxLength={100} />
+                          </div>
+                          <div>
+                            <Label>Account holder type</Label>
+                            <Select value={bHolderType} onValueChange={(v) => setBHolderType(v as "individual" | "business")}>
+                              <SelectTrigger><SelectValue /></SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="individual">Individual</SelectItem>
+                                <SelectItem value="business">Business</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          <div>
+                            <Label>Account type</Label>
+                            <Select value={bAccountType} onValueChange={(v) => setBAccountType(v as "checking" | "savings")}>
+                              <SelectTrigger><SelectValue /></SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="checking">Checking</SelectItem>
+                                <SelectItem value="savings">Savings</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          <div className="sm:col-span-2">
+                            <Label>Bank name</Label>
+                            <Input value={bBankName} onChange={(e) => setBBankName(e.target.value)} placeholder="e.g. Chase, Bank of America" maxLength={80} />
+                          </div>
+                          <div>
+                            <Label>Routing number (ABA)</Label>
+                            <Input
+                              inputMode="numeric"
+                              value={bRouting}
+                              onChange={(e) => setBRouting(e.target.value.replace(/\D/g, "").slice(0, 9))}
+                              placeholder="9 digits"
+                            />
+                          </div>
+                          <div>
+                            <Label>Billing ZIP code</Label>
+                            <Input
+                              inputMode="numeric"
+                              value={bZip}
+                              onChange={(e) => setBZip(e.target.value.replace(/[^\d-]/g, "").slice(0, 10))}
+                              placeholder="e.g. 90210"
+                            />
+                          </div>
+                          <div>
+                            <Label>Account number</Label>
+                            <Input
+                              type="password"
+                              inputMode="numeric"
+                              value={bAccount}
+                              onChange={(e) => setBAccount(e.target.value.replace(/\D/g, "").slice(0, 17))}
+                              placeholder="4–17 digits"
+                              autoComplete="off"
+                            />
+                          </div>
+                          <div>
+                            <Label>Confirm account number</Label>
+                            <Input
+                              inputMode="numeric"
+                              value={bAccountConfirm}
+                              onChange={(e) => setBAccountConfirm(e.target.value.replace(/\D/g, "").slice(0, 17))}
+                              placeholder="Re-enter account number"
+                              autoComplete="off"
+                            />
+                          </div>
+                        </div>
+                        <p className="text-xs text-muted-foreground">
+                          By adding this account you confirm you are authorized to receive ACH payments to it. Only the last 4 digits are stored on this device.
+                        </p>
+                      </div>
+                    )}
+
+                    {mType === "paypal" && (
+                      <div>
+                        <Label>PayPal email</Label>
+                        <Input
+                          type="email"
+                          value={pEmail}
+                          onChange={(e) => setPEmail(e.target.value)}
+                          placeholder="you@example.com"
+                          autoComplete="off"
+                        />
+                      </div>
+                    )}
+
+                    {mType === "stripe" && (
+                      <div>
+                        <Label>Stripe account ID</Label>
+                        <Input
+                          value={sAccountId}
+                          onChange={(e) => setSAccountId(e.target.value.trim())}
+                          placeholder="acct_1A2b3C4d5E6f7G8h"
+                          autoComplete="off"
+                        />
+                        <p className="text-xs text-muted-foreground mt-1">Find this in your Stripe dashboard under Settings → Account.</p>
+                      </div>
+                    )}
                   </div>
                   <DialogFooter>
                     <Button variant="outline" onClick={() => setMethodOpen(false)}>Cancel</Button>

@@ -12,11 +12,26 @@ export interface WalletTransaction {
   reference?: string;
 }
 
+export type BankAccountType = "checking" | "savings";
+
 export interface WithdrawalMethod {
   id: string;
   label: string;
   type: "bank" | "paypal" | "stripe";
+  /** Human-readable summary shown in lists & transactions, e.g. "Chase •••• 4821" */
   details: string;
+  // US bank-specific (only set when type === "bank")
+  accountHolderName?: string;
+  accountHolderType?: "individual" | "business";
+  bankName?: string;
+  routingNumber?: string; // 9 digits, US ABA
+  accountNumberLast4?: string;
+  accountType?: BankAccountType;
+  billingZip?: string; // US ZIP for verification
+  // PayPal-specific
+  paypalEmail?: string;
+  // Stripe-specific
+  stripeAccountId?: string; // acct_...
 }
 
 const TX_KEY = "auralink:wallet:txs";
