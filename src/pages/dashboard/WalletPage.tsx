@@ -87,20 +87,84 @@ export default function WalletPage() {
     setWithdrawOpen(false);
   };
 
-  // Method form
+  // Method form — US-tailored
   const [mLabel, setMLabel] = useState("");
   const [mType, setMType] = useState<WithdrawalMethod["type"]>("bank");
-  const [mDetails, setMDetails] = useState("");
+  // Bank fields
+  const [bHolderName, setBHolderName] = useState("");
+  const [bHolderType, setBHolderType] = useState<"individual" | "business">("individual");
+  const [bBankName, setBBankName] = useState("");
+  const [bRouting, setBRouting] = useState("");
+  const [bAccount, setBAccount] = useState("");
+  const [bAccountConfirm, setBAccountConfirm] = useState("");
+  const [bAccountType, setBAccountType] = useState<"checking" | "savings">("checking");
+  const [bZip, setBZip] = useState("");
+  // PayPal
+  const [pEmail, setPEmail] = useState("");
+  // Stripe
+  const [sAccountId, setSAccountId] = useState("");
+
+  const resetMethodForm = () => {
+    setMLabel(""); setMType("bank");
+    setBHolderName(""); setBHolderType("individual"); setBBankName("");
+    setBRouting(""); setBAccount(""); setBAccountConfirm("");
+    setBAccountType("checking"); setBZip("");
+    setPEmail(""); setSAccountId("");
+  };
 
   const addMethod = () => {
-    if (!mLabel || !mDetails) return toast({ title: "Fill out both fields", variant: "destructive" });
-    const next: WithdrawalMethod = { id: `m_${Date.now()}`, label: mLabel, type: mType, details: mDetails };
+    if (!mLabel.trim()) return toast({ title: "Add a label for this method", variant: "destructive" });
+
+    let next: WithdrawalMethod;
+
+    if (mType === "bank") {
+      if (!bHolderName.trim()) return toast({ title: "Enter the account holder's full name", variant: "destructive" });
+      if (!bBankName.trim()) return toast({ title: "Enter the bank name", variant: "destructive" });
+      if (!/^\d{9}$/.test(bRouting)) return toast({ title: "Routing number must be 9 digits", variant: "destructive" });
+      if (!/^\d{4,17}$/.test(bAccount)) return toast({ title: "Enter a valid account number (4–17 digits)", variant: "destructive" });
+      if (bAccount !== bAccountConfirm) return toast({ title: "Account numbers do not match", variant: "destructive" });
+      if (!/^\d{5}(-\d{4})?$/.test(bZip)) return toast({ title: "Enter a valid US ZIP code", variant: "destructive" });
+
+      const last4 = bAccount.slice(-4);
+      next = {
+        id: `m_${Date.now()}`,
+        label: mLabel.trim(),
+        type: "bank",
+        details: `${bBankName.trim()} •••• ${last4}`,
+        accountHolderName: bHolderName.trim(),
+        accountHolderType: bHolderType,
+        bankName: bBankName.trim(),
+        routingNumber: bRouting,
+        accountNumberLast4: last4,
+        accountType: bAccountType,
+        billingZip: bZip,
+      };
+    } else if (mType === "paypal") {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(pEmail)) return toast({ title: "Enter a valid PayPal email", variant: "destructive" });
+      next = {
+        id: `m_${Date.now()}`,
+        label: mLabel.trim(),
+        type: "paypal",
+        details: `PayPal · ${pEmail}`,
+        paypalEmail: pEmail.trim(),
+      };
+    } else {
+      if (!/^acct_[A-Za-z0-9]+$/.test(sAccountId)) return toast({ title: "Enter a valid Stripe account ID (acct_...)", variant: "destructive" });
+      next = {
+        id: `m_${Date.now()}`,
+        label: mLabel.trim(),
+        type: "stripe",
+        details: `Stripe · ${sAccountId}`,
+        stripeAccountId: sAccountId.trim(),
+      };
+    }
+
     const updated = [...methods, next];
     saveMethods(updated);
     setMethods(updated);
-    setMLabel(""); setMDetails(""); setMType("bank");
+    resetMethodForm();
     setMethodOpen(false);
-    toast({ title: "Method added" });
+    toast({ title: "Withdrawal method added" });
   };
 
   const removeMethod = async (id: string) => {
