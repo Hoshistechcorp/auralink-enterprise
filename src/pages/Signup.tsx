@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import { Eye, EyeOff, UserPlus, ArrowRight, Check, Building2, Globe2, X } from "lucide-react";
+import { motion } from "framer-motion";
+import { Eye, EyeOff, UserPlus, ArrowRight, Check, Building2, Globe2 } from "lucide-react";
 import { requestSignUpOtp } from "@/lib/auth";
 import { toast } from "sonner";
 import ibloovLogo from "@/assets/ibloov-logo.jpeg";
@@ -27,7 +27,6 @@ const Signup = () => {
   const [termsOpen, setTermsOpen] = useState(false);
   const [privacyOpen, setPrivacyOpen] = useState(false);
   const [accountType, setAccountType] = useState<"enterprise" | "tourism" | null>(null);
-  const [showTypeModal, setShowTypeModal] = useState(true);
 
 
 
@@ -110,6 +109,66 @@ const Signup = () => {
           <div className="text-center">
             <h2 className="text-2xl font-display font-bold">Create your account</h2>
             <p className="text-sm text-muted-foreground mt-1">Start your free 3-week trial</p>
+          </div>
+
+          {/* Account Type Selector */}
+          <div className="space-y-3">
+            <p className="text-xs font-semibold text-muted-foreground">I'm joining as</p>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={() => setAccountType("enterprise")}
+                className={`relative flex items-center gap-3 p-3.5 rounded-xl border-2 transition-all duration-200 text-left ${
+                  accountType === "enterprise"
+                    ? "border-primary bg-primary/5"
+                    : "border-border hover:border-primary/30 hover:bg-muted/30"
+                }`}
+              >
+                <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Building2 className="w-4 h-4 text-primary" />
+                </div>
+                <div className="min-w-0">
+                  <p className="font-semibold text-sm">Enterprise</p>
+                  <p className="text-[11px] text-muted-foreground leading-tight">Business & Hospitality</p>
+                </div>
+                {accountType === "enterprise" && (
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="absolute top-2.5 right-2.5 w-5 h-5 rounded-full bg-primary flex items-center justify-center"
+                  >
+                    <Check className="w-3 h-3 text-primary-foreground" />
+                  </motion.div>
+                )}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setAccountType("tourism")}
+                className={`relative flex items-center gap-3 p-3.5 rounded-xl border-2 transition-all duration-200 text-left ${
+                  accountType === "tourism"
+                    ? "border-primary bg-primary/5"
+                    : "border-border hover:border-primary/30 hover:bg-muted/30"
+                }`}
+              >
+                <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Globe2 className="w-4 h-4 text-primary" />
+                </div>
+                <div className="min-w-0">
+                  <p className="font-semibold text-sm">Tourism Board</p>
+                  <p className="text-[11px] text-muted-foreground leading-tight">Destination Marketing</p>
+                </div>
+                {accountType === "tourism" && (
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="absolute top-2.5 right-2.5 w-5 h-5 rounded-full bg-primary flex items-center justify-center"
+                  >
+                    <Check className="w-3 h-3 text-primary-foreground" />
+                  </motion.div>
+                )}
+              </button>
+            </div>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -227,117 +286,6 @@ const Signup = () => {
         version={PRIVACY_META.version}
         sections={privacySections}
       />
-
-      {/* Account Type Selector Modal */}
-      <AnimatePresence>
-        {showTypeModal && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm"
-            onClick={(e) => {
-              if (e.target === e.currentTarget) setShowTypeModal(false);
-            }}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ type: "spring", duration: 0.5, bounce: 0.3 }}
-              className="w-full max-w-lg mx-4"
-            >
-              <div className="bg-background border border-border rounded-3xl shadow-2xl p-8 relative">
-                <button
-                  onClick={() => setShowTypeModal(false)}
-                  className="absolute top-4 right-4 p-2 rounded-full hover:bg-muted transition-colors text-muted-foreground"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-
-                <div className="text-center mb-8">
-                  <h3 className="text-xl font-display font-bold">I'm joining as</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Select the account type that fits your needs
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  {/* Enterprise Card */}
-                  <button
-                    onClick={() => {
-                      setAccountType("enterprise");
-                      setShowTypeModal(false);
-                    }}
-                    className={`relative flex flex-col items-start gap-3 p-5 rounded-2xl border-2 transition-all duration-300 text-left ${
-                      accountType === "enterprise"
-                        ? "border-primary bg-primary/5"
-                        : "border-border hover:border-primary/30 hover:bg-muted/50"
-                    }`}
-                  >
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <Building2 className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-sm">Enterprise</p>
-                      <p className="text-xs text-muted-foreground mt-0.5">Business & Hospitality</p>
-                    </div>
-                    {accountType === "enterprise" && (
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        className="absolute top-3 right-3 w-6 h-6 rounded-full bg-primary flex items-center justify-center"
-                      >
-                        <Check className="w-3.5 h-3.5 text-primary-foreground" />
-                      </motion.div>
-                    )}
-                  </button>
-
-                  {/* Tourism Card */}
-                  <button
-                    onClick={() => {
-                      setAccountType("tourism");
-                      setShowTypeModal(false);
-                    }}
-                    className={`relative flex flex-col items-start gap-3 p-5 rounded-2xl border-2 transition-all duration-300 text-left ${
-                      accountType === "tourism"
-                        ? "border-primary bg-primary/5"
-                        : "border-border hover:border-primary/30 hover:bg-muted/50"
-                    }`}
-                  >
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <Globe2 className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-sm">Tourism Board</p>
-                      <p className="text-xs text-muted-foreground mt-0.5">Destination Marketing</p>
-                    </div>
-                    {accountType === "tourism" && (
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        className="absolute top-3 right-3 w-6 h-6 rounded-full bg-primary flex items-center justify-center"
-                      >
-                        <Check className="w-3.5 h-3.5 text-primary-foreground" />
-                      </motion.div>
-                    )}
-                  </button>
-                </div>
-
-                {accountType && (
-                  <motion.p
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-center text-xs text-muted-foreground mt-6"
-                  >
-                    You can change this later in your account settings
-                  </motion.p>
-                )}
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 };
