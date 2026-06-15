@@ -63,12 +63,13 @@ const clearPendingOtp = () => {
   localStorage.removeItem(OTP_KEY);
 };
 
-const createUser = (name: string, email: string, password: string): AuthUser => {
+const createUser = (name: string, email: string, password: string, accountType?: AccountType): AuthUser => {
   const user: AuthUser = {
     id: crypto.randomUUID(),
     name,
     email,
     createdAt: new Date().toISOString(),
+    accountType,
   };
 
   const users = getUsers();
@@ -82,8 +83,8 @@ const createUser = (name: string, email: string, password: string): AuthUser => 
   return user;
 };
 
-export const signUp = (name: string, email: string, password: string): AuthUser => {
-  return createUser(name, email, password);
+export const signUp = (name: string, email: string, password: string, accountType?: AccountType): AuthUser => {
+  return createUser(name, email, password, accountType);
 };
 
 export const requestSignUpOtp = (name: string, email: string, password: string) => {
