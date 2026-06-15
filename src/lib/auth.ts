@@ -2,6 +2,7 @@
 import { findManagerByCredentials, updateManager } from "./branchManagers";
 
 export type UserRole = "admin" | "branch_manager";
+export type AccountType = "enterprise" | "tourism";
 
 export interface AuthUser {
   id: string;
@@ -9,6 +10,7 @@ export interface AuthUser {
   email: string;
   createdAt: string;
   role?: UserRole;
+  accountType?: AccountType;
   branchId?: string;
   branchLabel?: string;
 }
@@ -29,6 +31,7 @@ interface PendingOtpSession {
   expiresAt: string;
   name?: string;
   password?: string;
+  accountType?: AccountType;
 }
 
 const getUsers = (): StoredUser[] => JSON.parse(localStorage.getItem(USERS_KEY) || "[]");
@@ -60,12 +63,13 @@ const clearPendingOtp = () => {
   localStorage.removeItem(OTP_KEY);
 };
 
-const createUser = (name: string, email: string, password: string): AuthUser => {
+const createUser = (name: string, email: string, password: string, accountType?: AccountType): AuthUser => {
   const user: AuthUser = {
     id: crypto.randomUUID(),
     name,
     email,
     createdAt: new Date().toISOString(),
+    accountType,
   };
 
   const users = getUsers();
@@ -79,11 +83,11 @@ const createUser = (name: string, email: string, password: string): AuthUser => 
   return user;
 };
 
-export const signUp = (name: string, email: string, password: string): AuthUser => {
-  return createUser(name, email, password);
+export const signUp = (name: string, email: string, password: string, accountType?: AccountType): AuthUser => {
+  return createUser(name, email, password, accountType);
 };
 
-export const requestSignUpOtp = (name: string, email: string, password: string) => {
+export const requestSignUpOtp = (name: string, email: string, password: string, accountType?: AccountType) => {
   if (getUsers().find((user) => user.email === email)) {
     throw new Error("An account with this email already exists");
   }
@@ -96,6 +100,7 @@ export const requestSignUpOtp = (name: string, email: string, password: string) 
     expiresAt: new Date(Date.now() + 10 * 60 * 1000).toISOString(),
     name,
     password,
+    accountType,
   });
 
   return otp;
@@ -129,7 +134,7 @@ export const verifyOtp = (mode: PendingOtpMode, email: string, otp: string) => {
 
   if (mode === "signup") {
     clearPendingOtp();
-    return createUser(session.name || "", session.email, session.password || "");
+    return createUser(session.name || "", session.email, session.password || "", session.accountType);
   }
 
   localStorage.setItem(RESET_KEY, email);
@@ -144,7 +149,7 @@ export const resendOtp = (mode: PendingOtpMode, email: string) => {
       throw new Error("Your signup session has expired. Please create your account again.");
     }
 
-    return requestSignUpOtp(session.name, email, session.password);
+    return requestSignUpOtp(session.name, email, session.password, session.accountType);
   }
 
   return requestPasswordResetOtp(email);
