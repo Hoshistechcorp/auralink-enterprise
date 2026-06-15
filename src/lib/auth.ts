@@ -87,7 +87,7 @@ export const signUp = (name: string, email: string, password: string, accountTyp
   return createUser(name, email, password, accountType);
 };
 
-export const requestSignUpOtp = (name: string, email: string, password: string) => {
+export const requestSignUpOtp = (name: string, email: string, password: string, accountType?: AccountType) => {
   if (getUsers().find((user) => user.email === email)) {
     throw new Error("An account with this email already exists");
   }
@@ -100,6 +100,7 @@ export const requestSignUpOtp = (name: string, email: string, password: string) 
     expiresAt: new Date(Date.now() + 10 * 60 * 1000).toISOString(),
     name,
     password,
+    accountType,
   });
 
   return otp;
