@@ -27,7 +27,6 @@ const Signup = () => {
   const [termsOpen, setTermsOpen] = useState(false);
   const [privacyOpen, setPrivacyOpen] = useState(false);
   const [accountType, setAccountType] = useState<"enterprise" | "tourism" | null>(null);
-  const [showTypeModal, setShowTypeModal] = useState(true);
 
 
 
