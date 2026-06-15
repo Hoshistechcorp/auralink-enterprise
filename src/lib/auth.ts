@@ -2,6 +2,7 @@
 import { findManagerByCredentials, updateManager } from "./branchManagers";
 
 export type UserRole = "admin" | "branch_manager";
+export type AccountType = "enterprise" | "tourism";
 
 export interface AuthUser {
   id: string;
@@ -9,6 +10,7 @@ export interface AuthUser {
   email: string;
   createdAt: string;
   role?: UserRole;
+  accountType?: AccountType;
   branchId?: string;
   branchLabel?: string;
 }
