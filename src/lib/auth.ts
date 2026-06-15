@@ -31,6 +31,7 @@ interface PendingOtpSession {
   expiresAt: string;
   name?: string;
   password?: string;
+  accountType?: AccountType;
 }
 
 const getUsers = (): StoredUser[] => JSON.parse(localStorage.getItem(USERS_KEY) || "[]");
