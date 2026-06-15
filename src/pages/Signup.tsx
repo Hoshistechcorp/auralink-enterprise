@@ -48,9 +48,9 @@ const Signup = () => {
 
     setLoading(true);
     try {
-      requestSignUpOtp(name, email, password);
+      requestSignUpOtp(name, email, password, accountType || undefined);
       toast.success("Verification code sent to your email");
-      navigate(`/verify-otp?mode=signup&email=${encodeURIComponent(email)}`);
+      navigate(`/verify-otp?mode=signup&email=${encodeURIComponent(email)}${accountType ? `&type=${accountType}` : ""}`);
     } catch (err: any) {
       setError(err.message);
     } finally {
