@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import { Eye, EyeOff, UserPlus, ArrowRight, Check, Building2, Globe2, X } from "lucide-react";
+import { motion } from "framer-motion";
+import { Eye, EyeOff, UserPlus, ArrowRight, Check, Building2, Globe2 } from "lucide-react";
 import { requestSignUpOtp } from "@/lib/auth";
 import { toast } from "sonner";
 import ibloovLogo from "@/assets/ibloov-logo.jpeg";
