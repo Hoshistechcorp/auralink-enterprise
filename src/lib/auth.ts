@@ -134,7 +134,7 @@ export const verifyOtp = (mode: PendingOtpMode, email: string, otp: string) => {
 
   if (mode === "signup") {
     clearPendingOtp();
-    return createUser(session.name || "", session.email, session.password || "");
+    return createUser(session.name || "", session.email, session.password || "", session.accountType);
   }
 
   localStorage.setItem(RESET_KEY, email);
@@ -149,7 +149,7 @@ export const resendOtp = (mode: PendingOtpMode, email: string) => {
       throw new Error("Your signup session has expired. Please create your account again.");
     }
 
-    return requestSignUpOtp(session.name, email, session.password);
+    return requestSignUpOtp(session.name, email, session.password, session.accountType);
   }
 
   return requestPasswordResetOtp(email);
