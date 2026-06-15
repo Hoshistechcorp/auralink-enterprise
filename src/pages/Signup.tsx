@@ -111,6 +111,66 @@ const Signup = () => {
             <p className="text-sm text-muted-foreground mt-1">Start your free 3-week trial</p>
           </div>
 
+          {/* Account Type Selector */}
+          <div className="space-y-3">
+            <p className="text-xs font-semibold text-muted-foreground">I'm joining as</p>
+            <div className="grid grid-cols-2 gap-3">
+              <button
+                type="button"
+                onClick={() => setAccountType("enterprise")}
+                className={`relative flex items-center gap-3 p-3.5 rounded-xl border-2 transition-all duration-200 text-left ${
+                  accountType === "enterprise"
+                    ? "border-primary bg-primary/5"
+                    : "border-border hover:border-primary/30 hover:bg-muted/30"
+                }`}
+              >
+                <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Building2 className="w-4 h-4 text-primary" />
+                </div>
+                <div className="min-w-0">
+                  <p className="font-semibold text-sm">Enterprise</p>
+                  <p className="text-[11px] text-muted-foreground leading-tight">Business & Hospitality</p>
+                </div>
+                {accountType === "enterprise" && (
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="absolute top-2.5 right-2.5 w-5 h-5 rounded-full bg-primary flex items-center justify-center"
+                  >
+                    <Check className="w-3 h-3 text-primary-foreground" />
+                  </motion.div>
+                )}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setAccountType("tourism")}
+                className={`relative flex items-center gap-3 p-3.5 rounded-xl border-2 transition-all duration-200 text-left ${
+                  accountType === "tourism"
+                    ? "border-primary bg-primary/5"
+                    : "border-border hover:border-primary/30 hover:bg-muted/30"
+                }`}
+              >
+                <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Globe2 className="w-4 h-4 text-primary" />
+                </div>
+                <div className="min-w-0">
+                  <p className="font-semibold text-sm">Tourism Board</p>
+                  <p className="text-[11px] text-muted-foreground leading-tight">Destination Marketing</p>
+                </div>
+                {accountType === "tourism" && (
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="absolute top-2.5 right-2.5 w-5 h-5 rounded-full bg-primary flex items-center justify-center"
+                  >
+                    <Check className="w-3 h-3 text-primary-foreground" />
+                  </motion.div>
+                )}
+              </button>
+            </div>
+          </div>
+
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
               <div className="p-3 rounded-xl bg-destructive/10 border border-destructive/20 text-destructive text-xs font-medium text-center">
