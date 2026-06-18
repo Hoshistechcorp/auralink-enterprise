@@ -37,6 +37,12 @@ const NavBar = () => {
             TribeMint
           </button>
           <button
+            onClick={() => scrollTo("#movement")}
+            className="hidden md:inline-flex px-3 py-2 text-[13px] font-semibold text-[#111]/70 hover:text-[#1F2BD6] transition-colors"
+          >
+            iBloov
+          </button>
+          <button
             onClick={() => scrollTo("#pricing")}
             className="hidden sm:inline-flex px-3 py-2 text-[13px] font-semibold text-[#111]/70 hover:text-[#111] transition-colors"
           >

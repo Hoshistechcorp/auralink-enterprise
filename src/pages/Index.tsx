@@ -9,6 +9,7 @@ import FeatureTiles from "@/components/enterprise/v3/FeatureTiles";
 import LoveLetterSection from "@/components/enterprise/v3/LoveLetterSection";
 import EcosystemShowcase from "@/components/enterprise/v3/EcosystemShowcase";
 import TribeMintSection from "@/components/enterprise/v3/TribeMintSection";
+import IBloovMovementSection from "@/components/enterprise/v3/IBloovMovementSection";
 import HowItWorks from "@/components/enterprise/v3/HowItWorks";
 import Pricing from "@/components/enterprise/v3/Pricing";
 import Faq from "@/components/enterprise/v3/Faq";
@@ -80,6 +81,7 @@ const Index = () => {
           <LoveLetterSection />
           <EcosystemShowcase />
           <TribeMintSection />
+          <IBloovMovementSection />
           <HowItWorks />
           <Pricing />
           <Faq />
