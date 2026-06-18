@@ -14,32 +14,40 @@ const faqs = [
 const Faq = () => {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section className="px-5 py-16" aria-labelledby="faq-h">
-      <div className="text-center mb-8">
-        <span className="text-[10px] uppercase tracking-[0.3em] text-[#C9A35B]">FAQ</span>
-        <h2 id="faq-h" className="font-grotesk mt-2 text-[28px] font-bold text-[#F5F0E8] tracking-tight">
-          Common questions.
-        </h2>
-      </div>
-      <div className="max-w-lg mx-auto space-y-2">
-        {faqs.map((f, i) => {
-          const isOpen = open === i;
-          return (
-            <button
-              key={f.q}
-              onClick={() => setOpen(isOpen ? null : i)}
-              className="w-full text-left rounded-2xl border border-[#1F1A17] bg-[#0F0D0B] px-5 py-4 hover:border-[#C9A35B]/30 transition-colors"
-            >
-              <div className="flex items-center justify-between gap-3">
-                <span className="font-grotesk font-semibold text-[14px] text-[#F5F0E8]">{f.q}</span>
-                <ChevronDown
-                  className={`w-4 h-4 text-[#C9A35B] transition-transform shrink-0 ${isOpen ? "rotate-180" : ""}`}
-                />
-              </div>
-              {isOpen && <p className="mt-2 text-[13px] text-[#A89B8B] leading-relaxed">{f.a}</p>}
-            </button>
-          );
-        })}
+    <section className="px-5 py-20 bg-[#7CC7FF]" aria-labelledby="faq-h">
+      <div className="max-w-2xl mx-auto">
+        <div className="text-center mb-10">
+          <span className="text-[11px] uppercase tracking-[0.3em] text-[#1F2BD6] font-bold">FAQ</span>
+          <h2
+            id="faq-h"
+            className="font-grotesk mt-2 text-[32px] sm:text-[40px] font-extrabold text-[#111] tracking-tight"
+          >
+            Common questions.
+          </h2>
+        </div>
+        <div className="space-y-3">
+          {faqs.map((f, i) => {
+            const isOpen = open === i;
+            return (
+              <button
+                key={f.q}
+                onClick={() => setOpen(isOpen ? null : i)}
+                className="w-full text-left rounded-2xl border-2 border-[#111] bg-[#FFF7ED] px-5 py-4 shadow-[0_4px_0_0_#111] hover:-translate-y-0.5 transition-transform"
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <span className="font-grotesk font-extrabold text-[15px] text-[#111]">{f.q}</span>
+                  <ChevronDown
+                    className={`w-5 h-5 text-[#111] transition-transform shrink-0 ${isOpen ? "rotate-180" : ""}`}
+                    strokeWidth={2.5}
+                  />
+                </div>
+                {isOpen && (
+                  <p className="mt-2.5 text-[13.5px] text-[#111]/75 leading-relaxed">{f.a}</p>
+                )}
+              </button>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

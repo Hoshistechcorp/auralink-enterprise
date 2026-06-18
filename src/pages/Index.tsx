@@ -62,12 +62,12 @@ const Index = () => {
         keywords="hospitality OS, QR microsite, restaurant guest experience, hotel AI concierge, gift cards, loyalty, AuraLink"
         jsonLd={jsonLd}
       />
-      <div className="min-h-screen bg-[#0B0907] text-[#F5F0E8] font-dm antialiased selection:bg-[#C9A35B]/40">
+      <div className="min-h-screen bg-[#FFF7ED] text-[#111] font-dm antialiased selection:bg-[#C6F432]">
         <NavBar />
-        <div className="fixed top-16 left-1/2 -translate-x-1/2 z-40">
+        <div className="fixed top-[72px] left-1/2 -translate-x-1/2 z-40">
           <LandingSegmentNav />
         </div>
-        <main id="main-content" className="max-w-3xl mx-auto">
+        <main id="main-content">
           <Hero />
           <LogoStrip />
           <BeforeAfter />

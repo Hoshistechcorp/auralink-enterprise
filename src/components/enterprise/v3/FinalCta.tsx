@@ -1,21 +1,28 @@
-import { ArrowRight } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import ClaimLinkBar from "./ClaimLinkBar";
 
 const FinalCta = () => {
-  const navigate = useNavigate();
   return (
-    <section className="px-5 py-20 bg-gradient-to-b from-[#0E0B09] to-[#1A1410] border-t border-[#1F1A17]">
-      <div className="max-w-md mx-auto text-center">
-        <h2 className="font-grotesk text-[32px] font-bold text-[#F5F0E8] tracking-tight leading-tight">
-          Your venue's <span className="bg-gradient-to-r from-[#E8C886] to-[#C9A35B] bg-clip-text text-transparent">new front door.</span>
+    <section className="relative px-5 py-24 bg-[#C6F432] border-t-2 border-[#111] overflow-hidden">
+      <div aria-hidden className="absolute inset-0 -z-10 opacity-60">
+        <div className="absolute top-10 left-10 w-72 h-72 rounded-full bg-[#FF7A59] blur-[80px]" />
+        <div className="absolute bottom-0 right-10 w-80 h-80 rounded-full bg-[#C8A2FF] blur-[90px]" />
+      </div>
+
+      <div className="max-w-2xl mx-auto text-center relative">
+        <h2 className="font-grotesk text-[36px] sm:text-[48px] font-extrabold text-[#111] tracking-tight leading-[1.05]">
+          Your venue's{" "}
+          <span className="relative inline-block">
+            <span className="relative z-10">new front door.</span>
+            <span aria-hidden className="absolute left-0 right-0 bottom-1 h-3 sm:h-4 bg-[#FFF7ED] -z-0 rounded-full" />
+          </span>
         </h2>
-        <p className="text-[14px] text-[#A89B8B] mt-3">21 days free. No credit card. Live in 3 minutes.</p>
-        <button
-          onClick={() => navigate("/signup")}
-          className="mt-6 inline-flex items-center justify-center gap-2 h-12 px-7 rounded-full bg-gradient-to-r from-[#E8C886] to-[#C9A35B] text-[#1B1310] font-semibold text-[14px] shadow-lg shadow-[#C9A35B]/20"
-        >
-          Start free trial <ArrowRight className="w-4 h-4" />
-        </button>
+        <p className="text-[15px] text-[#111]/75 mt-4">
+          21 days free. No credit card. Live in 3 minutes.
+        </p>
+
+        <div className="mt-8 max-w-lg mx-auto">
+          <ClaimLinkBar />
+        </div>
       </div>
     </section>
   );
