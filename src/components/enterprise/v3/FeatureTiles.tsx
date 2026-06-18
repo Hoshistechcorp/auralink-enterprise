@@ -1,4 +1,4 @@
-import { Gift, CalendarCheck, Sparkles, Award, BarChart3, QrCode } from "lucide-react";
+import { Gift, CalendarCheck, Sparkles, Award, BarChart3, QrCode, Heart, Share2 } from "lucide-react";
 
 const tiles = [
   { icon: Gift, t: "Gift cards", d: "Sell digital, redeem instant.", bg: "#FF7A59", ink: "#FFF7ED" },
@@ -7,6 +7,8 @@ const tiles = [
   { icon: Award, t: "Loyalty", d: "Points, tiers, retention.", bg: "#F39A1F", ink: "#111" },
   { icon: BarChart3, t: "Analytics", d: "See what guests do.", bg: "#7CC7FF", ink: "#111" },
   { icon: QrCode, t: "QR microsite", d: "15 cards, one tap away.", bg: "#1F2BD6", ink: "#FFF7ED" },
+  { icon: Heart, t: "Reviews that travel", d: "LoveLetter built-in.", bg: "#FF7A59", ink: "#FFF7ED" },
+  { icon: Share2, t: "Affiliate built-in", d: "TribeMint, every fan earns.", bg: "#C8A2FF", ink: "#111" },
 ];
 
 const FeatureTiles = () => (

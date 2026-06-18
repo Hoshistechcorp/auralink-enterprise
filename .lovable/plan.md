@@ -1,58 +1,87 @@
-# Linktree-Inspired AuraLink Landing Redesign
+# Expand the AuraLink Landing — iBloov Ecosystem, LoveLetter & TribeMint
 
-Reimagine the Enterprise landing (`/`) with Linktree's vibrant, playful energy while keeping AuraLink's existing copy and concept intact. Bright real backdrop, alive colors, and a hero "claim your link" input bar that previews `4i.fyi/businessname`.
+Build on the current vibrant Linktree-style Enterprise landing (`/enterprise`) by adding richer product storytelling and two dedicated, fully-styled sections for **LoveLetter** (global reviews) and **TribeMint** (affiliate/influencer engine), plus a deeper ecosystem showcase. Same neo-playful skin: cream/lime/coral/sky/violet color blocks, 2px ink borders, chunky offset shadows, Framer Motion energy.
 
 ## What changes
 
-**Scope:** `src/pages/Index.tsx` and the `src/components/enterprise/v3/*` sections it renders. Tourism landing stays untouched.
+**Scope:** `src/pages/Index.tsx` + new `src/components/enterprise/v3/*` sections only. No backend, no dashboard, no Tourism landing.
 
-### 1. New vibrant color system (presentation only)
-- Move away from the current dark `#0B0907` + brass-only palette toward a Linktree-style bright multi-hue scheme:
-  - Primary backdrop: warm cream `#FFF7ED` with large soft gradient blobs (lime `#C6F432`, coral `#FF7A59`, sky `#7CC7FF`, lavender `#C8A2FF`, iBloov blue `#1F2BD6`, iBloov orange `#F39A1F`).
-  - Animated blurred gradient mesh + subtle grain for a "real, bright" backdrop.
-- Sections alternate between cream, mint, peach, and periwinkle bands (full-bleed color blocks, à la Linktree).
-- Add tokens in `src/index.css` (`--al-cream`, `--al-lime`, `--al-coral`, `--al-sky`, `--al-violet`, `--al-ink`) and Tailwind config entries; components consume tokens, no hardcoded hex in JSX.
+### 1. New section — `LoveLetterSection.tsx` 💌
+Full-bleed **coral/cream** band themed around `loveletter.ibloov.com`.
 
-### 2. Hero with claim-your-link bar (`v3/Hero.tsx`)
-- Keep current headline + subhead copy.
-- Replace the two stacked CTA buttons with a single pill-shaped **claim bar**:
+- Headline: "Leave a Love Letter." Sub: "The new, global way to review the places you love — and the venues that love you back."
+- Split layout: left = copy + 3 feature bullets ("Find any venue worldwide", "Wall of Love & Top 10 trending", "Unread Love Letters waiting for owners"); right = mocked phone/card showing a Love Letter UI (heart envelope icon from `HeartLetter`, sample letter cards, "Wall of Love" chips).
+- Two CTAs: **"Send a Love Letter"** → external `https://loveletter.ibloov.com/`, **"Claim your venue"** → `/signup?slug=` (reuses claim flow).
+- Floating sticker badges: ❤️, 💌, ⭐, "Top 10" pill — same neo-brutalist style.
+
+### 2. New section — `TribeMintSection.tsx` 🌀
+Full-bleed **violet/sky** band themed around TribeMint affiliate marketing for leisure & experiences.
+
+- Headline: "Turn every fan into a tribe." Sub: "TribeMint is the affiliate & influencer engine for leisure, hospitality and experience brands — every customer earns when they share."
+- 3-column "how it works" mini-cards: **Mint a link** → **Share the vibe** → **Earn on every booking**.
+- Stats strip (illustrative): "0% setup", "Real-time commissions", "Cross-venue tribe".
+- CTA: **"Activate TribeMint"** → `/signup?slug=` (with note "Included in Maverick & Supernova").
+- Floating stickers: 🌀, 💸, 🔗, "Affiliate" pill.
+
+### 3. Rebuild — `EcosystemShowcase.tsx` (replaces nothing; new section)
+A vibrant re-skin of the existing `EnterpriseEcosystem` content (currently dark-themed), brought into the v3 cream/neo-brutalist style with **8 products** instead of 6:
+
+| Product | Color | One-liner |
+|---|---|---|
+| 🎟️ iBloov Event | coral | High-volume booking, ticketing & social rituals engine. |
+| ⚡ SPARK | lime | Micro-learning that turns Sparks into certified Mavericks. |
+| 🎵 VibesGigs | violet | The "Uber for Hospitality" — instant verified-talent shifts. |
+| 🌀 TribeMint | sky | Affiliate engine turning every guest into a micro-influencer. |
+| 📸 PicPop | coral | Collaborative event memory cloud & live memory walls. |
+| 💸 Flex-it | lime | Social fintech for tipping, splitting & digital spraying. |
+| 💌 LoveLetter | violet | Global reviews & Wall of Love for venues you love. |
+| 🏛️ Municipal Nebula | sky | City-data intelligence for tourism boards & governments. |
+
+Each tile: chunky bordered card, emoji sticker, name, one-liner, **"AuraLink Sync"** mini-row, hover-tilt animation. Two-row responsive grid.
+
+### 4. Expand — `FeatureTiles.tsx`
+Add 2 more tiles to the existing grid so it reflects ecosystem depth:
+- "Reviews that travel" (LoveLetter integration)
+- "Affiliate built-in" (TribeMint integration)
+
+Keep all existing tiles + copy.
+
+### 5. New section — `SectorsStrip.tsx` 🌍
+Color-blocked **"Built for every leisure sector"** marquee/grid using current copy energy. Sectors (from project history): Restaurants, Hotels, Lounges & Nightclubs, Retail, Spas & Wellness, Tour Operators, Coffee Shops, Event Venues, Beach Clubs, Cruise & Yacht, Tourism Boards, Cultural Sites. Each as a chunky bordered chip with emoji, no nav target.
+
+### 6. Wire new sections into `Index.tsx`
+New order:
 
 ```text
-┌─────────────────────────────────────────────┐
-│ 4i.fyi/ [ businessname              ] [Get →]│
-└─────────────────────────────────────────────┘
+NavBar
+Hero
+LogoStrip
+SectorsStrip            ← new
+BeforeAfter
+FeatureTiles            ← expanded
+LoveLetterSection       ← new
+EcosystemShowcase       ← new (8 products)
+TribeMintSection        ← new
+HowItWorks
+Pricing
+Faq
+FinalCta
+Footer
+StickyMobileCta
 ```
 
-  - Left prefix label `4i.fyi/` (non-editable, muted).
-  - Text input (slug, lowercased, spaces → hyphens, alnum + `-` only, live preview underneath: "Your link: 4i.fyi/your-name").
-  - "Get started free" CTA button on the right; on click → `navigate("/signup?slug=<value>")`.
-  - On `Signup.tsx`, read `?slug=` from query string and prefill the business-name field (small, additive change — still presentation/flow, no backend).
-- Secondary text link below: "See live demo →" (keeps existing `/microsite` route).
-- Floating playful elements behind hero: tilted cards, sticker-style emojis/badges, animated marquee of sample links — same energy as linktr.ee hero.
-
-### 3. Section refresh (same copy, new skin)
-- `LogoStrip`, `BeforeAfter`, `FeatureTiles`, `HowItWorks`, `Pricing`, `Faq`, `FinalCta`: keep all text and structure. Re-skin with:
-  - Color-blocked section backgrounds (cream → mint → peach → periwinkle → lime).
-  - Chunky rounded cards (radius 28–32px), thick 2px ink borders, offset drop shadows (`6px 6px 0 #111`) for the neo-playful Linktree feel.
-  - Typography: keep Space Grotesk display, but bump weight/scale; add a wobble/underline accent on key words.
-  - Pricing tiers get distinct bright fills (Spark = lime, Maverick = coral, Supernova = violet) instead of monotone dark cards.
-- Add subtle Framer Motion: floating tiles in hero, hover-tilt on pricing cards, marquee of "live AuraLinks".
-
-### 4. Nav + sticky CTA
-- `v3/NavBar.tsx`: switch to light glassy nav on cream background; pill "Get started" button uses ink-on-lime.
-- `LandingSegmentNav` already-positioned switcher restyled for light backdrop (darker text, brand-blue active pill) so it reads on the new cream hero.
-- `StickyMobileCta` becomes a sticky **claim bar** (same input + button) so mobile users can claim from anywhere on the page.
-
-### 5. iBloov logo presence
-- Use the uploaded iBloov logo as a small playful badge in the nav ("powered by iBloov") and as a floating sticker in the hero collage. Imported via Lovable Assets pointer from `/mnt/user-uploads/ibloov_logo.jpeg`.
+### 7. Nav update
+Add anchor links in `NavBar.tsx`: "Ecosystem", "LoveLetter", "TribeMint" (smooth-scroll to section IDs). Keep "Get started" pill CTA.
 
 ## Out of scope
-- No changes to Tourism landing, dashboard, microsite, auth logic, or backend.
-- No copy rewrites — all current text stays.
-- No new routes; `4i.fyi/<slug>` is presented as the future public URL but click-through still goes to `/signup` (slug passed via query).
+- No backend, auth, or routing changes (LoveLetter CTA is external link; TribeMint CTA reuses `/signup`).
+- No edits to Tourism landing, dashboard, microsite, or business logic.
+- No copy edits to existing v3 sections beyond `FeatureTiles` additions.
 
 ## Technical notes
-- Files edited: `src/index.css`, `tailwind.config.ts`, `src/pages/Index.tsx`, `src/pages/Signup.tsx` (slug prefill only), and all `src/components/enterprise/v3/*.tsx`.
-- New file: `src/components/enterprise/v3/ClaimLinkBar.tsx` (reused in hero + sticky mobile CTA).
-- New asset pointer: `src/assets/ibloov-logo.jpeg.asset.json`.
-- All colors via semantic tokens; no `text-white`/`bg-black` literals.
+- All new files in `src/components/enterprise/v3/`: `LoveLetterSection.tsx`, `TribeMintSection.tsx`, `EcosystemShowcase.tsx`, `SectorsStrip.tsx`.
+- Edits: `src/pages/Index.tsx`, `src/components/enterprise/v3/NavBar.tsx`, `src/components/enterprise/v3/FeatureTiles.tsx`.
+- Reuse existing palette tokens (`#FFF7ED`, `#C6F432`, `#FF7A59`, `#7CC7FF`, `#C8A2FF`, `#111`) and the chunky border / `6px 6px 0 #111` shadow recipe already established in v3.
+- Reuse `HeartLetter` icon from `src/components/icons/HeartLetter.tsx` for LoveLetter visuals.
+- Framer Motion: section-level fade-up + per-tile hover tilt, matching existing v3 motion register.
+- All colors via the inline ink/lime/coral/sky/violet recipe already used across v3 components — no new theme tokens needed.
