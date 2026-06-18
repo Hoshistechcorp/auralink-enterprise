@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, UserPlus, ArrowRight, Check, Building2, Globe2 } from "lucide-react";
 import { requestSignUpOtp } from "@/lib/auth";
@@ -17,6 +17,7 @@ const features = [
 
 const Signup = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,6 +28,19 @@ const Signup = () => {
   const [termsOpen, setTermsOpen] = useState(false);
   const [privacyOpen, setPrivacyOpen] = useState(false);
   const [accountType, setAccountType] = useState<"enterprise" | "tourism" | null>(null);
+
+  // Prefill business name from the landing-page claim bar (?slug=)
+  useEffect(() => {
+    const slug = searchParams.get("slug");
+    if (slug && !name) {
+      const pretty = slug
+        .replace(/-+/g, " ")
+        .replace(/\b\w/g, (c) => c.toUpperCase())
+        .trim();
+      setName(pretty);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams]);
 
 
 
