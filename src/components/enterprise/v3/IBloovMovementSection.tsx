@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Globe, Users, Zap, ArrowUpRight } from "lucide-react";
+import { Globe, ArrowUpRight } from "lucide-react";
 
 const pillars = [
   {
@@ -112,4 +112,86 @@ const IBloovMovementSection = () => (
         className="text-center mt-7 max-w-2xl mx-auto"
       >
         <p className="text-[16px] sm:text-[19px] leading-relaxed text-[#FFF7ED]/80">
-          The world isn't just short on technology — it is{
+          The world is not just short on technology — it is leaking human connection. iBloov is the world&apos;s first <span className="text-[#C6F432] font-bold">Life and Leisure Operating System</span>, built to systematically turn everyday lifestyle transactions into shared global prosperity.
+        </p>
+      </motion.div>
+
+      {/* Stats strip */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+        className="mt-10 flex flex-wrap justify-center gap-6 sm:gap-10"
+      >
+        {stats.map((s) => (
+          <div
+            key={s.l}
+            className="text-center px-5 py-3 rounded-2xl border-2 border-[#FFF7ED]/20 bg-[#FFF7ED]/5"
+          >
+            <p className="font-grotesk text-[28px] sm:text-[36px] font-extrabold text-[#C6F432] leading-none">{s.n}</p>
+            <p className="mt-1 text-[11px] sm:text-[13px] font-semibold text-[#FFF7ED]/60 uppercase tracking-wider">{s.l}</p>
+          </div>
+        ))}
+      </motion.div>
+
+      {/* Manifesto block */}
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.35 }}
+        className="mt-12 max-w-3xl mx-auto text-center rounded-3xl border-2 border-[#C6F432] p-6 sm:p-8 bg-[#FFF7ED]/[0.03] shadow-[0_6px_0_0_#C6F432]"
+      >
+        <p className="text-[15px] sm:text-[17px] leading-relaxed text-[#FFF7ED]/85">
+          When you bring your venue onto AuraLink, you are not just dropping a clunky software subscription. You are <span className="text-[#FF7A59] font-bold">plugging your business into a global ecosystem</span> engineered to turn customers into community, and community into co-owners.
+        </p>
+      </motion.div>
+
+      {/* Three pillars */}
+      <div className="mt-14 grid sm:grid-cols-3 gap-5">
+        {pillars.map((p, i) => (
+          <motion.div
+            key={p.title}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
+            className="rounded-3xl border-2 border-[#111] p-6 sm:p-7 shadow-[0_6px_0_0_#111] hover:-translate-y-1.5 hover:rotate-[-1deg] transition-transform"
+            style={{ background: p.bg, color: p.ink }}
+          >
+            <div className="text-[36px] mb-3">{p.emoji}</div>
+            <h3 className="font-grotesk text-[18px] sm:text-[20px] font-extrabold tracking-tight leading-tight">
+              {p.title}
+            </h3>
+            <p className="mt-2.5 text-[13px] sm:text-[14px] leading-relaxed opacity-90">
+              {p.body}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* CTA */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: 0.6 }}
+        className="mt-14 text-center"
+      >
+        <a
+          href="https://www.ibloov.com/aura"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-[#C6F432] text-[#111] text-[15px] font-extrabold border-2 border-[#111] shadow-[0_6px_0_0_#111] hover:translate-y-[-2px] hover:shadow-[0_8px_0_0_#111] active:translate-y-[1px] active:shadow-[0_3px_0_0_#111] transition-all"
+        >
+          Step Into the Future of Leisure-Tech
+          <ArrowUpRight className="w-5 h-5" />
+        </a>
+        <p className="mt-3 text-[12px] text-[#FFF7ED]/40 font-medium">Explore the Full Orbit at ibloov.com/aura</p>
+      </motion.div>
+    </div>
+  </section>
+);
+
+export default IBloovMovementSection;
