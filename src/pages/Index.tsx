@@ -3,8 +3,12 @@ import LandingSegmentNav from "@/components/aura/LandingSegmentNav";
 import NavBar from "@/components/enterprise/v3/NavBar";
 import Hero from "@/components/enterprise/v3/Hero";
 import LogoStrip from "@/components/enterprise/v3/LogoStrip";
+import SectorsStrip from "@/components/enterprise/v3/SectorsStrip";
 import BeforeAfter from "@/components/enterprise/v3/BeforeAfter";
 import FeatureTiles from "@/components/enterprise/v3/FeatureTiles";
+import LoveLetterSection from "@/components/enterprise/v3/LoveLetterSection";
+import EcosystemShowcase from "@/components/enterprise/v3/EcosystemShowcase";
+import TribeMintSection from "@/components/enterprise/v3/TribeMintSection";
 import HowItWorks from "@/components/enterprise/v3/HowItWorks";
 import Pricing from "@/components/enterprise/v3/Pricing";
 import Faq from "@/components/enterprise/v3/Faq";
@@ -70,8 +74,12 @@ const Index = () => {
         <main id="main-content">
           <Hero />
           <LogoStrip />
+          <SectorsStrip />
           <BeforeAfter />
           <FeatureTiles />
+          <LoveLetterSection />
+          <EcosystemShowcase />
+          <TribeMintSection />
           <HowItWorks />
           <Pricing />
           <Faq />

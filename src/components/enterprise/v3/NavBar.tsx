@@ -19,6 +19,24 @@ const NavBar = () => {
         </button>
         <div className="flex items-center gap-1">
           <button
+            onClick={() => scrollTo("#ecosystem")}
+            className="hidden md:inline-flex px-3 py-2 text-[13px] font-semibold text-[#111]/70 hover:text-[#111] transition-colors"
+          >
+            Ecosystem
+          </button>
+          <button
+            onClick={() => scrollTo("#loveletter")}
+            className="hidden md:inline-flex px-3 py-2 text-[13px] font-semibold text-[#111]/70 hover:text-[#FF7A59] transition-colors"
+          >
+            LoveLetter
+          </button>
+          <button
+            onClick={() => scrollTo("#tribemint")}
+            className="hidden md:inline-flex px-3 py-2 text-[13px] font-semibold text-[#111]/70 hover:text-[#C8A2FF] transition-colors"
+          >
+            TribeMint
+          </button>
+          <button
             onClick={() => scrollTo("#pricing")}
             className="hidden sm:inline-flex px-3 py-2 text-[13px] font-semibold text-[#111]/70 hover:text-[#111] transition-colors"
           >
