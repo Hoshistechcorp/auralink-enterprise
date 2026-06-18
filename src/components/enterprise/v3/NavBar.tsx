@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import ibloovLogo from "@/assets/ibloov-logo.jpeg";
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -8,30 +9,32 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-[#0B0907]/85 backdrop-blur-xl border-b border-[#1F1A17]">
-      <div className="max-w-3xl mx-auto px-5 h-14 flex items-center justify-between">
-        <button onClick={() => navigate("/")} className="flex items-center gap-2">
-          <span className="h-6 w-6 rounded bg-gradient-to-br from-[#E8C886] to-[#C9A35B]" />
-          <span className="font-grotesk font-bold text-[#F5F0E8] text-[16px] tracking-tight">AuraLink</span>
+    <nav className="sticky top-0 z-50 bg-[#FFF7ED]/85 backdrop-blur-xl border-b-2 border-[#111]">
+      <div className="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between">
+        <button onClick={() => navigate("/")} className="flex items-center gap-2.5">
+          <img src={ibloovLogo} alt="iBloov" className="h-7 w-auto rounded-md" />
+          <span className="font-grotesk font-extrabold text-[#111] text-[18px] tracking-tight">
+            AuraLink
+          </span>
         </button>
         <div className="flex items-center gap-1">
           <button
             onClick={() => scrollTo("#pricing")}
-            className="px-3 py-2 text-[13px] font-medium text-[#A89B8B] hover:text-[#F5F0E8] transition-colors"
+            className="hidden sm:inline-flex px-3 py-2 text-[13px] font-semibold text-[#111]/70 hover:text-[#111] transition-colors"
           >
             Pricing
           </button>
           <button
             onClick={() => navigate("/login")}
-            className="hidden sm:inline-flex px-3 py-2 text-[13px] font-medium text-[#A89B8B] hover:text-[#F5F0E8] transition-colors"
+            className="hidden sm:inline-flex px-3 py-2 text-[13px] font-semibold text-[#111]/70 hover:text-[#111] transition-colors"
           >
-            Sign in
+            Log in
           </button>
           <button
             onClick={() => navigate("/signup")}
-            className="ml-1 px-4 py-2 rounded-full bg-gradient-to-r from-[#E8C886] to-[#C9A35B] text-[#1B1310] text-[12.5px] font-semibold hover:opacity-95 transition"
+            className="ml-1 px-4 py-2 rounded-full bg-[#111] text-[#FFF7ED] text-[12.5px] font-bold hover:bg-[#1F2BD6] transition-colors border-2 border-[#111] shadow-[0_3px_0_0_#111]"
           >
-            Start free
+            Sign up free
           </button>
         </div>
       </div>
