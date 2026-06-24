@@ -130,9 +130,6 @@ const GamificationPage = () => {
   };
 
 
-  const filteredAch = achievements.filter((a) =>
-    achFilter === "all" ? true : achFilter === "unlocked" ? a.unlocked : !a.unlocked
-  );
 
   return (
     <DashboardLayout title="Gamification" subtitle="Engagement, badges & achievements">
