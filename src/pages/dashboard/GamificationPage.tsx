@@ -94,8 +94,10 @@ const tabItems = [
   { id: "achievements", label: "Achievements" },
   { id: "leaderboard", label: "Leaderboard" },
   { id: "freebie", label: "Freebie Game" },
+  { id: "claims", label: "Gift Claims" },
 ] as const;
 type TabId = (typeof tabItems)[number]["id"];
+
 
 /* ── Freebie Game Config Types ─────────────────────── */
 interface FreebiePrice {
