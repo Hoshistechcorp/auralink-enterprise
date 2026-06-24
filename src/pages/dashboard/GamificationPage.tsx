@@ -19,7 +19,6 @@ import {
 /* ── Data ─────────────────────────────────────────── */
 const metrics = [
   { label: "Active Players", value: "1,847", icon: Users, trend: "+12%" },
-  { label: "Badges Earned", value: "4,231", icon: Award, trend: "+8%" },
   { label: "Avg Points/User", value: "342", icon: Zap, trend: "+15%" },
   { label: "Completion Rate", value: "67%", icon: Target, trend: "+3%" },
 ];
