@@ -1,15 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Switch } from "@/components/ui/switch";
 import {
   Trophy, Target, Flame, Star, Gift, Zap, Crown, Medal,
   TrendingUp, Users, Calendar, Award, Lock, CheckCircle2, ChevronRight,
-  Gamepad2, Plus, Trash2, Save,
+  Gamepad2, Plus, Trash2, Save, Mail, Clock, Search, Ticket, CheckCheck,
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { toast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/aura/DashboardLayout";
 import { confirmAction } from "@/components/ui/confirm-dialog";
+import {
+  listClaims, redeemClaim, deleteClaim, findClaim, claimStats,
+  FREEBIE_EVENT, type FreebieClaim,
+} from "@/lib/freebieClaims";
+
 
 /* ── Data ─────────────────────────────────────────── */
 const metrics = [
