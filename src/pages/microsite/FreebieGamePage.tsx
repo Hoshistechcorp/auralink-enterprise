@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, Gamepad2, Gift, RotateCcw, Trophy, Sparkles, Mail, Check, Copy, Clock } from "lucide-react";
+import { ArrowLeft, Gamepad2, Gift, RotateCcw, Trophy, Sparkles, Mail, Check, Copy, Clock, User } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { z } from "zod";
 import { createClaim, type FreebieClaim } from "@/lib/freebieClaims";
