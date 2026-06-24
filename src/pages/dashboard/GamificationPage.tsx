@@ -211,7 +211,7 @@ const GamificationPage = () => {
                     </div>
                     <div className="flex-1">
                       <div className="text-sm font-medium">{p.name}</div>
-                      <div className="text-[10px] text-muted-foreground">{p.badges} badges</div>
+                      <div className="text-[10px] text-muted-foreground">{p.streak} day streak</div>
                     </div>
                     <span className="text-sm font-bold">{p.points.toLocaleString()}</span>
                   </div>
