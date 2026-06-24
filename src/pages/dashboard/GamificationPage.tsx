@@ -670,7 +670,9 @@ const GamificationPage = () => {
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="text-sm font-medium truncate">{c.prizeLabel}</div>
-                        <div className="text-xs text-muted-foreground truncate">{c.email}</div>
+                        <div className="text-xs text-muted-foreground truncate">
+                          {c.name ? <><span className="text-foreground/80">{c.name}</span> · </> : null}{c.email}
+                        </div>
                       </div>
                       <div className="text-xs">
                         <div className="font-mono font-bold tracking-widest">{c.code}</div>
