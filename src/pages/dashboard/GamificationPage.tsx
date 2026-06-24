@@ -132,6 +132,56 @@ const GamificationPage = () => {
   const [freebieConfig, setFreebieConfig] = useState(defaultFreebieConfig);
   const [newPrize, setNewPrize] = useState("");
 
+  /* ── Claims state ──────────────────────────────── */
+  const [claims, setClaims] = useState<FreebieClaim[]>(() => listClaims());
+  const [claimFilter, setClaimFilter] = useState<"all" | "pending" | "redeemed" | "expired">("all");
+  const [lookup, setLookup] = useState("");
+  const [lookupResult, setLookupResult] = useState<FreebieClaim | null | "not_found">(null);
+
+  useEffect(() => {
+    const refresh = () => setClaims(listClaims());
+    window.addEventListener(FREEBIE_EVENT, refresh);
+    window.addEventListener("storage", refresh);
+    const t = setInterval(refresh, 5000);
+    return () => {
+      window.removeEventListener(FREEBIE_EVENT, refresh);
+      window.removeEventListener("storage", refresh);
+      clearInterval(t);
+    };
+  }, []);
+
+  const stats = claimStats();
+  const filteredClaims = claims.filter((c) => claimFilter === "all" ? true : c.status === claimFilter);
+
+  const handleLookup = () => {
+    const q = lookup.trim();
+    if (!q) { setLookupResult(null); return; }
+    const isEmail = q.includes("@");
+    const found = findClaim(isEmail ? { email: q } : { code: q });
+    setLookupResult(found ?? "not_found");
+  };
+
+  const handleRedeem = async (c: FreebieClaim) => {
+    if (c.status !== "pending") return;
+    if (!(await confirmAction({
+      title: `Confirm redemption — ${c.prizeLabel}`,
+      description: `This marks the gift as redeemed and emails ${c.email} a confirmation. Continue?`,
+    }))) return;
+    const updated = redeemClaim(c.id);
+    setClaims(listClaims());
+    if (lookupResult && lookupResult !== "not_found" && lookupResult.id === c.id && updated) {
+      setLookupResult(updated);
+    }
+    toast({ title: "Redemption confirmed ✅", description: `Confirmation email sent to ${c.email}.` });
+  };
+
+  const handleDeleteClaim = async (c: FreebieClaim) => {
+    if (!(await confirmAction({ title: "Delete claim?", description: `Remove ${c.code} (${c.email}) from records.` }))) return;
+    deleteClaim(c.id);
+    setClaims(listClaims());
+  };
+
+
   const filteredAch = achievements.filter((a) =>
     achFilter === "all" ? true : achFilter === "unlocked" ? a.unlocked : !a.unlocked
   );
