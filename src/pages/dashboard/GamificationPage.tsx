@@ -23,54 +23,12 @@ const metrics = [
   { label: "Completion Rate", value: "67%", icon: Target, trend: "+3%" },
 ];
 
-interface Badge {
-  id: string;
-  name: string;
-  description: string;
-  icon: typeof Trophy;
-  color: string;
-  earnedCount: number;
-  totalEligible: number;
-  rarity: "common" | "rare" | "epic" | "legendary";
-}
-
-const badges: Badge[] = [
-  { id: "1", name: "First Visit", description: "Complete your first check-in", icon: Star, color: "hsl(var(--aura-success))", earnedCount: 1654, totalEligible: 1847, rarity: "common" },
-  { id: "2", name: "Foodie Explorer", description: "Try 10 different menu items", icon: Target, color: "hsl(var(--aura-info))", earnedCount: 892, totalEligible: 1847, rarity: "common" },
-  { id: "3", name: "Social Butterfly", description: "Share 5 reviews on social media", icon: Users, color: "hsl(var(--secondary))", earnedCount: 421, totalEligible: 1847, rarity: "rare" },
-  { id: "4", name: "Wine Connoisseur", description: "Order from the wine list 15 times", icon: Trophy, color: "hsl(var(--aura-warning))", earnedCount: 234, totalEligible: 1847, rarity: "rare" },
-  { id: "5", name: "VIP Regular", description: "Visit 25 times in 3 months", icon: Crown, color: "hsl(var(--primary))", earnedCount: 87, totalEligible: 1847, rarity: "epic" },
-  { id: "6", name: "Legendary Patron", description: "Accumulate 10,000 lifetime points", icon: Flame, color: "hsl(var(--destructive))", earnedCount: 23, totalEligible: 1847, rarity: "legendary" },
-];
-
-interface Achievement {
-  id: string;
-  title: string;
-  description: string;
-  progress: number;
-  total: number;
-  xp: number;
-  unlocked: boolean;
-  category: string;
-}
-
-const achievements: Achievement[] = [
-  { id: "1", title: "Weekend Warrior", description: "Visit on 4 consecutive weekends", progress: 3, total: 4, xp: 200, unlocked: false, category: "Visits" },
-  { id: "2", title: "Review Champion", description: "Leave 10 detailed reviews", progress: 10, total: 10, xp: 500, unlocked: true, category: "Engagement" },
-  { id: "3", title: "Referral King", description: "Refer 5 friends who visit", progress: 3, total: 5, xp: 750, unlocked: false, category: "Social" },
-  { id: "4", title: "Birthday Celebrant", description: "Celebrate a birthday at Bella Vista", progress: 1, total: 1, xp: 300, unlocked: true, category: "Special" },
-  { id: "5", title: "Tasting Menu Master", description: "Complete the full tasting menu 3 times", progress: 1, total: 3, xp: 600, unlocked: false, category: "Dining" },
-  { id: "6", title: "Early Bird", description: "Dine during lunch hours 10 times", progress: 7, total: 10, xp: 400, unlocked: false, category: "Visits" },
-  { id: "7", title: "Event Enthusiast", description: "Attend 3 special events", progress: 2, total: 3, xp: 350, unlocked: false, category: "Special" },
-  { id: "8", title: "Loyalty Legend", description: "Maintain Gold tier for 6 months", progress: 6, total: 6, xp: 1000, unlocked: true, category: "Loyalty" },
-];
-
 const leaderboard = [
-  { rank: 1, name: "Sarah M.", points: 8420, badges: 12, streak: 14 },
-  { rank: 2, name: "James K.", points: 7215, badges: 10, streak: 11 },
-  { rank: 3, name: "Elena R.", points: 6890, badges: 11, streak: 9 },
-  { rank: 4, name: "Marcus D.", points: 5734, badges: 8, streak: 7 },
-  { rank: 5, name: "Nina P.", points: 5210, badges: 9, streak: 12 },
+  { rank: 1, name: "Sarah M.", points: 8420, streak: 14 },
+  { rank: 2, name: "James K.", points: 7215, streak: 11 },
+  { rank: 3, name: "Elena R.", points: 6890, streak: 9 },
+  { rank: 4, name: "Marcus D.", points: 5734, streak: 7 },
+  { rank: 5, name: "Nina P.", points: 5210, streak: 12 },
 ];
 
 const challenges = [
@@ -78,13 +36,6 @@ const challenges = [
   { title: "Photo Contest", description: "Share a photo of your dish for bonus XP", deadline: "5 days left", reward: "150 pts", active: true },
   { title: "Bring a Friend", description: "Dine with a new friend this month", deadline: "12 days left", reward: "300 pts", active: true },
 ];
-
-const rarityColors: Record<string, string> = {
-  common: "bg-muted text-muted-foreground",
-  rare: "bg-aura-info/15 text-aura-info",
-  epic: "bg-primary/15 text-primary",
-  legendary: "bg-aura-warning/15 text-aura-warning",
-};
 
 /* ── Tabs ─────────────────────────────────────────── */
 const tabItems = [
