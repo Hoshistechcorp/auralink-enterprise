@@ -604,7 +604,11 @@ const GamificationPage = () => {
                       {lookupResult.status}
                     </span>
                   </div>
-                  <div className="grid sm:grid-cols-3 gap-3 text-xs">
+                  <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+                    <div>
+                      <div className="text-muted-foreground mb-0.5">Name</div>
+                      <div className="font-medium truncate">{lookupResult.name || "—"}</div>
+                    </div>
                     <div>
                       <div className="text-muted-foreground mb-0.5">Email</div>
                       <div className="font-medium flex items-center gap-1"><Mail className="w-3 h-3" />{lookupResult.email}</div>
