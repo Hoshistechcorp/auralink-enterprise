@@ -40,8 +40,6 @@ const challenges = [
 /* ── Tabs ─────────────────────────────────────────── */
 const tabItems = [
   { id: "overview", label: "Overview" },
-  { id: "badges", label: "Badges" },
-  { id: "achievements", label: "Achievements" },
   { id: "leaderboard", label: "Leaderboard" },
   { id: "freebie", label: "Gamification" },
   { id: "claims", label: "Gift Claims" },
