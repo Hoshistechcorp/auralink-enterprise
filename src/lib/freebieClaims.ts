@@ -64,21 +64,23 @@ function genCode(): string {
 
 export interface CreateClaimInput {
   email: string;
+  name: string;
   prizeLabel: string;
   businessName?: string;
-  /** Days until expiry. Defaults to 14. */
+  /** Days until expiry. Defaults to 7. */
   claimWindowDays?: number;
 }
 
 export function createClaim(input: CreateClaimInput): FreebieClaim {
   const now = new Date();
   const expires = new Date(now);
-  expires.setDate(expires.getDate() + (input.claimWindowDays ?? 14));
+  expires.setDate(expires.getDate() + (input.claimWindowDays ?? 7));
 
   const claim: FreebieClaim = {
     id: `clm_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
     code: genCode(),
     email: input.email.trim().toLowerCase(),
+    name: input.name.trim(),
     prizeLabel: input.prizeLabel,
     businessName: input.businessName ?? "the venue",
     status: "pending",
