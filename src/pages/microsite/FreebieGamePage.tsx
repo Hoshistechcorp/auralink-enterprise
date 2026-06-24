@@ -86,8 +86,8 @@ const FreebieGamePage = () => {
           <ArrowLeft className="w-5 h-5" />
         </button>
         <div>
-          <h1 className="font-display font-semibold text-lg">Spin & Win</h1>
-          <p className="text-xs text-muted-foreground">Try your luck for a freebie!</p>
+          <h1 className="font-display font-semibold text-lg">Gamification</h1>
+          <p className="text-xs text-muted-foreground">Spin, play & win a freebie!</p>
         </div>
         <Gamepad2 className="w-5 h-5 text-primary ml-auto" />
       </div>

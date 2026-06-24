@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const cardLabels = [
   "Gift Cards", "Menu", "Reviews", "FAQs", "Social",
   "Gallery", "Staff", "Awards", "Events", "Dishes",
-  "AI Concierge", "Private Dining", "Freebie", "Refer", "Affiliate",
+  "AI Concierge", "Private Dining", "Gamification", "Refer", "Affiliate",
 ];
 
 const PhoneMockup = () => (

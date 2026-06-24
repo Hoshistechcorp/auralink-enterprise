@@ -20,7 +20,7 @@ interface Props {
 const requiredPlanForCard: Record<string, string> = {
   "Photo Gallery": "Supernova", "AI Concierge": "Supernova", "Private Dining": "Supernova",
   "Refer a Friend": "Supernova", "Affiliate": "Supernova",
-  "Gift Cards": "Maverick", "Freebie Game": "Maverick", "Staff": "Maverick", "Awards": "Maverick",
+  "Gift Cards": "Maverick", "Gamification": "Maverick", "Staff": "Maverick", "Awards": "Maverick",
   "Events": "Maverick", "Popular Dishes": "Maverick",
 };
 
@@ -192,7 +192,7 @@ const CardStudioEditor = ({ cards, setCards, editing, setEditing, updateCard, vi
           <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> Drag cards to reorder how they appear</li>
           <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> Hide cards to remove from the public page</li>
           <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> Display up to 15 cards on your microsite</li>
-          <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> Freebie Game drives daily visits</li>
+          <li className="flex gap-2"><ChevronRight className="w-3 h-3 text-primary mt-0.5 shrink-0" /> Gamification drives daily visits</li>
           <li className="flex gap-2"><Crown className="w-3 h-3 text-primary mt-0.5 shrink-0" /> Upgrade your plan to unlock more cards</li>
         </ul>
       </div>

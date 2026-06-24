@@ -34,7 +34,7 @@ const tiers = [
     cards: [
       { icon: Sparkles, label: "AI Concierge" },
       { icon: CalendarCheck, label: "Private Dining & Ticketing" },
-      { icon: Gamepad2, label: "Freebie Game" },
+      { icon: Gamepad2, label: "Gamification" },
       { icon: Heart, label: "Refer a Friend" },
       { icon: Megaphone, label: "Affiliate / TribeMint" },
     ],

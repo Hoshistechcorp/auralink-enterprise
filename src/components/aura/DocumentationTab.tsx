@@ -34,7 +34,7 @@ const sections: DocSection[] = [
   {
     id: "card-studio", icon: Layers, title: "Card Studio",
     description: "Customize your public microsite layout by selecting up to 15 cards. Drag to reorder, toggle visibility, and preview changes in real time.",
-    features: ["15 available card types covering every aspect of your business", "Drag-and-drop card reordering", "Toggle cards on/off to control what visitors see", "Live preview of your microsite layout", "Cards locked by tier display upgrade prompts", "Spark tier: 6 core cards (Details, Gift Cards, Menu, Social Links, Reviews, FAQs)", "Maverick tier: adds Freebie Game, Staff, Awards, Events, Popular Dishes", "Supernova tier: unlocks AI Concierge, Private Dining, Photo Gallery, Refer a Friend, Affiliate"],
+    features: ["15 available card types covering every aspect of your business", "Drag-and-drop card reordering", "Toggle cards on/off to control what visitors see", "Live preview of your microsite layout", "Cards locked by tier display upgrade prompts", "Spark tier: 6 core cards (Details, Gift Cards, Menu, Social Links, Reviews, FAQs)", "Maverick tier: adds Gamification, Staff, Awards, Events, Popular Dishes", "Supernova tier: unlocks AI Concierge, Private Dining, Photo Gallery, Refer a Friend, Affiliate"],
   },
   {
     id: "analytics", icon: BarChart3, title: "Analytics",
@@ -84,7 +84,7 @@ const sections: DocSection[] = [
   {
     id: "microsite", icon: Globe, title: "Public Microsite",
     description: "Your customer-facing mini website with action buttons, content cards, and interactive features — all powered by your dashboard settings.",
-    features: ["Action Buttons: Call, Message, Directions, and Reserve — all configurable from Settings", "Dynamic card layout controlled by Card Studio", "Reviews card with real customer submissions (star ratings + comments)", "Gift Cards card for digital purchases", "Menu card with item details and pricing", "Freebie Game for interactive engagement", "Staff card with team profiles and tip links", "Refer a Friend and Affiliate sign-up cards", "AI Concierge for instant customer assistance", "Photo Gallery with venue imagery", "Trial expiry shows upgrade prompt instead of hiding cards", "Trial countdown banner visible to business owner", "Fully mobile-responsive design"],
+    features: ["Action Buttons: Call, Message, Directions, and Reserve — all configurable from Settings", "Dynamic card layout controlled by Card Studio", "Reviews card with real customer submissions (star ratings + comments)", "Gift Cards card for digital purchases", "Menu card with item details and pricing", "Gamification (spin & win) for interactive engagement", "Staff card with team profiles and tip links", "Refer a Friend and Affiliate sign-up cards", "AI Concierge for instant customer assistance", "Photo Gallery with venue imagery", "Trial expiry shows upgrade prompt instead of hiding cards", "Trial countdown banner visible to business owner", "Fully mobile-responsive design"],
   },
   {
     id: "settings", icon: Settings, title: "Settings",
