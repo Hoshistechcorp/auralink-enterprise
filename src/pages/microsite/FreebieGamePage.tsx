@@ -19,12 +19,15 @@ const prizes = [
 ];
 
 const emailSchema = z.string().trim().email("Please enter a valid email").max(255);
+const nameSchema = z.string().trim().min(2, "Please enter your name").max(80);
 
 const FreebieGamePage = () => {
   const navigate = useNavigate();
   const [spinning, setSpinning] = useState(false);
   const [result, setResult] = useState<number | null>(null);
   const [spinsLeft, setSpinsLeft] = useState(1);
+  const [name, setName] = useState("");
+  const [nameError, setNameError] = useState("");
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [claim, setClaim] = useState<FreebieClaim | null>(null);
@@ -34,6 +37,8 @@ const FreebieGamePage = () => {
     setSpinning(true);
     setResult(null);
     setClaim(null);
+    setName("");
+    setNameError("");
     setEmail("");
     setEmailError("");
     setSpinsLeft((s) => s - 1);
@@ -45,23 +50,24 @@ const FreebieGamePage = () => {
   };
 
   const handleClaim = () => {
-    const parsed = emailSchema.safeParse(email);
-    if (!parsed.success) {
-      setEmailError(parsed.error.errors[0].message);
-      return;
-    }
-    if (!prize) return;
-    setEmailError("");
+    const nameParsed = nameSchema.safeParse(name);
+    const emailParsed = emailSchema.safeParse(email);
+    if (!nameParsed.success) setNameError(nameParsed.error.errors[0].message);
+    else setNameError("");
+    if (!emailParsed.success) setEmailError(emailParsed.error.errors[0].message);
+    else setEmailError("");
+    if (!nameParsed.success || !emailParsed.success || !prize) return;
     const created = createClaim({
-      email: parsed.data,
+      name: nameParsed.data,
+      email: emailParsed.data,
       prizeLabel: prize.label,
       businessName: "Bella Vista",
-      claimWindowDays: 14,
+      claimWindowDays: 7,
     });
     setClaim(created);
     toast({
       title: "🎉 Gift unlocked!",
-      description: `We emailed your claim code to ${parsed.data}. Show it at the venue within 14 days.`,
+      description: `We emailed your claim code to ${emailParsed.data}. Show it at the venue within 7 days.`,
     });
   };
 
