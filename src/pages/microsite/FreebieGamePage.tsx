@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, Gamepad2, Gift, RotateCcw, Trophy, Sparkles, Mail, Check, Copy, Clock } from "lucide-react";
+import { ArrowLeft, Gamepad2, Gift, RotateCcw, Trophy, Sparkles, Mail, Check, Copy, Clock, User } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { z } from "zod";
 import { createClaim, type FreebieClaim } from "@/lib/freebieClaims";
@@ -19,12 +19,15 @@ const prizes = [
 ];
 
 const emailSchema = z.string().trim().email("Please enter a valid email").max(255);
+const nameSchema = z.string().trim().min(2, "Please enter your name").max(80);
 
 const FreebieGamePage = () => {
   const navigate = useNavigate();
   const [spinning, setSpinning] = useState(false);
   const [result, setResult] = useState<number | null>(null);
   const [spinsLeft, setSpinsLeft] = useState(1);
+  const [name, setName] = useState("");
+  const [nameError, setNameError] = useState("");
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [claim, setClaim] = useState<FreebieClaim | null>(null);
@@ -34,6 +37,8 @@ const FreebieGamePage = () => {
     setSpinning(true);
     setResult(null);
     setClaim(null);
+    setName("");
+    setNameError("");
     setEmail("");
     setEmailError("");
     setSpinsLeft((s) => s - 1);
@@ -45,23 +50,24 @@ const FreebieGamePage = () => {
   };
 
   const handleClaim = () => {
-    const parsed = emailSchema.safeParse(email);
-    if (!parsed.success) {
-      setEmailError(parsed.error.errors[0].message);
-      return;
-    }
-    if (!prize) return;
-    setEmailError("");
+    const nameParsed = nameSchema.safeParse(name);
+    const emailParsed = emailSchema.safeParse(email);
+    if (!nameParsed.success) setNameError(nameParsed.error.errors[0].message);
+    else setNameError("");
+    if (!emailParsed.success) setEmailError(emailParsed.error.errors[0].message);
+    else setEmailError("");
+    if (!nameParsed.success || !emailParsed.success || !prize) return;
     const created = createClaim({
-      email: parsed.data,
+      name: nameParsed.data,
+      email: emailParsed.data,
       prizeLabel: prize.label,
       businessName: "Bella Vista",
-      claimWindowDays: 14,
+      claimWindowDays: 7,
     });
     setClaim(created);
     toast({
       title: "🎉 Gift unlocked!",
-      description: `We emailed your claim code to ${parsed.data}. Show it at the venue within 14 days.`,
+      description: `We emailed your claim code to ${emailParsed.data}. Show it at the venue within 7 days.`,
     });
   };
 
@@ -128,10 +134,26 @@ const FreebieGamePage = () => {
               <div className="text-center p-6 rounded-2xl bg-primary/5 border border-primary/20">
                 <prize.icon className="w-10 h-10 mx-auto mb-2" style={{ color: prize.color }} />
                 <h2 className="font-display font-bold text-xl">You won: {prize.label}!</h2>
-                <p className="text-sm text-muted-foreground mt-1">Enter your email — we'll send your claim code & instructions.</p>
+                <p className="text-sm text-muted-foreground mt-1">Enter your name & email — we'll send your claim code & instructions.</p>
+                <p className="inline-flex items-center gap-1.5 mt-3 px-3 py-1 rounded-full bg-aura-warning/15 text-aura-warning text-xs font-semibold">
+                  <Clock className="w-3 h-3" /> You have 7 days to claim your prize
+                </p>
               </div>
 
               <div className="space-y-2">
+                <div className="relative">
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => { setName(e.target.value); setNameError(""); }}
+                    placeholder="Your full name"
+                    className="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-card border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    maxLength={80}
+                    autoComplete="name"
+                  />
+                </div>
+                {nameError && <p className="text-xs text-destructive px-1">{nameError}</p>}
                 <div className="relative">
                   <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                   <input
@@ -141,6 +163,7 @@ const FreebieGamePage = () => {
                     placeholder="your@email.com"
                     className="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-card border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
                     maxLength={255}
+                    autoComplete="email"
                     onKeyDown={(e) => e.key === "Enter" && handleClaim()}
                   />
                 </div>
@@ -149,7 +172,7 @@ const FreebieGamePage = () => {
                   🎁 Email me my claim code
                 </button>
                 <p className="text-[10px] text-muted-foreground text-center">
-                  Show the code at the venue to redeem. No spam, ever.
+                  Show the code at the venue to redeem within 7 days. No spam, ever.
                 </p>
               </div>
             </motion.div>

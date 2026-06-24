@@ -604,7 +604,11 @@ const GamificationPage = () => {
                       {lookupResult.status}
                     </span>
                   </div>
-                  <div className="grid sm:grid-cols-3 gap-3 text-xs">
+                  <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs">
+                    <div>
+                      <div className="text-muted-foreground mb-0.5">Name</div>
+                      <div className="font-medium truncate">{lookupResult.name || "—"}</div>
+                    </div>
                     <div>
                       <div className="text-muted-foreground mb-0.5">Email</div>
                       <div className="font-medium flex items-center gap-1"><Mail className="w-3 h-3" />{lookupResult.email}</div>
@@ -666,7 +670,9 @@ const GamificationPage = () => {
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="text-sm font-medium truncate">{c.prizeLabel}</div>
-                        <div className="text-xs text-muted-foreground truncate">{c.email}</div>
+                        <div className="text-xs text-muted-foreground truncate">
+                          {c.name ? <><span className="text-foreground/80">{c.name}</span> · </> : null}{c.email}
+                        </div>
                       </div>
                       <div className="text-xs">
                         <div className="font-mono font-bold tracking-widest">{c.code}</div>
