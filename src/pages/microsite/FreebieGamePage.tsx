@@ -134,10 +134,26 @@ const FreebieGamePage = () => {
               <div className="text-center p-6 rounded-2xl bg-primary/5 border border-primary/20">
                 <prize.icon className="w-10 h-10 mx-auto mb-2" style={{ color: prize.color }} />
                 <h2 className="font-display font-bold text-xl">You won: {prize.label}!</h2>
-                <p className="text-sm text-muted-foreground mt-1">Enter your email — we'll send your claim code & instructions.</p>
+                <p className="text-sm text-muted-foreground mt-1">Enter your name & email — we'll send your claim code & instructions.</p>
+                <p className="inline-flex items-center gap-1.5 mt-3 px-3 py-1 rounded-full bg-aura-warning/15 text-aura-warning text-xs font-semibold">
+                  <Clock className="w-3 h-3" /> You have 7 days to claim your prize
+                </p>
               </div>
 
               <div className="space-y-2">
+                <div className="relative">
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => { setName(e.target.value); setNameError(""); }}
+                    placeholder="Your full name"
+                    className="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-card border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    maxLength={80}
+                    autoComplete="name"
+                  />
+                </div>
+                {nameError && <p className="text-xs text-destructive px-1">{nameError}</p>}
                 <div className="relative">
                   <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                   <input
@@ -147,6 +163,7 @@ const FreebieGamePage = () => {
                     placeholder="your@email.com"
                     className="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-card border text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
                     maxLength={255}
+                    autoComplete="email"
                     onKeyDown={(e) => e.key === "Enter" && handleClaim()}
                   />
                 </div>
@@ -155,7 +172,7 @@ const FreebieGamePage = () => {
                   🎁 Email me my claim code
                 </button>
                 <p className="text-[10px] text-muted-foreground text-center">
-                  Show the code at the venue to redeem. No spam, ever.
+                  Show the code at the venue to redeem within 7 days. No spam, ever.
                 </p>
               </div>
             </motion.div>
