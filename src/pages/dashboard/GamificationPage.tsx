@@ -76,7 +76,7 @@ const defaultFreebieConfig = {
    ══════════════════════════════════════════════════════ */
 const GamificationPage = () => {
   const [tab, setTab] = useState<TabId>("overview");
-  const [achFilter, setAchFilter] = useState<"all" | "unlocked" | "locked">("all");
+  
   const [freebieConfig, setFreebieConfig] = useState(defaultFreebieConfig);
   const [newPrize, setNewPrize] = useState("");
 
