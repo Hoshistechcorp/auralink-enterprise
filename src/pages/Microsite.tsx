@@ -33,7 +33,7 @@ const cards = [
   { icon: Globe, title: "Social Links", subtitle: "Follow us" },
   { icon: HeartLetter, title: "Love Letter", subtitle: "Send us love" },
   { icon: HelpCircle, title: "FAQs", subtitle: "24 answers" },
-  { icon: Gamepad2, title: "Freebie Game", subtitle: "Spin & win" },
+  { icon: Gamepad2, title: "Gamification", subtitle: "Spin, play & win" },
   { icon: Users, title: "Staff", subtitle: "Meet team" },
   { icon: Award, title: "Awards", subtitle: "8 awards" },
   { icon: CalendarDays, title: "Events", subtitle: "Upcoming" },
@@ -58,7 +58,7 @@ const routes: Record<string, string> = {
   "FAQs": "/microsite/faqs",
   "Events": "/microsite/events",
   "Social Links": "/microsite/social-links",
-  "Freebie Game": "/microsite/freebie-game",
+  "Gamification": "/microsite/freebie-game",
   "Refer a Friend": "/microsite/referral",
   "Affiliate": "/microsite/affiliate",
 };

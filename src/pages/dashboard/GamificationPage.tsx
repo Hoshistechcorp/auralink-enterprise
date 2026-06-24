@@ -93,7 +93,7 @@ const tabItems = [
   { id: "badges", label: "Badges" },
   { id: "achievements", label: "Achievements" },
   { id: "leaderboard", label: "Leaderboard" },
-  { id: "freebie", label: "Freebie Game" },
+  { id: "freebie", label: "Gamification" },
   { id: "claims", label: "Gift Claims" },
 ] as const;
 type TabId = (typeof tabItems)[number]["id"];
@@ -403,7 +403,7 @@ const GamificationPage = () => {
                     <Gamepad2 className="w-5 h-5 text-aura-success" />
                   </div>
                   <div>
-                    <h3 className="font-display font-semibold">Freebie Game</h3>
+                    <h3 className="font-display font-semibold">Gamification</h3>
                     <p className="text-xs text-muted-foreground">Spin-to-win wheel on your microsite</p>
                   </div>
                 </div>
@@ -527,7 +527,7 @@ const GamificationPage = () => {
             </div>
 
             {/* Save */}
-            <button onClick={() => toast({ title: "Freebie Game saved", description: "Configuration published to your microsite." })}
+            <button onClick={() => toast({ title: "Gamification saved", description: "Configuration published to your microsite." })}
               className="flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity">
               <Save className="w-4 h-4" /> Save Configuration
             </button>
