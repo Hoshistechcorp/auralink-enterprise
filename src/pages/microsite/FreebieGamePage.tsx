@@ -27,13 +27,13 @@ const FreebieGamePage = () => {
   const [spinsLeft, setSpinsLeft] = useState(1);
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
-  const [claimed, setClaimed] = useState(false);
+  const [claim, setClaim] = useState<FreebieClaim | null>(null);
 
   const spin = () => {
     if (spinning || spinsLeft <= 0) return;
     setSpinning(true);
     setResult(null);
-    setClaimed(false);
+    setClaim(null);
     setEmail("");
     setEmailError("");
     setSpinsLeft((s) => s - 1);
@@ -50,10 +50,31 @@ const FreebieGamePage = () => {
       setEmailError(parsed.error.errors[0].message);
       return;
     }
+    if (!prize) return;
     setEmailError("");
-    setClaimed(true);
-    toast({ title: "Freebie claimed! 🎉", description: `We'll send your reward details to ${parsed.data}` });
+    const created = createClaim({
+      email: parsed.data,
+      prizeLabel: prize.label,
+      businessName: "Bella Vista",
+      claimWindowDays: 14,
+    });
+    setClaim(created);
+    toast({
+      title: "🎉 Gift unlocked!",
+      description: `We emailed your claim code to ${parsed.data}. Show it at the venue within 14 days.`,
+    });
   };
+
+  const copyCode = async () => {
+    if (!claim) return;
+    try {
+      await navigator.clipboard.writeText(claim.code);
+      toast({ title: "Code copied", description: claim.code });
+    } catch {
+      toast({ title: "Copy failed", description: "Please copy manually.", variant: "destructive" });
+    }
+  };
+
 
   const prize = result !== null ? prizes[result] : null;
   const isWinner = prize && prize.label !== "Try Again";
