@@ -218,96 +218,10 @@ const GamificationPage = () => {
                 ))}
               </div>
             </div>
-
-            {/* Popular Badges Preview */}
-            <div className="lg:col-span-3 p-5 rounded-2xl bg-card border">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-display font-semibold">Popular Badges</h3>
-                <button onClick={() => setTab("badges")} className="text-xs text-primary font-medium">View All →</button>
-              </div>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-                {badges.map((b, i) => (
-                  <motion.div key={b.id} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.05 }} className="p-4 rounded-xl bg-muted/30 text-center hover:bg-muted/50 transition-colors">
-                    <div className="w-12 h-12 rounded-2xl mx-auto mb-2 flex items-center justify-center" style={{ backgroundColor: `${b.color}20` }}>
-                      <b.icon className="w-6 h-6" style={{ color: b.color }} />
-                    </div>
-                    <div className="text-xs font-medium">{b.name}</div>
-                    <div className={`inline-block mt-1 px-2 py-0.5 rounded-full text-[9px] font-semibold capitalize ${rarityColors[b.rarity]}`}>{b.rarity}</div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
           </motion.div>
         )}
 
-        {/* ─── BADGES ───────────────────────────── */}
-        {tab === "badges" && (
-          <motion.div key="badges" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {badges.map((b, i) => {
-                const pct = Math.round((b.earnedCount / b.totalEligible) * 100);
-                return (
-                  <motion.div key={b.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} className="p-5 rounded-2xl bg-card border hover:shadow-lg transition-shadow">
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="w-14 h-14 rounded-2xl flex items-center justify-center" style={{ backgroundColor: `${b.color}15` }}>
-                        <b.icon className="w-7 h-7" style={{ color: b.color }} />
-                      </div>
-                      <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold capitalize ${rarityColors[b.rarity]}`}>{b.rarity}</span>
-                    </div>
-                    <h4 className="font-display font-semibold mb-1">{b.name}</h4>
-                    <p className="text-xs text-muted-foreground mb-3">{b.description}</p>
-                    <Progress value={pct} className="h-1.5 mb-1.5" />
-                    <div className="flex justify-between text-[10px] text-muted-foreground">
-                      <span>{b.earnedCount.toLocaleString()} earned</span>
-                      <span>{pct}% of users</span>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </motion.div>
-        )}
 
-        {/* ─── ACHIEVEMENTS ─────────────────────── */}
-        {tab === "achievements" && (
-          <motion.div key="achievements" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-            <div className="flex gap-2 mb-4">
-              {(["all", "unlocked", "locked"] as const).map((f) => (
-                <button key={f} onClick={() => setAchFilter(f)} className={`px-3 py-1.5 rounded-lg text-xs font-medium capitalize ${achFilter === f ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}`}>
-                  {f} {f === "all" ? `(${achievements.length})` : f === "unlocked" ? `(${achievements.filter((a) => a.unlocked).length})` : `(${achievements.filter((a) => !a.unlocked).length})`}
-                </button>
-              ))}
-            </div>
-            <div className="space-y-3">
-              {filteredAch.map((a, i) => (
-                <motion.div key={a.id} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.04 }} className={`p-4 rounded-2xl border transition-all ${a.unlocked ? "bg-primary/5 border-primary/20" : "bg-card"}`}>
-                  <div className="flex items-center gap-4">
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${a.unlocked ? "bg-primary/15" : "bg-muted"}`}>
-                      {a.unlocked ? <CheckCircle2 className="w-6 h-6 text-primary" /> : <Lock className="w-5 h-5 text-muted-foreground" />}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-0.5">
-                        <span className="text-sm font-medium">{a.title}</span>
-                        <span className="px-2 py-0.5 rounded-full bg-muted text-[9px] font-medium text-muted-foreground">{a.category}</span>
-                      </div>
-                      <p className="text-xs text-muted-foreground mb-2">{a.description}</p>
-                      <div className="flex items-center gap-3">
-                        <Progress value={(a.progress / a.total) * 100} className="h-1.5 flex-1" />
-                        <span className="text-[10px] font-medium text-muted-foreground shrink-0">{a.progress}/{a.total}</span>
-                      </div>
-                    </div>
-                    <div className="text-right shrink-0">
-                      <div className="flex items-center gap-1 text-sm font-bold text-aura-warning">
-                        <Zap className="w-3.5 h-3.5" /> {a.xp}
-                      </div>
-                      <span className="text-[10px] text-muted-foreground">XP</span>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        )}
 
         {/* ─── LEADERBOARD ──────────────────────── */}
         {tab === "leaderboard" && (
