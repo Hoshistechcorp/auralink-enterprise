@@ -123,12 +123,12 @@ const FreebieGamePage = () => {
             </motion.div>
           )}
 
-          {isWinner && !claimed && (
+          {isWinner && !claim && (
             <motion.div key="win" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="w-full space-y-4">
               <div className="text-center p-6 rounded-2xl bg-primary/5 border border-primary/20">
                 <prize.icon className="w-10 h-10 mx-auto mb-2" style={{ color: prize.color }} />
                 <h2 className="font-display font-bold text-xl">You won: {prize.label}!</h2>
-                <p className="text-sm text-muted-foreground mt-1">Enter your email to claim your freebie</p>
+                <p className="text-sm text-muted-foreground mt-1">Enter your email — we'll send your claim code & instructions.</p>
               </div>
 
               <div className="space-y-2">
@@ -146,24 +146,55 @@ const FreebieGamePage = () => {
                 </div>
                 {emailError && <p className="text-xs text-destructive px-1">{emailError}</p>}
                 <button onClick={handleClaim} className="w-full py-4 rounded-2xl bg-primary text-primary-foreground font-semibold text-lg">
-                  🎁 Claim My Freebie
+                  🎁 Email me my claim code
                 </button>
                 <p className="text-[10px] text-muted-foreground text-center">
-                  We'll email your reward code. No spam, ever.
+                  Show the code at the venue to redeem. No spam, ever.
                 </p>
               </div>
             </motion.div>
           )}
 
-          {claimed && (
-            <motion.div key="claimed" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="text-center p-6 rounded-2xl bg-aura-success/10 border border-aura-success/20 w-full">
-              <div className="w-14 h-14 rounded-full bg-aura-success/20 flex items-center justify-center mx-auto mb-3">
-                <Check className="w-7 h-7 text-aura-success" />
+          {claim && (
+            <motion.div key="claimed" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="w-full space-y-3">
+              <div className="text-center p-6 rounded-2xl bg-aura-success/10 border border-aura-success/20">
+                <div className="w-14 h-14 rounded-full bg-aura-success/20 flex items-center justify-center mx-auto mb-3">
+                  <Check className="w-7 h-7 text-aura-success" />
+                </div>
+                <h2 className="font-display font-bold text-xl">Check your inbox!</h2>
+                <p className="text-sm text-muted-foreground mt-1">
+                  We sent your <strong>{claim.prizeLabel}</strong> claim details to <strong>{claim.email}</strong>.
+                </p>
               </div>
-              <h2 className="font-display font-bold text-xl">Freebie Claimed!</h2>
-              <p className="text-sm text-muted-foreground mt-1">Check your email for your <strong>{prize?.label}</strong> reward code</p>
+
+              <div className="p-4 rounded-2xl bg-card border space-y-3">
+                <div>
+                  <div className="text-[10px] uppercase tracking-wide text-muted-foreground mb-1">Your claim code</div>
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 font-mono text-2xl font-bold tracking-[0.25em] px-4 py-3 rounded-xl bg-muted/50 text-center">
+                      {claim.code}
+                    </div>
+                    <button onClick={copyCode} className="p-3 rounded-xl bg-primary/10 hover:bg-primary/20 transition-colors" aria-label="Copy code">
+                      <Copy className="w-4 h-4 text-primary" />
+                    </button>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                  <Clock className="w-3.5 h-3.5" />
+                  <span>
+                    Claim by <strong className="text-foreground">
+                      {new Date(claim.expiresAt).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })}
+                    </strong>
+                  </span>
+                </div>
+                <div className="text-xs text-muted-foreground border-t pt-3">
+                  <strong className="text-foreground">How to redeem:</strong> Visit {claim.businessName} and show this code (or
+                  your email) to a staff member. You'll get a confirmation email once it's redeemed.
+                </div>
+              </div>
             </motion.div>
           )}
+
         </AnimatePresence>
 
         {!result && (
