@@ -132,7 +132,7 @@ const GamificationPage = () => {
 
 
   return (
-    <DashboardLayout title="Gamification" subtitle="Engagement, badges & achievements">
+    <DashboardLayout title="Gamification" subtitle="Engagement, challenges & rewards">
       {/* Metrics */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         {metrics.map((m, i) => (
