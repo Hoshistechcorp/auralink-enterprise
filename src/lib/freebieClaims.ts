@@ -11,6 +11,7 @@ export interface FreebieClaim {
   id: string;
   code: string;             // 6-char human-readable code
   email: string;
+  name: string;
   prizeLabel: string;
   businessName: string;
   status: ClaimStatus;
